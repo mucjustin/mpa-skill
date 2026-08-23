@@ -9,7 +9,7 @@ if ([string]::IsNullOrWhiteSpace($ConfigPath)) {
     if (-not [string]::IsNullOrWhiteSpace($env:MPA_WORKSPACE_CONFIG)) {
         $ConfigPath = $env:MPA_WORKSPACE_CONFIG
     } elseif (-not [string]::IsNullOrWhiteSpace($env:APPDATA)) {
-        $ConfigPath = Join-Path $env:APPDATA 'mpa-research-workflow\config.json'
+        $ConfigPath = Join-Path $env:APPDATA 'mpa-skill\config.json'
     }
 }
 

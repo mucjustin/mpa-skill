@@ -12,7 +12,7 @@
 
 1. Fork 本仓库并克隆到本地；
 2. 从 main 创建分支：`feat/xxx`、`fix/xxx`、`docs/xxx` 或 `test/xxx`；
-3. 修改 `skills/mpa-research-workflow/` 下的 Skill 内容或 `tests/` 下的测试；
+3. 修改 `skills/mpa-skill/` 下的 Skill 内容或 `tests/` 下的测试；
 4. 本地运行全部测试并确认通过（见下节）；
 5. 按 [Conventional Commits](https://www.conventionalcommits.org/zh-hans/) 规范提交，发起指向 main 的 Pull Request；
 6. CI 在 windows-latest 上运行与本地相同的测试，通过后合并。
@@ -33,7 +33,7 @@ pwsh tests/Test-WorkspaceScripts.ps1
 - 保持 Windows-first 声明真实：跨平台改造请先开 Issue 讨论；
 - 不得放宽安全停止条件（登录、验证码、付费墙、破坏性写入）；
 - Skill 行为契约变更必须同步更新 `tests/Test-PublicSkill.ps1`，保持测试与行为一致；
-- 新增依赖必须在 `skills/mpa-research-workflow/references/dependencies.md` 中声明，并说明缺失时的降级行为。
+- 新增依赖必须在 `skills/mpa-skill/references/dependencies.md` 中声明，并说明缺失时的降级行为。
 
 ## 提交规范
 

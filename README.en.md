@@ -1,6 +1,6 @@
-# MPA Research Workflow
+# mpa-skill
 
-[![CI](https://github.com/mucjustin/mpa-research-workflow-skill/actions/workflows/ci.yml/badge.svg)](https://github.com/mucjustin/mpa-research-workflow-skill/actions/workflows/ci.yml)
+[![CI](https://github.com/mucjustin/mpa-skill/actions/workflows/ci.yml/badge.svg)](https://github.com/mucjustin/mpa-skill/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Platform](https://img.shields.io/badge/platform-Windows--first-0078D4.svg)](#)
 [![PowerShell](https://img.shields.io/badge/PowerShell-5.1%2B-5391FE.svg?logo=powershell)](#)
@@ -16,7 +16,7 @@ A Codex workflow controller designed for **MPA graduate students**. It is not a 
 |---|---|
 | 🚀 Get started | [Install](#install) · [First-run setup](#first-run-setup) · [Examples](#real-world-usage) |
 | 🧭 Understand | [What makes it different](#what-makes-it-different) · [Architecture](#architecture) · [Repository layout](#repository-layout) |
-| 🛠️ Develop | [Development and testing](#development-and-testing) · [CI status](https://github.com/mucjustin/mpa-research-workflow-skill/actions) |
+| 🛠️ Develop | [Development and testing](#development-and-testing) · [CI status](https://github.com/mucjustin/mpa-skill/actions) |
 | 🤝 Contribute | [Contributing](CONTRIBUTING.md) · [Changelog](CHANGELOG.md) · [Security policy](SECURITY.md) |
 | ⚖️ License | [MIT License](LICENSE) |
 
@@ -58,7 +58,7 @@ Generic instructional design, blogging, programming, generic data analysis, stan
 ### Using the Agent Skills CLI
 
 ```powershell
-npx skills add mucjustin/mpa-research-workflow-skill -g -s mpa-research-workflow -y --full-depth
+npx skills add mucjustin/mpa-skill -g -s mpa-skill -y --full-depth
 ```
 
 ### Let Codex install it
@@ -67,7 +67,7 @@ Tell Codex:
 
 ```text
 Use $skill-installer to install the user-level skill from
-https://github.com/mucjustin/mpa-research-workflow-skill at skills/mpa-research-workflow.
+https://github.com/mucjustin/mpa-skill at skills/mpa-skill.
 ```
 
 If a newly installed skill does not appear immediately, restart Codex.
@@ -77,12 +77,12 @@ If a newly installed skill does not appear immediately, restart Codex.
 The initialization script only creates a workspace under a root you choose plus a local JSON config. It does not modify the Zotero database or Obsidian settings.
 
 ```powershell
-$skillRoot = Join-Path $HOME '.agents\skills\mpa-research-workflow'
+$skillRoot = Join-Path $HOME '.agents\skills\mpa-skill'
 & (Join-Path $skillRoot 'scripts\Initialize-MpaWorkspace.ps1') `
   -WorkspaceRoot (Join-Path $HOME 'Documents\MPA-Workspace')
 ```
 
-The default config is written to `%APPDATA%\mpa-research-workflow\config.json`. You can point elsewhere via an environment variable:
+The default config is written to `%APPDATA%\mpa-skill\config.json`. You can point elsewhere via an environment variable:
 
 ```powershell
 $env:MPA_WORKSPACE_CONFIG = 'path-to-your-config.json'
@@ -169,8 +169,8 @@ Safety stops run throughout: logins, CAPTCHAs, paywalls, licensed access, destru
 ## Repository layout
 
 ```text
-mpa-research-workflow-skill/
-├── skills/mpa-research-workflow/   # The skill itself (install entry)
+mpa-skill/
+├── skills/mpa-skill/   # The skill itself (install entry)
 │   ├── SKILL.md                   # Controller instructions and triggers
 │   ├── agents/openai.yaml         # Skill metadata
 │   ├── references/                # Routing, research contract, deliverables, dependencies, workspace rules
@@ -210,13 +210,13 @@ The skill never silently installs third-party software, bypasses institutional a
 Update:
 
 ```powershell
-npx skills update mpa-research-workflow -g -y
+npx skills update mpa-skill -g -y
 ```
 
 Uninstall:
 
 ```powershell
-npx skills remove mpa-research-workflow -g -y
+npx skills remove mpa-skill -g -y
 ```
 
 Uninstalling the skill does not delete your research workspace or local config. Back up and confirm exact paths before removing those yourself.

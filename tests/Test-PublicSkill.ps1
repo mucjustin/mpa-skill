@@ -6,7 +6,7 @@ param(
 
 $ErrorActionPreference = 'Stop'
 $failures = [System.Collections.Generic.List[string]]::new()
-$skillRoot = Join-Path $RepoRoot 'skills\mpa-research-workflow'
+$skillRoot = Join-Path $RepoRoot 'skills\mpa-skill'
 
 function Require-File {
     param([string] $Path, [string] $Label)
@@ -83,7 +83,7 @@ $readmeEn = Read-File (Join-Path $RepoRoot 'README.en.md')
 $license = Read-File (Join-Path $RepoRoot 'LICENSE')
 $security = Read-File (Join-Path $RepoRoot 'SECURITY.md')
 
-Require-Text $skill '(?s)^---\s*\r?\nname:\s*mpa-research-workflow\s*\r?\ndescription:' 'skill frontmatter'
+Require-Text $skill '(?s)^---\s*\r?\nname:\s*mpa-skill\s*\r?\ndescription:' 'skill frontmatter'
 Require-Text $skill '(?i)MPA graduate' 'MPA graduate trigger'
 Require-Text $skill '(?i)generic.*(?:academic|teaching|blogging|data|Zotero|Obsidian).*not' 'generic request exclusion'
 Require-Text $skill '(?i)public problem.*stakeholders.*public value.*institutional.*theory.*evidence.*method.*analysis.*recommendation' 'MPA Research Spine'
@@ -106,7 +106,7 @@ Require-Text $routing '(?i)course.*case.*policy memo.*literature.*research desig
 Require-Text $dependencies '(?i)optional' 'optional dependency boundary'
 Require-Text $dependencies '(?i)unavailable.*closest|missing.*report' 'dependency degradation'
 Require-Text $workspace 'MPA_WORKSPACE_CONFIG' 'environment configuration'
-Require-Text $workspace '%APPDATA%\\mpa-research-workflow\\config\.json' 'user configuration path'
+Require-Text $workspace '%APPDATA%\\mpa-skill\\config\.json' 'user configuration path'
 Require-Text $workspace '(?i)start.*Zotero.*automatically' 'automatic Zotero startup'
 Require-Text $workspace '(?i)launch fails' 'manual Zotero fallback'
 
@@ -116,7 +116,7 @@ Require-Text $metadata 'default_prompt:' 'UI default prompt'
 Require-Text $metadata '(?i)allow_implicit_invocation:\s*true' 'implicit invocation policy'
 
 foreach ($text in @($readmeZh, $readmeEn)) {
-    Require-Text $text 'mucjustin/mpa-research-workflow-skill' 'public repository installation'
+    Require-Text $text 'mucjustin/mpa-skill' 'public repository installation'
     Require-Text $text '(?i)npx skills add' 'npx installation command'
     Require-Text $text '(?i)Initialize-MpaWorkspace\.ps1' 'first-run setup command'
     Require-Text $text '(?i)update' 'update instructions'

@@ -3,7 +3,7 @@ param()
 
 $ErrorActionPreference = 'Stop'
 $repoRoot = Split-Path -Parent $PSScriptRoot
-$skillRoot = Join-Path $repoRoot 'skills\mpa-research-workflow'
+$skillRoot = Join-Path $repoRoot 'skills\mpa-skill'
 $initializeScript = Join-Path $skillRoot 'scripts\Initialize-MpaWorkspace.ps1'
 $inspectScript = Join-Path $skillRoot 'scripts\Test-MpaEnvironment.ps1'
 
@@ -26,7 +26,7 @@ $testRoot = Join-Path $tempBase ('mpa-workspace-test-' + [guid]::NewGuid().ToStr
 try {
     $isolatedAppData = Join-Path $testRoot 'AppData'
     $workspaceRoot = Join-Path $testRoot 'Workspace'
-    $configPath = Join-Path $isolatedAppData 'mpa-research-workflow\config.json'
+    $configPath = Join-Path $isolatedAppData 'mpa-skill\config.json'
     $zoteroPath = Join-Path $testRoot 'Apps\Zotero\zotero.exe'
 
     $result = & $initializeScript -WorkspaceRoot $workspaceRoot -ConfigPath $configPath -ZoteroExecutable $zoteroPath

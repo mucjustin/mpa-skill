@@ -27,7 +27,7 @@ if ([string]::IsNullOrWhiteSpace($ConfigPath)) {
     if ([string]::IsNullOrWhiteSpace($env:APPDATA)) {
         throw 'ConfigPath is required when APPDATA is unavailable.'
     }
-    $ConfigPath = Join-Path $env:APPDATA 'mpa-research-workflow\config.json'
+    $ConfigPath = Join-Path $env:APPDATA 'mpa-skill\config.json'
 }
 $resolvedConfig = Resolve-FullPath $ConfigPath
 

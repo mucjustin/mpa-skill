@@ -1,5 +1,5 @@
 ---
-name: mpa-research-workflow
+name: mpa-skill
 description: Use when an MPA graduate student needs course study, case analysis, policy memos, literature work, research design, fieldwork, data analysis, thesis writing, or defence preparation in an established MPA, public-management, or public-policy context. Generic academic, teaching, blogging, programming, data, Zotero, Obsidian, or non-MPA thesis requests do not qualify by themselves.
 ---
 

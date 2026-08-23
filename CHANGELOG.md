@@ -6,6 +6,18 @@
 
 ## [Unreleased]
 
+## [2.0.0] - 2026-08-24
+
+### Changed
+
+- 仓库由 `mpa-research-workflow-skill` 重命名为 [mpa-skill](https://github.com/mucjustin/mpa-skill)（GitHub 自动重定向旧地址）；
+- Skill 名称与安装名由 `mpa-research-workflow` 改为 `mpa-skill`，安装命令更新为 `npx skills add mucjustin/mpa-skill -g -s mpa-skill -y --full-depth`；
+- 本机配置目录由 `%APPDATA%\mpa-research-workflow\` 改为 `%APPDATA%\mpa-skill\`。
+
+### BREAKING
+
+- 已按旧名安装的用户需卸载后以新名重装；旧配置目录需手动迁移到新路径。
+
 ## [1.1.0] - 2026-08-24
 
 ### Added

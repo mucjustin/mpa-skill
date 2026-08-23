@@ -5,7 +5,7 @@ Resolve local paths before the first durable write. Never infer that an example 
 ## Resolution order
 
 1. Read the JSON file named by `MPA_WORKSPACE_CONFIG` when the environment variable is set.
-2. Otherwise read `%APPDATA%\mpa-research-workflow\config.json` on Windows.
+2. Otherwise read `%APPDATA%\mpa-skill\config.json` on Windows.
 3. If no valid configuration exists, run `scripts/Initialize-MpaWorkspace.ps1` or ask the user to choose a workspace root.
 
 Required JSON properties:

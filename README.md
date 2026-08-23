@@ -1,6 +1,6 @@
-# MPA Research Workflow
+# mpa-skill
 
-[![CI](https://github.com/mucjustin/mpa-research-workflow-skill/actions/workflows/ci.yml/badge.svg)](https://github.com/mucjustin/mpa-research-workflow-skill/actions/workflows/ci.yml)
+[![CI](https://github.com/mucjustin/mpa-skill/actions/workflows/ci.yml/badge.svg)](https://github.com/mucjustin/mpa-skill/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Platform](https://img.shields.io/badge/platform-Windows--first-0078D4.svg)](#)
 [![PowerShell](https://img.shields.io/badge/PowerShell-5.1%2B-5391FE.svg?logo=powershell)](#)
@@ -16,7 +16,7 @@
 |---|---|
 | 🚀 快速上手 | [安装](#安装) · [首次配置](#首次配置) · [使用示例](#实际使用) |
 | 🧭 了解项目 | [独特之处](#独特之处) · [架构](#架构) · [仓库结构](#仓库结构) |
-| 🛠️ 开发测试 | [开发与测试](#开发与测试) · [CI 状态](https://github.com/mucjustin/mpa-research-workflow-skill/actions) |
+| 🛠️ 开发测试 | [开发与测试](#开发与测试) · [CI 状态](https://github.com/mucjustin/mpa-skill/actions) |
 | 🤝 参与项目 | [贡献指南](CONTRIBUTING.md) · [更新日志](CHANGELOG.md) · [安全政策](SECURITY.md) |
 | ⚖️ 许可 | [MIT License](LICENSE) |
 
@@ -58,7 +58,7 @@ Skill 会先识别这条主线中已经成立和仍然缺失的部分，再开�
 ### 使用 Agent Skills CLI
 
 ```powershell
-npx skills add mucjustin/mpa-research-workflow-skill -g -s mpa-research-workflow -y --full-depth
+npx skills add mucjustin/mpa-skill -g -s mpa-skill -y --full-depth
 ```
 
 ### 让 Codex 安装
@@ -66,8 +66,8 @@ npx skills add mucjustin/mpa-research-workflow-skill -g -s mpa-research-workflow
 告诉 Codex：
 
 ```text
-使用 $skill-installer 从 https://github.com/mucjustin/mpa-research-workflow-skill
-的 skills/mpa-research-workflow 安装用户级 Skill。
+使用 $skill-installer 从 https://github.com/mucjustin/mpa-skill
+的 skills/mpa-skill 安装用户级 Skill。
 ```
 
 如果新安装的 Skill 没有立即出现在列表中，重启 Codex。
@@ -77,12 +77,12 @@ npx skills add mucjustin/mpa-research-workflow-skill -g -s mpa-research-workflow
 初始化脚本只创建你指定根目录下的工作区和本机 JSON 配置，不修改 Zotero 数据库或 Obsidian 设置。
 
 ```powershell
-$skillRoot = Join-Path $HOME '.agents\skills\mpa-research-workflow'
+$skillRoot = Join-Path $HOME '.agents\skills\mpa-skill'
 & (Join-Path $skillRoot 'scripts\Initialize-MpaWorkspace.ps1') `
   -WorkspaceRoot (Join-Path $HOME 'Documents\MPA-Workspace')
 ```
 
-默认配置写入 `%APPDATA%\mpa-research-workflow\config.json`。也可以通过环境变量指定其他配置：
+默认配置写入 `%APPDATA%\mpa-skill\config.json`。也可以通过环境变量指定其他配置：
 
 ```powershell
 $env:MPA_WORKSPACE_CONFIG = 'path-to-your-config.json'
@@ -169,8 +169,8 @@ flowchart TD
 ## 仓库结构
 
 ```text
-mpa-research-workflow-skill/
-├── skills/mpa-research-workflow/   # Skill 本体（安装入口）
+mpa-skill/
+├── skills/mpa-skill/   # Skill 本体（安装入口）
 │   ├── SKILL.md                   # 控制器指令与触发规则
 │   ├── agents/openai.yaml         # Skill 元数据
 │   ├── references/                # 路由、研究契约、交付物、依赖与工作区规则
@@ -210,13 +210,13 @@ Skill 不会静默安装第三方软件、绕过机构访问或假装不存在�
 更新：
 
 ```powershell
-npx skills update mpa-research-workflow -g -y
+npx skills update mpa-skill -g -y
 ```
 
 卸载：
 
 ```powershell
-npx skills remove mpa-research-workflow -g -y
+npx skills remove mpa-skill -g -y
 ```
 
 卸载 Skill 不会删除你创建的研究工作区和本机配置。如需删除这些数据，请先自行确认备份和准确路径。
