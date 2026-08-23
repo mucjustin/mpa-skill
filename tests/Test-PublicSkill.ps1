@@ -131,6 +131,11 @@ Require-Text $workspace '%APPDATA%\\mpa-skill\\config\.json' 'user configuration
 Require-Text $workspace '(?i)start.*Zotero.*automatically' 'automatic Zotero startup'
 Require-Text $workspace '(?i)launch fails' 'manual Zotero fallback'
 
+Require-Text $skill '(?i)A request to convert non-MPA material into MPA work is MPA work' 'non-MPA conversion scope rule'
+Require-Text $skill '(?i)include one workspace-integration question in the same confirmation' 'workspace offer in single confirmation'
+Require-Text $routing '(?is)non-MPA to MPA conversion.*Research Spine before rewriting' 'non-MPA conversion route sequence'
+Require-Text $routing '(?i)Offer Zotero or Obsidian integration once in the route confirmation' 'workspace integration offer'
+Require-Text $routing '(?i)write nothing to either before the user confirms' 'no unconfirmed integration writes'
 Require-Text $metadata 'display_name:' 'UI display name'
 Require-Text $metadata 'short_description:' 'UI short description'
 Require-Text $metadata 'default_prompt:' 'UI default prompt'
