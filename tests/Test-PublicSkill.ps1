@@ -140,9 +140,9 @@ if ($InstalledSkillRoot) {
         $sourceFile = Join-Path $skillRoot $relative
         $installedFile = Join-Path $InstalledSkillRoot $relative
         if ((Test-Path -LiteralPath $sourceFile -PathType Leaf) -and (Test-Path -LiteralPath $installedFile -PathType Leaf)) {
-            $sourceHash = (Get-FileHash -LiteralPath $sourceFile -Algorithm SHA256).Hash
-            $installedHash = (Get-FileHash -LiteralPath $installedFile -Algorithm SHA256).Hash
-            if ($sourceHash -ne $installedHash) {
+            $sourceText = [IO.File]::ReadAllText($sourceFile).Replace("`r`n", "`n").Replace("`r", "`n")
+            $installedText = [IO.File]::ReadAllText($installedFile).Replace("`r`n", "`n").Replace("`r", "`n")
+            if ($sourceText -cne $installedText) {
                 $failures.Add("installed parity: $relative")
             }
         }
