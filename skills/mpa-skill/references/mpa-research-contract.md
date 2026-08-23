@@ -10,6 +10,7 @@ An MPA question must connect a real governance, public-service, organizational, 
 - Mark interpretation, inference, and recommendation rather than blending them with facts.
 - Do not fabricate sources, results, respondents, quotations, statistics, rules, or programme requirements.
 - Treat course notes and earlier assignments as leads until their original sources are verified.
+- Disclose AI assistance as current programme, course, or competition rules require; never present AI-generated text, data, or citations as the student's own.
 
 ## Method and causality
 
