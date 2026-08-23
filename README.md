@@ -1,8 +1,24 @@
 # MPA Research Workflow
 
+[![CI](https://github.com/mucjustin/mpa-research-workflow-skill/actions/workflows/ci.yml/badge.svg)](https://github.com/mucjustin/mpa-research-workflow-skill/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![Platform](https://img.shields.io/badge/platform-Windows--first-0078D4.svg)](#)
+[![PowerShell](https://img.shields.io/badge/PowerShell-5.1%2B-5391FE.svg?logo=powershell)](#)
+[![Skill](https://img.shields.io/badge/Codex-Agent%20Skill-8A2BE2.svg)](#)
+
 一个专门为 **MPA 研究生**设计的 Codex 工作流控制器。它不是通用论文写作模板，而是把课程资料、案例、政策问题、文献、调研、数据和论文组织成可核验、可复用、能形成实际决策建议的研究过程。
 
 > 支持状态：Windows-first。Skill 指令本身可被其他平台读取，但自动工作区初始化和环境检查脚本目前使用 PowerShell。
+
+## 快速导航
+
+| 板块 | 入口 |
+|---|---|
+| 🚀 快速上手 | [安装](#安装) · [首次配置](#首次配置) · [使用示例](#实际使用) |
+| 🧭 了解项目 | [独特之处](#独特之处) · [架构](#架构) · [仓库结构](#仓库结构) |
+| 🛠️ 开发测试 | [开发与测试](#开发与测试) · [CI 状态](https://github.com/mucjustin/mpa-research-workflow-skill/actions) |
+| 🤝 参与项目 | [贡献指南](CONTRIBUTING.md) · [更新日志](CHANGELOG.md) · [安全政策](SECURITY.md) |
+| ⚖️ 许可 | [MIT License](LICENSE) |
 
 ## 独特之处
 
@@ -131,6 +147,53 @@ Codex 会先检查指令和附件，组合最小必要路线，然后只问一�
 根据已定稿论文准备十分钟答辩，形成决策叙事、核心证据、局限、可能追问和备用材料。
 ```
 
+## 架构
+
+Skill 是一个**薄控制器**：只负责范围判定、分类编排、最小必要路线、安全停止与最终验收；专业执行（文献检索、论文写作、引用核验等）委托给对应技能，可选集成 Zotero 与 Obsidian。
+
+```mermaid
+flowchart TD
+    A[用户请求与材料] --> B{MPA 范围判定}
+    B -- 非公共管理/公共政策任务 --> C[转交其他 Skill 处理]
+    B -- MPA 任务 --> D[任务分类与依赖排序]
+    D --> E[组合最小必要路线]
+    E --> F[一次性确认：是否执行？]
+    F --> G[五条分支：课程 / 文献 / 研究设计 / 数据分析 / 论文答辩]
+    G --> H[专业执行与可选集成<br/>Zotero · Obsidian · 文献与写作技能]
+    H --> I[MPA 质量门<br/>研究契约核验]
+    I --> J[最终验收与状态交接]
+```
+
+安全停止贯穿全程：登录、验证码、付费墙、授权访问、破坏性写入或实质研究歧义都会暂停并询问。
+
+## 仓库结构
+
+```text
+mpa-research-workflow-skill/
+├── skills/mpa-research-workflow/   # Skill 本体（安装入口）
+│   ├── SKILL.md                   # 控制器指令与触发规则
+│   ├── agents/openai.yaml         # Skill 元数据
+│   ├── references/                # 路由、研究契约、交付物、依赖与工作区规则
+│   └── scripts/                   # Initialize-MpaWorkspace.ps1 / Test-MpaEnvironment.ps1
+├── tests/                         # 公开契约测试与脚本测试（含 fixtures）
+├── .github/                       # CI 工作流、Issue 与 PR 模板
+├── CONTRIBUTING.md                # 贡献指南与版本维护规范
+├── CHANGELOG.md                   # 变更记录
+├── SECURITY.md                    # 安全披露政策
+└── LICENSE                        # MIT
+```
+
+## 开发与测试
+
+本地运行全部测试：
+
+```powershell
+pwsh tests/Test-PublicSkill.ps1        # 仓库结构、指令契约与文档一致性校验
+pwsh tests/Test-WorkspaceScripts.ps1   # 工作区脚本行为测试（在临时目录执行，不触碰真实工作区）
+```
+
+CI（GitHub Actions，windows-latest）会在 main 分支和每个 Pull Request 上运行相同测试。
+
 ## 可选依赖
 
 | 能力 | 是否必需 | 说明 |
@@ -142,13 +205,15 @@ Codex 会先检查指令和附件，组合最小必要路线，然后只问一�
 
 Skill 不会静默安装第三方软件、绕过机构访问或假装不存在的集成已经成功。
 
-## 更新
+## 更新与卸载（Update & Uninstall）
+
+更新：
 
 ```powershell
 npx skills update mpa-research-workflow -g -y
 ```
 
-## 卸载（Uninstall）
+卸载：
 
 ```powershell
 npx skills remove mpa-research-workflow -g -y
@@ -173,6 +238,10 @@ npx skills remove mpa-research-workflow -g -y
 - 找不到配置：运行 `Initialize-MpaWorkspace.ps1`，或设置 `MPA_WORKSPACE_CONFIG`。
 - Zotero 无法启动：运行 `Test-MpaEnvironment.ps1`，确认配置中的可执行文件存在。
 - 缺少专业能力：安装相应 Skill，或让控制器采用已验证的可用工具并说明降级范围。
+
+## 贡献
+
+欢迎 Issue 与 Pull Request。贡献流程、内容边界与版本维护规范见 [CONTRIBUTING.md](CONTRIBUTING.md)，历史变更见 [CHANGELOG.md](CHANGELOG.md)。
 
 ## License
 

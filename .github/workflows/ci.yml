@@ -1,0 +1,24 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  test:
+    name: Skill contract and script tests
+    runs-on: windows-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Run public skill contract tests
+        shell: pwsh
+        run: ./tests/Test-PublicSkill.ps1
+
+      - name: Run workspace script tests
+        shell: pwsh
+        run: ./tests/Test-WorkspaceScripts.ps1
