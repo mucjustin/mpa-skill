@@ -159,7 +159,7 @@ flowchart TD
     B -- MPA task --> D[Classify and order by dependency]
     D --> E[Compose minimum sufficient route]
     E --> F[Single confirmation: proceed?]
-    F --> G[Five branches: course / literature / research design / data analysis / thesis and defence]
+    F --> G[Ten routes: course / case analysis / case competition / policy memo / literature / research design / fieldwork / data analysis / thesis and defence]
     G --> H[Specialist execution and optional integrations<br/>Zotero · Obsidian · literature and writing skills]
     H --> I[MPA quality gate<br/>research contract check]
     I --> J[Final acceptance and handoff]

@@ -12,7 +12,7 @@ Act as a thin controller for applied MPA learning and research. Preserve program
 1. Inspect the request and supplied files before choosing a route.
 2. Establish MPA, public-management, or public-policy context. Route unrelated work elsewhere; if explicit invocation still leaves the domain unclear, inspect first and report the scope decision.
 3. Map known and missing links in the MPA Research Spine: public problem → stakeholders and public value → institutional context → theory → evidence → method → analysis → implementable recommendation.
-4. Identify reusable course or project assets through course-to-capstone reuse, but verify original sources before promoting notes or assignments into research evidence.
+4. Apply course-to-capstone reuse: identify reusable course or project assets, and verify original sources before promoting notes or assignments into research evidence.
 5. Read [routing](references/routing.md), then load only the references required for the selected route.
 6. Present the minimum sufficient route and ask exactly once: `是否执行？`
 7. After confirmation, execute safe steps without repeated permission prompts unless a new safety stop appears.
@@ -28,7 +28,7 @@ Act as a thin controller for applied MPA learning and research. Preserve program
 - Data analysis: data quality before modelling; reproducible transformation; association separated from causality.
 - Thesis and defence: accepted evidence and analysis before prose, formatting, or slides.
 
-Read [MPA deliverables](references/mpa-deliverables.md) before creating a substantive artifact. Read [MPA research contract](references/mpa-research-contract.md) for research claims, methods, data, or thesis work. Read [dependencies](references/dependencies.md) before delegating to optional integrations.
+Read [MPA deliverables](references/mpa-deliverables.md) before creating a substantive artifact. Read [MPA research contract](references/mpa-research-contract.md) for substantial research outputs. Read [dependencies](references/dependencies.md) before delegating to optional integrations.
 
 ## Workspace and integrations
 

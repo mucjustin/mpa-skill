@@ -6,6 +6,14 @@
 
 ## [Unreleased]
 
+## [2.2.1] - 2026-08-24
+
+### Changed
+
+- 文字表述规范化：SKILL.md 课程成果复用步骤改写、研究契约加载条件统一为 substantial research outputs；
+- README（中英双语）架构图「五条分支」更正为当前十条路由；AIGC 披露条目排版修正；
+- Issue 功能建议模板的 MPA 场景清单补齐（案例大赛、田野调研）。
+
 ## [2.2.0] - 2026-08-24
 
 ### Added

@@ -47,4 +47,4 @@ pwsh tests/Test-WorkspaceScripts.ps1
   - **PATCH**：问题修正与文档改进；
 - 发布流程：更新 `CHANGELOG.md` → 合并到 main → 打标签 `vX.Y.Z`；
 - 未发布变更统一记录在 `CHANGELOG.md` 的 `[Unreleased]` 段；
-- 请勿在 main 上保留未写入 CHANGELOG 的契约变更，`npx skills update` 会直接拉取 main 最新版本。
+- 请勿在 main 上保留未写入 CHANGELOG 的契约变更，`npx skills update` 会直接拉取 main 的最新版本。
