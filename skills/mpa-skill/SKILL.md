@@ -1,6 +1,6 @@
 ---
 name: mpa-skill
-description: Use when an MPA graduate student needs course study, case analysis, policy memos, literature work, research design, fieldwork, data analysis, thesis writing, or defence preparation in an established MPA, public-management, or public-policy context. Generic academic, teaching, blogging, programming, data, Zotero, Obsidian, or non-MPA thesis requests do not qualify by themselves.
+description: Use when an MPA graduate student needs course study, case analysis, case competition entries, policy memos, literature work, research design, fieldwork, data analysis, thesis writing, or defence preparation in an established MPA, public-management, or public-policy context. Generic academic, teaching, blogging, programming, data, Zotero, Obsidian, or non-MPA thesis requests do not qualify by themselves.
 ---
 
 # MPA Research Workflow
@@ -21,6 +21,7 @@ Act as a thin controller for applied MPA learning and research. Preserve program
 
 - Course study: source-complete notes, concept maps, revision materials, and assignment preparation.
 - Case analysis: actors, institutions, incentives, public value, implementation, alternatives, and lessons.
+- Case competition entries: verify real events and fieldwork evidence, confirm theory applicability, and follow [case competition rules](references/mpa-case-competition.md) before drafting.
 - Policy memo: decision audience, options, criteria, trade-offs, feasibility, and recommendation.
 - Literature: source discovery or intake tied to an applied public-management question.
 - Research design and fieldwork: question, scope, framework, evidence, sampling, instruments, ethics, feasibility, and risks.

@@ -21,4 +21,4 @@ Identify stakeholders, distributional effects, administrative capacity, costs, l
 
 ## Precedence and ethics
 
-Current programme, university, supervisor, ethics, formatting, and submission rules override generic or historical guidance. Pause when current requirements conflict or cannot be verified. Protect participants, confidential administrative data, and licensed sources; collect or expose only what the approved task requires.
+Current programme, university, supervisor, ethics, formatting, and submission rules override generic or historical guidance. For case competition entries, apply the structure, fieldwork, and originality rules in [case competition rules](mpa-case-competition.md); the current-year official notice overrides both. Pause when current requirements conflict or cannot be verified. Protect participants, confidential administrative data, and licensed sources; collect or expose only what the approved task requires.

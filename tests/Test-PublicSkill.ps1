@@ -55,6 +55,7 @@ $requiredSkillFiles = @(
     'SKILL.md',
     'agents\openai.yaml',
     'references\dependencies.md',
+    'references\mpa-case-competition.md',
     'references\mpa-deliverables.md',
     'references\mpa-research-contract.md',
     'references\routing.md',
@@ -74,6 +75,7 @@ if ($skillFiles.Count -ne 1) {
 $skill = Read-File (Join-Path $skillRoot 'SKILL.md')
 $metadata = Read-File (Join-Path $skillRoot 'agents\openai.yaml')
 $deliverables = Read-File (Join-Path $skillRoot 'references\mpa-deliverables.md')
+$caseCompetition = Read-File (Join-Path $skillRoot 'references\mpa-case-competition.md')
 $researchContract = Read-File (Join-Path $skillRoot 'references\mpa-research-contract.md')
 $routing = Read-File (Join-Path $skillRoot 'references\routing.md')
 $dependencies = Read-File (Join-Path $skillRoot 'references\dependencies.md')
@@ -93,6 +95,7 @@ Require-Text $skill '(?i)without repeated.*permission' 'no repeated confirmation
 Require-Text $skill '(?i)never.*zotero\.sqlite' 'direct Zotero database prohibition'
 Require-Text $skill '(?i)login.*CAPTCHA.*paywall' 'access safety stop'
 Require-Text $skill 'references/mpa-deliverables\.md' 'deliverable reference routing'
+Require-Text $skill 'references/mpa-case-competition\.md' 'case competition reference routing'
 Require-Text $skill 'references/workspace-configuration\.md' 'workspace reference routing'
 
 foreach ($term in @('course notes', 'case analysis', 'policy memo', 'literature map', 'proposal', 'fieldwork', 'data analysis', 'thesis', 'defence')) {
@@ -103,6 +106,21 @@ Require-Text $researchContract '(?i)current.*programme.*university.*supervisor.*
 Require-Text $researchContract '(?i)causal|causality' 'causal boundary'
 Require-Text $routing '(?i)minimum sufficient' 'minimum sufficient route'
 Require-Text $routing '(?i)course.*case.*policy memo.*literature.*research design.*fieldwork.*data.*thesis.*defence' 'MPA route coverage'
+Require-Text $routing '(?i)case competition entry' 'case competition route row'
+Require-Text $routing 'mpa-case-competition\.md' 'case competition reference load'
+foreach ($term in @('\u6848\u4F8B\u6B63\u6587', '\u6848\u4F8B\u5206\u6790\u62A5\u544A', '\u8C03\u7814\u62A5\u544A', 'fieldwork evidence', 'theory applicability')) {
+    Require-Text $routing $term "routing case competition rule: $term"
+}
+Require-Text $caseCompetition '(?s)\u6848\u4F8B\u6B63\u6587.*\u6848\u4F8B\u5206\u6790\u62A5\u544A.*\u8C03\u7814\u62A5\u544A' 'case competition three-document structure'
+Require-Text $caseCompetition '15000' 'case competition word limit'
+Require-Text $caseCompetition '4000' 'case competition survey word limit'
+Require-Text $caseCompetition '\u8D77\u627F\u8F6C\u5408' 'case competition narrative arc'
+Require-Text $caseCompetition '(?i)overrides this file' 'case competition notice precedence'
+Require-Text $caseCompetition '(?i)multi-stakeholder interview outlines' 'case competition fieldwork evidence'
+Require-Text $caseCompetition '(?i)applicability' 'case competition theory applicability'
+Require-Text $caseCompetition '(?i)must not be AI-generated' 'case competition AIGC boundary'
+Require-Text $caseCompetition '(?i)never substitutes' 'case competition drafting boundary'
+Require-Text $researchContract 'mpa-case-competition\.md' 'research contract case competition pointer'
 Require-Text $dependencies '(?i)optional' 'optional dependency boundary'
 Require-Text $dependencies '(?i)unavailable.*closest|missing.*report' 'dependency degradation'
 Require-Text $workspace 'MPA_WORKSPACE_CONFIG' 'environment configuration'
@@ -130,7 +148,7 @@ Require-Text $license 'Copyright \(c\) 2026 mucjustin' 'MIT copyright'
 Require-Text $security '(?i)private vulnerability reporting' 'private vulnerability reporting'
 Require-Text $security '(?i)credentials' 'credential reporting boundary'
 
-$trackedText = @($skill, $metadata, $deliverables, $researchContract, $routing, $dependencies, $workspace, $readmeZh, $readmeEn, $security) -join "`n"
+$trackedText = @($skill, $metadata, $deliverables, $caseCompetition, $researchContract, $routing, $dependencies, $workspace, $readmeZh, $readmeEn, $security) -join "`n"
 Reject-Text $trackedText '(?i)(?<![A-Z0-9])[A-Z]:\\' 'fixed drive-letter path'
 Reject-Text $trackedText '(?i)[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}' 'embedded email address'
 Reject-Text $trackedText '(?i)gh[pousr]_[A-Za-z0-9]{20,}|github_pat_[A-Za-z0-9_]{20,}|sk-[A-Za-z0-9]{20,}' 'credential-like token'

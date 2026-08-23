@@ -45,6 +45,7 @@ Course notes, cases, concepts, literature cards, assignments, surveys, data, cod
 
 - Complete reading, notes, revision, and assignment preparation for MPA course materials;
 - Public-management case analysis;
+- Case competition entries (for example, the China graduate public-management case competition): entry planning, fieldwork evidence organization, and theory framework refinement;
 - Policy memos;
 - Literature search and review for public problems;
 - Proposals, research design, surveys, interviews, and fieldwork;
@@ -173,7 +174,7 @@ mpa-skill/
 ├── skills/mpa-skill/   # The skill itself (install entry)
 │   ├── SKILL.md                   # Controller instructions and triggers
 │   ├── agents/openai.yaml         # Skill metadata
-│   ├── references/                # Routing, research contract, deliverables, dependencies, workspace rules
+│   ├── references/                # Routing, research contract, case competition rules, deliverables, dependencies, workspace rules
 │   └── scripts/                   # Initialize-MpaWorkspace.ps1 / Test-MpaEnvironment.ps1
 ├── tests/                         # Public contract and script tests (with fixtures)
 ├── .github/                       # CI workflow, issue and PR templates

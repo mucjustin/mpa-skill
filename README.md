@@ -45,6 +45,7 @@ Skill 会先识别这条主线中已经成立和仍然缺失的部分，再开�
 
 - MPA 课程资料完整阅读、笔记、复习和作业准备；
 - 公共管理案例分析；
+- 中国研究生公共管理案例大赛等案例竞赛的参赛作品规划、调研证据组织与理论框架打磨；
 - 政策备忘录；
 - 面向公共问题的文献检索与综述；
 - 开题、研究设计、问卷、访谈和田野工作；
@@ -173,7 +174,7 @@ mpa-skill/
 ├── skills/mpa-skill/   # Skill 本体（安装入口）
 │   ├── SKILL.md                   # 控制器指令与触发规则
 │   ├── agents/openai.yaml         # Skill 元数据
-│   ├── references/                # 路由、研究契约、交付物、依赖与工作区规则
+│   ├── references/                # 路由、研究契约、案例大赛规则、交付物、依赖与工作区规则
 │   └── scripts/                   # Initialize-MpaWorkspace.ps1 / Test-MpaEnvironment.ps1
 ├── tests/                         # 公开契约测试与脚本测试（含 fixtures）
 ├── .github/                       # CI 工作流、Issue 与 PR 模板
