@@ -1,0 +1,8 @@
+{
+  "workspace_root": "<TEMP_ROOT>",
+  "obsidian_vault": "<TEMP_ROOT>\\Obsidian",
+  "zotero_executable": "<TEMP_ROOT>\\Apps\\Zotero\\zotero.exe",
+  "zotero_attachments": "<TEMP_ROOT>\\ZoteroAttachments",
+  "research_data": "<TEMP_ROOT>\\ResearchData",
+  "research_projects": "<TEMP_ROOT>\\ResearchProjects"
+}
