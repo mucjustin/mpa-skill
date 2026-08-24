@@ -113,6 +113,22 @@ def panel_label(ax, letter, y=1.02, x=-0.12):
             color=PAL["slate"], va="bottom", ha="right")
 
 
+def draw_hull(ax, pts, color, alpha=0.10, ec_alpha=0.35):
+    """Convex hull polygon around a 2-D point cloud."""
+    pts = np.asarray(pts)[:, :2]
+    if len(pts) < 3:
+        return
+    try:
+        hull = ConvexHull(pts)
+    except Exception:
+        return
+    for simplex in hull.simplices:
+        ax.plot(pts[simplex, 0], pts[simplex, 1], color=color,
+                alpha=ec_alpha, linewidth=1.0, zorder=1)
+    ax.fill(pts[hull.vertices, 0], pts[hull.vertices, 1], color=color,
+            alpha=alpha, zorder=0)
+
+
 # ============================================================
 # Fig 1: Route similarity + bilingual accuracy
 # ============================================================
@@ -309,7 +325,7 @@ def fig2_knowledge_pca():
 # ============================================================
 def fig3_benchmark():
     print("Fig 3: Benchmark ...")
-    R = json.loads(read_file("docs/validation/v2.4.0-results.json"))
+    R = json.loads(read_file("docs/validation/v1.0.0-results.json"))
     m = R["metrics"]
 
     fig = plt.figure(figsize=(13, 8.5))
@@ -317,10 +333,10 @@ def fig3_benchmark():
 
     # --- Panel A: synthetic pass rate ---
     axA = fig.add_subplot(gs[0, 0])
-    conds = ["No skill", "v2.3.0", "v2.4.0"]
+    conds = ["No skill", "Previous iteration", "Current version"]
     rates = [m["synthetic"]["none"]["rate"],
-             m["synthetic"]["v2.3.0"]["rate"],
-             m["synthetic"]["v2.4.0"]["rate"]]
+             m["synthetic"]["previous"]["rate"],
+             m["synthetic"]["current"]["rate"]]
     colors = [PAL["gray"], PAL["mauve"], PAL["rose"]]
     bars = axA.bar(conds, rates, color=colors, width=0.55,
                    edgecolor=PAL["white"], linewidth=1)
@@ -339,7 +355,7 @@ def fig3_benchmark():
 
     # --- Panel B: paper metrics ---
     axB = fig.add_subplot(gs[0, 1])
-    p = m["papers"]["v2.4.0"]
+    p = m["papers"]["current"]
     metrics = ["Route\naccuracy", "Risk\nrecall", "Data before\nwriting",
                "Office\nconditionality", "Page\nsupport"]
     vals = [p["route_accuracy"], p["confirmed_risk_recall"],
@@ -363,13 +379,13 @@ def fig3_benchmark():
     papers = R["paper_cases"]
     x = np.arange(len(papers))
     w = 0.35
-    r23 = [len(p["conditions"]["v2.3.0"]["risks_found"]) / len(p["confirmed_risks"])
+    r23 = [len(p["conditions"]["previous"]["risks_found"]) / len(p["confirmed_risks"])
            for p in papers]
-    r24 = [len(p["conditions"]["v2.4.0"]["risks_found"]) / len(p["confirmed_risks"])
+    r24 = [len(p["conditions"]["current"]["risks_found"]) / len(p["confirmed_risks"])
            for p in papers]
-    axC.bar(x - w / 2, r23, w, color=PAL["mauve"], label="v2.3.0",
+    axC.bar(x - w / 2, r23, w, color=PAL["mauve"], label="Previous iteration",
             edgecolor=PAL["white"], linewidth=0.4)
-    axC.bar(x + w / 2, r24, w, color=PAL["rose"], label="v2.4.0",
+    axC.bar(x + w / 2, r24, w, color=PAL["rose"], label="Current version",
             edgecolor=PAL["white"], linewidth=0.4)
     axC.set_xticks(x)
     axC.set_xticklabels([f"{p['split'][:3]}-{i+1}" for i, p in enumerate(papers)],
@@ -388,10 +404,10 @@ def fig3_benchmark():
     axD.set_ylim(0, 1)
 
     nums = [
-        (f"{m['synthetic']['v2.4.0']['rate']:.0%}", "Synthetic pass", PAL["rose"]),
-        (f"{m['papers']['v2.4.0']['route_accuracy']:.0%}", "Route accuracy", PAL["mauve"]),
-        (f"{m['papers']['v2.4.0']['confirmed_risk_recall']:.0%}", "Risk recall", PAL["coral"]),
-        (str(m["papers"]["v2.4.0"]["fabrications"]), "Fabrications", PAL["gray"]),
+        (f"{m['synthetic']['current']['rate']:.0%}", "Synthetic pass", PAL["rose"]),
+        (f"{m['papers']['current']['route_accuracy']:.0%}", "Route accuracy", PAL["mauve"]),
+        (f"{m['papers']['current']['confirmed_risk_recall']:.0%}", "Risk recall", PAL["coral"]),
+        (str(m["papers"]["current"]["fabrications"]), "Fabrications", PAL["gray"]),
     ]
     for i, (val, lbl, col) in enumerate(nums):
         cx = 0.125 + i * 0.25
@@ -405,11 +421,11 @@ def fig3_benchmark():
     axD.text(0.5, 0.16,
              "10 papers × 3 risks = 30 total · development 7 · holdout 3",
              ha="center", va="center", fontsize=8, color=PAL["gray"], style="italic")
-    axD.set_title("Key benchmark metrics (v2.4.0)", fontsize=10,
+    axD.set_title("Key benchmark metrics (v1.0.0)", fontsize=10,
                   fontweight="bold", loc="left")
     panel_label(axD, "d")
 
-    fig.suptitle("MPA Skill v2.6.0 — validation benchmark",
+    fig.suptitle("MPA Skill v1.0.0 — validation benchmark",
                  fontsize=14, fontweight="bold", y=0.98, color=PAL["slate"])
     plt.savefig(os.path.join(OUT, "fig3_benchmark.png"), dpi=250)
     plt.close()
@@ -421,7 +437,7 @@ def fig3_benchmark():
 # ============================================================
 def fig4_risks():
     print("Fig 4: Risk taxonomy ...")
-    R = json.loads(read_file("docs/validation/v2.4.0-results.json"))
+    R = json.loads(read_file("docs/validation/v1.0.0-results.json"))
     papers = R["paper_cases"]
     risks = []
     for p in papers:

@@ -78,8 +78,8 @@ $requiredRepoFiles = @(
     'tests\fixtures\portable-config.json',
     'tests\fixtures\reliability-scenarios.json',
     'docs\validation\mpa-thesis-corpus.json',
-    'docs\validation\v2.4.0-benchmark.md',
-    'docs\validation\v2.4.0-results.json'
+    'docs\validation\v1.0.0-benchmark.md',
+    'docs\validation\v1.0.0-results.json'
 )
 foreach ($relative in $requiredRepoFiles) {
     Require-File (Join-Path $RepoRoot $relative) $relative
@@ -135,7 +135,7 @@ $readmeZh = Read-File (Join-Path $RepoRoot 'README.md')
 $readmeEn = Read-File (Join-Path $RepoRoot 'README.en.md')
 $changelog = Read-File (Join-Path $RepoRoot 'CHANGELOG.md')
 $corpusText = Read-File (Join-Path $RepoRoot 'docs\validation\mpa-thesis-corpus.json')
-$benchmarkResultsText = Read-File (Join-Path $RepoRoot 'docs\validation\v2.4.0-results.json')
+$benchmarkResultsText = Read-File (Join-Path $RepoRoot 'docs\validation\v1.0.0-results.json')
 $license = Read-File (Join-Path $RepoRoot 'LICENSE')
 $security = Read-File (Join-Path $RepoRoot 'SECURITY.md')
 
@@ -281,7 +281,7 @@ foreach ($text in @($readmeZh, $readmeEn)) {
     Require-Text $text 'skills/mpa-skill/references/real-data-workflow\.md' 'README real-data workflow link'
     Require-Text $text 'skills/mpa-skill/references/local-office-editing\.md' 'README local Office workflow link'
     Require-Text $text 'skills/mpa-skill/references/aigc-disclosure\.md' 'README AI-use disclosure link'
-    Require-Text $text 'docs/validation/v2\.4\.0-benchmark\.md' 'README benchmark report link'
+    Require-Text $text 'docs/validation/v1\.0\.0-benchmark\.md' 'README benchmark report link'
     Require-Text $text 'pwsh -NoProfile -File tests/Test-ReliabilityScenarios\.ps1' 'README reliability scenario command'
     Require-Text $text '(?i)STATE_UNKNOWN' 'README unknown-state boundary'
 }
@@ -291,8 +291,8 @@ Require-Text $readmeZh '(?s)\u6570\u636E.*\u5199\u4F5C|\u5199\u4F5C.*\u6570\u636
 Require-Text $readmeEn '(?is)data.*before.*writ|audit.*data.*before.*prose' 'English data-before-writing explanation'
 Require-Text $readmeZh '(?s)\u8BD5\u70B9.*(?:\u4E0D\u80FD|\u4E0D).*\u6CDB\u5316|\u4E0D\u80FD.*\u6CDB\u5316.*\u8BD5\u70B9' 'Chinese evidence boundary'
 Require-Text $readmeEn '(?is)pilot.*does not.*(?:establish|prove|generalize)' 'English evidence boundary'
-$evidenceZh = [regex]::Match($readmeZh, '(?s)### v2\.4\.0 \u7684\u8BC1\u636E\u8FB9\u754C.*?(?=\r?\n## )').Value
-$evidenceEn = [regex]::Match($readmeEn, '(?s)### v2\.4\.0 evidence boundary.*?(?=\r?\n## )').Value
+$evidenceZh = [regex]::Match($readmeZh, '(?s)### 1\.0\.0 \u7684\u8BC1\u636E\u8FB9\u754C.*?(?=\r?\n## )').Value
+$evidenceEn = [regex]::Match($readmeEn, '(?s)### 1\.0\.0 evidence boundary.*?(?=\r?\n## )').Value
 Require-Text $readmeZh '### 1\. \u539F\u59CB\u6570\u636E\u8F6C\u5316' 'Chinese raw-data starter prompt'
 Require-Text $readmeZh '### 2\. \u65E0\u6570\u636E\u7684\u6848\u4F8B/\u653F\u7B56\u5206\u6790' 'Chinese no-data starter prompt'
 Require-Text $readmeZh '### 3\. \u5DF2\u9A8C\u6536\u5185\u5BB9\u7684 Word \u4EA4\u4ED8' 'Chinese Word-delivery starter prompt'
@@ -319,7 +319,7 @@ Require-Text $readmeZh 'https://(?:dspace\.library\.uvic\.ca/items|digital\.libr
 Require-Text $readmeEn 'https://(?:dspace\.library\.uvic\.ca/items|digital\.library\.txst\.edu/items|calhoun\.nps\.edu/handle)/' 'English open-thesis example link'
 
 # ── CHANGELOG assertions ──
-$releaseSection = [regex]::Match($changelog, '(?s)## \[2\.4\.0\] - 2026-08-24.*?(?=\r?\n## \[|\z)').Value
+$releaseSection = [regex]::Match($changelog, '(?s)## \[1\.0\.0\] - 2026-08-24.*?(?=\r?\n## \[|\z)').Value
 
 # ── Benchmark-backed assertions ──
 if ((-not [string]::IsNullOrWhiteSpace($benchmarkResultsText)) -and (-not [string]::IsNullOrWhiteSpace($corpusText))) {
@@ -327,14 +327,14 @@ if ((-not [string]::IsNullOrWhiteSpace($benchmarkResultsText)) -and (-not [strin
     $corpus = @($corpusText | ConvertFrom-Json | ForEach-Object { $_ })
     $paperCases = @($benchmarkResults.paper_cases)
     $noneSynthetic = $benchmarkResults.metrics.synthetic.none
-    $v23Synthetic = $benchmarkResults.metrics.synthetic.'v2.3.0'
-    $v24Synthetic = $benchmarkResults.metrics.synthetic.'v2.4.0'
-    $v23Papers = $benchmarkResults.metrics.papers.'v2.3.0'
-    $v24Papers = $benchmarkResults.metrics.papers.'v2.4.0'
+    $v23Synthetic = $benchmarkResults.metrics.synthetic.'previous'
+    $v24Synthetic = $benchmarkResults.metrics.synthetic.'current'
+    $v23Papers = $benchmarkResults.metrics.papers.'previous'
+    $v24Papers = $benchmarkResults.metrics.papers.'current'
     $developmentCount = @($paperCases | Where-Object split -eq 'development').Count
     $holdoutCount = @($paperCases | Where-Object split -eq 'holdout').Count
-    $v23Unsupported = @($paperCases | Where-Object { $_.conditions.'v2.3.0'.unsupported_claim_generated }).Count
-    $v24Unsupported = @($paperCases | Where-Object { $_.conditions.'v2.4.0'.unsupported_claim_generated }).Count
+    $v23Unsupported = @($paperCases | Where-Object { $_.conditions.'previous'.unsupported_claim_generated }).Count
+    $v24Unsupported = @($paperCases | Where-Object { $_.conditions.'current'.unsupported_claim_generated }).Count
     $chinaContextCount = @($corpus | Where-Object jurisdiction -eq 'China').Count
     $unavailablePreflight = $benchmarkResults.corpus_access.pdf_structural_preflight.unavailable
     $replicatesPerCondition = [int] $benchmarkResults.execution.replicates_per_condition
@@ -342,8 +342,8 @@ if ((-not [string]::IsNullOrWhiteSpace($benchmarkResultsText)) -and (-not [strin
     $syntheticDeltaVsNone = $v24Synthetic.passed - $noneSynthetic.passed
     $deltaVsV23Fraction = "+$syntheticDeltaVsV23/$($v24Synthetic.total)"
     $deltaVsNoneFraction = "+$syntheticDeltaVsNone/$($v24Synthetic.total)"
-    $deltaVsV23Points = "+$($benchmarkResults.metrics.synthetic.'v2.4_minus_v2.3_percentage_points')"
-    $deltaVsNonePoints = "+$($benchmarkResults.metrics.synthetic.'v2.4_minus_none_percentage_points')"
+    $deltaVsV23Points = "+$($benchmarkResults.metrics.synthetic.'current_minus_previous_percentage_points')"
+    $deltaVsNonePoints = "+$($benchmarkResults.metrics.synthetic.'current_minus_none_percentage_points')"
 
     $noneMetric = "$($noneSynthetic.passed)/$($noneSynthetic.total)"
     $v23SyntheticMetric = "$($v23Synthetic.passed)/$($v23Synthetic.total)"
@@ -354,20 +354,20 @@ if ((-not [string]::IsNullOrWhiteSpace($benchmarkResultsText)) -and (-not [strin
     $v24RiskMetric = "$($v24Papers.confirmed_risks_found)/$($v24Papers.confirmed_risks_total)"
 
     Require-Text $readmeZh ('\u65E0 Skill\s*\u4E3A\s*' + [regex]::Escape($noneMetric)) 'Chinese no-skill synthetic metric'
-    Require-Text $readmeZh ('v2\.3\.0\s*\u4E3A\s*' + [regex]::Escape($v23SyntheticMetric)) 'Chinese v2.3.0 synthetic metric'
-    Require-Text $readmeZh ('v2\.4\.0\s*\u4E3A\s*' + [regex]::Escape($v24SyntheticMetric)) 'Chinese v2.4.0 synthetic metric'
+    Require-Text $readmeZh ('\u65E9\u671F\u5185\u90E8\u8FED\u4EE3\u4E3A\s*' + [regex]::Escape($v23SyntheticMetric)) 'Chinese previous-iteration synthetic metric'
+    Require-Text $readmeZh ('\u5F53\u524D\u7248\u672C\u4E3A\s*' + [regex]::Escape($v24SyntheticMetric)) 'Chinese current-version synthetic metric'
     Require-Text $readmeEn ([regex]::Escape($noneMetric) + '\s+for no skill') 'English no-skill synthetic metric'
-    Require-Text $readmeEn ([regex]::Escape($v23SyntheticMetric) + '\s+for v2\.3\.0') 'English v2.3.0 synthetic metric'
-    Require-Text $readmeEn ([regex]::Escape($v24SyntheticMetric) + '\s+for v2\.4\.0') 'English v2.4.0 synthetic metric'
+    Require-Text $readmeEn ([regex]::Escape($v23SyntheticMetric) + '\s+for the previous iteration') 'English previous-iteration synthetic metric'
+    Require-Text $readmeEn ([regex]::Escape($v24SyntheticMetric) + '\s+for the current version') 'English current-version synthetic metric'
 
     if (($deltaVsV23Fraction -eq $deltaVsNoneFraction) -and ($deltaVsV23Points -eq $deltaVsNonePoints)) {
         Require-Text $readmeZh ('\u76F8\u5BF9\u4E24\u4E2A\u57FA\u7EBF\u5747\u63D0\u5347\s*' + [regex]::Escape($deltaVsV23Fraction) + '.{0,30}' + [regex]::Escape($deltaVsV23Points)) 'Chinese delta against each baseline'
         Require-Text $readmeEn ('gain against each baseline was\s*' + [regex]::Escape($deltaVsV23Fraction) + '.{0,30}' + [regex]::Escape($deltaVsV23Points)) 'English delta against each baseline'
-        Require-Text $releaseSection ('\u5DEE\u503C\u5747\u4E3A\s*' + [regex]::Escape($deltaVsV23Fraction) + '.{0,30}' + [regex]::Escape($deltaVsV23Points)) '2.4.0 changelog delta against each baseline'
+        Require-Text $releaseSection ('\u5DEE\u503C\u5747\u4E3A\s*' + [regex]::Escape($deltaVsV23Fraction) + '.{0,30}' + [regex]::Escape($deltaVsV23Points)) '1.0.0 changelog delta against each baseline'
     } else {
-        Require-Text $readmeZh ('v2\.3\.0.{0,40}' + [regex]::Escape($deltaVsV23Fraction) + '.{0,30}' + [regex]::Escape($deltaVsV23Points)) 'Chinese delta against v2.3.0'
+        Require-Text $readmeZh ('\u65E9\u671F\u5185\u90E8\u8FED\u4EE3.{0,40}' + [regex]::Escape($deltaVsV23Fraction) + '.{0,30}' + [regex]::Escape($deltaVsV23Points)) 'Chinese delta against previous iteration'
         Require-Text $readmeZh ('\u65E0 Skill.{0,40}' + [regex]::Escape($deltaVsNoneFraction) + '.{0,30}' + [regex]::Escape($deltaVsNonePoints)) 'Chinese delta against no skill'
-        Require-Text $readmeEn ('v2\.3\.0.{0,40}' + [regex]::Escape($deltaVsV23Fraction) + '.{0,30}' + [regex]::Escape($deltaVsV23Points)) 'English delta against v2.3.0'
+        Require-Text $readmeEn ('previous iteration.{0,40}' + [regex]::Escape($deltaVsV23Fraction) + '.{0,30}' + [regex]::Escape($deltaVsV23Points)) 'English delta against previous iteration'
         Require-Text $readmeEn ('no skill.{0,40}' + [regex]::Escape($deltaVsNoneFraction) + '.{0,30}' + [regex]::Escape($deltaVsNonePoints)) 'English delta against no skill'
     }
     foreach ($text in @($evidenceZh, $evidenceEn)) {
@@ -377,17 +377,17 @@ if ((-not [string]::IsNullOrWhiteSpace($benchmarkResultsText)) -and (-not [strin
     Require-Text $readmeEn ("$($paperCases.Count)-paper pilot.{0,80}$developmentCount development papers.{0,40}$holdoutCount.*holdouts") 'English development/holdout split'
     if (($v23RouteMetric -eq $v24RouteMetric) -and ($v23RiskMetric -eq $v24RiskMetric) -and ($v23Unsupported -eq $v24Unsupported)) {
         $englishUnsupported = if ($v23Unsupported -eq 0) { 'zero' } else { [string] $v23Unsupported }
-        Require-Text $readmeZh ("v2\.3\.0 \u4E0E v2\.4\.0.{0,100}" + [regex]::Escape($v23RouteMetric) + '.{0,80}' + [regex]::Escape($v23RiskMetric) + ".{0,80}\u4E3A $v23Unsupported") 'Chinese condition-bound paper metrics'
-        Require-Text $readmeEn ("both v2\.3\.0 and v2\.4\.0.{0,100}" + [regex]::Escape($v23RouteMetric) + '.{0,80}' + [regex]::Escape($v23RiskMetric) + ".{0,80}$englishUnsupported unsupported claims") 'English condition-bound paper metrics'
-        Require-Text $releaseSection ("v2\.3\.0 \u4E0E v2\.4\.0.{0,80}" + [regex]::Escape($v23RouteMetric) + '.{0,60}' + [regex]::Escape($v23RiskMetric) + ".{0,80}\u4E3A $v23Unsupported") '2.4.0 changelog condition-bound paper metrics'
+        Require-Text $readmeZh ("\u4E24\u4E2A\u7248\u672C\u90FD\u5B8C\u6210.{0,100}" + [regex]::Escape($v23RouteMetric) + '.{0,80}' + [regex]::Escape($v23RiskMetric) + ".{0,80}\u4E3A $v23Unsupported") 'Chinese condition-bound paper metrics'
+        Require-Text $readmeEn ("both iterations.{0,100}" + [regex]::Escape($v23RouteMetric) + '.{0,80}' + [regex]::Escape($v23RiskMetric) + ".{0,80}$englishUnsupported unsupported claims") 'English condition-bound paper metrics'
+        Require-Text $releaseSection ("\u4E24\u4E2A\u7248\u672C\u5747\u5B8C\u6210.{0,80}" + [regex]::Escape($v23RouteMetric) + '.{0,60}' + [regex]::Escape($v23RiskMetric) + ".{0,80}\u4E3A $v23Unsupported") '1.0.0 changelog condition-bound paper metrics'
     } else {
         foreach ($claim in @(
-            @{ Text = $readmeZh; Version = 'v2\.3\.0'; Route = $v23RouteMetric; Risk = $v23RiskMetric; Unsupported = $v23Unsupported; Label = 'Chinese v2.3.0 paper metrics' },
-            @{ Text = $readmeZh; Version = 'v2\.4\.0'; Route = $v24RouteMetric; Risk = $v24RiskMetric; Unsupported = $v24Unsupported; Label = 'Chinese v2.4.0 paper metrics' },
-            @{ Text = $readmeEn; Version = 'v2\.3\.0'; Route = $v23RouteMetric; Risk = $v23RiskMetric; Unsupported = $v23Unsupported; Label = 'English v2.3.0 paper metrics' },
-            @{ Text = $readmeEn; Version = 'v2\.4\.0'; Route = $v24RouteMetric; Risk = $v24RiskMetric; Unsupported = $v24Unsupported; Label = 'English v2.4.0 paper metrics' },
-            @{ Text = $releaseSection; Version = 'v2\.3\.0'; Route = $v23RouteMetric; Risk = $v23RiskMetric; Unsupported = $v23Unsupported; Label = '2.4.0 changelog v2.3.0 paper metrics' },
-            @{ Text = $releaseSection; Version = 'v2\.4\.0'; Route = $v24RouteMetric; Risk = $v24RiskMetric; Unsupported = $v24Unsupported; Label = '2.4.0 changelog v2.4.0 paper metrics' }
+            @{ Text = $readmeZh; Version = '\u4E24\u4E2A\u7248\u672C\u4E2D\u7684\u65E9\u671F\u8FED\u4EE3'; Route = $v23RouteMetric; Risk = $v23RiskMetric; Unsupported = $v23Unsupported; Label = 'Chinese previous-iteration paper metrics' },
+            @{ Text = $readmeZh; Version = '\u5F53\u524D\u7248\u672C'; Route = $v24RouteMetric; Risk = $v24RiskMetric; Unsupported = $v24Unsupported; Label = 'Chinese current-version paper metrics' },
+            @{ Text = $readmeEn; Version = 'previous iteration'; Route = $v23RouteMetric; Risk = $v23RiskMetric; Unsupported = $v23Unsupported; Label = 'English previous-iteration paper metrics' },
+            @{ Text = $readmeEn; Version = 'current version'; Route = $v24RouteMetric; Risk = $v24RiskMetric; Unsupported = $v24Unsupported; Label = 'English current-version paper metrics' },
+            @{ Text = $releaseSection; Version = '\u65E9\u671F\u5185\u90E8\u8FED\u4EE3'; Route = $v23RouteMetric; Risk = $v23RiskMetric; Unsupported = $v23Unsupported; Label = '1.0.0 changelog previous-iteration paper metrics' },
+            @{ Text = $releaseSection; Version = '\u5F53\u524D\u7248\u672C'; Route = $v24RouteMetric; Risk = $v24RiskMetric; Unsupported = $v24Unsupported; Label = '1.0.0 changelog current-version paper metrics' }
         )) {
             Require-Text $claim.Text ($claim.Version + '.{0,100}' + [regex]::Escape($claim.Route) + '.{0,80}' + [regex]::Escape($claim.Risk) + ".{0,80}$($claim.Unsupported)") $claim.Label
         }
@@ -395,21 +395,21 @@ if ((-not [string]::IsNullOrWhiteSpace($benchmarkResultsText)) -and (-not [strin
     Require-Text $evidenceZh ("$chinaContextCount\s*\u6761\u4E2D\u56FD\u60C5\u5883\u8BB0\u5F55") 'Chinese China-context limit'
     $englishChinaCount = if ($chinaContextCount -eq 1) { 'one' } else { [string] $chinaContextCount }
     Require-Text $evidenceEn ([regex]::Escape($englishChinaCount) + ' China-context record') 'English China-context limit'
-    Require-Text $evidenceZh '(?s)\u4E0D\u80FD.{0,40}v2\.4\.0.{0,40}\u8BBA\u6587\u8BCA\u65AD\u4F18\u4E8E v2\.3\.0' 'Chinese not-superior-diagnosis boundary'
-    Require-Text $evidenceEn '(?is)does not establish superior thesis diagnosis for v2\.4\.0' 'English not-superior-diagnosis boundary'
+    Require-Text $evidenceZh '(?s)\u4E0D\u80FD.{0,40}\u5F53\u524D\u7248\u672C.{0,40}\u8BBA\u6587\u8BCA\u65AD\u4F18\u4E8E\s*\u65E9\u671F\u8FED\u4EE3' 'Chinese not-superior-diagnosis boundary'
+    Require-Text $evidenceEn '(?is)does not establish superior thesis diagnosis for the current version' 'English not-superior-diagnosis boundary'
 
     $chineseReplicateCount = if ($replicatesPerCondition -eq 1) { '\u4E00' } else { [regex]::Escape([string] $replicatesPerCondition) }
     $englishReplicateCount = if ($replicatesPerCondition -eq 1) { 'one' } else { [regex]::Escape([string] $replicatesPerCondition) }
     Require-Text $evidenceZh ('\u6BCF\u4E2A\u6761\u4EF6(?:\u53EA\u6709|\u4EC5)' + $chineseReplicateCount + '\u6B21\u54CD\u5E94') 'Chinese one-response-per-condition limit'
     Require-Text $evidenceEn ([regex]::Escape($englishReplicateCount) + '\s+response(?:s)? per condition') 'English one-response-per-condition limit'
-    Require-Text $releaseSection ('\u6BCF\u4E2A\u6761\u4EF6(?:\u53EA\u6709|\u4EC5)' + $chineseReplicateCount + '\u6B21\u54CD\u5E94') '2.4.0 changelog one-response-per-condition limit'
+    Require-Text $releaseSection ('\u6BCF\u4E2A\u6761\u4EF6(?:\u53EA\u6709|\u4EC5)' + $chineseReplicateCount + '\u6B21\u54CD\u5E94') '1.0.0 changelog one-response-per-condition limit'
     Require-Text $evidenceZh ("$($paperCases.Count)\s*\u7BC7(?:\u6837\u672C|\u8BD5\u70B9)\u4E0D\u662F\u603B\u4F53\u4F30\u8BA1") 'Chinese not-a-population-estimate limit'
     Require-Text $evidenceEn ("$($paperCases.Count)-paper (?:pilot|sample).{0,30}(?:rather than|not) a population estimate") 'English not-a-population-estimate limit'
-    Require-Text $releaseSection ("$($paperCases.Count)\s*\u7BC7(?:\u6837\u672C|\u8BD5\u70B9)\u4E0D\u662F\u603B\u4F53\u4F30\u8BA1") '2.4.0 changelog not-a-population-estimate limit'
+    Require-Text $releaseSection ("$($paperCases.Count)\s*\u7BC7(?:\u6837\u672C|\u8BD5\u70B9)\u4E0D\u662F\u603B\u4F53\u4F30\u8BA1") '1.0.0 changelog not-a-population-estimate limit'
     foreach ($claim in @(
         @{ Text = $evidenceZh; Pattern = '\u6765\u6E90\u94FE\u63A5\u53EF\u80FD.{0,12}\u6F02\u79FB'; Reject = '\u6765\u6E90\u94FE\u63A5.{0,12}(?:\u4E0D\u4F1A|\u4E0D\u53EF\u80FD)\u6F02\u79FB'; Label = 'Chinese README source links may drift' },
         @{ Text = $evidenceEn; Pattern = 'source links(?: that)? may drift'; Reject = 'source links.{0,20}(?:cannot|can''t|will not|won''t) drift'; Label = 'English README source links may drift' },
-        @{ Text = $releaseSection; Pattern = '\u6765\u6E90\u94FE\u63A5\u53EF\u80FD.{0,12}\u6F02\u79FB'; Reject = '\u6765\u6E90\u94FE\u63A5.{0,12}(?:\u4E0D\u4F1A|\u4E0D\u53EF\u80FD)\u6F02\u79FB'; Label = '2.4.0 changelog source links may drift' }
+        @{ Text = $releaseSection; Pattern = '\u6765\u6E90\u94FE\u63A5\u53EF\u80FD.{0,12}\u6F02\u79FB'; Reject = '\u6765\u6E90\u94FE\u63A5.{0,12}(?:\u4E0D\u4F1A|\u4E0D\u53EF\u80FD)\u6F02\u79FB'; Label = '1.0.0 changelog source links may drift' }
     )) {
         Require-Text $claim.Text $claim.Pattern $claim.Label
         Reject-Text $claim.Text $claim.Reject ($claim.Label + ' rejects cannot-drift wording')
@@ -448,25 +448,25 @@ if ((-not [string]::IsNullOrWhiteSpace($benchmarkResultsText)) -and (-not [strin
         }
     }
 
-    Require-Text $releaseSection ('\u51BB\u7ED3\u5019\u9009\u5728\u5408\u6210\u573A\u666F\u4E2D\u4E3A\s*' + [regex]::Escape($v24SyntheticMetric)) '2.4.0 changelog v2.4.0 synthetic metric'
+    Require-Text $releaseSection ('\u51BB\u7ED3\u5019\u9009\u5728\u5408\u6210\u573A\u666F\u4E2D\u4E3A\s*' + [regex]::Escape($v24SyntheticMetric)) '1.0.0 changelog current-version synthetic metric'
     if ($noneMetric -eq $v23SyntheticMetric) {
-        Require-Text $releaseSection ('\u65E0 Skill \u4E0E v2\.3\.0 \u5747\u4E3A\s*' + [regex]::Escape($noneMetric)) '2.4.0 changelog baseline synthetic metrics'
+        Require-Text $releaseSection ('\u65E0 Skill \u4E0E\s*(?:\u65E9\u671F\u5185\u90E8\u8FED\u4EE3|v2\.3\.0)\s*\u5747\u4E3A\s*' + [regex]::Escape($noneMetric)) '1.0.0 changelog baseline synthetic metrics'
     } else {
-        Require-Text $releaseSection ('\u65E0 Skill.{0,40}' + [regex]::Escape($noneMetric)) '2.4.0 changelog no-skill synthetic metric'
-        Require-Text $releaseSection ('v2\.3\.0.{0,40}' + [regex]::Escape($v23SyntheticMetric)) '2.4.0 changelog v2.3.0 synthetic metric'
+        Require-Text $releaseSection ('\u65E0 Skill.{0,40}' + [regex]::Escape($noneMetric)) '1.0.0 changelog no-skill synthetic metric'
+        Require-Text $releaseSection ('\u65E9\u671F\u5185\u90E8\u8FED\u4EE3.{0,40}' + [regex]::Escape($v23SyntheticMetric)) '1.0.0 changelog previous-iteration synthetic metric'
     }
-    Require-Text $releaseSection ("$developmentCount\s*\u7BC7\u5F00\u53D1\u96C6\u52A0\s*$holdoutCount\s*\u7BC7\u7559\u51FA\u96C6") '2.4.0 changelog development/holdout split'
-    Require-Text $releaseSection ([regex]::Escape("$unavailablePreflight/$($benchmarkResults.corpus_access.papers)") + '.{0,60}PDF.{0,30}UNAVAILABLE') '2.4.0 changelog unavailable PDF preflights'
-    Require-Text $releaseSection ("$chinaContextCount\s*\u6761\u4E2D\u56FD\u60C5\u5883\u8BB0\u5F55") '2.4.0 changelog China-context limit'
-    Require-Text $releaseSection '\u4E0D\u4EE3\u8868\u8BBA\u6587\u8BCA\u65AD\u66F4\u4F18' '2.4.0 changelog not-superior-diagnosis boundary'
+    Require-Text $releaseSection ("$developmentCount\s*\u7BC7\u5F00\u53D1\u96C6\u52A0\s*$holdoutCount\s*\u7BC7\u7559\u51FA\u96C6") '1.0.0 changelog development/holdout split'
+    Require-Text $releaseSection ([regex]::Escape("$unavailablePreflight/$($benchmarkResults.corpus_access.papers)") + '.{0,60}PDF.{0,30}UNAVAILABLE') '1.0.0 changelog unavailable PDF preflights'
+    Require-Text $releaseSection ("$chinaContextCount\s*\u6761\u4E2D\u56FD\u60C5\u5883\u8BB0\u5F55") '1.0.0 changelog China-context limit'
+    Require-Text $releaseSection '\u4E0D\u4EE3\u8868\u8BBA\u6587\u8BCA\u65AD\u66F4\u4F18' '1.0.0 changelog not-superior-diagnosis boundary'
 }
 
-Require-Text $releaseSection '### Added' '2.4.0 Added changelog section'
-Require-Text $releaseSection '### Changed' '2.4.0 Changed changelog section'
-Require-Text $releaseSection '### Validation' '2.4.0 Validation changelog section'
-Require-Text $releaseSection '(?s)\u6570\u636E.*\u5199\u4F5C|\u5199\u4F5C.*\u6570\u636E' '2.4.0 data-first routing changelog claim'
-Require-Text $releaseSection '(?is)Office.*(?:\u6062\u590D|\u53EF\u6062\u590D)|(?:\u6062\u590D|\u53EF\u6062\u590D).*Office' '2.4.0 recoverable Office changelog claim'
-Require-Text $releaseSection '(?s)\u771F\u5B9E.*\u8BBA\u6587.*(?:\u9A8C\u8BC1|\u8BD5\u70B9|\u57FA\u51C6)' '2.4.0 real-thesis validation changelog claim'
+Require-Text $releaseSection '### Added' '1.0.0 Added changelog section'
+Require-Text $releaseSection '### Changed' '1.0.0 Changed changelog section'
+Require-Text $releaseSection '### Validation' '1.0.0 Validation changelog section'
+Require-Text $releaseSection '(?s)\u6570\u636E.*\u5199\u4F5C|\u5199\u4F5C.*\u6570\u636E' '1.0.0 data-first routing changelog claim'
+Require-Text $releaseSection '(?is)Office.*(?:\u6062\u590D|\u53EF\u6062\u590D)|(?:\u6062\u590D|\u53EF\u6062\u590D).*Office' '1.0.0 recoverable Office changelog claim'
+Require-Text $releaseSection '(?s)\u771F\u5B9E.*\u8BBA\u6587.*(?:\u9A8C\u8BC1|\u8BD5\u70B9|\u57FA\u51C6)' '1.0.0 real-thesis validation changelog claim'
 
 # ── License & security assertions ──
 Require-Text $license 'MIT License' 'MIT license title'

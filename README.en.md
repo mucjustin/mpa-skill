@@ -72,6 +72,8 @@
 | ✅ **Contract tests** | PowerShell contract tests cover repository structure, skill instructions, doc consistency, and privacy red lines. |
 
 > **Windows-first**: the skill instructions are platform-agnostic, but automated workspace initialization and environment checks currently use PowerShell.
+>
+> Validation boundary in one sentence: the current reliability evidence comes from a **10-paper pilot with one sampled response per condition** (4/10 PDF structural preflights unavailable, one China-context record) — see the [evidence boundary](#-what-it-solves-first) for details. It is a release gate, not a reliability proof.
 
 ---
 
@@ -82,11 +84,11 @@
 - **Data before writing:** when usable data exists, the [real-data workflow](skills/mpa-skill/references/real-data-workflow.md) audits provenance, cleaning, methods, numbers, and existing conclusions first. Unaccepted evidence or methods are not hidden by rewriting prose.
 - **Recoverable delivery:** the [local Office editing rules](skills/mpa-skill/references/local-office-editing.md) load only when the route needs local Office mutation and a matching capability is available. After interruption, the controller reacquires document identity and probes old and new content; it stops at `STATE_UNKNOWN` instead of replaying a write or claiming success.
 
-### v2.4.0 evidence boundary
+### 1.0.0 evidence boundary
 
-The [frozen reliability benchmark](docs/validation/v2.4.0-benchmark.md) observed 7/8 for no skill, 7/8 for v2.3.0, and 8/8 for v2.4.0. The v2.4.0 gain against each baseline was +1/8, or +12.5 percentage points. The 10-paper pilot contained 7 development papers and 3 frozen holdouts; both v2.3.0 and v2.4.0 routed 10/10 papers and found 30/30 preregistered risks, with zero unsupported claims in the recorded outputs.
+The [frozen reliability benchmark](docs/validation/v1.0.0-benchmark.md) observed 7/8 for no skill, 7/8 for the previous iteration, and 8/8 for the current version. The gain against each baseline was +1/8, or +12.5 percentage points. The 10-paper pilot contained 7 development papers and 3 frozen holdouts; both iterations routed 10/10 papers and found 30/30 preregistered risks, with zero unsupported claims in the recorded outputs.
 
-The observed improvement is **rejection of stale artifacts and recovery to a verifiable delivery state**. Paper-audit metrics were tied, so the pilot does not establish superior thesis diagnosis for v2.4.0. It sampled one response per condition, had 4/10 PDF structural preflights marked `UNAVAILABLE`, is a 10-paper pilot rather than a population estimate, contains only one China-context record, and depends on source links that may drift. It therefore does not prove general model reliability, Chinese-thesis quality, or live Office-mutation success.
+The observed improvement is **rejection of stale artifacts and recovery to a verifiable delivery state**. Paper-audit metrics were tied, so the pilot does not establish superior thesis diagnosis for the current version over the previous iteration. It sampled one response per condition, had 4/10 PDF structural preflights marked `UNAVAILABLE`, is a 10-paper pilot rather than a population estimate, contains only one China-context record, and depends on source links that may drift. It therefore does not prove general model reliability, Chinese-thesis quality, or live Office-mutation success.
 
 ### MPA Research Spine
 
@@ -184,7 +186,7 @@ Check the current environment without writing files or launching apps:
 
 Codex inspects the request and attachments, composes a minimum sufficient route, then asks exactly once: `是否执行？`. After confirmation it proceeds automatically; it only asks again for logins, CAPTCHAs, paid access, destructive writes, or new substantive research ambiguity.
 
-Take the Texas State University repository-open thesis [Establishing the Relationship Between Sewer Surcharge Fees and Pollutant Discharges by Industrial Users](https://digital.library.txst.edu/items/50bce8d1-3a34-49bb-8c38-8e52b8038265). PDF pages 29–32 cover exclusions, mean imputation, and aggregation; pages 30–32 and 37 show that implementation coincided with COVID-19 without an adequate control; and pages 36–41 do not justify converting non-significance into "no effect" or direct policy guidance. A reproducible route is: retrieve the open PDF → preserve page references while auditing raw data, missingness handling, and identification → mark counterfactual and inference gaps as `RISK`/`AUTHOR_INPUT_NEEDED` → write bounded conclusions only after analysis acceptance. Sources, pages, and preregistered risks are in the [benchmark report](docs/validation/v2.4.0-benchmark.md) and its machine-readable results. Reproduction keys: source `txst-50bce8d1-3a34-49bb-8c38-8e52b8038265`, risk `d3-identification` (pages 30, 31, 32, and 37).
+Take the Texas State University repository-open thesis [Establishing the Relationship Between Sewer Surcharge Fees and Pollutant Discharges by Industrial Users](https://digital.library.txst.edu/items/50bce8d1-3a34-49bb-8c38-8e52b8038265). PDF pages 29–32 cover exclusions, mean imputation, and aggregation; pages 30–32 and 37 show that implementation coincided with COVID-19 without an adequate control; and pages 36–41 do not justify converting non-significance into "no effect" or direct policy guidance. A reproducible route is: retrieve the open PDF → preserve page references while auditing raw data, missingness handling, and identification → mark counterfactual and inference gaps as `RISK`/`AUTHOR_INPUT_NEEDED` → write bounded conclusions only after analysis acceptance. Sources, pages, and preregistered risks are in the [benchmark report](docs/validation/v1.0.0-benchmark.md) and its machine-readable results. Reproduction keys: source `txst-50bce8d1-3a34-49bb-8c38-8e52b8038265`, risk `d3-identification` (pages 30, 31, 32, and 37).
 
 ---
 
@@ -255,7 +257,7 @@ mpa-skill/
 │   ├── agents/openai.yaml          # Skill metadata
 │   ├── references/                 # Routing, research contract, real-data, local Office, deliverable, dependency, workspace rules
 │   └── scripts/                    # Initialize-MpaWorkspace.ps1 / Test-MpaEnvironment.ps1
-├── docs/validation/               # Corpus manifest, v2.4.0 machine results, and benchmark report
+├── docs/validation/               # Corpus manifest, v1.0.0 machine results, and benchmark report
 ├── tests/                         # Public contract, reliability-scenario, corpus-manifest, and script tests (with fixtures)
 ├── .github/                       # CI workflow, issue and PR templates
 ├── CONTRIBUTING.md                # Contributing guide and versioning policy

@@ -72,21 +72,25 @@
 | ✅ **契约测试护航** | 仓库结构、Skill 指令、文档一致性与隐私红线全部纳入 PowerShell 契约测试。 |
 
 > 支持状态：**Windows-first**。Skill 指令本身可跨平台阅读，但自动工作区初始化和环境检查脚本目前使用 PowerShell。
+>
+> 验证边界一句话版：当前可靠性证据来自 **10 篇论文、每个条件仅一次响应的试点**（4/10 个 PDF 结构预检不可用，仅 1 条中国情境记录），全部细节见[证据边界](#-先看它解决什么)——它是发布门槛，不是可靠性证明。
 
 ---
 
 ## 🧭 先看它解决什么
+
+**为什么是现在**：2026 年 5 月发布的《规范研究生学位论文与实践成果中人工智能工具使用指南》明确要求研究生对 AI 工具使用做出可追溯的说明。本 Skill 内置 [AI 使用声明工作流](skills/mpa-skill/references/aigc-disclosure.md)：只依据实际发生的工具使用生成七字段声明草稿（工具名称、版本、官方网址、使用用途、具体环节、参数设置、验证过程），无法核实的字段保留 `AUTHOR_INPUT_NEEDED` 而不是事后编造——应对新政，靠的是过程中留下的可审计记录，不是交稿前补写一段"本人合理使用 AI"。
 
 `mpa-skill` 面向需要把课程、案例、政策、田野、数据和论文串成一条可核验研究链的 MPA、公共管理与公共政策研究生。它以 **MPA Research Spine**（公共问题 → 利益相关者与公共价值 → 制度与政策情境 → 理论 → 证据 → 方法 → 分析 → 可执行建议）组织任务，并设置两道行为门：
 
 - **数据先于写作**：有可用数据时，先按[真实数据工作流](skills/mpa-skill/references/real-data-workflow.md)核对来源、清洗、方法、数值与既有结论；证据或方法未被接受，就不靠改写正文掩盖缺口。
 - **可恢复交付**：只有路线确需本地 Office 编辑且相应能力可用时，才加载[本地 Office 编辑规则](skills/mpa-skill/references/local-office-editing.md)。中断后重新获取文档身份并核对新旧内容；无法判定时停在 `STATE_UNKNOWN`，不会盲目重放写入或宣称成功。
 
-### v2.4.0 的证据边界
+### 1.0.0 的证据边界
 
-[冻结的可靠性基准](docs/validation/v2.4.0-benchmark.md)记录了这些观察结果：无 Skill 为 7/8，v2.3.0 为 7/8，v2.4.0 为 8/8；v2.4.0 相对两个基线均提升 +1/8，即 +12.5 个百分点。10 篇论文试点由 7 篇开发集和 3 篇冻结留出集组成；v2.3.0 与 v2.4.0 都完成 10/10 路由并找出 30/30 个预登记风险，记录输出中不受支持的声明为 0。
+[冻结的可靠性基准](docs/validation/v1.0.0-benchmark.md)记录了这些观察结果：无 Skill 为 7/8，早期内部迭代为 7/8，当前版本为 8/8；当前版本相对两个基线均提升 +1/8，即 +12.5 个百分点。10 篇论文试点由 7 篇开发集和 3 篇冻结留出集组成；两个版本都完成 10/10 路由并找出 30/30 个预登记风险，记录输出中不受支持的声明为 0。
 
-这说明的改进是**拒绝仍含旧值的产物，并在交付中断后恢复到可验证状态**；论文审计指标持平，不能据此声称 v2.4.0 的论文诊断优于 v2.3.0。该试点每个条件只有一次响应，4/10 个 PDF 的结构预检为 `UNAVAILABLE`，10 篇样本不是总体估计，只有 1 条中国情境记录，且来源链接可能漂移。因此试点不能泛化为模型可靠性、中文论文质量或真实 Office 写入成功率的证明。
+这说明的改进是**拒绝仍含旧值的产物，并在交付中断后恢复到可验证状态**；论文审计指标持平，不能据此声称当前版本的论文诊断优于早期迭代。该试点每个条件只有一次响应，4/10 个 PDF 的结构预检为 `UNAVAILABLE`，10 篇样本不是总体估计，只有 1 条中国情境记录，且来源链接可能漂移。因此试点不能泛化为模型可靠性、中文论文质量或真实 Office 写入成功率的证明。
 
 ### MPA Research Spine（MPA 研究主线）
 
@@ -184,7 +188,7 @@ $env:MPA_WORKSPACE_CONFIG = 'path-to-your-config.json'
 
 Codex 会先检查指令和附件，组合最小必要路线，然后只问一次 `是否执行？`。确认后继续执行；只有遇到登录、验证码、付费访问、破坏性写入或新的实质研究歧义时才再次询问。
 
-以 Texas State University 机构库开放的论文 [Establishing the Relationship Between Sewer Surcharge Fees and Pollutant Discharges by Industrial Users](https://digital.library.txst.edu/items/50bce8d1-3a34-49bb-8c38-8e52b8038265) 为例：PDF 第 29–32 页涉及排除、均值填补和聚合，第 30–32、37 页显示政策实施与 COVID-19 同期且没有充分对照，第 36–41 页的无显著结果不足以支持"没有影响"或直接政策推广。可复现路线是：获取开放 PDF → 保留页码审计原始数据、缺失处理与识别策略 → 将反事实和推断缺口标为 `RISK`/`AUTHOR_INPUT_NEEDED` → 只在分析被接受后写有边界的结论。来源、页码和预登记风险见[基准报告](docs/validation/v2.4.0-benchmark.md)及其机器可读结果。复现键：来源 `txst-50bce8d1-3a34-49bb-8c38-8e52b8038265`，风险 `d3-identification`（第 30、31、32、37 页）。
+以 Texas State University 机构库开放的论文 [Establishing the Relationship Between Sewer Surcharge Fees and Pollutant Discharges by Industrial Users](https://digital.library.txst.edu/items/50bce8d1-3a34-49bb-8c38-8e52b8038265) 为例：PDF 第 29–32 页涉及排除、均值填补和聚合，第 30–32、37 页显示政策实施与 COVID-19 同期且没有充分对照，第 36–41 页的无显著结果不足以支持"没有影响"或直接政策推广。可复现路线是：获取开放 PDF → 保留页码审计原始数据、缺失处理与识别策略 → 将反事实和推断缺口标为 `RISK`/`AUTHOR_INPUT_NEEDED` → 只在分析被接受后写有边界的结论。来源、页码和预登记风险见[基准报告](docs/validation/v1.0.0-benchmark.md)及其机器可读结果。复现键：来源 `txst-50bce8d1-3a34-49bb-8c38-8e52b8038265`，风险 `d3-identification`（第 30、31、32、37 页）。
 
 ---
 
@@ -255,7 +259,7 @@ mpa-skill/
 │   ├── agents/openai.yaml          # Skill 元数据
 │   ├── references/                 # 路由、研究契约、真实数据、本地 Office、交付物、依赖与工作区规则
 │   └── scripts/                    # Initialize-MpaWorkspace.ps1 / Test-MpaEnvironment.ps1
-├── docs/validation/               # 语料清单、v2.4.0 机器结果与基准报告
+├── docs/validation/               # 语料清单、v1.0.0 机器结果与基准报告
 ├── tests/                         # 公开契约、可靠性场景、语料清单与脚本测试（含 fixtures）
 ├── .github/                        # CI 工作流、Issue 与 PR 模板
 ├── CONTRIBUTING.md                 # 贡献指南与版本维护规范
