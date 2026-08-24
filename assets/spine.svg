@@ -1,0 +1,103 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 500" width="1280" height="500" role="img" aria-label="MPA Research Spine workflow diagram">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0d1117"/>
+      <stop offset="1" stop-color="#111827"/>
+    </linearGradient>
+    <marker id="arrowR" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L9,3 z" fill="#58a6ff"/>
+    </marker>
+    <marker id="arrowL" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L9,3 z" fill="#3fb950"/>
+    </marker>
+    <marker id="arrowD" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L9,3 z" fill="#d29922"/>
+    </marker>
+  </defs>
+
+  <rect width="1280" height="500" fill="url(#bg)"/>
+
+  <!-- 标题 -->
+  <text x="640" y="48" text-anchor="middle" font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="28" font-weight="700" fill="#e6edf3" letter-spacing="2">MPA Research Spine · 研究主线</text>
+
+  <!-- 节点数据：[x, y, 序号, 中文, 英文, 颜色] -->
+  <!-- 排 1 -->
+  <g>
+    <rect x="50"  y="86" width="240" height="110" rx="14" fill="#21262d" stroke="#30363d"/>
+    <circle cx="82" cy="124" r="17" fill="#58a6ff"/>
+    <text x="82" y="131" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="700" fill="#0d1117">1</text>
+    <text x="110" y="136" font-family="'Microsoft YaHei', 'PingFang SC', 'Segoe UI', sans-serif" font-size="21" font-weight="700" fill="#f0f6fc">公共问题</text>
+    <text x="110" y="166" font-family="'Segoe UI', Arial, sans-serif" font-size="13" fill="#8b949e">public problem</text>
+    <line x1="82" y1="148" x2="262" y2="148" stroke="#58a6ff" stroke-width="3" opacity="0.5"/>
+  </g>
+  <g>
+    <rect x="350" y="86" width="240" height="110" rx="14" fill="#21262d" stroke="#30363d"/>
+    <circle cx="382" cy="124" r="17" fill="#58a6ff"/>
+    <text x="382" y="131" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="700" fill="#0d1117">2</text>
+    <text x="410" y="136" font-family="'Microsoft YaHei', 'PingFang SC', 'Segoe UI', sans-serif" font-size="19" font-weight="700" fill="#f0f6fc">利益相关者与公共价值</text>
+    <text x="410" y="166" font-family="'Segoe UI', Arial, sans-serif" font-size="13" fill="#8b949e">stakeholders &amp; public value</text>
+    <line x1="382" y1="148" x2="562" y2="148" stroke="#58a6ff" stroke-width="3" opacity="0.5"/>
+  </g>
+  <g>
+    <rect x="650" y="86" width="240" height="110" rx="14" fill="#21262d" stroke="#30363d"/>
+    <circle cx="682" cy="124" r="17" fill="#bc8cff"/>
+    <text x="682" y="131" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="700" fill="#0d1117">3</text>
+    <text x="710" y="136" font-family="'Microsoft YaHei', 'PingFang SC', 'Segoe UI', sans-serif" font-size="21" font-weight="700" fill="#f0f6fc">制度与政策情境</text>
+    <text x="710" y="166" font-family="'Segoe UI', Arial, sans-serif" font-size="13" fill="#8b949e">institutional &amp; policy context</text>
+    <line x1="682" y1="148" x2="862" y2="148" stroke="#bc8cff" stroke-width="3" opacity="0.5"/>
+  </g>
+  <g>
+    <rect x="950" y="86" width="240" height="110" rx="14" fill="#21262d" stroke="#30363d"/>
+    <circle cx="982" cy="124" r="17" fill="#bc8cff"/>
+    <text x="982" y="131" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="700" fill="#0d1117">4</text>
+    <text x="1010" y="136" font-family="'Microsoft YaHei', 'PingFang SC', 'Segoe UI', sans-serif" font-size="21" font-weight="700" fill="#f0f6fc">理论或分析框架</text>
+    <text x="1010" y="166" font-family="'Segoe UI', Arial, sans-serif" font-size="13" fill="#8b949e">theory / framework</text>
+  </g>
+
+  <!-- 排 1 横向箭头 1→2→3→4 -->
+  <line x1="290" y1="141" x2="346" y2="141" stroke="#58a6ff" stroke-width="4" marker-end="url(#arrowR)"/>
+  <line x1="590" y1="141" x2="646" y2="141" stroke="#58a6ff" stroke-width="4" marker-end="url(#arrowR)"/>
+  <line x1="890" y1="141" x2="946" y2="141" stroke="#58a6ff" stroke-width="4" marker-end="url(#arrowR)"/>
+
+  <!-- 4 向下到 5 -->
+  <line x1="1070" y1="196" x2="1070" y2="288" stroke="#d29922" stroke-width="4" marker-end="url(#arrowD)"/>
+
+  <!-- 排 2 -->
+  <g>
+    <rect x="950" y="296" width="240" height="110" rx="14" fill="#21262d" stroke="#30363d"/>
+    <circle cx="982" cy="334" r="17" fill="#3fb950"/>
+    <text x="982" y="341" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="700" fill="#0d1117">5</text>
+    <text x="1010" y="346" font-family="'Microsoft YaHei', 'PingFang SC', 'Segoe UI', sans-serif" font-size="21" font-weight="700" fill="#f0f6fc">证据</text>
+    <text x="1010" y="376" font-family="'Segoe UI', Arial, sans-serif" font-size="13" fill="#8b949e">evidence</text>
+  </g>
+  <g>
+    <rect x="650" y="296" width="240" height="110" rx="14" fill="#21262d" stroke="#30363d"/>
+    <circle cx="682" cy="334" r="17" fill="#3fb950"/>
+    <text x="682" y="341" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="700" fill="#0d1117">6</text>
+    <text x="710" y="346" font-family="'Microsoft YaHei', 'PingFang SC', 'Segoe UI', sans-serif" font-size="21" font-weight="700" fill="#f0f6fc">方法</text>
+    <text x="710" y="376" font-family="'Segoe UI', Arial, sans-serif" font-size="13" fill="#8b949e">method</text>
+  </g>
+  <g>
+    <rect x="350" y="296" width="240" height="110" rx="14" fill="#21262d" stroke="#30363d"/>
+    <circle cx="382" cy="334" r="17" fill="#d29922"/>
+    <text x="382" y="341" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="700" fill="#0d1117">7</text>
+    <text x="410" y="346" font-family="'Microsoft YaHei', 'PingFang SC', 'Segoe UI', sans-serif" font-size="21" font-weight="700" fill="#f0f6fc">分析</text>
+    <text x="410" y="376" font-family="'Segoe UI', Arial, sans-serif" font-size="13" fill="#8b949e">analysis</text>
+  </g>
+  <g>
+    <rect x="50" y="296" width="240" height="110" rx="14" fill="#21262d" stroke="#30363d"/>
+    <circle cx="82" cy="334" r="17" fill="#d29922"/>
+    <text x="82" y="341" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="700" fill="#0d1117">8</text>
+    <text x="110" y="346" font-family="'Microsoft YaHei', 'PingFang SC', 'Segoe UI', sans-serif" font-size="21" font-weight="700" fill="#f0f6fc">可执行建议</text>
+    <text x="110" y="376" font-family="'Segoe UI', Arial, sans-serif" font-size="13" fill="#8b949e">actionable recommendations</text>
+  </g>
+
+  <!-- 排 2 横向箭头（向左：5→6→7→8 的流程方向） -->
+  <line x1="950" y1="351" x2="894" y2="351" stroke="#3fb950" stroke-width="4" marker-end="url(#arrowL)"/>
+  <line x1="650" y1="351" x2="594" y2="351" stroke="#3fb950" stroke-width="4" marker-end="url(#arrowL)"/>
+  <line x1="350" y1="351" x2="294" y2="351" stroke="#3fb950" stroke-width="4" marker-end="url(#arrowL)"/>
+
+  <!-- 底部说明 -->
+  <text x="640" y="456" text-anchor="middle" font-family="'Microsoft YaHei', 'PingFang SC', 'Segoe UI', sans-serif" font-size="16" fill="#8b949e">先识别主线上已成立与仍缺失的环节，再开始写作 —— 避免用漂亮文字掩盖问题定义不清、证据不足、方法不匹配或建议不可落地</text>
+  <text x="640" y="482" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif" font-size="13" fill="#484f58">Identify what holds and what is missing on the spine before writing.</text>
+</svg>

@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" role="img" aria-label="MPA Skill logo">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#161b22"/>
+      <stop offset="1" stop-color="#0d1117"/>
+    </linearGradient>
+    <linearGradient id="glow" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#58a6ff" stop-opacity="0.18"/>
+      <stop offset="0.5" stop-color="#bc8cff" stop-opacity="0.12"/>
+      <stop offset="1" stop-color="#3fb950" stop-opacity="0.18"/>
+    </linearGradient>
+    <linearGradient id="bookL" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#58a6ff"/>
+      <stop offset="1" stop-color="#1f6feb"/>
+    </linearGradient>
+    <linearGradient id="bookR" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#bc8cff"/>
+      <stop offset="1" stop-color="#8957e5"/>
+    </linearGradient>
+  </defs>
+
+  <!-- 底板 -->
+  <rect x="16" y="16" width="480" height="480" rx="112" fill="url(#bg)" stroke="#30363d" stroke-width="2"/>
+  <rect x="16" y="16" width="480" height="480" rx="112" fill="url(#glow)"/>
+
+  <!-- 书本（打开的两页） -->
+  <path d="M 116 148 C 152 172, 208 178, 256 166 L 256 300 C 208 312, 152 306, 116 282 Z" fill="url(#bookL)"/>
+  <path d="M 396 148 C 360 172, 304 178, 256 166 L 256 300 C 304 312, 360 306, 396 282 Z" fill="url(#bookR)"/>
+  <!-- 中缝 -->
+  <line x1="256" y1="166" x2="256" y2="300" stroke="#e6edf3" stroke-width="4" stroke-linecap="round"/>
+  <!-- 书页纹理线 -->
+  <line x1="138" y1="190" x2="216" y2="180" stroke="#0d1117" stroke-width="5" stroke-linecap="round" opacity="0.35"/>
+  <line x1="130" y1="226" x2="224" y2="214" stroke="#0d1117" stroke-width="5" stroke-linecap="round" opacity="0.35"/>
+  <line x1="296" y1="180" x2="374" y2="190" stroke="#0d1117" stroke-width="5" stroke-linecap="round" opacity="0.35"/>
+  <line x1="288" y1="214" x2="382" y2="226" stroke="#0d1117" stroke-width="5" stroke-linecap="round" opacity="0.35"/>
+
+  <!-- 路径弧（书页上方，象征研究主线） -->
+  <path d="M 128 120 Q 200 96 256 108 Q 312 96 384 120" fill="none" stroke="#3fb950" stroke-width="6" stroke-linecap="round"/>
+  <circle cx="128" cy="120" r="6" fill="#3fb950"/>
+  <circle cx="384" cy="120" r="6" fill="#3fb950"/>
+
+  <!-- 字标 -->
+  <text x="256" y="398" text-anchor="middle" font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="116" font-weight="800" fill="#e6edf3" letter-spacing="6">MPA</text>
+  <text x="256" y="446" text-anchor="middle" font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="30" font-weight="600" fill="#8b949e" letter-spacing="7">RESEARCH WORKFLOW</text>
+</svg>

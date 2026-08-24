@@ -1,0 +1,6 @@
+.worktrees/
+docs/superpowers/
+
+# Local generated configuration and test output
+*.local.json
+.tmp/
