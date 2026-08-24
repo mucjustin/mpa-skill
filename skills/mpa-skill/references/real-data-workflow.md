@@ -7,11 +7,11 @@ Contract for rerunning analysis on a user-supplied dataset and writing results b
 1. Audit data quality and preserve the raw file untouched; record inclusion and exclusion rules with counts.
 2. Rerun the analysis before any prose change. Conclusions follow the data, never the reverse.
 3. Mark any claim the data cannot support as `AUTHOR_INPUT_NEEDED`; never fabricate numbers, sample sizes, or fit statistics.
-4. Rewrite the affected conclusions, then verify every numeric write-back in both directions: new values present, superseded values absent.
+4. Rewrite the affected conclusions, then verify every numeric write-back in both directions: new value present, old value absent.
 
 ## Method discipline
 
-- Know the standardization frame. Z-scores computed per exam session zero each session's mean, so group centroids encode relative position, not absolute progress. Improvement or value-added claims must name the frame that supports them.
+- Know the standardization frame; standardized scores describe relative position in their reference frame. Z-scores computed per exam session zero each session's mean, so group centroids encode relative position, not absolute progress. Improvement or value-added claims must name the frame that supports them.
 - For longitudinal tracking, fit dimensionality reduction and clustering once on all observations (global PCA, global KMeans) and then assign labels. Per-session fitting lets group boundaries drift and breaks tracking.
 - Report classifier accuracy together with the majority-class baseline and a confusion-matrix reading; high accuracy on an imbalanced target is not evidence of usable recall.
 - State the validation design (split ratio, stratification, seed) next to every reported metric.
