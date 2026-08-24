@@ -2,11 +2,11 @@
   <img src="assets/logo.svg" alt="MPA Skill logo" width="160">
 </p>
 
-<h1 align="center">MPA Skill</h1>
+<h1 align="center">MPA Skill 🎓</h1>
 
 <p align="center">
-  <strong>可核验、可复用、能落地的公共管理研究工作流</strong><br>
-  专为 <strong>MPA 研究生</strong>打造的 Codex Agent Skill · 不是通用论文模板
+  <strong>让公共管理研究从碎片走向可核验</strong><br>
+  给 MPA 研究生的 Codex Agent Skill — 不是通用论文模板 🙅
 </p>
 
 <p align="center">
@@ -36,122 +36,45 @@
 
 ---
 
-## 📑 目录
+## 🎯 这是什么
 
-- [✨ 功能特性](#-功能特性)
-- [🧭 先看它解决什么](#-先看它解决什么)
-- [🛣️ 适用任务](#-适用任务)
-- [🚀 安装](#-安装)
-- [⚙️ 首次配置](#-首次配置)
-- [可复现审计示例](#可复现审计示例)
-- [📝 三个起步提示](#-三个起步提示)
-- [🏗️ 架构](#-架构)
-- [🧰 技术栈](#-技术栈)
-- [📂 仓库结构](#-仓库结构)
-- [🧪 开发与测试](#-开发与测试)
-- [🔌 可选依赖](#-可选依赖)
-- [🔒 隐私与安全](#-隐私与安全)
-- [⚙️ 更新与卸载](#-更新与卸载)
-- [❓ 故障排查](#-故障排查)
-- [🤝 贡献](#-贡献)
-- [📄 许可证](#-许可证)
+帮 MPA 研究生把课程、案例、政策、田野、数据和论文串成**一条可核验研究链**的 Codex Agent Skill。
+
+核心是 **MPA Research Spine**：公共问题 → 利益相关者 → 制度情境 → 理论 → 证据 → 方法 → 分析 → 可执行建议。先找缺口，再动笔 ✏️
+
+两道行为门贯穿全程：
+
+- 🛡️ **数据先于写作**：有数据时先审计来源、清洗、方法和数值；分析未被接受前不改写结论。详见[执行手册](skills/mpa-skill/references/execution.md)。
+- 🔄 **可恢复交付**：Office 编辑中断后重新核验文档身份；不确定时停在 `STATE_UNKNOWN`，不盲目重放。
+
+> **Windows-first** · 指令可跨平台阅读，自动化脚本使用 PowerShell
 
 ---
 
-## ✨ 功能特性
+## ✨ 功能一览
 
-| 特性 | 说明 |
-|---|---|
-| 🧭 **MPA Research Spine** | 把「公共问题 → 利益相关者 → 制度情境 → 理论 → 证据 → 方法 → 分析 → 可执行建议」串成可核验主线，先识别缺口再动笔。 |
-| 🛣️ **十条研究路由** | 课程资料 / 案例分析 / 案例大赛 / 政策备忘录 / 文献综述 / 研究设计 / 田野调研 / 数据分析 / 论文写作 / 答辩准备，按需组合。 |
-| 🔗 **课程→毕业研究复用** | 课程笔记、案例、问卷、代码可沉淀为研究资产，但复用前必须回原始来源核验来源与边界。 |
-| 🧠 **MPA 知识本体** | 理论地图、中国治理情境库、公管思维清单、课程-能力映射，让控制器拥有 MPA 学科内容。 |
-| 🛡️ **数据先于写作** | 有可用数据时，先核对来源、清洗、方法、数值与既有结论；证据或方法未被接受，不靠改写正文掩盖缺口。 |
-| 🔄 **可恢复交付** | 本地 Office 编辑中断后重新获取文档身份并核对新旧内容；无法判定时停在 `STATE_UNKNOWN`，不盲目重放写入。 |
-| 🧾 **AI 使用声明** | 按 [AI 使用声明工作流](skills/mpa-skill/references/aigc-disclosure.md)仅依据实际发生的工具使用生成声明草稿；无法核实的字段保留 `AUTHOR_INPUT_NEEDED`，绝不写入未执行的验证。 |
-| ✅ **契约测试护航** | 仓库结构、Skill 指令、文档一致性与隐私红线全部纳入 PowerShell 契约测试。 |
-
-> 支持状态：**Windows-first**。Skill 指令本身可跨平台阅读，但自动工作区初始化和环境检查脚本目前使用 PowerShell。
->
-> 验证边界一句话版：当前可靠性证据来自 **10 篇论文、每个条件仅一次响应的试点**（4/10 个 PDF 结构预检不可用，仅 1 条中国情境记录），全部细节见[证据边界](#-先看它解决什么)——它是发布门槛，不是可靠性证明。
+| | 特性 | 一句话 |
+|---|---|---|
+| 🧭 | MPA Research Spine | 八步可核验研究主线，先识别缺口再动笔 |
+| 🛣️ | 十条研究路由 | 课程/案例/政策/文献/设计/田野/数据/论文/答辩，按需组合 |
+| 🔗 | 课程→毕业复用 | 笔记、案例、代码可沉淀为研究资产，复用前回原始来源核验 |
+| 🧠 | MPA 知识本体 | 理论地图 + 中国治理情境 + 思维清单 + 课程映射 |
+| 🛡️ | 数据先于写作 | 先审计再写作，不靠改写掩盖缺口 |
+| 🔄 | 可恢复交付 | 中断可恢复，`STATE_UNKNOWN` 时停止 |
+| 🧾 | AI 使用声明 | 只依据实际工具使用生成，不编造。详见[声明工作流](skills/mpa-skill/references/aigc-disclosure.md) |
+| ✅ | 契约测试 | PowerShell 测试覆盖结构、指令、文档与隐私红线 |
 
 ---
 
-## 🧭 先看它解决什么
+## 🚀 快速开始
 
-**为什么是现在**：2026 年 5 月发布的《规范研究生学位论文与实践成果中人工智能工具使用指南》明确要求研究生对 AI 工具使用做出可追溯的说明。本 Skill 内置 [AI 使用声明工作流](skills/mpa-skill/references/aigc-disclosure.md)：只依据实际发生的工具使用生成七字段声明草稿（工具名称、版本、官方网址、使用用途、具体环节、参数设置、验证过程），无法核实的字段保留 `AUTHOR_INPUT_NEEDED` 而不是事后编造——应对新政，靠的是过程中留下的可审计记录，不是交稿前补写一段"本人合理使用 AI"。
-
-`mpa-skill` 面向需要把课程、案例、政策、田野、数据和论文串成一条可核验研究链的 MPA、公共管理与公共政策研究生。它以 **MPA Research Spine**（公共问题 → 利益相关者与公共价值 → 制度与政策情境 → 理论 → 证据 → 方法 → 分析 → 可执行建议）组织任务，并设置两道行为门：
-
-- **数据先于写作**：有可用数据时，先按[执行手册](skills/mpa-skill/references/execution.md)的数据工作流部分核对来源、清洗、方法、数值与既有结论；证据或方法未被接受，就不靠改写正文掩盖缺口。
-- **可恢复交付**：只有路线确需本地 Office 编辑且相应能力可用时，才加载[执行手册](skills/mpa-skill/references/execution.md)的 Office 编辑部分。中断后重新获取文档身份并核对新旧内容；无法判定时停在 `STATE_UNKNOWN`，不会盲目重放写入或宣称成功。
-
-
-
-### MPA Research Spine（MPA 研究主线）
-
-<p align="center">
-  <img src="assets/spine.svg" alt="MPA Research Spine" width="100%">
-</p>
-
-```text
-公共问题
-→ 利益相关者与公共价值
-→ 制度与政策情境
-→ 理论或分析框架
-→ 证据
-→ 方法
-→ 分析
-→ 可执行建议
-```
-
-Skill 会先识别这条主线中已经成立和仍然缺失的部分，再开始写作，避免用漂亮文字掩盖问题定义不清、利益相关者缺失、证据不足、方法不匹配或建议无法实施。
-
-### 课程成果向毕业研究复用
-
-课程笔记、案例、概念、文献卡片、作业、问卷、数据、代码和教师反馈可以成为后续研究资产，但必须记录来源。课程笔记或旧作业在进入开题和论文之前，需要回到原始来源重新核验。
-
----
-
-## 🛣️ 适用任务
-
-- MPA 课程资料完整阅读、笔记、复习和作业准备；
-- 公共管理案例分析；
-- 中国研究生公共管理案例大赛等案例竞赛的参赛作品规划、调研证据组织与理论框架打磨；
-- 政策备忘录；
-- 面向公共问题的文献检索与综述；
-- 开题、研究设计、问卷、访谈和田野工作；
-- 问卷、访谈、行政数据及混合方法分析；
-- MPA 论文写作、引用核验与答辩准备。
-
-普通教学设计、博客写作、编程、通用数据分析、单独整理 Zotero/Obsidian 或非 MPA 论文不会仅因关键词相近而触发本 Skill。
-
----
-
-## 🚀 安装
-
-### 使用 Agent Skills CLI
+### 安装
 
 ```powershell
 npx skills add mucjustin/mpa-skill -g -s mpa-skill -y --full-depth
 ```
 
-### 让 Codex 安装
-
-告诉 Codex：
-
-```text
-使用 $skill-installer 从 https://github.com/mucjustin/mpa-skill
-的 skills/mpa-skill 安装用户级 Skill。
-```
-
-如果新安装的 Skill 没有立即出现在列表中，重启 Codex。
-
----
-
-## ⚙️ 首次配置
-
-初始化脚本只创建你指定根目录下的工作区和本机 JSON 配置，不修改 Zotero 数据库或 Obsidian 设置。
+### 初始化工作区
 
 ```powershell
 $skillRoot = Join-Path $HOME '.agents\skills\mpa-skill'
@@ -159,32 +82,14 @@ $skillRoot = Join-Path $HOME '.agents\skills\mpa-skill'
   -WorkspaceRoot (Join-Path $HOME 'Documents\MPA-Workspace')
 ```
 
-默认配置写入 `%APPDATA%\mpa-skill\config.json`。也可以通过环境变量指定其他配置：
+默认配置写入 `%APPDATA%\mpa-skill\config.json`，不修改 Zotero 数据库或 Obsidian 设置。预览操作加 `-WhatIf`；检查环境用 `Test-MpaEnvironment.ps1`。
+
+### 更新与卸载
 
 ```powershell
-$env:MPA_WORKSPACE_CONFIG = 'path-to-your-config.json'
+npx skills update mpa-skill -g -y    # 更新
+npx skills remove mpa-skill -g -y    # 卸载（不删除已创建的工作区和配置）
 ```
-
-只查看将执行的操作：
-
-```powershell
-& (Join-Path $skillRoot 'scripts\Initialize-MpaWorkspace.ps1') `
-  -WorkspaceRoot (Join-Path $HOME 'Documents\MPA-Workspace') -WhatIf
-```
-
-检查当前环境，不写入文件也不启动应用：
-
-```powershell
-& (Join-Path $skillRoot 'scripts\Test-MpaEnvironment.ps1')
-```
-
----
-
-## 可复现审计示例
-
-Codex 会先检查指令和附件，组合最小必要路线，然后只问一次 `是否执行？`。确认后继续执行；只有遇到登录、验证码、付费访问、破坏性写入或新的实质研究歧义时才再次询问。
-
-以 Texas State University 机构库开放的论文 [Establishing the Relationship Between Sewer Surcharge Fees and Pollutant Discharges by Industrial Users](https://digital.library.txst.edu/items/50bce8d1-3a34-49bb-8c38-8e52b8038265) 为例：PDF 第 29–32 页涉及排除、均值填补和聚合，第 30–32、37 页显示政策实施与 COVID-19 同期且没有充分对照，第 36–41 页的无显著结果不足以支持"没有影响"或直接政策推广。可复现路线是：获取开放 PDF → 保留页码审计原始数据、缺失处理与识别策略 → 将反事实和推断缺口标为 `RISK`/`AUTHOR_INPUT_NEEDED` → 只在分析被接受后写有边界的结论。来源、页码和预登记风险见[基准报告](docs/validation/v1.0.0-benchmark.md)及其机器可读结果。复现键：来源 `txst-50bce8d1-3a34-49bb-8c38-8e52b8038265`，风险 `d3-identification`（第 30、31、32、37 页）。
 
 ---
 
@@ -199,7 +104,7 @@ Codex 会先检查指令和附件，组合最小必要路线，然后只问一�
 ### 2. 无数据的案例/政策分析
 
 ```text
-分析这个基层治理案例；当前没有原始数据。请明确证据缺口，比较利益相关者、制度约束、公共价值、备选方案、可行性与可迁移边界，不要虚构数据或效果。
+分析这个基层治理案例；没有原始数据。请明确证据缺口，比较利益相关者、制度约束、公共价值、备选方案、可行性与可迁移边界，不要虚构数据或效果。
 ```
 
 ### 3. 已验收内容的 Word 交付
@@ -212,36 +117,17 @@ Codex 会先检查指令和附件，组合最小必要路线，然后只问一�
 
 ## 🏗️ 架构
 
-Skill 是一个**薄控制器**：只负责范围判定、分类编排、最小必要路线、安全停止与最终验收；专业执行（文献检索、论文写作、引用核验等）委托给对应技能，可选集成 Zotero 与 Obsidian。
+Skill 是一个**薄控制器**：只管范围判定、路由编排、安全停止和最终验收，专业执行委托给对应技能。
 
 <p align="center">
   <img src="assets/workflow.svg" alt="MPA Skill workflow" width="100%">
 </p>
 
-执行流程概括为：
+```
+输入 → 判定 → 编排 → 路由 → 确认(一次) → 执行 → 验收
+```
 
-1. **输入**：用户请求与材料；
-2. **判定**：识别是否属于 MPA / 公共管理 / 公共政策任务；
-3. **编排**：按依赖关系对任务分类并排序；
-4. **路由**：组合最小必要路线；
-5. **确认**：一次性 `是否执行？`；
-6. **执行**：十条路由按需组合，调用可选专业技能；
-7. **验收**：MPA 质量门（研究契约核验）+ 最终验收与状态交接。
-
-安全停止贯穿全程：登录、验证码、付费墙、授权访问、破坏性写入或实质研究歧义都会暂停并询问。
-
----
-
-## 🧰 技术栈
-
-| 层级 | 技术 |
-|---|---|
-| **Skill 框架** | Codex Agent Skill（`SKILL.md` + `agents/openai.yaml`） |
-| **脚本与测试** | PowerShell 5.1+ / PowerShell 7 (`pwsh`) |
-| **CI / CD** | GitHub Actions（`windows-latest`） |
-| **可选集成** | Zotero（本地 API / Better BibTeX）、Obsidian（Markdown Vault） |
-| **依赖管理** | npm `skills` CLI |
-| **版本规范** | [Semantic Versioning](https://semver.org/lang/zh-CN/) + [Keep a Changelog](https://keepachangelog.com/zh-CN/1.1.0/) |
+安全停止：登录、验证码、付费墙、授权访问、破坏性写入或实质研究歧义 → 暂停并询问。
 
 ---
 
@@ -249,34 +135,70 @@ Skill 是一个**薄控制器**：只负责范围判定、分类编排、最小�
 
 ```text
 mpa-skill/
-├── assets/                         # Logo、Banner、架构图、工作流图
-├── skills/mpa-skill/               # Skill 本体（安装入口）
-│   ├── SKILL.md                    # 控制器指令与引用加载表
-│   ├── agents/openai.yaml          # Skill 元数据
-│   ├── references/                 # 8 个引用文件（路由、知识库、执行手册、模板等）
+├── assets/                         # Logo、Banner、架构图
+├── skills/mpa-skill/               # Skill 本体
+│   ├── SKILL.md                    # 控制器指令
+│   ├── agents/openai.yaml          # 元数据
+│   ├── references/                 # 8 个引用文件
 │   │   ├── routing.md              # 路由表与决策树
-│   │   ├── mpa-knowledge.md        # 统一知识库（理论地图+中国情境+思维清单+课程映射+方法决策树）
-│   │   ├── execution.md            # 执行手册（数据工作流+Office编辑+依赖管理+工作区配置）
-│   │   ├── templates.md             # 实用模板库（8种路由的落地骨架）
-│   │   ├── mpa-research-contract.md # 研究契约
-│   │   ├── mpa-deliverables.md      # 交付物规格
-│   │   ├── mpa-case-competition.md  # 案例竞赛规则
-│   │   └── aigc-disclosure.md      # AI使用声明
-│   └── scripts/                    # Initialize-MpaWorkspace.ps1 / Test-MpaEnvironment.ps1
-├── docs/validation/               # 语料清单、v1.0.0 机器结果与基准报告
-├── tests/                         # 公开契约、可靠性场景、语料清单与脚本测试（含 fixtures）
-├── .github/                        # CI 工作流、Issue 与 PR 模板
-├── CONTRIBUTING.md                 # 贡献指南与版本维护规范
-├── CHANGELOG.md                    # 变更记录
-├── SECURITY.md                     # 安全披露政策
+│   │   ├── mpa-knowledge.md        # 统一知识库
+│   │   ├── execution.md            # 执行手册
+│   │   ├── templates.md            # 实用模板库
+│   │   ├── mpa-research-contract.md
+│   │   ├── mpa-deliverables.md
+│   │   ├── mpa-case-competition.md
+│   │   └── aigc-disclosure.md
+│   └── scripts/                    # 工作区与环境脚本
+├── docs/validation/               # 基准报告与语料
+├── tests/                         # 契约测试
+├── .github/                        # CI 与模板
+├── CONTRIBUTING.md
+├── CHANGELOG.md
+├── SECURITY.md
 └── LICENSE                         # MIT
 ```
 
 ---
 
-## 🧪 开发与测试
+## 可复现审计示例
 
-本地运行全部测试：
+Codex 先检查指令和附件，组合最小必要路线，然后只问一次 `是否执行？`。
+
+以 Texas State University 机构库开放的论文 [Establishing the Relationship Between Sewer Surcharge Fees and Pollutant Discharges by Industrial Users](https://digital.library.txst.edu/items/50bce8d1-3a34-49bb-8c38-8e52b8038265) 为例：PDF 第 29–32 页涉及排除、均值填补和聚合，第 30–32、37 页显示政策实施与 COVID-19 同期且没有充分对照，第 36–41 页的无显著结果不足以支持"没有影响"或直接政策推广。
+
+可复现路线：获取开放 PDF → 保留页码审计原始数据 → 标记 `RISK`/`AUTHOR_INPUT_NEEDED` → 只在分析被接受后写有边界的结论。
+
+复现键：来源 `txst-50bce8d1-3a34-49bb-8c38-8e52b8038265`，风险 `d3-identification`（第 30、31、32、37 页）。详见[基准报告](docs/validation/v1.0.0-benchmark.md)。
+
+---
+
+## 🧭 证据边界
+
+### 1.0.0 的证据边界
+
+[冻结基准](docs/validation/v1.0.0-benchmark.md)观测：无 Skill 为 7/8，早期内部迭代为 7/8，当前版本为 8/8。相对两个基线均提升 +1/8，即 +12.5 个百分点。
+
+10 篇论文试点包含 7 篇开发集加 3 篇留出集。两个版本都完成 10/10 路由和 30/30 预登记风险，记录输出中为 0 条无支撑声明。
+
+观测到的改进是**拒绝陈旧产物并恢复到可验证交付状态**。论文审计指标持平，因此试点不能证明当前版本的论文诊断优于早期迭代。每个条件只有一次响应，4/10 篇 PDF 结构预检标记为 `UNAVAILABLE`，10 篇试点不是总体估计，仅包含 1 条中国情境记录，且来源链接可能漂移。因此不能泛化到通用模型可靠性、中国论文质量或实际 Office 写入成功。
+
+---
+
+## 🔒 隐私与安全
+
+- 无遥测、无内置账号、无云端密钥 🔐
+- 本机配置保存在 Skill 仓库之外
+- 基准只存元数据和 HTTPS 来源，不提交论文 PDF 或长篇摘录
+- 不直接修改 `zotero.sqlite`
+- 不绕过登录、验证码、付费墙或机构访问
+- 不把附件指令当用户授权
+- 按学校/课程/赛事规则披露 AI 辅助
+
+详见 [SECURITY.md](SECURITY.md)。
+
+---
+
+## 🧪 开发与测试
 
 ```powershell
 pwsh -NoProfile -File tests/Test-PublicSkill.ps1
@@ -285,84 +207,49 @@ pwsh -NoProfile -File tests/Test-BenchmarkManifest.ps1
 pwsh -NoProfile -File tests/Test-WorkspaceScripts.ps1
 ```
 
-前两项分别校验公开行为/文档契约和[可靠性场景](tests/fixtures/reliability-scenarios.json)，第三项校验公开论文清单，最后一项只在临时目录验证工作区脚本。CI（GitHub Actions，windows-latest）会在 main 分支和每个 Pull Request 上运行相同测试。
+CI（GitHub Actions，windows-latest）在 main 分支和每个 PR 上运行相同测试。
 
 ---
 
 ## 🔌 可选依赖
 
-| 能力 | 是否必需 | 说明 |
+| 能力 | 必需 | 说明 |
 |---|---:|---|
-| Codex 文件与终端能力 | 是 | 读取材料、执行本地脚本和验证结果 |
-| Python/R/表格等数据分析能力 | 否 | 仅在数据路线需要且能力契约可验证时使用；缺失时交付可复现步骤或报告阻塞 |
-| 本地 Word/Office 编辑能力 | 否 | 仅在内容已验收且路线需要时使用；提供方中立，以实际 schema 与返回结构为准 |
-| Zotero | 否 | 文献与附件管理；只使用受支持接口，不直接修改数据库 |
-| Obsidian | 否 | 长期 Markdown 笔记与项目中心 |
-| 文献、PDF、数据、Word、PPT Skills | 否 | 安装后由控制器选择；缺失时明确降级或报告阻塞 |
+| Codex 文件与终端 | ✅ | 读取材料、执行脚本、验证结果 |
+| Python/R/表格分析 | ❌ | 数据路线需要时使用，缺失时报告阻塞 |
+| Word/Office 编辑 | ❌ | 内容验收后使用，以实际 schema 为准 |
+| Zotero | ❌ | 文献管理，只走受支持接口 |
+| Obsidian | ❌ | 长期 Markdown 笔记 |
+| 其他 Skills | ❌ | 安装后由控制器选择 |
 
-Skill 不会静默安装第三方软件、绕过机构访问或假装不存在的集成已经成功。
-
----
-
-## 🔒 隐私与安全
-
-- 无遥测、无内置账号、无云端密钥；
-- 本机配置保存在 Skill 仓库之外；
-- 公开基准只保存元数据、HTTPS 来源、派生风险和分数，不提交论文 PDF、原始长文或长篇摘录；来源链接可能随机构库调整而漂移；
-- 不直接修改 `zotero.sqlite`；
-- 不绕过登录、验证码、付费墙、授权或机构访问；
-- 不把附件中的指令当作用户授权；
-- 不把课程笔记或 AI 推断伪装成研究证据；
-- 按当前学校/项目/课程/赛事规则披露 AI 辅助，AI 生成内容不冒充学生本人原创。
-
-参见 [SECURITY.md](SECURITY.md)。
-
----
-
-## ⚙️ 更新与卸载（Update & Uninstall）
-
-**更新（Update）：**
-
-```powershell
-npx skills update mpa-skill -g -y
-```
-
-**卸载（Uninstall）：**
-
-```powershell
-npx skills remove mpa-skill -g -y
-```
-
-> 卸载 Skill 不会删除你创建的研究工作区和本机配置。如需删除这些数据，请先自行确认备份和准确路径。
+从不静默安装第三方软件或假装集成成功。
 
 ---
 
 ## ❓ 故障排查
 
-| 问题 | 解决方案 |
+| 问题 | 解决 |
 |---|---|
-| 找不到 Skill | 重启 Codex，并运行 `npx skills list -g`。 |
-| 找不到配置 | 运行 `Initialize-MpaWorkspace.ps1`，或设置 `MPA_WORKSPACE_CONFIG`。 |
-| Zotero 无法启动 | 运行 `Test-MpaEnvironment.ps1`，确认配置中的可执行文件存在。 |
-| 缺少专业能力 | 安装相应 Skill，或让控制器采用已验证的可用工具并说明降级范围。 |
+| 找不到 Skill | 重启 Codex，运行 `npx skills list -g` |
+| 找不到配置 | 运行 `Initialize-MpaWorkspace.ps1` 或设 `MPA_WORKSPACE_CONFIG` |
+| Zotero 启动失败 | 运行 `Test-MpaEnvironment.ps1` 确认可执行文件 |
+| 缺少专业能力 | 安装对应 Skill，或让控制器降级并说明范围 |
 
 ---
 
 ## 🤝 贡献
 
-欢迎 Issue 与 Pull Request。贡献流程、内容边界与版本维护规范见 [CONTRIBUTING.md](CONTRIBUTING.md)，历史变更见 [CHANGELOG.md](CHANGELOG.md)。
-
----
+欢迎 Issue 与 PR 👋 流程见 [CONTRIBUTING.md](CONTRIBUTING.md)，变更见 [CHANGELOG.md](CHANGELOG.md)。
 
 ## 📄 许可证
 
-本项目采用 [MIT License](LICENSE) 开源。
+[MIT License](LICENSE) · 开源共享 🎉
 
 ---
 
 ## ⭐ Star History
 
-如果这个项目对你的研究或学习有帮助，请给个 Star — 这是对作者最大的鼓励。
+如果对你有帮助，给个 Star 吧~
 
 <a href="https://github.com/mucjustin/mpa-skill">
   <img src="https://img.shields.io/github/stars/mucjustin/mpa-skill?style=social" alt="GitHub stars">
@@ -375,5 +262,5 @@ npx skills remove mpa-skill -g -y
 </p>
 
 <p align="center">
-  <sub>Built with kyro🧠 for MPA researchers · 让公共管理研究从碎片走向可核验</sub>
+  <sub>Built with 🧠 for MPA researchers · 从碎片到可核验</sub>
 </p>

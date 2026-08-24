@@ -4,6 +4,8 @@ Choose the minimum sufficient route from capabilities actually available. Order 
 
 ## Route table
 
+Routes (in dependency order): course → case → policy memo → literature → research design → fieldwork → data → thesis → defence. Compose the minimum sufficient subset.
+
 | Route | Output | 中文关键词 | Key references |
 |---|---|---|---|
 | course | notes, revision map, assignment inputs | 课程复习、笔记整理、作业辅导 | templates.md, mpa-knowledge.md (course map) |
@@ -31,7 +33,7 @@ Choose the minimum sufficient route from capabilities actually available. Order 
 - **Case competition**: plan three documents (案例正文 ≤15000字, 案例分析报告 ≤15000字, 调研报告 ≤4000字 — verify notice limits each year) before drafting. No part reveals team identity.
 - **Data analysis**: audit data quality and preserve raw data before transformation or modelling. Association is not causality without a defensible identification strategy.
 - **Thesis**: accept evidence and analysis before drafting or polishing prose.
-- **Non-MPA conversion**: audit source-data consistency and remap through the MPA Research Spine before rewriting. Rewording alone is not conversion.
+- **Non-MPA conversion**: a non-MPA to MPA conversion requires auditing source-data consistency and remapping through the MPA Research Spine before rewriting. Rewording alone is not conversion.
 - **Literature**: tie search and reading to the applied question; verify identity before citation.
 
 ## Integration offer
