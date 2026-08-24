@@ -353,8 +353,7 @@ npx skills remove mpa-skill -g -y
 
 ## ⭐ Star History
 
-## Star History
-如果这个项目对你的研究或学习有帮助，请给个 Star — 这是对作者最大的鼓励。
+如果这个项目对你的研究或学习有帮助，请给个 Star — 这是对wo最大的鼓励！
 <a href="https://www.star-history.com/?type=date&repos=mucjustin%2Fmpa-skill">
  <picture>
    <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/chart?repos=mucjustin/mpa-skill&type=date&theme=dark&legend=top-left&sealed_token=1reCqX5_wIXEWlTxSepu2oXV9XyQKYdVT5QmHM6TwwwAUDCQFJUDK9NAho-49BQFAhcW2MAvNOtxqSChy4PJ2-N2BKJrVWC1pxr53tb35q4zV97Py8Uh0w" />
