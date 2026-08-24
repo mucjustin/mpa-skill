@@ -42,6 +42,11 @@
 - 旧版本引用的文件路径已变更：`real-data-workflow.md` → `execution.md`（数据工作流章节）、`local-office-editing.md` → `execution.md`（Office 编辑章节）、`dependencies.md` + `workspace-configuration.md` → `execution.md`（依赖管理 + 工作区配置章节）、四个知识文件 → `mpa-knowledge.md`（对应章节）
 - `SKILL.md` 的引用加载表完整映射了新路径
 
+### Validation
+
+- 继承 [v1.0.0 基准](docs/validation/v1.0.0-benchmark.md)：本次为架构重构（文件合并与模板新增），未改变研究行为，因此基准数据无需重跑
+- README 证据边界仍引用 v1.0.0 冻结基准，因为该基准对应的行为契约未变
+
 ---
 
 ## [1.0.0] - 2026-08-24
