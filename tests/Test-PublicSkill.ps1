@@ -306,7 +306,7 @@ Require-Text $readmeZh 'https://(?:dspace\.library\.uvic\.ca/items|digital\.libr
 Require-Text $readmeEn 'https://(?:dspace\.library\.uvic\.ca/items|digital\.library\.txst\.edu/items|calhoun\.nps\.edu/handle)/' 'English open-thesis example link'
 
 # ── CHANGELOG assertions ──
-$releaseSection = [regex]::Match($changelog, '(?s)## \[2\.4\.0\] - 2026-08-24.*?(?=\r?\n## \[|\z)').Value
+$releaseSection = [regex]::Match($changelog, '(?s)## \[1\.0\.0\] - 2026-08-24.*?(?=\r?\n## \[|\z)').Value
 
 # ── Benchmark-backed assertions ──
 if ((-not [string]::IsNullOrWhiteSpace($benchmarkResultsText)) -and (-not [string]::IsNullOrWhiteSpace($corpusText))) {
