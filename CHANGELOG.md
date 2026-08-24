@@ -6,6 +6,17 @@
 
 ## [Unreleased]
 
+## [2.4.0] - 2026-08-24
+
+### Added
+
+- 新增 `references/local-office-editing.md`：本地 Word 批量同步 SOP（坐标只信查询返回、降序替换、唯一性校验、`--json` 传参、`file://` 前缀、按返回结构判定成败、崩溃恢复 SOP、表格双模式、回写双向验证）；
+- 新增 `references/real-data-workflow.md`：真实数据重跑契约（质量审计先于建模、结论缺口标 `AUTHOR_INPUT_NEEDED` 禁虚构、标准化框架边界、全局降维防标签漂移、多数类基线解读、图表纪律、回写双向验证）；
+- `references/dependencies.md` 新增 Verified integration pitfalls 表（local editor 参数/图片/会话/表格、Zotero 本地 API 只读）；
+- 非 MPA → MPA 转化路由补两步：数据一致性审计前置、用户提供原始数据时先跑数据路线再成文；routing 登记两个新 reference 的加载条件；
+- SKILL.md 验收补数字回写双向验证（新值命中、旧值清零）；
+- 公开契约测试同步扩展文件清单与断言。
+
 ## [2.3.0] - 2026-08-24
 
 ### Added
