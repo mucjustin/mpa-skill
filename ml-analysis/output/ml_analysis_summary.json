@@ -1,0 +1,45 @@
+{
+  "exp1": {
+    "routes": 13,
+    "high_sim_pairs": 0,
+    "query_accuracy": "13/14",
+    "query_accuracy_pct": 92.9
+  },
+  "exp2": {
+    "total_items": 57,
+    "theories": 21,
+    "contexts": 11,
+    "principles": 13,
+    "courses": 12,
+    "clusters": 8,
+    "pc1_variance_pct": 3.6,
+    "pc2_variance_pct": 3.2
+  },
+  "exp3": {
+    "synthetic_none_rate": 0.875,
+    "synthetic_v23_rate": 0.875,
+    "synthetic_v24_rate": 1.0,
+    "v24_precision": 1.0,
+    "v24_recall": 1.0,
+    "v24_f1": 1.0,
+    "v23_f1": 1.0,
+    "f1_improvement": 0.0
+  },
+  "exp4": {
+    "total_risks": 30,
+    "clusters": 0,
+    "noise_points": 30,
+    "categories": {
+      "d1": 3,
+      "d2": 3,
+      "d3": 3,
+      "d4": 3,
+      "d5": 3,
+      "d6": 3,
+      "d7": 3,
+      "h1": 3,
+      "h2": 3,
+      "h3": 3
+    }
+  }
+}
