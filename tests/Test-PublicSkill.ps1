@@ -79,7 +79,8 @@ $requiredRepoFiles = @(
     'tests\fixtures\reliability-scenarios.json',
     'docs\validation\mpa-thesis-corpus.json',
     'docs\validation\v1.0.0-benchmark.md',
-    'docs\validation\v1.0.0-results.json'
+    'docs\validation\v1.0.0-results.json',
+    'docs\validation\a-b-regression.md'
 )
 foreach ($relative in $requiredRepoFiles) {
     Require-File (Join-Path $RepoRoot $relative) $relative
@@ -121,6 +122,7 @@ $routing = Read-File (Join-Path $skillRoot 'references\routing.md')
 $execution = Read-File (Join-Path $skillRoot 'references\execution.md')
 $mpaKnowledge = Read-File (Join-Path $skillRoot 'references\mpa-knowledge.md')
 $templates = Read-File (Join-Path $skillRoot 'references\templates.md')
+$abRegression = Read-File (Join-Path $RepoRoot 'docs\validation\a-b-regression.md')
 $readmeZh = Read-File (Join-Path $RepoRoot 'README.md')
 $readmeEn = Read-File (Join-Path $RepoRoot 'README.en.md')
 $changelog = Read-File (Join-Path $RepoRoot 'CHANGELOG.md')
@@ -241,6 +243,17 @@ Require-Text $templates '(?i)literature' 'templates literature section'
 Require-Text $templates '(?i)research design' 'templates research-design section'
 Require-Text $templates '(?i)fieldwork' 'templates fieldwork section'
 Require-Text $templates '(?i)data analysis' 'templates data-analysis section'
+Require-Text $templates '\u9AA8\u67B6\u964D\u7EA7\u4E3A\u68C0\u67E5\u6E05\u5355' 'templates flexibility clause'
+Require-Text $templates '\u7ED3\u6784\u4ECE\u7528\u6237' 'templates structure-from-user rule'
+Require-Text $templates '\u4F9B\u7ED9\u4FA7\u5DE5\u5177' 'templates supply-side coverage'
+Require-Text $templates '\u9700\u6C42\u4FA7\u8BC4\u4F30' 'templates demand-side coverage'
+Require-Text $templates '\u4FE1\u606F\u4E0E\u95EE\u8D23\u673A\u5236' 'templates information-accountability coverage'
+Require-Text $templates '\u8BC1\u636E\+\u63A8\u65AD|\u63A8\u65AD\+\u5EFA\u8BAE' 'templates layer tags'
+
+# ── A/B regression method doc assertions ──
+Require-Text $abRegression '(?i)A/B regression' 'ab-regression method doc'
+Require-Text $abRegression '(?i)single sampled response' 'ab-regression single-run limit'
+Require-Text $abRegression '(?i)not quality ranking' 'ab-regression no-ranking boundary'
 
 # ── Metadata assertions ──
 Require-Text $metadata 'display_name:' 'UI display name'
@@ -452,7 +465,7 @@ Require-Text $security '(?i)private vulnerability reporting' 'private vulnerabil
 Require-Text $security '(?i)credentials' 'credential reporting boundary'
 
 # ── Privacy scanning (includes four knowledge files) ──
-$trackedText = @($skill, $metadata, $deliverables, $aigcDisclosure, $caseCompetition, $researchContract, $routing, $execution, $mpaKnowledge, $templates, $readmeZh, $readmeEn, $changelog, $security) -join "`n"
+$trackedText = @($skill, $metadata, $deliverables, $aigcDisclosure, $caseCompetition, $researchContract, $routing, $execution, $mpaKnowledge, $templates, $abRegression, $readmeZh, $readmeEn, $changelog, $security) -join "`n"
 Reject-Text $trackedText '(?i)(?<![A-Z0-9])[A-Z]:\\' 'fixed drive-letter path'
 Reject-Text $trackedText '(?i)[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}' 'embedded email address'
 Reject-Text $trackedText '(?i)gh[pousr]_[A-Za-z0-9]{20,}|github_pat_[A-Za-z0-9_]{20,}|sk-[A-Za-z0-9]{20,}' 'credential-like token'
