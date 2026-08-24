@@ -20,7 +20,7 @@
   <!-- 节点 1: 输入 -->
   <rect x="40" y="90" width="200" height="88" rx="14" fill="#FFFFFF" stroke="#F2B5C1" stroke-width="1.5"/>
   <text x="140" y="128" text-anchor="middle" font-family="'Microsoft YaHei', 'PingFang SC', 'Segoe UI', sans-serif" font-size="19" font-weight="700" fill="#3D3A42">用户请求与材料</text>
-  <text x="140" y="154" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif" font-size="12" fill="#9B95A3">request + attachments</text>
+  <text x="140" y="154" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif" font-size="14" fill="#9B95A3">request + attachments</text>
 
   <!-- 菱形 2: 范围判定 -->
   <path d="M 330 90 L 390 134 L 330 178 L 270 134 Z" fill="#D65A7C" stroke="#B8456B" stroke-width="1.5"/>
@@ -30,17 +30,17 @@
   <!-- 节点 3 -->
   <rect x="420" y="90" width="210" height="88" rx="14" fill="#FFFFFF" stroke="#F2B5C1" stroke-width="1.5"/>
   <text x="525" y="128" text-anchor="middle" font-family="'Microsoft YaHei', 'PingFang SC', 'Segoe UI', sans-serif" font-size="19" font-weight="700" fill="#3D3A42">任务分类与排序</text>
-  <text x="525" y="154" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif" font-size="12" fill="#9B95A3">classify by dependency</text>
+  <text x="525" y="154" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif" font-size="14" fill="#9B95A3">classify by dependency</text>
 
   <!-- 节点 4 -->
   <rect x="660" y="90" width="210" height="88" rx="14" fill="#FFFFFF" stroke="#F2B5C1" stroke-width="1.5"/>
   <text x="765" y="128" text-anchor="middle" font-family="'Microsoft YaHei', 'PingFang SC', 'Segoe UI', sans-serif" font-size="19" font-weight="700" fill="#3D3A42">组合最小必要路线</text>
-  <text x="765" y="154" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif" font-size="12" fill="#9B95A3">minimum sufficient route</text>
+  <text x="765" y="154" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif" font-size="14" fill="#9B95A3">minimum sufficient route</text>
 
   <!-- 节点 5: 确认 -->
   <rect x="900" y="90" width="210" height="88" rx="14" fill="#FFFFFF" stroke="#F5C896" stroke-width="2"/>
   <text x="1005" y="128" text-anchor="middle" font-family="'Microsoft YaHei', 'PingFang SC', 'Segoe UI', sans-serif" font-size="19" font-weight="700" fill="#3D3A42">一次性确认</text>
-  <text x="1005" y="154" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif" font-size="12" fill="#9B95A3">是否执行？</text>
+  <text x="1005" y="154" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif" font-size="14" fill="#9B95A3">是否执行？</text>
 
   <!-- 箭头 1→2→3→4→5 -->
   <line x1="240" y1="134" x2="266" y2="134" stroke="#D65A7C" stroke-width="4" marker-end="url(#ar)"/>
@@ -50,13 +50,13 @@
 
   <!-- 非 MPA 分支 -->
   <line x1="330" y1="182" x2="330" y2="244" stroke="#D65A7C" stroke-width="3" stroke-dasharray="5 5" marker-end="url(#ar)"/>
-  <text x="342" y="220" font-family="'Microsoft YaHei', 'PingFang SC', 'Segoe UI', sans-serif" font-size="13" fill="#9B95A3">非 MPA 任务</text>
+  <text x="342" y="220" font-family="'Microsoft YaHei', 'PingFang SC', 'Segoe UI', sans-serif" font-size="14" fill="#9B95A3">非 MPA 任务</text>
   <rect x="240" y="252" width="180" height="52" rx="12" fill="#FFFFFF" stroke="#F2B5C1" stroke-width="1.5"/>
   <text x="330" y="284" text-anchor="middle" font-family="'Microsoft YaHei', 'PingFang SC', 'Segoe UI', sans-serif" font-size="16" fill="#3D3A42">转交其他 Skill</text>
 
   <!-- MPA 分支向下到执行层 -->
   <line x1="1005" y1="178" x2="1005" y2="276" stroke="#E87A6A" stroke-width="4" marker-end="url(#ag)"/>
-  <text x="1017" y="236" font-family="'Microsoft YaHei', 'PingFang SC', 'Segoe UI', sans-serif" font-size="13" fill="#9B95A3">确认后继续</text>
+  <text x="1017" y="236" font-family="'Microsoft YaHei', 'PingFang SC', 'Segoe UI', sans-serif" font-size="14" fill="#9B95A3">确认后继续</text>
 
   <!-- 执行层卡片 -->
   <rect x="100" y="284" width="1100" height="170" rx="16" fill="#FFFFFF" stroke="#F2B5C1" stroke-width="1.5"/>
@@ -94,32 +94,32 @@
     <rect x="372" y="400" width="130" height="34" rx="17" fill="#FFFFFF" stroke="#E87A6A" stroke-opacity="0.5"/>
     <text x="437" y="423" text-anchor="middle" fill="#E87A6A">Obsidian 笔记库</text>
     <rect x="516" y="400" width="176" height="34" rx="17" fill="#FFFFFF" stroke="#E87A6A" stroke-opacity="0.5"/>
-    <text x="604" y="422" text-anchor="middle" fill="#E87A6A" font-size="13">文献 / PDF / 数据 / Office</text>
+    <text x="604" y="422" text-anchor="middle" fill="#E87A6A" font-size="14">文献 / PDF / 数据 / Office</text>
   </g>
-  <text x="712" y="423" font-family="'Microsoft YaHei', 'PingFang SC', 'Segoe UI', sans-serif" font-size="13" fill="#C4BFC7">缺失时明确降级，绝不假装集成成功</text>
+  <text x="712" y="423" font-family="'Microsoft YaHei', 'PingFang SC', 'Segoe UI', sans-serif" font-size="14" fill="#C4BFC7">缺失时明确降级，绝不假装集成成功</text>
 
   <!-- 质量门 -->
   <line x1="640" y1="454" x2="640" y2="484" stroke="#E87A6A" stroke-width="4" marker-end="url(#ag)"/>
   <rect x="360" y="492" width="280" height="64" rx="14" fill="#FFFFFF" stroke="#F5C896" stroke-width="2"/>
   <text x="500" y="522" text-anchor="middle" font-family="'Microsoft YaHei', 'PingFang SC', 'Segoe UI', sans-serif" font-size="18" font-weight="700" fill="#3D3A42">MPA 质量门 · 研究契约核验</text>
-  <text x="500" y="544" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif" font-size="12" fill="#9B95A3">research contract check</text>
+  <text x="500" y="544" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif" font-size="14" fill="#9B95A3">research contract check</text>
 
   <!-- 最终验收 -->
   <line x1="640" y1="524" x2="678" y2="524" stroke="#D65A7C" stroke-width="4" marker-end="url(#ar)"/>
   <rect x="686" y="492" width="260" height="64" rx="14" fill="#FFFFFF" stroke="#F2B5C1" stroke-width="1.5"/>
   <text x="816" y="522" text-anchor="middle" font-family="'Microsoft YaHei', 'PingFang SC', 'Segoe UI', sans-serif" font-size="18" font-weight="700" fill="#3D3A42">最终验收与状态交接</text>
-  <text x="816" y="544" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif" font-size="12" fill="#9B95A3">final acceptance</text>
+  <text x="816" y="544" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif" font-size="14" fill="#9B95A3">final acceptance</text>
 
   <!-- 安全停止贯穿条 -->
   <line x1="1218" y1="90" x2="1218" y2="580" stroke="#F5C896" stroke-width="3" stroke-dasharray="6 6" opacity="0.8"/>
-  <rect x="1194" y="300" width="48" height="170" rx="24" fill="#FFFFFF" stroke="#F5C896" stroke-opacity="0.6"/>
+  <rect x="1158" y="300" width="120" height="170" rx="24" fill="#FFFFFF" stroke="#F5C896" stroke-opacity="0.6"/>
   <text x="1218" y="330" text-anchor="middle" font-family="'Microsoft YaHei', 'PingFang SC', 'Segoe UI', sans-serif" font-size="14" font-weight="700" fill="#B8456B">安</text>
   <text x="1218" y="354" text-anchor="middle" font-family="'Microsoft YaHei', 'PingFang SC', 'Segoe UI', sans-serif" font-size="14" font-weight="700" fill="#B8456B">全</text>
   <text x="1218" y="378" text-anchor="middle" font-family="'Microsoft YaHei', 'PingFang SC', 'Segoe UI', sans-serif" font-size="14" font-weight="700" fill="#B8456B">停</text>
   <text x="1218" y="402" text-anchor="middle" font-family="'Microsoft YaHei', 'PingFang SC', 'Segoe UI', sans-serif" font-size="14" font-weight="700" fill="#B8456B">止</text>
-  <text x="1218" y="430" text-anchor="middle" font-family="'Microsoft YaHei', 'PingFang SC', 'Segoe UI', sans-serif" font-size="11" fill="#9B95A3">登录·验证码</text>
-  <text x="1218" y="450" text-anchor="middle" font-family="'Microsoft YaHei', 'PingFang SC', 'Segoe UI', sans-serif" font-size="11" fill="#9B95A3">付费墙·授权</text>
-  <text x="1218" y="470" text-anchor="middle" font-family="'Microsoft YaHei', 'PingFang SC', 'Segoe UI', sans-serif" font-size="11" fill="#9B95A3">破坏性写入·歧义</text>
+  <text x="1218" y="430" text-anchor="middle" font-family="'Microsoft YaHei', 'PingFang SC', 'Segoe UI', sans-serif" font-size="13" fill="#9B95A3">登录·验证码</text>
+  <text x="1218" y="450" text-anchor="middle" font-family="'Microsoft YaHei', 'PingFang SC', 'Segoe UI', sans-serif" font-size="13" fill="#9B95A3">付费墙·授权</text>
+  <text x="1218" y="470" text-anchor="middle" font-family="'Microsoft YaHei', 'PingFang SC', 'Segoe UI', sans-serif" font-size="13" fill="#9B95A3">破坏性写入·歧义</text>
 
   <!-- 底部 -->
   <text x="640" y="606" text-anchor="middle" font-family="'Microsoft YaHei', 'PingFang SC', 'Segoe UI', sans-serif" font-size="14" fill="#9B95A3">安全停止贯穿全程：遇到登录、验证码、付费墙、授权访问、破坏性写入或实质研究歧义时暂停并询问</text>
