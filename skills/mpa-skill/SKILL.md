@@ -40,4 +40,4 @@ Pause for login, CAPTCHA, paywall or licensed access, destructive or broad write
 
 ## Acceptance
 
-Verify the requested artifact, MPA Research Spine coverage, source/page evidence, evidence-versus-inference boundaries, integrations, and destination before reporting completion. Record unresolved gaps as `TODO` and material weaknesses as `RISK`; never claim an inaccessible source or unverified write succeeded.
+Verify the requested artifact, MPA Research Spine coverage, source/page evidence, evidence-versus-inference boundaries, integrations, and destination before reporting completion. Record unresolved gaps as `TODO` and material weaknesses as `RISK`; never claim an inaccessible source or unverified write succeeded. Verify numeric write-backs in both directions before reporting completion: new values present, superseded values absent.

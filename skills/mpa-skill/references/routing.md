@@ -14,7 +14,7 @@ Choose the minimum sufficient route from capabilities actually available in the 
 | data analysis | reproducible analysis and report | audit data quality and preserve raw data before transformation or modelling |
 | thesis | evidence-grounded chapters | accept evidence and analysis before drafting or polishing |
 | defence | presentation and challenge preparation | stabilize thesis claims before narrative and visual production |
-| non-MPA to MPA conversion | re-anchored MPA research design | remap the public problem, stakeholders, and theory through the MPA Research Spine before rewriting; rewording alone is not conversion |
+| non-MPA to MPA conversion | re-anchored MPA research design | audit source-data consistency and remap the public problem, stakeholders, and theory through the MPA Research Spine before rewriting; when the user supplies raw data, run the data route before drafting; rewording alone is not conversion |
 
 For cross-route work, order only the needed phases by dependency. A common sequence is intake → course/case assets → literature → research design → fieldwork → data → thesis → defence.
 
@@ -22,4 +22,4 @@ Offer Zotero or Obsidian integration once in the route confirmation when a subst
 
 For case competition entries, plan the three-document structure (案例正文, 案例分析报告, 调研报告), fieldwork evidence, and theory applicability before any drafting; course case-analysis assignments use the research contract without competition deliverables.
 
-Use [MPA deliverables](mpa-deliverables.md) to shape the output and [MPA research contract](mpa-research-contract.md) to gate claims. Read [case competition rules](mpa-case-competition.md) before case-competition entry planning. Read [dependencies](dependencies.md) before selecting specialist tools. Do not invoke this controller merely because a request mentions a thesis, spreadsheet, Zotero, Obsidian, teaching, or writing without MPA context.
+Use [MPA deliverables](mpa-deliverables.md) to shape the output and [MPA research contract](mpa-research-contract.md) to gate claims. Read [case competition rules](mpa-case-competition.md) before case-competition entry planning. Read [dependencies](dependencies.md) before selecting specialist tools. Read [real-data workflow](real-data-workflow.md) before rerunning analysis on user-supplied data. Read [local office editing](local-office-editing.md) before batch writes to local Word documents. Do not invoke this controller merely because a request mentions a thesis, spreadsheet, Zotero, Obsidian, teaching, or writing without MPA context.
