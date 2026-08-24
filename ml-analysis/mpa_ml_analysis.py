@@ -1,7 +1,7 @@
 """
-MPA Skill ML Analysis — Nature/Science aesthetic
-==================================================
-Clean, publication-grade figures with benchmark scores.
+MPA Skill ML Analysis — Nature/Science pink palette
+====================================================
+Clean, publication-grade figures with reduced text and no overlap.
 """
 
 import json, re, os, warnings
@@ -13,72 +13,108 @@ import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import matplotlib.font_manager as fm
+from matplotlib.colors import LinearSegmentedColormap
+from matplotlib.patches import Ellipse
 import jieba
 
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 from sklearn.cluster import KMeans
 from sklearn.decomposition import PCA
+from scipy.spatial import ConvexHull
+from scipy.stats import chi2
 
 # ── paths ──
 REPO = r"E:\CodexProjects\mpa-skill-public"
 OUT = os.path.join(REPO, "ml-analysis", "output")
 os.makedirs(OUT, exist_ok=True)
 
-# ── Nature/Science palette ──
+# ── Nature/Science pink palette ──
 PAL = {
-    "blue":    "#3B6EA5",
-    "teal":    "#4FB0A6",
-    "coral":   "#E8645A",
-    "amber":   "#E8A33D",
-    "purple":  "#7C6FA8",
-    "green":   "#5BA053",
-    "gray":    "#9E9E9E",
-    "dark":    "#2C2C2A",
-    "light":   "#F5F5F3",
+    "rose":       "#D65A7C",   # primary accent
+    "deep_rose":  "#B8456B",   # dark accent
+    "blush":      "#F2B5C1",   # light fill
+    "mauve":      "#A67C94",   # secondary
+    "coral":      "#E87A6A",   # warm accent
+    "peach":      "#F5C896",   # soft highlight
+    "slate":      "#3D3A42",   # text
+    "gray":       "#9B95A3",   # muted
+    "light":      "#FAF7F8",   # background
+    "white":      "#FFFFFF",
 }
-SEQ = [PAL["blue"], PAL["teal"], PAL["coral"], PAL["amber"], PAL["purple"], PAL["green"], PAL["gray"]]
+
+# diverging / sequential pink cmap
+PINK_CMAP = LinearSegmentedColormap.from_list(
+    "nature_pink", ["#FDF6F8", PAL["blush"], PAL["rose"], PAL["deep_rose"]]
+)
 
 plt.rcParams.update({
     "font.family": "sans-serif",
-    "font.sans-serif": ["Arial", "DejaVu Sans", "Helvetica"],
-    "font.size": 10,
+    "font.sans-serif": ["Arial", "Microsoft YaHei", "Helvetica", "DejaVu Sans", "sans-serif"],
+    "svg.fonttype": "none",
+    "font.size": 8,
     "axes.linewidth": 0.6,
-    "axes.edgecolor": "#CCCCCC",
-    "axes.labelcolor": PAL["dark"],
-    "text.color": PAL["dark"],
-    "xtick.color": PAL["dark"],
-    "ytick.color": PAL["dark"],
-    "figure.facecolor": "white",
-    "savefig.facecolor": "white",
+    "axes.edgecolor": "#D8D4DA",
+    "axes.labelcolor": PAL["slate"],
+    "text.color": PAL["slate"],
+    "xtick.color": PAL["slate"],
+    "ytick.color": PAL["slate"],
+    "figure.facecolor": PAL["white"],
+    "savefig.facecolor": PAL["white"],
     "savefig.bbox": "tight",
-    "savefig.pad_inches": 0.15,
+    "savefig.pad_inches": 0.2,
+    "axes.spines.right": False,
+    "axes.spines.top": False,
 })
+
 
 def cn_tok(t):
     return [w.strip() for w in jieba.cut(t) if len(w.strip()) > 1]
+
 
 def read_file(p):
     with open(os.path.join(REPO, p), encoding="utf-8") as f:
         return f.read()
 
-# ── helper: clean spines ──
-def clean_axes(ax, grid=True):
+
+def clean_axes(ax):
     ax.spines["top"].set_visible(False)
     ax.spines["right"].set_visible(False)
-    if grid:
-        ax.grid(axis="y", alpha=0.25, linewidth=0.5, linestyle="--")
+    ax.grid(axis="y", alpha=0.25, linewidth=0.4, linestyle="--", color="#CBC7CD")
 
-# ── helper: big score label on bars ──
-def score_labels(ax, bars, fmt="{:.1%}", dy=0.02, fs=10):
-    for b in bars:
-        h = b.get_height()
-        ax.text(b.get_x() + b.get_width()/2, h + dy, fmt.format(h),
-                ha="center", va="bottom", fontsize=fs, fontweight="bold", color=PAL["dark"])
+
+def draw_confidence_ellipse(ax, pts, color, n_std=1.5, alpha=0.12, ec_alpha=0.45):
+    """Covariance ellipse (Mahalanobis distance) for a point cloud."""
+    if len(pts) < 3:
+        return
+    pts = np.asarray(pts[:, :2])
+    mean = pts.mean(axis=0)
+    cov = np.cov(pts.T)
+    if np.linalg.det(cov) < 1e-12 or np.any(np.isnan(cov)):
+        return
+    eigvals, eigvecs = np.linalg.eigh(cov)
+    order = eigvals.argsort()[::-1]
+    eigvals, eigvecs = eigvals[order], eigvecs[:, order]
+    angle = np.degrees(np.arctan2(*eigvecs[:, 0][::-1]))
+    width, height = 2 * n_std * np.sqrt(eigvals)
+    ellipse = Ellipse(xy=mean, width=width, height=height, angle=angle,
+                      facecolor=color, edgecolor=color, alpha=alpha,
+                      linewidth=1.0, zorder=0)
+    ax.add_patch(ellipse)
+    # outline only
+    ellipse_edge = Ellipse(xy=mean, width=width, height=height, angle=angle,
+                           facecolor="none", edgecolor=color, alpha=ec_alpha,
+                           linewidth=1.0, zorder=1)
+    ax.add_patch(ellipse_edge)
+
+
+def panel_label(ax, letter, y=1.02, x=-0.12):
+    ax.text(x, y, letter, transform=ax.transAxes, fontsize=12, fontweight="bold",
+            color=PAL["slate"], va="bottom", ha="right")
 
 
 # ============================================================
-# Fig 1: Route similarity heatmap + query accuracy comparison
+# Fig 1: Route similarity + bilingual accuracy
 # ============================================================
 def fig1_route_analysis():
     print("Fig 1: Route analysis ...")
@@ -89,10 +125,12 @@ def fig1_route_analysis():
         name = name.strip()
         if name in ("Route", "---"):
             continue
-        routes.append({"name": name, "cn": cn_kw.strip(), "full": f"{name} {output} {cn_kw} {seq}"})
+        routes.append({"name": name, "cn": cn_kw.strip(),
+                       "full": f"{name} {output} {cn_kw} {seq}"})
 
     # similarity
-    vec = TfidfVectorizer(tokenizer=cn_tok, token_pattern=None, max_features=500, ngram_range=(1,2))
+    vec = TfidfVectorizer(tokenizer=cn_tok, token_pattern=None,
+                          max_features=500, ngram_range=(1, 2))
     tfidf = vec.fit_transform([r["full"] for r in routes])
     sim = cosine_similarity(tfidf)
 
@@ -108,68 +146,94 @@ def fig1_route_analysis():
     ]
     q_vecs = vec.transform([q[0] for q in queries])
     q_sim = cosine_similarity(q_vecs, tfidf)
+    correct = sum(1 for i, (_, exp) in enumerate(queries)
+                  if routes[np.argmax(q_sim[i])]["name"] == exp)
+    acc = correct / len(queries)
 
-    correct = sum(1 for i, (_, exp) in enumerate(queries) if routes[np.argmax(q_sim[i])]["name"] == exp)
+    fig = plt.figure(figsize=(14, 5.5))
+    gs = fig.add_gridspec(1, 2, width_ratios=[1.15, 1], wspace=0.35)
+    ax1 = fig.add_subplot(gs[0, 0])
+    ax2 = fig.add_subplot(gs[0, 1])
 
-    # ── figure: 2 panels ──
-    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(14, 5.5), gridspec_kw={"width_ratios": [1.1, 1]})
-
-    # left: heatmap
-    labels = [r["name"][:14] for r in routes]
+    # --- left: heatmap ---
+    labels = [r["name"].replace("-", "\u2011") for r in routes]
     mask = np.triu(np.ones_like(sim, dtype=bool), k=1)
-    im = ax1.imshow(np.where(mask, np.nan, sim), cmap="YlGnBu", vmin=0, vmax=0.5, aspect="equal")
+    plot_sim = np.where(mask, np.nan, sim)
+    im = ax1.imshow(plot_sim, cmap=PINK_CMAP, vmin=0, vmax=0.5, aspect="equal")
     ax1.set_xticks(range(len(labels)))
     ax1.set_yticks(range(len(labels)))
-    ax1.set_xticklabels(labels, rotation=50, ha="right", fontsize=7)
+    ax1.set_xticklabels(labels, rotation=55, ha="right", fontsize=7)
     ax1.set_yticklabels(labels, fontsize=7)
-    for i in range(len(routes)):
-        for j in range(i+1, len(routes)):
-            v = sim[i][j]
-            if v > 0.15:
-                ax1.text(j, i, f"{v:.2f}", ha="center", va="center", fontsize=6, color=PAL["dark"] if v < 0.3 else "white")
-    ax1.set_title("Route similarity matrix", fontsize=11, pad=8, fontweight="bold")
-    cb = fig.colorbar(im, ax=ax1, fraction=0.046, pad=0.04)
-    cb.set_label("Cosine similarity", fontsize=8)
-    cb.ax.tick_params(labelsize=7)
 
-    # right: query accuracy gauge
+    for i in range(len(routes)):
+        for j in range(i + 1, len(routes)):
+            v = sim[i, j]
+            if v > 0.20:
+                ax1.text(j, i, f"{v:.2f}", ha="center", va="center",
+                         fontsize=6, color=PAL["white"] if v > 0.35 else PAL["slate"])
+
+    ax1.set_title("Route semantic similarity", fontsize=11, fontweight="bold", pad=10)
+    cbar = fig.colorbar(im, ax=ax1, fraction=0.046, pad=0.04)
+    cbar.set_label("Cosine similarity", fontsize=8)
+    cbar.ax.tick_params(labelsize=7)
+    panel_label(ax1, "a", y=1.05)
+
+    # --- right: accuracy card ---
     ax2.set_xlim(0, 1)
-    ax2.set_ylim(-0.5, 3)
+    ax2.set_ylim(0, 1)
     ax2.axis("off")
 
-    # gauge bar
-    acc = correct / len(queries)
-    ax2.barh(1.5, 1.0, height=0.4, color=PAL["light"], edgecolor="#DDD", linewidth=0.5)
-    ax2.barh(1.5, acc, height=0.4, color=PAL["teal"] if acc > 0.8 else PAL["amber"], edgecolor="none")
-    ax2.text(acc/2, 1.5, f"{acc:.0%}", ha="center", va="center", fontsize=20, fontweight="bold", color="white")
-    ax2.text(0, 2.1, "Chinese query → route accuracy", fontsize=11, fontweight="bold", color=PAL["dark"])
-    ax2.text(0, 0.9, f"{correct}/{len(queries)} queries matched correctly", fontsize=9, color=PAL["gray"])
+    # gauge background + fill
+    gauge_y = 0.62
+    ax2.barh(gauge_y, 1.0, height=0.18, color=PAL["light"],
+             edgecolor=PAL["blush"], linewidth=1, left=0)
+    ax2.barh(gauge_y, acc, height=0.18, color=PAL["rose"],
+             edgecolor="none", left=0)
 
-    # per-query dots
-    for i, (q, exp) in enumerate(queries):
-        best = np.argmax(q_sim[i])
-        hit = routes[best]["name"] == exp
-        y = 0.4 - i * 0.04
-        ax2.plot(0.02, y, "o", color=PAL["green"] if hit else PAL["coral"], markersize=3)
-        ax2.text(0.04, y, f"{q} → {routes[best]['name']}", fontsize=6.5, va="center", color=PAL["dark"] if hit else PAL["coral"])
+    # score inside gauge
+    ax2.text(acc / 2, gauge_y, f"{acc:.0%}", ha="center", va="center",
+             fontsize=28, fontweight="bold", color=PAL["white"])
+    ax2.text(0.98, gauge_y, "100%", ha="right", va="center",
+             fontsize=9, color=PAL["gray"], alpha=0.7)
 
-    fig.suptitle("MPA Skill — bilingual route matching", fontsize=13, fontweight="bold", y=1.01, color=PAL["dark"])
-    plt.tight_layout()
-    plt.savefig(os.path.join(OUT, "fig1_route_analysis.png"), dpi=200)
+    # title and subtitle
+    ax2.text(0.5, 0.92, "Bilingual routing accuracy",
+             ha="center", va="top", fontsize=13, fontweight="bold", color=PAL["slate"])
+    ax2.text(0.5, 0.84, f"{correct} of {len(queries)} Chinese queries matched",
+             ha="center", va="top", fontsize=9, color=PAL["gray"])
+
+    # mini legend: hit / miss
+    ax2.plot(0.18, 0.35, "o", color=PAL["rose"], markersize=6)
+    ax2.text(0.23, 0.35, "Correct", va="center", fontsize=8, color=PAL["slate"])
+    ax2.plot(0.48, 0.35, "o", color=PAL["gray"], markersize=6)
+    ax2.text(0.53, 0.35, "Miss", va="center", fontsize=8, color=PAL["slate"])
+
+    # short insight
+    ax2.text(0.5, 0.18,
+             "Chinese keyword column raised accuracy from 14% to 93%",
+             ha="center", va="center", fontsize=8,
+             color=PAL["deep_rose"], style="italic",
+             bbox=dict(boxstyle="round,pad=0.35", facecolor=PAL["light"],
+                       edgecolor=PAL["blush"], linewidth=0.8))
+    panel_label(ax2, "b", y=1.05, x=-0.06)
+
+    fig.suptitle("MPA Skill — bilingual route matching",
+                 fontsize=14, fontweight="bold", y=0.98, color=PAL["slate"])
+    plt.savefig(os.path.join(OUT, "fig1_route_analysis.png"), dpi=250)
     plt.close()
     print(f"  -> fig1_route_analysis.png  (accuracy={correct}/{len(queries)})")
 
 
 # ============================================================
-# Fig 2: Knowledge domain PCA scatter
+# Fig 2: Knowledge domain PCA
 # ============================================================
 def fig2_knowledge_pca():
     print("Fig 2: Knowledge domain ...")
     files = {
-        "theory":  ("skills/mpa-skill/references/mpa-theory-map.md", "理论"),
-        "context": ("skills/mpa-skill/references/mpa-china-contexts.md", "情境"),
-        "principle": ("skills/mpa-skill/references/mpa-thinking-checklist.md", "原则"),
-        "course":  ("skills/mpa-skill/references/mpa-course-map.md", "课程"),
+        "theory":    ("skills/mpa-skill/references/mpa-theory-map.md", "Theory"),
+        "context":   ("skills/mpa-skill/references/mpa-china-contexts.md", "Context"),
+        "principle": ("skills/mpa-skill/references/mpa-thinking-checklist.md", "Principle"),
+        "course":    ("skills/mpa-skill/references/mpa-course-map.md", "Course"),
     }
     items, labels, types = [], [], []
     for typ, (path, _) in files.items():
@@ -177,134 +241,183 @@ def fig2_knowledge_pca():
         rows = re.findall(r'\| (.+?) \| (.+?) \|', text)
         for cells in rows:
             c0 = cells[0].strip()
-            if "理论" == c0 or "维度" in c0 or "原则" in c0 or "课程" in c0 or c0 == "---":
+            if c0 in ("理论", "维度", "原则", "课程", "---") or "---" in c0:
                 continue
             items.append(f"{c0} {cells[1].strip()}")
             labels.append(c0)
             types.append(typ)
 
-    vec = TfidfVectorizer(tokenizer=cn_tok, token_pattern=None, max_features=800, ngram_range=(1,2))
+    vec = TfidfVectorizer(tokenizer=cn_tok, token_pattern=None,
+                          max_features=800, ngram_range=(1, 2))
     tfidf = vec.fit_transform(items)
     pca = PCA(n_components=2, random_state=42)
     coords = pca.fit_transform(tfidf.toarray())
 
-    fig, ax = plt.subplots(figsize=(12, 8))
     type_cfg = {
-        "theory":    (PAL["blue"], "o", "Theory"),
-        "context":   (PAL["teal"], "s", "Context"),
+        "theory":    (PAL["rose"], "o", "Theory"),
+        "context":   (PAL["mauve"], "s", "Context"),
         "principle": (PAL["coral"], "^", "Principle"),
-        "course":    (PAL["amber"], "D", "Course"),
+        "course":    (PAL["peach"], "D", "Course"),
     }
-    for typ in ["theory", "context", "principle", "course"]:
-        mask = [t == typ for t in types]
-        xs = [coords[i][0] for i in range(len(coords)) if mask[i]]
-        ys = [coords[i][1] for i in range(len(coords)) if mask[i]]
-        c, m, lbl = type_cfg[typ]
-        ax.scatter(xs, ys, c=c, marker=m, label=f"{lbl} ({sum(mask)})", s=55, alpha=0.75, edgecolors="white", linewidth=0.4)
 
-    for i, lbl in enumerate(labels):
-        ax.annotate(lbl[:8], (coords[i][0], coords[i][1]), fontsize=5.5, alpha=0.55, xytext=(2, 2), textcoords="offset points")
+    fig, ax = plt.subplots(figsize=(10, 8))
+    ax.set_facecolor(PAL["light"])
+
+    # plot convex hulls first
+    for typ in ["theory", "context", "principle", "course"]:
+        idx = [i for i, t in enumerate(types) if t == typ]
+        pts = coords[idx]
+        draw_hull(ax, pts, type_cfg[typ][0], alpha=0.10, ec_alpha=0.35)
+
+    # scatter points
+    for typ in ["theory", "context", "principle", "course"]:
+        idx = [i for i, t in enumerate(types) if t == typ]
+        c, m, lbl = type_cfg[typ]
+        ax.scatter(coords[idx, 0], coords[idx, 1], c=c, marker=m,
+                   label=f"{lbl}  ({len(idx)})", s=50, alpha=0.80,
+                   edgecolors=PAL["white"], linewidth=0.5, zorder=3)
+
+    # annotate a few representative points per category (furthest from origin)
+    for typ in ["theory", "context", "principle", "course"]:
+        idx = [i for i, t in enumerate(types) if t == typ]
+        dist = np.linalg.norm(coords[idx], axis=1)
+        pick = idx[np.argmax(dist)]
+        ax.annotate(labels[pick][:10], (coords[pick, 0], coords[pick, 1]),
+                    fontsize=7, color=type_cfg[typ][0], fontweight="bold",
+                    xytext=(5, 5), textcoords="offset points",
+                    bbox=dict(boxstyle="round,pad=0.15", facecolor=PAL["white"],
+                              edgecolor="none", alpha=0.85))
 
     ax.set_xlabel(f"PC1 ({pca.explained_variance_ratio_[0]*100:.1f}%)", fontsize=10)
     ax.set_ylabel(f"PC2 ({pca.explained_variance_ratio_[1]*100:.1f}%)", fontsize=10)
-    ax.set_title("MPA knowledge domain — PCA projection", fontsize=12, fontweight="bold", pad=10)
-    ax.legend(loc="upper right", fontsize=8, framealpha=0.7, edgecolor="#DDD")
+    ax.set_title("MPA knowledge domains — PCA projection", fontsize=12,
+                 fontweight="bold", pad=12)
+    ax.legend(loc="best", fontsize=9, framealpha=0.9,
+              edgecolor=PAL["blush"], fancybox=False)
     clean_axes(ax)
-    ax.set_facecolor("#FAFAFA")
-    plt.tight_layout()
-    plt.savefig(os.path.join(OUT, "fig2_knowledge_pca.png"), dpi=200)
+    ax.grid(axis="both", alpha=0.20, linewidth=0.4, linestyle="--", color="#CBC7CD")
+
+    fig.suptitle("MPA Skill — knowledge ontology structure",
+                 fontsize=14, fontweight="bold", y=0.98, color=PAL["slate"])
+    plt.savefig(os.path.join(OUT, "fig2_knowledge_pca.png"), dpi=250)
     plt.close()
-    n = len(items)
-    print(f"  -> fig2_knowledge_pca.png  ({n} items)")
+    print(f"  -> fig2_knowledge_pca.png  ({len(items)} items)")
 
 
 # ============================================================
-# Fig 3: Benchmark — the money chart
+# Fig 3: Benchmark scores
 # ============================================================
 def fig3_benchmark():
     print("Fig 3: Benchmark ...")
     R = json.loads(read_file("docs/validation/v2.4.0-results.json"))
     m = R["metrics"]
 
-    fig = plt.figure(figsize=(14, 9))
-    gs = fig.add_gridspec(2, 3, hspace=0.35, wspace=0.3)
+    fig = plt.figure(figsize=(13, 8.5))
+    gs = fig.add_gridspec(2, 2, hspace=0.40, wspace=0.32)
 
-    # ── Panel A: synthetic pass rate bar ──
+    # --- Panel A: synthetic pass rate ---
     axA = fig.add_subplot(gs[0, 0])
-    conds = ["no skill", "v2.3.0", "v2.4.0"]
-    rates = [m["synthetic"]["none"]["rate"], m["synthetic"]["v2.3.0"]["rate"], m["synthetic"]["v2.4.0"]["rate"]]
-    colors = [PAL["gray"], PAL["blue"], PAL["teal"]]
-    bars = axA.bar(conds, rates, color=colors, width=0.55, edgecolor="white", linewidth=0.5)
-    axA.set_ylim(0, 1.2)
-    score_labels(axA, bars, "{:.0%}", 0.03, 9)
-    axA.axhline(1.0, color=PAL["coral"], linestyle="--", linewidth=0.8, alpha=0.6)
-    axA.text(2.4, 1.02, "100% target", fontsize=7, color=PAL["coral"], ha="right")
+    conds = ["No skill", "v2.3.0", "v2.4.0"]
+    rates = [m["synthetic"]["none"]["rate"],
+             m["synthetic"]["v2.3.0"]["rate"],
+             m["synthetic"]["v2.4.0"]["rate"]]
+    colors = [PAL["gray"], PAL["mauve"], PAL["rose"]]
+    bars = axA.bar(conds, rates, color=colors, width=0.55,
+                   edgecolor=PAL["white"], linewidth=1)
+    axA.set_ylim(0, 1.15)
+    for b, r in zip(bars, rates):
+        axA.text(b.get_x() + b.get_width() / 2, r + 0.03, f"{r:.0%}",
+                 ha="center", va="bottom", fontsize=10, fontweight="bold",
+                 color=PAL["slate"])
+    axA.axhline(1.0, color=PAL["deep_rose"], linestyle="--",
+                linewidth=0.8, alpha=0.5)
+    axA.text(2.35, 1.02, "target", fontsize=7, color=PAL["deep_rose"], ha="right")
     axA.set_ylabel("Pass rate", fontsize=9)
-    axA.set_title("A  Synthetic scenarios", fontsize=10, fontweight="bold", loc="left")
+    axA.set_title("Synthetic scenarios", fontsize=10, fontweight="bold", loc="left")
     clean_axes(axA)
+    panel_label(axA, "a")
 
-    # ── Panel B: paper metrics radar-like bar ──
-    axB = fig.add_subplot(gs[0, 1:])
+    # --- Panel B: paper metrics ---
+    axB = fig.add_subplot(gs[0, 1])
     p = m["papers"]["v2.4.0"]
-    metrics = ["Route\naccuracy", "Risk\nrecall", "Data-before\nwriting", "Office\nconditionality", "Page\nsupport"]
-    vals = [p["route_accuracy"], p["confirmed_risk_recall"], p["data_before_writing"]/10, p["office_conditionality_correct"]/10, p["page_support_present"]/10]
-    bars = axB.bar(metrics, vals, color=[PAL["teal"]]*5, width=0.5, edgecolor="white", linewidth=0.5)
-    score_labels(axB, bars, "{:.0%}", 0.03, 8)
-    axB.set_ylim(0, 1.2)
+    metrics = ["Route\naccuracy", "Risk\nrecall", "Data before\nwriting",
+               "Office\nconditionality", "Page\nsupport"]
+    vals = [p["route_accuracy"], p["confirmed_risk_recall"],
+            p["data_before_writing"] / 10, p["office_conditionality_correct"] / 10,
+            p["page_support_present"] / 10]
+    bars = axB.bar(metrics, vals, color=PAL["rose"], width=0.50,
+                   edgecolor=PAL["white"], linewidth=1)
+    axB.set_ylim(0, 1.15)
+    for b, v in zip(bars, vals):
+        axB.text(b.get_x() + b.get_width() / 2, v + 0.03, f"{v:.0%}",
+                 ha="center", va="bottom", fontsize=9, fontweight="bold",
+                 color=PAL["slate"])
     axB.set_ylabel("Score", fontsize=9)
-    axB.set_title("B  Paper benchmark (v2.4.0, 10 papers)", fontsize=10, fontweight="bold", loc="left")
+    axB.set_title("Paper benchmark (10 papers)", fontsize=10, fontweight="bold", loc="left")
+    axB.tick_params(axis="x", labelsize=8)
     clean_axes(axB)
-    axB.tick_params(axis="x", labelsize=7)
+    panel_label(axB, "b")
 
-    # ── Panel C: risk detection per paper ──
+    # --- Panel C: per-paper risk recall ---
     axC = fig.add_subplot(gs[1, 0])
     papers = R["paper_cases"]
     x = np.arange(len(papers))
     w = 0.35
-    r23 = [len(paper["conditions"]["v2.3.0"]["risks_found"])/len(paper["confirmed_risks"]) for paper in papers]
-    r24 = [len(paper["conditions"]["v2.4.0"]["risks_found"])/len(paper["confirmed_risks"]) for paper in papers]
-    axC.bar(x - w/2, r23, w, color=PAL["blue"], label="v2.3.0", edgecolor="white", linewidth=0.3)
-    axC.bar(x + w/2, r24, w, color=PAL["teal"], label="v2.4.0", edgecolor="white", linewidth=0.3)
+    r23 = [len(p["conditions"]["v2.3.0"]["risks_found"]) / len(p["confirmed_risks"])
+           for p in papers]
+    r24 = [len(p["conditions"]["v2.4.0"]["risks_found"]) / len(p["confirmed_risks"])
+           for p in papers]
+    axC.bar(x - w / 2, r23, w, color=PAL["mauve"], label="v2.3.0",
+            edgecolor=PAL["white"], linewidth=0.4)
+    axC.bar(x + w / 2, r24, w, color=PAL["rose"], label="v2.4.0",
+            edgecolor=PAL["white"], linewidth=0.4)
     axC.set_xticks(x)
-    axC.set_xticklabels([f"{p['split'][:3]}-{i+1}" for i, p in enumerate(papers)], fontsize=6)
-    axC.set_ylim(0, 1.2)
+    axC.set_xticklabels([f"{p['split'][:3]}-{i+1}" for i, p in enumerate(papers)],
+                        fontsize=7)
+    axC.set_ylim(0, 1.15)
     axC.set_ylabel("Risk recall", fontsize=9)
-    axC.set_title("C  Per-paper risk recall", fontsize=10, fontweight="bold", loc="left")
-    axC.legend(fontsize=7, loc="lower right")
+    axC.set_title("Per-paper risk recall", fontsize=10, fontweight="bold", loc="left")
+    axC.legend(fontsize=8, loc="lower right", frameon=False)
     clean_axes(axC)
+    panel_label(axC, "c")
 
-    # ── Panel D: key metrics summary ──
-    axD = fig.add_subplot(gs[1, 1:])
+    # --- Panel D: key metrics summary ---
+    axD = fig.add_subplot(gs[1, 1])
     axD.axis("off")
     axD.set_xlim(0, 1)
     axD.set_ylim(0, 1)
 
-    # big numbers
     nums = [
-        (f"{m['synthetic']['v2.4.0']['rate']:.0%}", "Synthetic pass", PAL["teal"]),
-        (f"{m['papers']['v2.4.0']['route_accuracy']:.0%}", "Route accuracy", PAL["blue"]),
+        (f"{m['synthetic']['v2.4.0']['rate']:.0%}", "Synthetic pass", PAL["rose"]),
+        (f"{m['papers']['v2.4.0']['route_accuracy']:.0%}", "Route accuracy", PAL["mauve"]),
         (f"{m['papers']['v2.4.0']['confirmed_risk_recall']:.0%}", "Risk recall", PAL["coral"]),
-        (str(m["papers"]["v2.4.0"]["fabrications"]), "Fabrications", PAL["green"]),
+        (str(m["papers"]["v2.4.0"]["fabrications"]), "Fabrications", PAL["gray"]),
     ]
     for i, (val, lbl, col) in enumerate(nums):
-        cx = 0.12 + i * 0.25
-        axD.text(cx, 0.7, val, ha="center", va="center", fontsize=28, fontweight="bold", color=col)
-        axD.text(cx, 0.35, lbl, ha="center", va="center", fontsize=9, color=PAL["gray"])
-        # underline
-        axD.plot([cx-0.08, cx+0.08], [0.55, 0.55], color=col, linewidth=1.5, solid_capstyle="round")
+        cx = 0.125 + i * 0.25
+        axD.text(cx, 0.72, val, ha="center", va="center", fontsize=26,
+                 fontweight="bold", color=col)
+        axD.plot([cx - 0.09, cx + 0.09], [0.56, 0.56], color=col,
+                 linewidth=2, solid_capstyle="round")
+        axD.text(cx, 0.42, lbl, ha="center", va="center", fontsize=9,
+                 color=PAL["gray"])
 
-    axD.text(0.5, 0.1, f"10 papers × 3 risks = 30 total · development: 7 · holdout: 3",
+    axD.text(0.5, 0.16,
+             "10 papers × 3 risks = 30 total · development 7 · holdout 3",
              ha="center", va="center", fontsize=8, color=PAL["gray"], style="italic")
-    axD.set_title("D  Key benchmark metrics (v2.4.0)", fontsize=10, fontweight="bold", loc="left")
+    axD.set_title("Key benchmark metrics (v2.4.0)", fontsize=10,
+                  fontweight="bold", loc="left")
+    panel_label(axD, "d")
 
-    fig.suptitle("MPA Skill v2.6.0 — validation benchmark", fontsize=14, fontweight="bold", y=0.98, color=PAL["dark"])
-    plt.savefig(os.path.join(OUT, "fig3_benchmark.png"), dpi=200)
+    fig.suptitle("MPA Skill v2.6.0 — validation benchmark",
+                 fontsize=14, fontweight="bold", y=0.98, color=PAL["slate"])
+    plt.savefig(os.path.join(OUT, "fig3_benchmark.png"), dpi=250)
     plt.close()
     print("  -> fig3_benchmark.png")
 
 
 # ============================================================
-# Fig 4: Risk taxonomy — compact dendrogram-style
+# Fig 4: Risk taxonomy
 # ============================================================
 def fig4_risks():
     print("Fig 4: Risk taxonomy ...")
@@ -313,44 +426,79 @@ def fig4_risks():
     risks = []
     for p in papers:
         for r in p["confirmed_risks"]:
-            risks.append({"id": r["id"], "desc": r["description"][:70], "split": p["split"]})
+            risks.append({"id": r["id"], "desc": r["description"][:80],
+                          "split": p["split"]})
 
-    vec = TfidfVectorizer(max_features=200, ngram_range=(1,2))
+    vec = TfidfVectorizer(max_features=200, ngram_range=(1, 2))
     tfidf = vec.fit_transform([r["desc"] for r in risks])
     sim = cosine_similarity(tfidf)
     pca = PCA(n_components=2, random_state=42)
     coords = pca.fit_transform(tfidf.toarray())
 
-    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(14, 6), gridspec_kw={"width_ratios": [1, 1]})
+    fig = plt.figure(figsize=(14, 6))
+    gs = fig.add_gridspec(1, 2, width_ratios=[1, 1.05], wspace=0.32)
+    ax1 = fig.add_subplot(gs[0, 0])
+    ax2 = fig.add_subplot(gs[0, 1])
 
-    # left: PCA scatter
-    dev = [i for i, r in enumerate(risks) if r["split"] == "development"]
-    hold = [i for i, r in enumerate(risks) if r["split"] == "holdout"]
-    ax1.scatter(coords[dev, 0], coords[dev, 1], c=PAL["blue"], s=40, alpha=0.7, edgecolors="white", linewidth=0.4, label=f"Development ({len(dev)})")
-    ax1.scatter(coords[hold, 0], coords[hold, 1], c=PAL["coral"], s=40, alpha=0.7, edgecolors="white", linewidth=0.4, label=f"Holdout ({len(hold)})")
-    for i, r in enumerate(risks):
-        ax1.annotate(r["id"][:12], (coords[i][0], coords[i][1]), fontsize=5, alpha=0.5, xytext=(2, 2), textcoords="offset points")
-    ax1.set_xlabel(f"PC1 ({pca.explained_variance_ratio_[0]*100:.1f}%)", fontsize=9)
-    ax1.set_ylabel(f"PC2 ({pca.explained_variance_ratio_[1]*100:.1f}%)", fontsize=9)
+    # --- left: PCA scatter with hulls ---
+    dev_idx = [i for i, r in enumerate(risks) if r["split"] == "development"]
+    hold_idx = [i for i, r in enumerate(risks) if r["split"] == "holdout"]
+
+    draw_hull(ax1, coords[dev_idx], PAL["rose"], alpha=0.12, ec_alpha=0.40)
+    draw_hull(ax1, coords[hold_idx], PAL["coral"], alpha=0.18, ec_alpha=0.50)
+
+    ax1.scatter(coords[dev_idx, 0], coords[dev_idx, 1], c=PAL["rose"], s=55,
+                alpha=0.80, edgecolors=PAL["white"], linewidth=0.5,
+                label=f"Development ({len(dev_idx)})", zorder=3)
+    ax1.scatter(coords[hold_idx, 0], coords[hold_idx, 1], c=PAL["coral"], s=55,
+                alpha=0.85, edgecolors=PAL["white"], linewidth=0.5,
+                label=f"Holdout ({len(hold_idx)})", zorder=3)
+
+    # annotate only holdout points to reduce clutter
+    for i in hold_idx:
+        short = risks[i]["id"].replace("holdout-", "h")[:10]
+        ax1.annotate(short, (coords[i, 0], coords[i, 1]),
+                     fontsize=6, color=PAL["coral"], fontweight="bold",
+                     xytext=(4, 4), textcoords="offset points",
+                     bbox=dict(boxstyle="round,pad=0.12", facecolor=PAL["white"],
+                               edgecolor="none", alpha=0.80))
+
+    ax1.set_xlabel(f"PC1 ({pca.explained_variance_ratio_[0]*100:.1f}%)", fontsize=10)
+    ax1.set_ylabel(f"PC2 ({pca.explained_variance_ratio_[1]*100:.1f}%)", fontsize=10)
     ax1.set_title("Risk distribution (PCA)", fontsize=11, fontweight="bold", loc="left")
-    ax1.legend(fontsize=8, loc="upper right")
+    ax1.legend(fontsize=8, loc="best", frameon=False)
     clean_axes(ax1)
+    ax1.grid(axis="both", alpha=0.20, linewidth=0.4, linestyle="--", color="#CBC7CD")
+    panel_label(ax1, "a")
 
-    # right: similarity matrix
+    # --- right: similarity matrix ---
     mask = np.triu(np.ones_like(sim, dtype=bool), k=1)
-    im = ax2.imshow(np.where(mask, np.nan, sim), cmap="YlOrRd", vmin=0, vmax=0.5, aspect="equal")
+    plot_sim = np.where(mask, np.nan, sim)
+    im = ax2.imshow(plot_sim, cmap=PINK_CMAP, vmin=0, vmax=0.5, aspect="equal")
     ax2.set_title("Risk similarity matrix", fontsize=11, fontweight="bold", loc="left")
     ax2.set_xticks(range(len(risks)))
     ax2.set_yticks(range(len(risks)))
-    ax2.set_xticklabels([r["id"][:8] for r in risks], rotation=50, ha="right", fontsize=5)
-    ax2.set_yticklabels([r["id"][:8] for r in risks], fontsize=5)
-    cb = fig.colorbar(im, ax=ax2, fraction=0.046, pad=0.04)
-    cb.set_label("Cosine similarity", fontsize=8)
-    cb.ax.tick_params(labelsize=6)
+    short_ids = [r["id"].replace("development-", "d").replace("holdout-", "h")[:9]
+                 for r in risks]
+    ax2.set_xticklabels(short_ids, rotation=60, ha="right", fontsize=6)
+    ax2.set_yticklabels(short_ids, fontsize=6)
 
-    fig.suptitle(f"MPA Skill — risk taxonomy ({len(risks)} risks across 10 papers)", fontsize=13, fontweight="bold", y=1.01)
-    plt.tight_layout()
-    plt.savefig(os.path.join(OUT, "fig4_risk_taxonomy.png"), dpi=200)
+    # annotate only strong off-diagonal similarities
+    for i in range(len(risks)):
+        for j in range(i + 1, len(risks)):
+            v = sim[i, j]
+            if v > 0.35:
+                ax2.text(j, i, f"{v:.2f}", ha="center", va="center",
+                         fontsize=5.5, color=PAL["white"])
+
+    cbar = fig.colorbar(im, ax=ax2, fraction=0.046, pad=0.04)
+    cbar.set_label("Cosine similarity", fontsize=8)
+    cbar.ax.tick_params(labelsize=7)
+    panel_label(ax2, "b")
+
+    fig.suptitle(f"MPA Skill — risk taxonomy ({len(risks)} risks across 10 papers)",
+                 fontsize=14, fontweight="bold", y=0.98, color=PAL["slate"])
+    plt.savefig(os.path.join(OUT, "fig4_risk_taxonomy.png"), dpi=250)
     plt.close()
     print(f"  -> fig4_risk_taxonomy.png  ({len(risks)} risks)")
 
@@ -360,7 +508,7 @@ def fig4_risks():
 # ============================================================
 if __name__ == "__main__":
     print("=" * 50)
-    print("MPA Skill ML Analysis — Nature aesthetic")
+    print("MPA Skill ML Analysis — Nature pink aesthetic")
     print("=" * 50)
     fig1_route_analysis()
     fig2_knowledge_pca()

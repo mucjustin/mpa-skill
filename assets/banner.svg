@@ -1,30 +1,30 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 420" width="1280" height="420" role="img" aria-label="MPA Skill banner">
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#0d1117"/>
-      <stop offset="0.55" stop-color="#111827"/>
-      <stop offset="1" stop-color="#1f2937"/>
+      <stop offset="0" stop-color="#FDF6F8"/>
+      <stop offset="0.55" stop-color="#FAF7F8"/>
+      <stop offset="1" stop-color="#F5EFF1"/>
     </linearGradient>
     <radialGradient id="halo1" cx="0.85" cy="0.25" r="0.55">
-      <stop offset="0" stop-color="#58a6ff" stop-opacity="0.20"/>
-      <stop offset="1" stop-color="#58a6ff" stop-opacity="0"/>
+      <stop offset="0" stop-color="#D65A7C" stop-opacity="0.12"/>
+      <stop offset="1" stop-color="#D65A7C" stop-opacity="0"/>
     </radialGradient>
     <radialGradient id="halo2" cx="0.2" cy="0.9" r="0.6">
-      <stop offset="0" stop-color="#bc8cff" stop-opacity="0.16"/>
-      <stop offset="1" stop-color="#bc8cff" stop-opacity="0"/>
+      <stop offset="0" stop-color="#A67C94" stop-opacity="0.10"/>
+      <stop offset="1" stop-color="#A67C94" stop-opacity="0"/>
     </radialGradient>
     <linearGradient id="bL" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#58a6ff"/>
-      <stop offset="1" stop-color="#1f6feb"/>
+      <stop offset="0" stop-color="#D65A7C"/>
+      <stop offset="1" stop-color="#B8456B"/>
     </linearGradient>
     <linearGradient id="bR" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#bc8cff"/>
-      <stop offset="1" stop-color="#8957e5"/>
+      <stop offset="0" stop-color="#A67C94"/>
+      <stop offset="1" stop-color="#8A6580"/>
     </linearGradient>
     <linearGradient id="line" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0" stop-color="#58a6ff"/>
-      <stop offset="0.5" stop-color="#3fb950"/>
-      <stop offset="1" stop-color="#d29922"/>
+      <stop offset="0" stop-color="#D65A7C"/>
+      <stop offset="0.5" stop-color="#E87A6A"/>
+      <stop offset="1" stop-color="#F5C896"/>
     </linearGradient>
   </defs>
 
@@ -34,37 +34,22 @@
 
   <!-- 底部光带 -->
   <rect x="0" y="406" width="1280" height="6" fill="url(#line)" opacity="0.9"/>
-  <rect x="0" y="416" width="1280" height="4" fill="#21262d"/>
+  <rect x="0" y="416" width="1280" height="4" fill="#F2B5C1" opacity="0.5"/>
 
   <!-- 左侧文案 -->
-  <text x="72" y="168" font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="76" font-weight="800" fill="#f0f6fc" letter-spacing="2">MPA Skill</text>
-  <text x="72" y="226" font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="30" font-weight="500" fill="#8b949e" letter-spacing="1">可核验、可复用、能落地的公共管理研究工作流</text>
+  <text x="72" y="168" font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="76" font-weight="800" fill="#3D3A42" letter-spacing="2">MPA Skill</text>
+  <text x="72" y="226" font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="28" font-weight="500" fill="#9B95A3" letter-spacing="1">可核验、可复用、能落地的公共管理研究工作流</text>
 
   <!-- 标签徽章 -->
-  <rect x="72" y="258" width="180" height="40" rx="20" fill="#21262d" stroke="#30363d"/>
-  <circle cx="92" cy="278" r="5" fill="#3fb950"/>
-  <text x="106" y="285" font-family="'Segoe UI', Arial, sans-serif" font-size="20" font-weight="600" fill="#e6edf3">Agent Skill</text>
-  <rect x="268" y="258" width="152" height="40" rx="20" fill="#21262d" stroke="#30363d"/>
-  <text x="284" y="285" font-family="'Segoe UI', Arial, sans-serif" font-size="20" font-weight="600" fill="#e6edf3">Windows-first</text>
-  <rect x="436" y="258" width="140" height="40" rx="20" fill="#21262d" stroke="#30363d"/>
-  <text x="452" y="285" font-family="'Segoe UI', Arial, sans-serif" font-size="20" font-weight="600" fill="#e6edf3">MIT License</text>
+  <rect x="72" y="258" width="170" height="40" rx="20" fill="#FFFFFF" stroke="#F2B5C1"/>
+  <text x="92" y="285" font-family="'Segoe UI', Arial, sans-serif" font-size="20" font-weight="600" fill="#3D3A42">Agent Skill</text>
+  <rect x="258" y="258" width="152" height="40" rx="20" fill="#FFFFFF" stroke="#F2B5C1"/>
+  <text x="278" y="285" font-family="'Segoe UI', Arial, sans-serif" font-size="20" font-weight="600" fill="#3D3A42">Windows-first</text>
+  <rect x="426" y="258" width="140" height="40" rx="20" fill="#FFFFFF" stroke="#F2B5C1"/>
+  <text x="446" y="285" font-family="'Segoe UI', Arial, sans-serif" font-size="20" font-weight="600" fill="#3D3A42">MIT License</text>
 
   <!-- 右侧书本 -->
-  <path d="M 862 122 C 908 152, 976 158, 1032 144 L 1032 296 C 976 310, 908 304, 862 274 Z" fill="url(#bL)" opacity="0.95"/>
-  <path d="M 1198 122 C 1152 152, 1084 158, 1028 144 L 1028 296 C 1084 310, 1152 304, 1198 274 Z" fill="url(#bR)" opacity="0.95"/>
-  <line x1="1030" y1="144" x2="1030" y2="296" stroke="#e6edf3" stroke-width="5" stroke-linecap="round"/>
-
-  <!-- 右侧主线节点流 -->
-  <line x1="1030" y1="64" x2="1030" y2="120" stroke="#58a6ff" stroke-width="3" stroke-dasharray="2 6" stroke-linecap="round"/>
-  <circle cx="1030" cy="56" r="7" fill="#3fb950"/>
-  <line x1="1030" y1="300" x2="1030" y2="356" stroke="#58a6ff" stroke-width="3" stroke-dasharray="2 6" stroke-linecap="round"/>
-  <circle cx="1030" cy="364" r="7" fill="#d29922"/>
-
-  <!-- 右侧节点点 -->
-  <g fill="#58a6ff">
-    <circle cx="1004" cy="180" r="6"/>
-    <circle cx="1056" cy="180" r="6"/>
-    <circle cx="1004" cy="228" r="6"/>
-    <circle cx="1056" cy="228" r="6"/>
-  </g>
+  <path d="M 862 132 C 908 162, 976 168, 1032 154 L 1032 306 C 976 320, 908 314, 862 284 Z" fill="url(#bL)" opacity="0.95"/>
+  <path d="M 1198 132 C 1152 162, 1084 168, 1028 154 L 1028 306 C 1084 320, 1152 314, 1198 284 Z" fill="url(#bR)" opacity="0.95"/>
+  <line x1="1030" y1="154" x2="1030" y2="306" stroke="#FDF6F8" stroke-width="5" stroke-linecap="round"/>
 </svg>
