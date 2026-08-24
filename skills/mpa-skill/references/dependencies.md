@@ -15,3 +15,13 @@ All integrations are optional. Inspect installed Skills, plugins, applications, 
 | Word or slides | installed document or presentation workflow | deliver accepted Markdown and a handoff specification |
 
 When a preferred dependency is unavailable, choose the closest verified installed capability that preserves the requested evidence and safety boundaries. If no adequate capability exists, report the missing dependency before execution and keep completed read-only analysis separate from the blocked integration.
+
+## Verified integration pitfalls
+
+| Area | Verified behavior | Rule |
+|---|---|---|
+| local editor arguments | `key=value` parses values as JSON first; a lookup text like `0.571` becomes a number | pass string arguments via `--json` |
+| local editor images | plain base64 without a `data:` prefix is rejected | use `file://`-prefixed local paths |
+| local editor sessions | the service can stop mid-run and the file_id changes on reopen | re-read pool status, probe write state, rerun idempotently |
+| local editor tables | `doc_insert_table` does not exist; region edits report `update_count`, not a message field | use `doc_insert_table_by_csv` or full-grid `doc_modify_table_region`; judge success by return shape |
+| Zotero local API | read-only in verified setups (writes return 501) | write through the connector API; prepare a manual handoff for the remainder |

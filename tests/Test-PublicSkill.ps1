@@ -55,6 +55,8 @@ $requiredSkillFiles = @(
     'SKILL.md',
     'agents\openai.yaml',
     'references\dependencies.md',
+    'references\local-office-editing.md',
+    'references\real-data-workflow.md',
     'references\mpa-case-competition.md',
     'references\mpa-deliverables.md',
     'references\mpa-research-contract.md',
@@ -80,6 +82,8 @@ $researchContract = Read-File (Join-Path $skillRoot 'references\mpa-research-con
 $routing = Read-File (Join-Path $skillRoot 'references\routing.md')
 $dependencies = Read-File (Join-Path $skillRoot 'references\dependencies.md')
 $workspace = Read-File (Join-Path $skillRoot 'references\workspace-configuration.md')
+$localOffice = Read-File (Join-Path $skillRoot 'references\local-office-editing.md')
+$realData = Read-File (Join-Path $skillRoot 'references\real-data-workflow.md')
 $readmeZh = Read-File (Join-Path $RepoRoot 'README.md')
 $readmeEn = Read-File (Join-Path $RepoRoot 'README.en.md')
 $license = Read-File (Join-Path $RepoRoot 'LICENSE')
@@ -131,6 +135,21 @@ Require-Text $workspace '%APPDATA%\\mpa-skill\\config\.json' 'user configuration
 Require-Text $workspace '(?i)start.*Zotero.*automatically' 'automatic Zotero startup'
 Require-Text $workspace '(?i)launch fails' 'manual Zotero fallback'
 
+Require-Text $localOffice '(?i)descending' 'office-editing descending-order rule'
+Require-Text $localOffice '--json' 'office-editing json-argument rule'
+Require-Text $localOffice 'file://' 'office-editing file-prefix rule'
+Require-Text $localOffice '(?i)doc_insert_table_by_csv' 'office-editing table-creation rule'
+Require-Text $localOffice '(?i)is_dirty' 'office-editing crash-recovery rule'
+Require-Text $realData '(?i)AUTHOR_INPUT_NEEDED' 'real-data no-fabrication rule'
+Require-Text $realData '(?i)relative position' 'real-data standardization-frame rule'
+Require-Text $realData '(?i)majority-class baseline' 'real-data baseline-reporting rule'
+Require-Text $dependencies '(?i)Verified integration pitfalls' 'dependencies verified-pitfalls table'
+Require-Text $dependencies '(?i)connector API' 'dependencies Zotero write-route rule'
+Require-Text $skill '(?i)new values present' 'skill two-way numeric verification'
+Require-Text $routing '(?is)non-MPA to MPA conversion.*audit source-data consistency' 'conversion data-audit-first rule'
+Require-Text $routing 'real-data-workflow\.md' 'routing loads real-data reference'
+Require-Text $routing 'local-office-editing\.md' 'routing loads office-editing reference'
+
 Require-Text $skill '(?i)A request to convert non-MPA material into MPA work is MPA work' 'non-MPA conversion scope rule'
 Require-Text $skill '(?i)include one workspace-integration question in the same confirmation' 'workspace offer in single confirmation'
 Require-Text $routing '(?is)non-MPA to MPA conversion.*Research Spine before rewriting' 'non-MPA conversion route sequence'
@@ -156,7 +175,7 @@ Require-Text $license 'Copyright \(c\) 2026 mucjustin' 'MIT copyright'
 Require-Text $security '(?i)private vulnerability reporting' 'private vulnerability reporting'
 Require-Text $security '(?i)credentials' 'credential reporting boundary'
 
-$trackedText = @($skill, $metadata, $deliverables, $caseCompetition, $researchContract, $routing, $dependencies, $workspace, $readmeZh, $readmeEn, $security) -join "`n"
+$trackedText = @($skill, $metadata, $deliverables, $caseCompetition, $researchContract, $routing, $dependencies, $workspace, $localOffice, $realData, $readmeZh, $readmeEn, $security) -join "`n"
 Reject-Text $trackedText '(?i)(?<![A-Z0-9])[A-Z]:\\' 'fixed drive-letter path'
 Reject-Text $trackedText '(?i)[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}' 'embedded email address'
 Reject-Text $trackedText '(?i)gh[pousr]_[A-Za-z0-9]{20,}|github_pat_[A-Za-z0-9_]{20,}|sk-[A-Za-z0-9]{20,}' 'credential-like token'
