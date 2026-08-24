@@ -86,11 +86,7 @@
 - **数据先于写作**：有可用数据时，先按[真实数据工作流](skills/mpa-skill/references/real-data-workflow.md)核对来源、清洗、方法、数值与既有结论；证据或方法未被接受，就不靠改写正文掩盖缺口。
 - **可恢复交付**：只有路线确需本地 Office 编辑且相应能力可用时，才加载[本地 Office 编辑规则](skills/mpa-skill/references/local-office-editing.md)。中断后重新获取文档身份并核对新旧内容；无法判定时停在 `STATE_UNKNOWN`，不会盲目重放写入或宣称成功。
 
-### 1.0.0 的证据边界
 
-[冻结的可靠性基准](docs/validation/v1.0.0-benchmark.md)记录了这些观察结果：无 Skill 为 7/8，早期内部迭代为 7/8，当前版本为 8/8；当前版本相对两个基线均提升 +1/8，即 +12.5 个百分点。10 篇论文试点由 7 篇开发集和 3 篇冻结留出集组成；两个版本都完成 10/10 路由并找出 30/30 个预登记风险，记录输出中不受支持的声明为 0。
-
-这说明的改进是**拒绝仍含旧值的产物，并在交付中断后恢复到可验证状态**；论文审计指标持平，不能据此声称当前版本的论文诊断优于早期迭代。该试点每个条件只有一次响应，4/10 个 PDF 的结构预检为 `UNAVAILABLE`，10 篇样本不是总体估计，只有 1 条中国情境记录，且来源链接可能漂移。因此试点不能泛化为模型可靠性、中文论文质量或真实 Office 写入成功率的证明。
 
 ### MPA Research Spine（MPA 研究主线）
 
@@ -371,5 +367,5 @@ npx skills remove mpa-skill -g -y
 </p>
 
 <p align="center">
-  <sub>Built with 🧠 for MPA researchers · 让公共管理研究从碎片走向可核验</sub>
+  <sub>Built with kyro🧠 for MPA researchers · 让公共管理研究从碎片走向可核验</sub>
 </p>
