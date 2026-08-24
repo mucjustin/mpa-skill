@@ -349,6 +349,22 @@ Issues and pull requests are welcome. See [CONTRIBUTING.md](CONTRIBUTING.md) for
 
 This project is licensed under the [MIT License](LICENSE).
 
+---
+
+## ⭐ Star History
+
+If this project helps your research or study, please consider giving it a Star.
+
+<a href="https://github.com/mucjustin/mpa-skill">
+  <img src="https://img.shields.io/github/stars/mucjustin/mpa-skill?style=social" alt="GitHub stars">
+</a>
+
+<p align="center">
+  <a href="https://star-history.com/#mucjustin/mpa-skill&Date">
+    <img src="https://api.star-history.com/svg?repos=mucjustin/mpa-skill&type=Date" alt="Star History" width="60%">
+  </a>
+</p>
+
 <p align="center">
   <sub>Built with 🧠 for MPA researchers · from fragments to verifiable research</sub>
 </p>

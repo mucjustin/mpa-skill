@@ -349,6 +349,22 @@ npx skills remove mpa-skill -g -y
 
 本项目采用 [MIT License](LICENSE) 开源。
 
+---
+
+## ⭐ Star History
+
+如果这个项目对你的研究或学习有帮助，请给个 Star — 这是对作者最大的鼓励。
+
+<a href="https://github.com/mucjustin/mpa-skill">
+  <img src="https://img.shields.io/github/stars/mucjustin/mpa-skill?style=social" alt="GitHub stars">
+</a>
+
+<p align="center">
+  <a href="https://star-history.com/#mucjustin/mpa-skill&Date">
+    <img src="https://api.star-history.com/svg?repos=mucjustin/mpa-skill&type=Date" alt="Star History" width="60%">
+  </a>
+</p>
+
 <p align="center">
   <sub>Built with 🧠 for MPA researchers · 让公共管理研究从碎片走向可核验</sub>
 </p>
