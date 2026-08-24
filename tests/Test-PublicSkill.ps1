@@ -62,6 +62,10 @@ $requiredSkillFiles = @(
     'references\mpa-research-contract.md',
     'references\routing.md',
     'references\workspace-configuration.md',
+    'references\mpa-theory-map.md',
+    'references\mpa-china-contexts.md',
+    'references\mpa-thinking-checklist.md',
+    'references\mpa-course-map.md',
     'scripts\Initialize-MpaWorkspace.ps1',
     'scripts\Test-MpaEnvironment.ps1'
 )
@@ -84,6 +88,10 @@ $dependencies = Read-File (Join-Path $skillRoot 'references\dependencies.md')
 $workspace = Read-File (Join-Path $skillRoot 'references\workspace-configuration.md')
 $localOffice = Read-File (Join-Path $skillRoot 'references\local-office-editing.md')
 $realData = Read-File (Join-Path $skillRoot 'references\real-data-workflow.md')
+$theoryMap = Read-File (Join-Path $skillRoot 'references\mpa-theory-map.md')
+$chinaContexts = Read-File (Join-Path $skillRoot 'references\mpa-china-contexts.md')
+$thinkingChecklist = Read-File (Join-Path $skillRoot 'references\mpa-thinking-checklist.md')
+$courseMap = Read-File (Join-Path $skillRoot 'references\mpa-course-map.md')
 $readmeZh = Read-File (Join-Path $RepoRoot 'README.md')
 $readmeEn = Read-File (Join-Path $RepoRoot 'README.en.md')
 $license = Read-File (Join-Path $RepoRoot 'LICENSE')
@@ -143,6 +151,28 @@ Require-Text $localOffice '(?i)is_dirty' 'office-editing crash-recovery rule'
 Require-Text $realData '(?i)AUTHOR_INPUT_NEEDED' 'real-data no-fabrication rule'
 Require-Text $realData '(?i)relative position' 'real-data standardization-frame rule'
 Require-Text $realData '(?i)majority-class baseline' 'real-data baseline-reporting rule'
+Require-Text $theoryMap '(?i)\u4F55\u65F6\u67E5\u9605' 'theory-map usage note'
+Require-Text $theoryMap '(?i)\u4E13\u9898\u7814\u7A76|\u6848\u4F8B\u5206\u6790|\u8C03\u7814\u62A5\u544A|\u516C\u5171\u653F\u7B56\u5206\u6790' 'theory-map type taxonomy'
+if ((@([regex]::Matches($theoryMap, '(?m)^\|')).Count) -lt 14) { $failures.Add('theory-map table rows') }
+Require-Text $chinaContexts '(?i)\u4F55\u65F6\u67E5\u9605' 'china-contexts usage note'
+Require-Text $chinaContexts '(?i)\u538B\u529B\u578B\u4F53\u5236|\u8BD5\u70B9|\u6570\u5B57\u653F\u5E9C' 'china-contexts coverage'
+if ((@([regex]::Matches($chinaContexts, '(?m)^\|')).Count) -lt 10) { $failures.Add('china-contexts table rows') }
+Require-Text $thinkingChecklist '(?i)\u4F55\u65F6\u67E5\u9605' 'thinking-checklist usage note'
+Require-Text $thinkingChecklist '(?i)\u95EE\u9898\u5BFC\u5411|\u60C5\u5883\u654F\u611F|\u8BC1\u636E\u94FE|\u5BF9\u7B56\u53EF\u884C' 'thinking-checklist principles'
+if ((@([regex]::Matches($thinkingChecklist, '(?m)^\|')).Count) -lt 10) { $failures.Add('thinking-checklist table rows') }
+Require-Text $courseMap '(?i)\u4F55\u65F6\u67E5\u9605' 'course-map usage note'
+Require-Text $courseMap '(?i)\u516C\u5171\u653F\u7B56\u5206\u6790|\u793E\u4F1A\u7814\u7A76\u65B9\u6CD5|\u516C\u5171\u7BA1\u7406\u5B66' 'course-map coverage'
+if ((@([regex]::Matches($courseMap, '(?m)^\|')).Count) -lt 10) { $failures.Add('course-map table rows') }
+Require-Text $skill 'mpa-theory-map\.md' 'skill theory-map pointer'
+Require-Text $skill 'mpa-china-contexts\.md' 'skill china-contexts pointer'
+Require-Text $skill 'mpa-thinking-checklist\.md' 'skill thinking-checklist pointer'
+Require-Text $skill 'mpa-course-map\.md' 'skill course-map pointer'
+Require-Text $routing 'Theory grounding' 'routing theory-grounding row'
+Require-Text $routing 'China-context check' 'routing china-context row'
+Require-Text $routing 'mpa-theory-map\.md' 'routing theory-map loading'
+Require-Text $routing 'mpa-china-contexts\.md' 'routing china-contexts loading'
+Require-Text $routing 'mpa-thinking-checklist\.md' 'routing thinking-checklist loading'
+Require-Text $routing 'mpa-course-map\.md' 'routing course-map loading'
 Require-Text $dependencies '(?i)Verified integration pitfalls' 'dependencies verified-pitfalls table'
 Require-Text $dependencies '(?i)connector API' 'dependencies Zotero write-route rule'
 Require-Text $skill '(?i)new values present' 'skill two-way numeric verification'
@@ -175,7 +205,7 @@ Require-Text $license 'Copyright \(c\) 2026 mucjustin' 'MIT copyright'
 Require-Text $security '(?i)private vulnerability reporting' 'private vulnerability reporting'
 Require-Text $security '(?i)credentials' 'credential reporting boundary'
 
-$trackedText = @($skill, $metadata, $deliverables, $caseCompetition, $researchContract, $routing, $dependencies, $workspace, $localOffice, $realData, $readmeZh, $readmeEn, $security) -join "`n"
+$trackedText = @($skill, $metadata, $deliverables, $caseCompetition, $researchContract, $routing, $dependencies, $workspace, $localOffice, $realData, $theoryMap, $chinaContexts, $thinkingChecklist, $courseMap, $readmeZh, $readmeEn, $security) -join "`n"
 Reject-Text $trackedText '(?i)(?<![A-Z0-9])[A-Z]:\\' 'fixed drive-letter path'
 Reject-Text $trackedText '(?i)[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}' 'embedded email address'
 Reject-Text $trackedText '(?i)gh[pousr]_[A-Za-z0-9]{20,}|github_pat_[A-Za-z0-9_]{20,}|sk-[A-Za-z0-9]{20,}' 'credential-like token'

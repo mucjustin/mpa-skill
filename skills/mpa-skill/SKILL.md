@@ -11,7 +11,7 @@ Act as a thin controller for applied MPA learning and research. Preserve program
 
 1. Inspect the request and supplied files before choosing a route.
 2. Establish MPA, public-management, or public-policy context. Route unrelated work elsewhere; if explicit invocation still leaves the domain unclear, inspect first and report the scope decision. A request to convert non-MPA material into MPA work is MPA work: treat it as research design and re-anchor the problem, stakeholders, and theory through the MPA Research Spine before any rewriting.
-3. Map known and missing links in the MPA Research Spine: public problem → stakeholders and public value → institutional context → theory → evidence → method → analysis → implementable recommendation.
+3. Map known and missing links in the MPA Research Spine: public problem → stakeholders and public value → institutional context → theory → evidence → method → analysis → implementable recommendation. Each spine check applies the thinking principles in [thinking checklist](references/mpa-thinking-checklist.md).
 4. Apply course-to-capstone reuse: identify reusable course or project assets, and verify original sources before promoting notes or assignments into research evidence.
 5. Read [routing](references/routing.md), then load only the references required for the selected route.
 6. Present the minimum sufficient route. When a substantive research task states no Zotero or Obsidian preference, include one workspace-integration question in the same confirmation. Ask exactly once: `是否执行？`
@@ -20,15 +20,15 @@ Act as a thin controller for applied MPA learning and research. Preserve program
 ## MPA route ownership
 
 - Course study: source-complete notes, concept maps, revision materials, and assignment preparation.
-- Case analysis: actors, institutions, incentives, public value, implementation, alternatives, and lessons.
+- Case analysis: actors, institutions, incentives, public value, implementation, alternatives, and lessons. Locate the governance context in [china contexts](references/mpa-china-contexts.md) before concluding.
 - Case competition entries: verify real events and fieldwork evidence, confirm theory applicability, and follow [case competition rules](references/mpa-case-competition.md) before drafting.
 - Policy memo: decision audience, options, criteria, trade-offs, feasibility, and recommendation.
 - Literature: source discovery or intake tied to an applied public-management question.
 - Research design and fieldwork: question, scope, framework, evidence, sampling, instruments, ethics, feasibility, and risks.
 - Data analysis: data quality before modelling; reproducible transformation; association separated from causality.
-- Thesis and defence: accepted evidence and analysis before prose, formatting, or slides.
+- Thesis and defence: accepted evidence and analysis before prose, formatting, or slides. Ground theory via [theory map](references/mpa-theory-map.md) and [thinking checklist](references/mpa-thinking-checklist.md) before drafting.
 
-Read [MPA deliverables](references/mpa-deliverables.md) before creating a substantive artifact. Read [MPA research contract](references/mpa-research-contract.md) for substantial research outputs. Read [dependencies](references/dependencies.md) before delegating to optional integrations.
+Read [MPA deliverables](references/mpa-deliverables.md) before creating a substantive artifact. Read [MPA research contract](references/mpa-research-contract.md) for substantial research outputs. Read [dependencies](references/dependencies.md) before delegating to optional integrations. Read [theory map](references/mpa-theory-map.md) before thesis or research-design drafting; read [china contexts](references/mpa-china-contexts.md) before case analysis or policy recommendations; read [course map](references/mpa-course-map.md) before course assignments or study planning; run [thinking checklist](references/mpa-thinking-checklist.md) before each draft acceptance.
 
 ## Workspace and integrations
 

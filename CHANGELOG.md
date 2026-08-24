@@ -6,6 +6,25 @@
 
 ## [Unreleased]
 
+## [2.5.0] - 2026-08-24
+
+### Added
+
+- MPA 知识本体层（回应"skill 缺乏 MPA 学科内容"问题），新增 4 个 reference：
+  - `mpa-theory-map.md`：理论地图（四主题分组：政策执行与基层 / 制度与激励 / 治理与制度主义 / 政策过程；含理论、核心命题、典型中国应用情境、适用论文类型、常见误用五列）；
+  - `mpa-china-contexts.md`：中国治理情境库（情境、特征、典型政策工具、论文切入视角、代表案例五列）；
+  - `mpa-thinking-checklist.md`：公管思维清单（13 项思维原则 + 自查问题 + 论文落地方式 + 反模式）；
+  - `mpa-course-map.md`：课程-能力映射（MPA 核心课程、培养能力、支撑论文类型、论文落地点四列）；
+- SKILL.md 四处指针：Start spine 步骤应用 thinking-checklist；MPA route ownership 的 case analysis 定位 china-contexts、thesis/defence 经 theory-map + thinking-checklist 锚定理论；deliverables 段补四文件读取时机；
+- routing.md 新增 Theory grounding / China-context check 两行路由，跨路线顺序调整为先理论接地再文献证据，reference loading 追加四文件加载时机；
+- 公开契约测试同步扩展四文件清单、内容断言（usage-note / coverage / table-rows）与 SKILL/routing 指针断言。
+
+### Verified
+
+- 公开契约测试 5 轮 + 工作区脚本测试 5 轮全 PASS；
+- 隐私红线扫描 0 命中（个人路径、课题特例、机构线索全部清理）；
+- 四文件与个人版去空白后内容一致（无脱敏差异）。
+
 ## [2.4.0] - 2026-08-24
 
 ### Added
