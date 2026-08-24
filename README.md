@@ -6,7 +6,7 @@
 
 <p align="center">
   <strong>让公共管理研究从碎片走向可核验</strong><br>
-  给 MPA 研究生的 Codex Agent Skill — 不是通用论文模板 🙅
+  给 MPA 研究生的 Codex Agent Skill  🙅
 </p>
 
 <p align="center">
@@ -38,7 +38,7 @@
 
 ## 🎯 这是什么
 
-帮 MPA 研究生把课程、案例、政策、田野、数据和论文串成**一条可核验研究链**的 Codex Agent Skill。
+帮 MPA 研究生把课程、案例、政策、田间、数据和论文串成**一条可核验研究链**的 Codex Agent Skill。
 
 核心是 **MPA Research Spine**：公共问题 → 利益相关者 → 制度情境 → 理论 → 证据 → 方法 → 分析 → 可执行建议。先找缺口，再动笔 ✏️
 
@@ -262,5 +262,5 @@ CI（GitHub Actions，windows-latest）在 main 分支和每个 PR 上运行相�
 </p>
 
 <p align="center">
-  <sub>Built with 🧠 for MPA researchers · 从碎片到可核验</sub>
+  <sub>Built with kyro🧠 for MPA researchers · 从碎片到可核验</sub>
 </p>
