@@ -13,6 +13,7 @@ Use the smallest artifact that answers the student's actual task. Every substant
 | data analysis | raw-data inventory, quality audit, transformations, model or coding method, diagnostics, uncertainty, reproducible outputs | raw data is preserved; analysis is reproducible; association is not presented as causality without design support |
 | thesis | chapter purpose, accepted evidence, argument chain, citations, limitations, applied contribution | prose follows evidence; citations are verified; conclusions stay within method and data limits |
 | defence | audience, time limit, decision narrative, evidence figures, likely challenges, backup evidence | spoken story matches thesis evidence; slides remain legible; answers distinguish facts, inference, and judgement |
+| AI-use disclosure statement | tool name, version, official URL, purpose, phases, parameter settings, verification process | every field traces to actual session tool use; unresolved fields stay `AUTHOR_INPUT_NEEDED`; never lists a verification that did not run |
 
 ## Course-to-capstone reuse
 

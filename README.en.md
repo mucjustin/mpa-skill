@@ -68,6 +68,7 @@
 | 🧠 **MPA Knowledge Ontology** | Theory map, China governance contexts, thinking checklist, and course-capability map to ground the controller in MPA content. |
 | 🛡️ **Data before writing** | When usable data exists, audit provenance, cleaning, methods, numbers, and existing conclusions first; unaccepted evidence is not hidden by rewriting prose. |
 | 🔄 **Recoverable delivery** | After local Office interruption, reacquire document identity and probe old and new content; stop at `STATE_UNKNOWN` instead of replaying writes or claiming success. |
+| 🧾 **AI-use disclosure** | The [AI-use disclosure workflow](skills/mpa-skill/references/aigc-disclosure.md) drafts the statement only from tool use that actually happened; unverifiable fields stay `AUTHOR_INPUT_NEEDED` and no unexecuted verification is listed. |
 | ✅ **Contract tests** | PowerShell contract tests cover repository structure, skill instructions, doc consistency, and privacy red lines. |
 
 > **Windows-first**: the skill instructions are platform-agnostic, but automated workspace initialization and environment checks currently use PowerShell.

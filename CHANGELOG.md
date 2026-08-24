@@ -44,7 +44,8 @@
 - 合并可靠性层：数据先于写作路由（能力预检 → 来源/数据/数值审计 → 分析或证据缺口 → 内容 → 交付 → 验收）；STATE_UNKNOWN 写入状态分类与安全停止；Office 交付中断后重新获取文档身份并核对新旧内容；
 - 新增 8 个可靠性场景测试（`tests/Test-ReliabilityScenarios.ps1` + `tests/fixtures/reliability-scenarios.json`）与论文清单测试（`tests/Test-BenchmarkManifest.ps1`）；
 - 新增公开基准资产：`docs/validation/v2.4.0-benchmark.md`、`docs/validation/v2.4.0-results.json`、`docs/validation/mpa-thesis-corpus.json`；
-- CI 新增可靠性场景与论文清单两步验证。
+- CI 新增可靠性场景与论文清单两步验证；
+- 新增 AI 使用声明生成器（`skills/mpa-skill/references/aigc-disclosure.md`）：工具名称、版本、官方网址、使用用途、具体环节、参数设置、验证过程七字段仅取自实际发生的工具使用，未核实字段保留 `AUTHOR_INPUT_NEEDED`，不写入未执行的验证，且不代签、不代交声明；SKILL.md、routing.md、mpa-deliverables.md 与双语 README 同步挂载。
 
 ### Changed
 
@@ -58,7 +59,8 @@
 
 - 冻结候选在合成场景中为 8/8；无 Skill 与 v2.3.0 均为 7/8，差值均为 +1/8（+12.5 个百分点）；
 - 真实论文验证为 7 篇开发集加 3 篇留出集。v2.3.0 与 v2.4.0 均完成 10/10 路由、找出 30/30 个预登记风险，记录输出中的不受支持声明为 0；观察到的改进限于陈旧产物拒绝和可恢复交付，不代表论文诊断更优；
-- 限制：每个条件仅一次响应；4/10 个 PDF 结构预检为 `UNAVAILABLE`；10 篇试点不是总体估计；只有 1 条中国情境记录；来源链接可能漂移。
+- 限制：每个条件仅一次响应；4/10 个 PDF 结构预检为 `UNAVAILABLE`；10 篇试点不是总体估计；只有 1 条中国情境记录；来源链接可能漂移；
+- AI 使用声明断言已纳入 `tests/Test-PublicSkill.ps1`（文件清单、七字段、防捏造、验证溯源、责任边界、README 双语链接、隐私扫描），契约测试与可靠性场景测试各连续 5 轮通过。
 
 ## [2.5.1] - 2026-08-24
 

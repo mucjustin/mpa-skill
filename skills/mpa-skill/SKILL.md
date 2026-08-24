@@ -1,6 +1,6 @@
 ---
 name: mpa-skill
-description: Use when an MPA graduate student needs course study, case analysis, case competition entries, policy memos, literature work, research design, fieldwork, data analysis, thesis writing, or defence preparation in an established MPA, public-management, or public-policy context. Generic academic, teaching, blogging, programming, data, Zotero, Obsidian, or non-MPA thesis requests do not qualify by themselves. An explicit request to convert non-MPA material into MPA work qualifies.
+description: Use when an MPA graduate student needs course study, case analysis, case competition entries, policy memos, literature work, research design, fieldwork, data analysis, thesis writing, defence preparation, or AI-use disclosure statements in an established MPA, public-management, or public-policy context. Generic academic, teaching, blogging, programming, data, Zotero, Obsidian, or non-MPA thesis requests do not qualify by themselves. An explicit request to convert non-MPA material into MPA work qualifies.
 ---
 
 # MPA Research Workflow
@@ -30,9 +30,9 @@ Read [local Office editing](references/local-office-editing.md) only when the ac
 - Literature: source discovery or intake tied to an applied public-management question.
 - Research design and fieldwork: question, scope, framework, evidence, sampling, instruments, ethics, feasibility, and risks.
 - Data analysis: data quality before modelling; reproducible transformation; association separated from causality.
-- Thesis and defence: accepted evidence and analysis before prose, formatting, or slides. Ground theory via [theory map](references/mpa-theory-map.md) and [thinking checklist](references/mpa-thinking-checklist.md) before drafting.
+- Thesis and defence: accepted evidence and analysis before prose, formatting, or slides. Ground theory via [theory map](references/mpa-theory-map.md) and [thinking checklist](references/mpa-thinking-checklist.md) before drafting. When AI tools were used and the current notice requires one, draft the AI-use disclosure statement from actual session tool use per [AI-use disclosure](references/aigc-disclosure.md).
 
-Read [MPA deliverables](references/mpa-deliverables.md) before creating a substantive artifact. Read [MPA research contract](references/mpa-research-contract.md) for substantial research outputs. Read [dependencies](references/dependencies.md) before delegating to optional integrations. Read [theory map](references/mpa-theory-map.md) before thesis or research-design drafting; read [china contexts](references/mpa-china-contexts.md) before case analysis or policy recommendations; read [course map](references/mpa-course-map.md) before course assignments or study planning; run [thinking checklist](references/mpa-thinking-checklist.md) before each draft acceptance.
+Read [MPA deliverables](references/mpa-deliverables.md) before creating a substantive artifact. Read [MPA research contract](references/mpa-research-contract.md) for substantial research outputs. Read [dependencies](references/dependencies.md) before delegating to optional integrations. Read [theory map](references/mpa-theory-map.md) before thesis or research-design drafting; read [china contexts](references/mpa-china-contexts.md) before case analysis or policy recommendations; read [course map](references/mpa-course-map.md) before course assignments or study planning; run [thinking checklist](references/mpa-thinking-checklist.md) before each draft acceptance. Read [AI-use disclosure](references/aigc-disclosure.md) before drafting an AI-use disclosure statement.
 
 ## Workspace and integrations
 

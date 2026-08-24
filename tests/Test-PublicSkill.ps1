@@ -92,6 +92,7 @@ $requiredSkillFiles = @(
     'references\dependencies.md',
     'references\mpa-case-competition.md',
     'references\mpa-deliverables.md',
+    'references\aigc-disclosure.md',
     'references\mpa-research-contract.md',
     'references\local-office-editing.md',
     'references\real-data-workflow.md',
@@ -118,6 +119,7 @@ if ($skillFiles.Count -ne 1) {
 $skill = Read-File (Join-Path $skillRoot 'SKILL.md')
 $metadata = Read-File (Join-Path $skillRoot 'agents\openai.yaml')
 $deliverables = Read-File (Join-Path $skillRoot 'references\mpa-deliverables.md')
+$aigcDisclosure = Read-File (Join-Path $skillRoot 'references\aigc-disclosure.md')
 $caseCompetition = Read-File (Join-Path $skillRoot 'references\mpa-case-competition.md')
 $researchContract = Read-File (Join-Path $skillRoot 'references\mpa-research-contract.md')
 $localOffice = Read-File (Join-Path $skillRoot 'references\local-office-editing.md')
@@ -165,6 +167,16 @@ foreach ($term in @('course notes', 'case analysis', 'policy memo', 'literature 
     Require-Text $deliverables ([regex]::Escape($term)) "MPA deliverable: $term"
 }
 Require-Text $deliverables '(?i)evidence.*inference.*recommendation' 'evidence/inference/recommendation boundary'
+
+# ── AI-use disclosure assertions ──
+Require-Text $aigcDisclosure '(?is)tool name.*version.*official URL.*purpose.*phases.*parameter settings.*verification process' 'aigc-disclosure field set'
+Require-Text $aigcDisclosure '(?i)AUTHOR_INPUT_NEEDED' 'aigc-disclosure no-fabrication rule'
+Require-Text $aigcDisclosure '(?i)verification that did not run' 'aigc-disclosure verification-trace rule'
+Require-Text $aigcDisclosure '\u8C01\u4F7F\u7528\u3001\u8C01\u8D1F\u8D23' 'aigc-disclosure responsibility rule'
+Require-Text $aigcDisclosure '(?i)Do not sign, submit, or upload' 'aigc-disclosure submission boundary'
+Require-Text $skill 'aigc-disclosure\.md' 'skill aigc-disclosure pointer'
+Require-Text $routing 'aigc-disclosure\.md' 'routing aigc-disclosure loading'
+Require-Text $deliverables 'AI-use disclosure statement' 'deliverables aigc-disclosure row'
 
 # ── Research contract assertions ──
 Require-Text $researchContract '(?i)current.*programme.*university.*supervisor.*ethics.*override' 'current programme precedence'
@@ -268,6 +280,7 @@ foreach ($text in @($readmeZh, $readmeEn)) {
     Require-Text $text '(?i)Windows-first' 'Windows-first support'
     Require-Text $text 'skills/mpa-skill/references/real-data-workflow\.md' 'README real-data workflow link'
     Require-Text $text 'skills/mpa-skill/references/local-office-editing\.md' 'README local Office workflow link'
+    Require-Text $text 'skills/mpa-skill/references/aigc-disclosure\.md' 'README AI-use disclosure link'
     Require-Text $text 'docs/validation/v2\.4\.0-benchmark\.md' 'README benchmark report link'
     Require-Text $text 'pwsh -NoProfile -File tests/Test-ReliabilityScenarios\.ps1' 'README reliability scenario command'
     Require-Text $text '(?i)STATE_UNKNOWN' 'README unknown-state boundary'
@@ -462,7 +475,7 @@ Require-Text $security '(?i)private vulnerability reporting' 'private vulnerabil
 Require-Text $security '(?i)credentials' 'credential reporting boundary'
 
 # ── Privacy scanning (includes four knowledge files) ──
-$trackedText = @($skill, $metadata, $deliverables, $caseCompetition, $researchContract, $localOffice, $realData, $routing, $dependencies, $workspace, $theoryMap, $chinaContexts, $thinkingChecklist, $courseMap, $readmeZh, $readmeEn, $changelog, $security) -join "`n"
+$trackedText = @($skill, $metadata, $deliverables, $aigcDisclosure, $caseCompetition, $researchContract, $localOffice, $realData, $routing, $dependencies, $workspace, $theoryMap, $chinaContexts, $thinkingChecklist, $courseMap, $readmeZh, $readmeEn, $changelog, $security) -join "`n"
 Reject-Text $trackedText '(?i)(?<![A-Z0-9])[A-Z]:\\' 'fixed drive-letter path'
 Reject-Text $trackedText '(?i)[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}' 'embedded email address'
 Reject-Text $trackedText '(?i)gh[pousr]_[A-Za-z0-9]{20,}|github_pat_[A-Za-z0-9_]{20,}|sk-[A-Za-z0-9]{20,}' 'credential-like token'
