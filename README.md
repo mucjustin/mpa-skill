@@ -84,7 +84,7 @@ $skillRoot = Join-Path $HOME '.agents\skills\mpa-skill'
 
 默认配置写入 `%APPDATA%\mpa-skill\config.json`，不修改 Zotero 数据库或 Obsidian 设置。预览操作加 `-WhatIf`；检查环境用 `Test-MpaEnvironment.ps1`。
 
-### 更新与卸载
+### 更新与卸载 (Update & Uninstall)
 
 ```powershell
 npx skills update mpa-skill -g -y    # 更新
