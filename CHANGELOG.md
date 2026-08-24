@@ -18,6 +18,32 @@
 
 ---
 
+## [2.0.0] - 2026-08-24
+
+### Changed（架构精简与能力增强）
+
+- **引用文件从 13 个精简为 8 个**：合并四个 MPA 知识文件（理论地图、中国情境、思维清单、课程映射）为统一的 `mpa-knowledge.md`；合并四个执行规则文件（真实数据工作流、本地 Office 编辑、依赖管理、工作区配置）为统一的 `execution.md`
+- **SKILL.md 从 48 行精简为 36 行**：用单一「引用加载表」替代分散在 3 段中的 "Read X before Y" 指令
+- **routing.md 简化为路由表 + 决策树**：移除冗余的加载指令，用紧凑的表格组织 12 条路由
+
+### Added（新增能力）
+
+- **`templates.md` 实用模板库**：8 种路由的落地模板（案例分析、政策备忘录、文献综述、研究设计、田野调查清单、数据分析报告、答辩准备、课程笔记），每个模板含结构骨架和检查清单
+- **知识库扩展**：理论地图新增运动式治理、目标责任制、公共选择理论、网络治理、民主行政、政策终结、间断均衡 7 个理论（共 26 个 → 33 个）；中国情境库新增区域协同、营商环境优化、生态环境治理、数据治理与隐私保护 4 个情境（共 10 个 → 14 个）；思维清单新增政策评估意识原则
+- **方法选择决策树**：按数据特征和研究问题类型自动推荐定量/定性/混合方法
+
+### Removed
+
+- 删除 `mpa-theory-map.md`、`mpa-china-contexts.md`、`mpa-thinking-checklist.md`、`mpa-course-map.md`（合并入 `mpa-knowledge.md`）
+- 删除 `real-data-workflow.md`、`local-office-editing.md`、`dependencies.md`、`workspace-configuration.md`（合并入 `execution.md`）
+
+### Migration
+
+- 旧版本引用的文件路径已变更：`real-data-workflow.md` → `execution.md`（数据工作流章节）、`local-office-editing.md` → `execution.md`（Office 编辑章节）、`dependencies.md` + `workspace-configuration.md` → `execution.md`（依赖管理 + 工作区配置章节）、四个知识文件 → `mpa-knowledge.md`（对应章节）
+- `SKILL.md` 的引用加载表完整映射了新路径
+
+---
+
 ## [1.0.0] - 2026-08-24
 
 首个公开发布版本。开发过程中的内部迭代标签（含基准条件 `previous` / `current` 的对应关系）见[基准报告](docs/validation/v1.0.0-benchmark.md)的命名说明。

@@ -85,23 +85,18 @@ foreach ($relative in $requiredRepoFiles) {
     Require-File (Join-Path $RepoRoot $relative) $relative
 }
 
-# ── Required skill files (includes four MPA knowledge files) ──
+# ── Required skill files (consolidated structure) ──
 $requiredSkillFiles = @(
     'SKILL.md',
     'agents\openai.yaml',
-    'references\dependencies.md',
+    'references\execution.md',
     'references\mpa-case-competition.md',
     'references\mpa-deliverables.md',
     'references\aigc-disclosure.md',
     'references\mpa-research-contract.md',
-    'references\local-office-editing.md',
-    'references\real-data-workflow.md',
     'references\routing.md',
-    'references\workspace-configuration.md',
-    'references\mpa-theory-map.md',
-    'references\mpa-china-contexts.md',
-    'references\mpa-thinking-checklist.md',
-    'references\mpa-course-map.md',
+    'references\mpa-knowledge.md',
+    'references\templates.md',
     'scripts\Initialize-MpaWorkspace.ps1',
     'scripts\Test-MpaEnvironment.ps1'
 )
@@ -122,15 +117,10 @@ $deliverables = Read-File (Join-Path $skillRoot 'references\mpa-deliverables.md'
 $aigcDisclosure = Read-File (Join-Path $skillRoot 'references\aigc-disclosure.md')
 $caseCompetition = Read-File (Join-Path $skillRoot 'references\mpa-case-competition.md')
 $researchContract = Read-File (Join-Path $skillRoot 'references\mpa-research-contract.md')
-$localOffice = Read-File (Join-Path $skillRoot 'references\local-office-editing.md')
-$realData = Read-File (Join-Path $skillRoot 'references\real-data-workflow.md')
 $routing = Read-File (Join-Path $skillRoot 'references\routing.md')
-$dependencies = Read-File (Join-Path $skillRoot 'references\dependencies.md')
-$workspace = Read-File (Join-Path $skillRoot 'references\workspace-configuration.md')
-$theoryMap = Read-File (Join-Path $skillRoot 'references\mpa-theory-map.md')
-$chinaContexts = Read-File (Join-Path $skillRoot 'references\mpa-china-contexts.md')
-$thinkingChecklist = Read-File (Join-Path $skillRoot 'references\mpa-thinking-checklist.md')
-$courseMap = Read-File (Join-Path $skillRoot 'references\mpa-course-map.md')
+$execution = Read-File (Join-Path $skillRoot 'references\execution.md')
+$mpaKnowledge = Read-File (Join-Path $skillRoot 'references\mpa-knowledge.md')
+$templates = Read-File (Join-Path $skillRoot 'references\templates.md')
 $readmeZh = Read-File (Join-Path $RepoRoot 'README.md')
 $readmeEn = Read-File (Join-Path $RepoRoot 'README.en.md')
 $changelog = Read-File (Join-Path $RepoRoot 'CHANGELOG.md')
@@ -151,13 +141,12 @@ Require-Text $skill '(?i)never.*zotero\.sqlite' 'direct Zotero database prohibit
 Require-Text $skill '(?i)login.*CAPTCHA.*paywall' 'access safety stop'
 Require-Text $skill 'references/mpa-deliverables\.md' 'deliverable reference routing'
 Require-Text $skill 'references/mpa-case-competition\.md' 'case competition reference routing'
-Require-Text $skill 'references/workspace-configuration\.md' 'workspace reference routing'
-Require-Text $skill 'references/real-data-workflow\.md' 'real-data workflow pointer'
-Require-Text $skill 'references/local-office-editing\.md' 'local Office workflow pointer'
-Require-Text $skill 'mpa-theory-map\.md' 'skill theory-map pointer'
-Require-Text $skill 'mpa-china-contexts\.md' 'skill china-contexts pointer'
-Require-Text $skill 'mpa-thinking-checklist\.md' 'skill thinking-checklist pointer'
-Require-Text $skill 'mpa-course-map\.md' 'skill course-map pointer'
+Require-Text $skill 'references/execution\.md' 'execution handbook reference'
+Require-Text $skill 'references/mpa-knowledge\.md' 'mpa knowledge base pointer'
+Require-Text $skill 'references/templates\.md' 'templates pointer'
+Require-Text $skill 'references/routing\.md' 'routing reference'
+Require-Text $skill 'mpa-knowledge\.md' 'skill knowledge-base pointer'
+Require-Text $skill 'execution\.md' 'skill execution-handbook pointer'
 Require-Text $skill '(?is)new.*present.*old.*absent|old.*absent.*new.*present' 'bidirectional replacement acceptance'
 Require-Text $skill '(?i)A request to convert non-MPA material into MPA work is MPA work' 'non-MPA conversion scope rule'
 Require-Text $skill '(?i)include one workspace-integration question in the same confirmation' 'workspace offer in single confirmation'
@@ -189,22 +178,15 @@ Require-Text $researchContract 'mpa-case-competition\.md' 'research contract cas
 # ── Routing assertions ──
 Require-Text $routing '(?i)minimum sufficient' 'minimum sufficient route'
 Require-Text $routing '(?i)course.*case.*policy memo.*literature.*research design.*fieldwork.*data.*thesis.*defence' 'MPA route coverage'
-Require-Text $routing '(?i)case competition entry' 'case competition route row'
 Require-Text $routing 'mpa-case-competition\.md' 'case competition reference load'
-Require-Text $routing '(?is)capabilit.*audit.*data.*content.*deliver' 'data-before-writing route order'
-Require-Text $routing '(?i)real-data-workflow\.md' 'real-data route load'
-Require-Text $routing '(?i)local-office-editing\.md' 'local Office route load'
-Require-Text $routing 'Theory grounding' 'routing theory-grounding row'
-Require-Text $routing 'China-context check' 'routing china-context row'
-Require-Text $routing 'mpa-theory-map\.md' 'routing theory-map loading'
-Require-Text $routing 'mpa-china-contexts\.md' 'routing china-contexts loading'
-Require-Text $routing 'mpa-thinking-checklist\.md' 'routing thinking-checklist loading'
-Require-Text $routing 'mpa-course-map\.md' 'routing course-map loading'
+Require-Text $routing 'mpa-knowledge\.md' 'routing knowledge-base loading'
+Require-Text $routing 'execution\.md' 'routing execution-handbook loading'
+Require-Text $routing 'templates\.md' 'routing templates loading'
+Require-Text $routing '(?i)capabilit.*audit.*data.*content.*deliver|data.*audit.*content.*acceptance' 'data-before-writing route order'
 foreach ($term in @('\u6848\u4F8B\u6B63\u6587', '\u6848\u4F8B\u5206\u6790\u62A5\u544A', '\u8C03\u7814\u62A5\u544A', 'fieldwork evidence', 'theory applicability')) {
     Require-Text $routing $term "routing case competition rule: $term"
 }
 Require-Text $routing '(?is)non-MPA to MPA conversion.*Research Spine before rewriting' 'non-MPA conversion route sequence'
-Require-Text $routing '(?is)non-MPA to MPA conversion.*audit source-data consistency' 'conversion data-audit-first rule'
 Require-Text $routing '(?i)Offer Zotero or Obsidian integration once in the route confirmation' 'workspace integration offer'
 Require-Text $routing '(?i)write nothing to either before the user confirms' 'no unconfirmed integration writes'
 
@@ -219,50 +201,46 @@ Require-Text $caseCompetition '(?i)applicability' 'case competition theory appli
 Require-Text $caseCompetition '(?i)must not be AI-generated' 'case competition AIGC boundary'
 Require-Text $caseCompetition '(?i)never substitutes' 'case competition drafting boundary'
 
-# ── Dependencies assertions ──
-Require-Text $dependencies '(?i)optional' 'optional dependency boundary'
-Require-Text $dependencies '(?i)unavailable.*closest|missing.*report' 'dependency degradation'
-Require-Text $dependencies '(?i)Verified integration pitfalls' 'dependencies verified-pitfalls table'
-Require-Text $dependencies '(?i)connector API' 'dependencies Zotero write-route rule'
+# ── Execution handbook assertions (merged: dependencies + workspace + office + data) ──
+Require-Text $execution '(?i)optional' 'optional dependency boundary'
+Require-Text $execution '(?i)unavailable.*closest|missing.*report' 'dependency degradation'
+Require-Text $execution '(?i)Verified integration pitfalls' 'dependencies verified-pitfalls table'
+Require-Text $execution '(?i)connector API' 'dependencies Zotero write-route rule'
+Require-Text $execution 'MPA_WORKSPACE_CONFIG' 'environment configuration'
+Require-Text $execution '%APPDATA%\\mpa-skill\\config\.json' 'user configuration path'
+Require-Text $execution '(?i)start.*Zotero.*automatically' 'automatic Zotero startup'
+Require-Text $execution '(?i)launch fails' 'manual Zotero fallback'
+Require-Text $execution '(?i)not applied.*applied.*partially applied.*STATE_UNKNOWN' 'mutation-state classification'
+Require-Text $execution '(?i)STATE_UNKNOWN.*(?:stop|pause)' 'unknown-state safety stop'
+Require-Text $execution '(?i)descending' 'descending positional edits'
+Require-Text $execution '(?i)unique' 'unique live anchor'
+Require-Text $execution '--json' 'office-editing json-argument rule'
+Require-Text $execution 'file://' 'office-editing file-prefix rule'
+Require-Text $execution '(?i)doc_insert_table_by_csv' 'office-editing table-creation rule'
+Require-Text $execution '(?i)is_dirty' 'office-editing crash-recovery rule'
+Require-Text $execution '(?i)raw data' 'raw-data preservation'
+Require-Text $execution '(?i)standardized|Z.standard' 'standardization interpretation boundary'
+Require-Text $execution '(?i)majority.*baseline|baseline.*majority' 'classification baseline'
+Require-Text $execution '(?i)new value.*old value|old value.*new value' 'numeric bidirectional verification'
+Require-Text $execution '(?i)AUTHOR_INPUT_NEEDED' 'real-data no-fabrication rule'
+Require-Text $execution '(?i)relative position' 'real-data standardization-frame rule'
+Require-Text $execution '(?i)majority-class baseline' 'real-data baseline-reporting rule'
 
-# ── Workspace assertions ──
-Require-Text $workspace 'MPA_WORKSPACE_CONFIG' 'environment configuration'
-Require-Text $workspace '%APPDATA%\\mpa-skill\\config\.json' 'user configuration path'
-Require-Text $workspace '(?i)start.*Zotero.*automatically' 'automatic Zotero startup'
-Require-Text $workspace '(?i)launch fails' 'manual Zotero fallback'
+# ── MPA knowledge base assertions (merged: theory + china + thinking + course) ──
+Require-Text $mpaKnowledge '\u4F55\u65F6\u67E5\u9605' 'knowledge-base usage note'
+Require-Text $mpaKnowledge '\u4E13\u9898\u7814\u7A76|\u6848\u4F8B\u5206\u6790|\u8C03\u7814\u62A5\u544A|\u516C\u5171\u653F\u7B56\u5206\u6790' 'knowledge-base type taxonomy'
+Require-Text $mpaKnowledge '\u538B\u529B\u578B\u4F53\u5236|\u8BD5\u70B9|\u6570\u5B57\u653F\u5E9C' 'knowledge-base china-contexts coverage'
+Require-Text $mpaKnowledge '\u95EE\u9898\u5BFC\u5411|\u60C5\u5883\u654F\u611F|\u8BC1\u636E\u94FE|\u5BF9\u7B56\u53EF\u884C' 'knowledge-base thinking principles'
+Require-Text $mpaKnowledge '\u516C\u5171\u653F\u7B56\u5206\u6790|\u793E\u4F1A\u7814\u7A76\u65B9\u6CD5|\u516C\u5171\u7BA1\u7406\u5B66' 'knowledge-base course-map coverage'
+if ((@([regex]::Matches($mpaKnowledge, '(?m)^\|')).Count) -lt 40) { $failures.Add('knowledge-base table rows (min 40)') }
 
-# ── Local Office assertions (provider-neutral + SDK-specific) ──
-Require-Text $localOffice '(?i)not applied.*applied.*partially applied.*STATE_UNKNOWN' 'mutation-state classification'
-Require-Text $localOffice '(?i)STATE_UNKNOWN.*(?:stop|pause)' 'unknown-state safety stop'
-Require-Text $localOffice '(?i)descending' 'descending positional edits'
-Require-Text $localOffice '(?i)unique' 'unique live anchor'
-Require-Text $localOffice '--json' 'office-editing json-argument rule'
-Require-Text $localOffice 'file://' 'office-editing file-prefix rule'
-Require-Text $localOffice '(?i)doc_insert_table_by_csv' 'office-editing table-creation rule'
-Require-Text $localOffice '(?i)is_dirty' 'office-editing crash-recovery rule'
-
-# ── Real-data assertions ──
-Require-Text $realData '(?i)raw data' 'raw-data preservation'
-Require-Text $realData '(?i)standardized|Z.standard' 'standardization interpretation boundary'
-Require-Text $realData '(?i)majority.*baseline|baseline.*majority' 'classification baseline'
-Require-Text $realData '(?i)new value.*old value|old value.*new value' 'numeric bidirectional verification'
-Require-Text $realData '(?i)AUTHOR_INPUT_NEEDED' 'real-data no-fabrication rule'
-Require-Text $realData '(?i)relative position' 'real-data standardization-frame rule'
-Require-Text $realData '(?i)majority-class baseline' 'real-data baseline-reporting rule'
-
-# ── MPA knowledge file assertions ──
-Require-Text $theoryMap '(?i)\u4F55\u65F6\u67E5\u9605' 'theory-map usage note'
-Require-Text $theoryMap '(?i)\u4E13\u9898\u7814\u7A76|\u6848\u4F8B\u5206\u6790|\u8C03\u7814\u62A5\u544A|\u516C\u5171\u653F\u7B56\u5206\u6790' 'theory-map type taxonomy'
-if ((@([regex]::Matches($theoryMap, '(?m)^\|')).Count) -lt 14) { $failures.Add('theory-map table rows') }
-Require-Text $chinaContexts '(?i)\u4F55\u65F6\u67E5\u9605' 'china-contexts usage note'
-Require-Text $chinaContexts '(?i)\u538B\u529B\u578B\u4F53\u5236|\u8BD5\u70B9|\u6570\u5B57\u653F\u5E9C' 'china-contexts coverage'
-if ((@([regex]::Matches($chinaContexts, '(?m)^\|')).Count) -lt 10) { $failures.Add('china-contexts table rows') }
-Require-Text $thinkingChecklist '(?i)\u4F55\u65F6\u67E5\u9605' 'thinking-checklist usage note'
-Require-Text $thinkingChecklist '(?i)\u95EE\u9898\u5BFC\u5411|\u60C5\u5883\u654F\u611F|\u8BC1\u636E\u94FE|\u5BF9\u7B56\u53EF\u884C' 'thinking-checklist principles'
-if ((@([regex]::Matches($thinkingChecklist, '(?m)^\|')).Count) -lt 10) { $failures.Add('thinking-checklist table rows') }
-Require-Text $courseMap '(?i)\u4F55\u65F6\u67E5\u9605' 'course-map usage note'
-Require-Text $courseMap '(?i)\u516C\u5171\u653F\u7B56\u5206\u6790|\u793E\u4F1A\u7814\u7A76\u65B9\u6CD5|\u516C\u5171\u7BA1\u7406\u5B66' 'course-map coverage'
-if ((@([regex]::Matches($courseMap, '(?m)^\|')).Count) -lt 10) { $failures.Add('course-map table rows') }
+# ── Templates assertions ──
+Require-Text $templates '(?i)case analysis' 'templates case-analysis section'
+Require-Text $templates '(?i)policy memo' 'templates policy-memo section'
+Require-Text $templates '(?i)literature' 'templates literature section'
+Require-Text $templates '(?i)research design' 'templates research-design section'
+Require-Text $templates '(?i)fieldwork' 'templates fieldwork section'
+Require-Text $templates '(?i)data analysis' 'templates data-analysis section'
 
 # ── Metadata assertions ──
 Require-Text $metadata 'display_name:' 'UI display name'
@@ -278,8 +256,7 @@ foreach ($text in @($readmeZh, $readmeEn)) {
     Require-Text $text '(?i)update' 'update instructions'
     Require-Text $text '(?i)uninstall' 'uninstall instructions'
     Require-Text $text '(?i)Windows-first' 'Windows-first support'
-    Require-Text $text 'skills/mpa-skill/references/real-data-workflow\.md' 'README real-data workflow link'
-    Require-Text $text 'skills/mpa-skill/references/local-office-editing\.md' 'README local Office workflow link'
+    Require-Text $text 'skills/mpa-skill/references/execution\.md' 'README execution handbook link'
     Require-Text $text 'skills/mpa-skill/references/aigc-disclosure\.md' 'README AI-use disclosure link'
     Require-Text $text 'docs/validation/v1\.0\.0-benchmark\.md' 'README benchmark report link'
     Require-Text $text 'pwsh -NoProfile -File tests/Test-ReliabilityScenarios\.ps1' 'README reliability scenario command'
@@ -475,7 +452,7 @@ Require-Text $security '(?i)private vulnerability reporting' 'private vulnerabil
 Require-Text $security '(?i)credentials' 'credential reporting boundary'
 
 # ── Privacy scanning (includes four knowledge files) ──
-$trackedText = @($skill, $metadata, $deliverables, $aigcDisclosure, $caseCompetition, $researchContract, $localOffice, $realData, $routing, $dependencies, $workspace, $theoryMap, $chinaContexts, $thinkingChecklist, $courseMap, $readmeZh, $readmeEn, $changelog, $security) -join "`n"
+$trackedText = @($skill, $metadata, $deliverables, $aigcDisclosure, $caseCompetition, $researchContract, $routing, $execution, $mpaKnowledge, $templates, $readmeZh, $readmeEn, $changelog, $security) -join "`n"
 Reject-Text $trackedText '(?i)(?<![A-Z0-9])[A-Z]:\\' 'fixed drive-letter path'
 Reject-Text $trackedText '(?i)[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}' 'embedded email address'
 Reject-Text $trackedText '(?i)gh[pousr]_[A-Za-z0-9]{20,}|github_pat_[A-Za-z0-9_]{20,}|sk-[A-Za-z0-9]{20,}' 'credential-like token'

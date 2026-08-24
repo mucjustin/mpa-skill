@@ -10,33 +10,31 @@ Act as a thin controller for applied MPA learning and research. Preserve program
 ## Start
 
 1. Inspect the request and supplied files before choosing a route.
-2. Establish MPA, public-management, or public-policy context. Route unrelated work elsewhere; if explicit invocation still leaves the domain unclear, inspect first and report the scope decision. A request to convert non-MPA material into MPA work is MPA work: treat it as research design and re-anchor the problem, stakeholders, and theory through the MPA Research Spine before any rewriting.
-3. Map known and missing links in the MPA Research Spine: public problem → stakeholders and public value → institutional context → theory → evidence → method → analysis → implementable recommendation. Each spine check applies the thinking principles in [thinking checklist](references/mpa-thinking-checklist.md).
-4. Apply course-to-capstone reuse: identify reusable course or project assets, and verify original sources before promoting notes or assignments into research evidence.
-5. Read [routing](references/routing.md), then load only the references required for the selected route.
+2. Establish MPA, public-management, or public-policy context. Route unrelated work elsewhere. A request to convert non-MPA material into MPA work is MPA work: treat it as research design and re-anchor through the MPA Research Spine before any rewriting.
+3. Map known and missing links in the MPA Research Spine: public problem → stakeholders and public value → institutional context → theory → evidence → method → analysis → implementable recommendation.
+4. Apply course-to-capstone reuse: identify reusable assets, verify original sources before promoting into research evidence.
+5. Read [routing](references/routing.md), then load only the required references per the routing table below.
 6. Present the minimum sufficient route. When a substantive research task states no Zotero or Obsidian preference, include one workspace-integration question in the same confirmation. Ask exactly once: `是否执行？`
-7. After confirmation, execute safe steps without repeated permission prompts unless a new safety stop appears.
+7. After confirmation, execute without repeated permission prompts unless a new safety stop appears. Never modify `zotero.sqlite` directly.
 
-For conversion, thesis, or data-bearing work, audit source/data consistency before drafting. When usable raw or project data exists, read [real-data workflow](references/real-data-workflow.md) and accept the analysis before writing conclusions.
+## Reference loading table
 
-Read [local Office editing](references/local-office-editing.md) only when the accepted route requires local Office mutation and a corresponding capability is actually available.
+Load references on demand — only what the selected route requires.
 
-## MPA route ownership
-
-- Course study: source-complete notes, concept maps, revision materials, and assignment preparation.
-- Case analysis: actors, institutions, incentives, public value, implementation, alternatives, and lessons. Locate the governance context in [china contexts](references/mpa-china-contexts.md) before concluding.
-- Case competition entries: verify real events and fieldwork evidence, confirm theory applicability, and follow [case competition rules](references/mpa-case-competition.md) before drafting.
-- Policy memo: decision audience, options, criteria, trade-offs, feasibility, and recommendation.
-- Literature: source discovery or intake tied to an applied public-management question.
-- Research design and fieldwork: question, scope, framework, evidence, sampling, instruments, ethics, feasibility, and risks.
-- Data analysis: data quality before modelling; reproducible transformation; association separated from causality.
-- Thesis and defence: accepted evidence and analysis before prose, formatting, or slides. Ground theory via [theory map](references/mpa-theory-map.md) and [thinking checklist](references/mpa-thinking-checklist.md) before drafting. When AI tools were used and the current notice requires one, draft the AI-use disclosure statement from actual session tool use per [AI-use disclosure](references/aigc-disclosure.md).
-
-Read [MPA deliverables](references/mpa-deliverables.md) before creating a substantive artifact. Read [MPA research contract](references/mpa-research-contract.md) for substantial research outputs. Read [dependencies](references/dependencies.md) before delegating to optional integrations. Read [theory map](references/mpa-theory-map.md) before thesis or research-design drafting; read [china contexts](references/mpa-china-contexts.md) before case analysis or policy recommendations; read [course map](references/mpa-course-map.md) before course assignments or study planning; run [thinking checklist](references/mpa-thinking-checklist.md) before each draft acceptance. Read [AI-use disclosure](references/aigc-disclosure.md) before drafting an AI-use disclosure statement.
-
-## Workspace and integrations
-
-Read [workspace configuration](references/workspace-configuration.md) before durable file, Zotero, Obsidian, data, or project operations. Resolve configuration instead of assuming a drive letter or application location. Never modify `zotero.sqlite` directly.
+| When | Read |
+|---|---|
+| Choosing a route | [routing](references/routing.md) |
+| Creating any substantive artifact | [deliverables](references/mpa-deliverables.md) + [templates](references/templates.md) |
+| Substantial research output | [research contract](references/mpa-research-contract.md) |
+| Theory selection or thesis/research-design drafting | [MPA knowledge base](references/mpa-knowledge.md) |
+| Case analysis or policy recommendations | [MPA knowledge base](references/mpa-knowledge.md) (china contexts section) |
+| Course assignments or study planning | [MPA knowledge base](references/mpa-knowledge.md) (course map section) |
+| Each draft acceptance | [MPA knowledge base](references/mpa-knowledge.md) (thinking checklist section) |
+| Case competition entries | [case competition rules](references/mpa-case-competition.md) |
+| Data-bearing work or rerunning analysis | [execution handbook](references/execution.md) (data workflow section) |
+| Local Office mutation after content acceptance | [execution handbook](references/execution.md) (office editing section) |
+| Delegating to optional integrations | [execution handbook](references/execution.md) (dependencies + workspace sections) |
+| Drafting AI-use disclosure statement | [AI-use disclosure](references/aigc-disclosure.md) |
 
 ## Safety stops
 
@@ -44,4 +42,4 @@ Pause for login, CAPTCHA, paywall or licensed access, destructive or broad write
 
 ## Acceptance
 
-Verify the requested artifact, MPA Research Spine coverage, source/page evidence, evidence-versus-inference boundaries, integrations, and destination before reporting completion. For replacements, verify the new value or artifact is present and the superseded old value or artifact is absent. Reopen or render saved deliverables when the file format supports it. Record unresolved gaps as `TODO` and material weaknesses as `RISK`; never claim an inaccessible source or unverified write succeeded.
+Verify the artifact, MPA Research Spine coverage, source/page evidence, evidence-versus-inference boundaries, integrations, and destination. For replacements, verify new content present and old content absent. Reopen saved deliverables when the format supports it. Record unresolved gaps as `TODO` and material weaknesses as `RISK`; never claim an inaccessible source or unverified write succeeded.

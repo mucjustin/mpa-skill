@@ -81,8 +81,8 @@
 
 `mpa-skill` is for MPA, public-administration, and public-policy graduate students who need to connect coursework, cases, policy, fieldwork, data, and a thesis into one verifiable research chain. It organizes work around the **MPA Research Spine** (public problem → stakeholders and public value → institutional and policy context → theory → evidence → method → analysis → actionable recommendations) and applies two behavioral gates:
 
-- **Data before writing:** when usable data exists, the [real-data workflow](skills/mpa-skill/references/real-data-workflow.md) audits provenance, cleaning, methods, numbers, and existing conclusions first. Unaccepted evidence or methods are not hidden by rewriting prose.
-- **Recoverable delivery:** the [local Office editing rules](skills/mpa-skill/references/local-office-editing.md) load only when the route needs local Office mutation and a matching capability is available. After interruption, the controller reacquires document identity and probes old and new content; it stops at `STATE_UNKNOWN` instead of replaying a write or claiming success.
+- **Data before writing:** when usable data exists, the [execution handbook](skills/mpa-skill/references/execution.md) (data workflow section) audits provenance, cleaning, methods, numbers, and existing conclusions first. Unaccepted evidence or methods are not hidden by rewriting prose.
+- **Recoverable delivery:** the [execution handbook](skills/mpa-skill/references/execution.md) (Office editing section) loads only when the route needs local Office mutation and a matching capability is available. After interruption, the controller reacquires document identity and probes old and new content; it stops at `STATE_UNKNOWN` instead of replaying a write or claiming success.
 
 ### 1.0.0 evidence boundary
 
@@ -253,9 +253,17 @@ Safety stops run throughout: logins, CAPTCHAs, paywalls, licensed access, destru
 mpa-skill/
 ├── assets/                         # Logo, banner, diagrams, workflow images
 ├── skills/mpa-skill/               # The skill itself (install entry)
-│   ├── SKILL.md                    # Controller instructions and triggers
+│   ├── SKILL.md                    # Controller instructions and reference loading table
 │   ├── agents/openai.yaml          # Skill metadata
-│   ├── references/                 # Routing, research contract, real-data, local Office, deliverable, dependency, workspace rules
+│   ├── references/                 # 8 reference files (routing, knowledge, execution, templates, etc.)
+│   │   ├── routing.md              # Route table and decision tree
+│   │   ├── mpa-knowledge.md        # Unified knowledge base (theory + china contexts + thinking + course map + method tree)
+│   │   ├── execution.md            # Execution handbook (data workflow + Office editing + dependencies + workspace)
+│   │   ├── templates.md            # Practical template library (8 route templates)
+│   │   ├── mpa-research-contract.md # Research contract
+│   │   ├── mpa-deliverables.md     # Deliverable specifications
+│   │   ├── mpa-case-competition.md  # Case competition rules
+│   │   └── aigc-disclosure.md      # AI-use disclosure
 │   └── scripts/                    # Initialize-MpaWorkspace.ps1 / Test-MpaEnvironment.ps1
 ├── docs/validation/               # Corpus manifest, v1.0.0 machine results, and benchmark report
 ├── tests/                         # Public contract, reliability-scenario, corpus-manifest, and script tests (with fixtures)

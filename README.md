@@ -83,8 +83,8 @@
 
 `mpa-skill` 面向需要把课程、案例、政策、田野、数据和论文串成一条可核验研究链的 MPA、公共管理与公共政策研究生。它以 **MPA Research Spine**（公共问题 → 利益相关者与公共价值 → 制度与政策情境 → 理论 → 证据 → 方法 → 分析 → 可执行建议）组织任务，并设置两道行为门：
 
-- **数据先于写作**：有可用数据时，先按[真实数据工作流](skills/mpa-skill/references/real-data-workflow.md)核对来源、清洗、方法、数值与既有结论；证据或方法未被接受，就不靠改写正文掩盖缺口。
-- **可恢复交付**：只有路线确需本地 Office 编辑且相应能力可用时，才加载[本地 Office 编辑规则](skills/mpa-skill/references/local-office-editing.md)。中断后重新获取文档身份并核对新旧内容；无法判定时停在 `STATE_UNKNOWN`，不会盲目重放写入或宣称成功。
+- **数据先于写作**：有可用数据时，先按[执行手册](skills/mpa-skill/references/execution.md)的数据工作流部分核对来源、清洗、方法、数值与既有结论；证据或方法未被接受，就不靠改写正文掩盖缺口。
+- **可恢复交付**：只有路线确需本地 Office 编辑且相应能力可用时，才加载[执行手册](skills/mpa-skill/references/execution.md)的 Office 编辑部分。中断后重新获取文档身份并核对新旧内容；无法判定时停在 `STATE_UNKNOWN`，不会盲目重放写入或宣称成功。
 
 
 
@@ -251,9 +251,17 @@ Skill 是一个**薄控制器**：只负责范围判定、分类编排、最小�
 mpa-skill/
 ├── assets/                         # Logo、Banner、架构图、工作流图
 ├── skills/mpa-skill/               # Skill 本体（安装入口）
-│   ├── SKILL.md                    # 控制器指令与触发规则
+│   ├── SKILL.md                    # 控制器指令与引用加载表
 │   ├── agents/openai.yaml          # Skill 元数据
-│   ├── references/                 # 路由、研究契约、真实数据、本地 Office、交付物、依赖与工作区规则
+│   ├── references/                 # 8 个引用文件（路由、知识库、执行手册、模板等）
+│   │   ├── routing.md              # 路由表与决策树
+│   │   ├── mpa-knowledge.md        # 统一知识库（理论地图+中国情境+思维清单+课程映射+方法决策树）
+│   │   ├── execution.md            # 执行手册（数据工作流+Office编辑+依赖管理+工作区配置）
+│   │   ├── templates.md             # 实用模板库（8种路由的落地骨架）
+│   │   ├── mpa-research-contract.md # 研究契约
+│   │   ├── mpa-deliverables.md      # 交付物规格
+│   │   ├── mpa-case-competition.md  # 案例竞赛规则
+│   │   └── aigc-disclosure.md      # AI使用声明
 │   └── scripts/                    # Initialize-MpaWorkspace.ps1 / Test-MpaEnvironment.ps1
 ├── docs/validation/               # 语料清单、v1.0.0 机器结果与基准报告
 ├── tests/                         # 公开契约、可靠性场景、语料清单与脚本测试（含 fixtures）
