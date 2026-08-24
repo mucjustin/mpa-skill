@@ -1,8 +1,39 @@
-# Changelog
+# 📜 Changelog
+
+<p align="center">
+  <a href="https://github.com/mucjustin/mpa-skill/releases">
+    <img src="https://img.shields.io/github/v/release/mucjustin/mpa-skill?color=brightgreen" alt="Release">
+  </a>
+  <a href="https://keepachangelog.com/zh-CN/1.1.0/">
+    <img src="https://img.shields.io/badge/Keep%20a%20Changelog-1.1.0-4A90E2.svg" alt="Keep a Changelog">
+  </a>
+  <a href="https://semver.org/lang/zh-CN/">
+    <img src="https://img.shields.io/badge/SemVer-2.0.0-6f42c1.svg" alt="Semantic Versioning">
+  </a>
+</p>
 
 本项目所有显著变更均记录在本文件中。
 
 格式基于 [Keep a Changelog](https://keepachangelog.com/zh-CN/1.1.0/)，版本号遵循[语义化版本](https://semver.org/lang/zh-CN/)。
+
+---
+
+## 📇 版本速览
+
+| 版本 | 日期 | 主题 |
+|---|---|---|
+| [2.5.0](#250---2026-08-24) | 2026-08-24 | MPA 知识本体层上线（理论地图 / 中国情境 / 思维清单 / 课程映射） |
+| [2.4.0](#240---2026-08-24) | 2026-08-24 | 本地 Office 编辑与真实数据工作流 |
+| [2.3.0](#230---2026-08-24) | 2026-08-24 | 非 MPA → MPA 转化与工作区集成询问 |
+| [2.2.1](#221---2026-08-24) | 2026-08-24 | 文字规范化与 Issue 模板补齐 |
+| [2.2.0](#220---2026-08-24) | 2026-08-24 | 通用 AIGC 披露规则 |
+| [2.1.1](#211---2026-08-24) | 2026-08-24 | 案例竞赛规则去特例化 |
+| [2.1.0](#210---2026-08-24) | 2026-08-24 | 案例竞赛分支 |
+| [2.0.0](#200---2026-08-24) | 2026-08-24 | 仓库与 Skill 重命名（破坏性变更） |
+| [1.1.0](#110---2026-08-24) | 2026-08-24 | CI、Issue/PR 模板与文档体系 |
+| [1.0.0](#100---2026-08-23) | 2026-08-23 | 首个公开版本 |
+
+---
 
 ## [Unreleased]
 
