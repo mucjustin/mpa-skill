@@ -353,18 +353,19 @@ npx skills remove mpa-skill -g -y
 
 ## ⭐ Star History
 
+## Star History
 如果这个项目对你的研究或学习有帮助，请给个 Star — 这是对作者最大的鼓励。
-
-<a href="https://github.com/mucjustin/mpa-skill">
-  <img src="https://img.shields.io/github/stars/mucjustin/mpa-skill?style=social" alt="GitHub stars">
+<a href="https://www.star-history.com/?type=date&repos=mucjustin%2Fmpa-skill">
+ <picture>
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/chart?repos=mucjustin/mpa-skill&type=date&theme=dark&legend=top-left&sealed_token=1reCqX5_wIXEWlTxSepu2oXV9XyQKYdVT5QmHM6TwwwAUDCQFJUDK9NAho-49BQFAhcW2MAvNOtxqSChy4PJ2-N2BKJrVWC1pxr53tb35q4zV97Py8Uh0w" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/chart?repos=mucjustin/mpa-skill&type=date&legend=top-left&sealed_token=1reCqX5_wIXEWlTxSepu2oXV9XyQKYdVT5QmHM6TwwwAUDCQFJUDK9NAho-49BQFAhcW2MAvNOtxqSChy4PJ2-N2BKJrVWC1pxr53tb35q4zV97Py8Uh0w" />
+   <img alt="Star History Chart" src="https://api.star-history.com/chart?repos=mucjustin/mpa-skill&type=date&legend=top-left&sealed_token=1reCqX5_wIXEWlTxSepu2oXV9XyQKYdVT5QmHM6TwwwAUDCQFJUDK9NAho-49BQFAhcW2MAvNOtxqSChy4PJ2-N2BKJrVWC1pxr53tb35q4zV97Py8Uh0w" />
+ </picture>
 </a>
-
-<p align="center">
-  <a href="https://star-history.com/#mucjustin/mpa-skill&Date">
-    <img src="https://api.star-history.com/svg?repos=mucjustin/mpa-skill&type=Date" alt="Star History" width="60%">
-  </a>
-</p>
-
 <p align="center">
   <sub>Built with 🧠 for MPA researchers · 让公共管理研究从碎片走向可核验</sub>
 </p>
+
+
+
+
