@@ -22,6 +22,8 @@
 
 | 版本 | 日期 | 主题 |
 |---|---|---|
+| [Unreleased](#unreleased) | — | 可靠性层合并：数据先于写作 + 可恢复交付 + 基准验证 |
+| [2.5.1](#251---2026-08-24) | 2026-08-24 | README 视觉美化与文档体系升级 |
 | [2.5.0](#250---2026-08-24) | 2026-08-24 | MPA 知识本体层上线（理论地图 / 中国情境 / 思维清单 / 课程映射） |
 | [2.4.0](#240---2026-08-24) | 2026-08-24 | 本地 Office 编辑与真实数据工作流 |
 | [2.3.0](#230---2026-08-24) | 2026-08-24 | 非 MPA → MPA 转化与工作区集成询问 |
@@ -36,6 +38,35 @@
 ---
 
 ## [Unreleased]
+
+### Added
+
+- 合并可靠性层：数据先于写作路由（能力预检 → 来源/数据/数值审计 → 分析或证据缺口 → 内容 → 交付 → 验收）；STATE_UNKNOWN 写入状态分类与安全停止；Office 交付中断后重新获取文档身份并核对新旧内容；
+- 新增 8 个可靠性场景测试（`tests/Test-ReliabilityScenarios.ps1` + `tests/fixtures/reliability-scenarios.json`）与论文清单测试（`tests/Test-BenchmarkManifest.ps1`）；
+- 新增公开基准资产：`docs/validation/v2.4.0-benchmark.md`、`docs/validation/v2.4.0-results.json`、`docs/validation/mpa-thesis-corpus.json`；
+- CI 新增可靠性场景与论文清单两步验证。
+
+### Changed
+
+- routing.md 合并交叉序列：保留 GitHub 版全部 12 条路由与 Theory grounding / China-context check 行，追加本地版数据先于写作段与四知识文件加载条件；
+- local-office-editing.md 合并：以本地版结构（Capability preflight → Mutation transaction → Recovery → Conditional compatibility → Acceptance）为骨架，嵌入 GitHub 版 SDK 细节（`doc_insert_table_by_csv`、`file_id`、`is_dirty`、`--json`、`file://`、降序编辑、`inherit_styles`、550px/96DPI）；
+- SKILL.md 合并：保留四知识文件指针与 thinking checklist 步骤，追加数据先于写作段与 Office 条件加载段，验收段补双向验证；
+- Test-PublicSkill.ps1 合并：PS 5.1 兼容修复 + 本地版全部 benchmark 断言 + GitHub版四知识文件/SDK/路由断言；
+- README 中英文版合并：以本地版 benchmark/证据边界/起步提示/审计示例为基底，叠加 GitHub 版视觉元素（logo、badge、TOC、特性表、SVG 图位、技术栈、页脚）。
+
+### Validation
+
+- 冻结候选在合成场景中为 8/8；无 Skill 与 v2.3.0 均为 7/8，差值均为 +1/8（+12.5 个百分点）；
+- 真实论文验证为 7 篇开发集加 3 篇留出集。v2.3.0 与 v2.4.0 均完成 10/10 路由、找出 30/30 个预登记风险，记录输出中的不受支持声明为 0；观察到的改进限于陈旧产物拒绝和可恢复交付，不代表论文诊断更优；
+- 限制：每个条件仅一次响应；4/10 个 PDF 结构预检为 `UNAVAILABLE`；10 篇试点不是总体估计；只有 1 条中国情境记录；来源链接可能漂移。
+
+## [2.5.1] - 2026-08-24
+
+### Changed
+
+- README 中英文版视觉升级：居中 Logo 与 Banner SVG、徽章矩阵、目录导航、emoji 章节标题、特性表格、架构/工作流 SVG 图位、技术栈表格、故障排查表格、页脚；
+- CHANGELOG 新增版本速览表与视觉徽章；
+- 仓库结构说明补齐 `assets/` 与 `docs/validation/` 目录。
 
 ## [2.5.0] - 2026-08-24
 
@@ -60,12 +91,19 @@
 
 ### Added
 
-- 新增 `references/local-office-editing.md`：本地 Word 批量同步 SOP（坐标只信查询返回、降序替换、唯一性校验、`--json` 传参、`file://` 前缀、按返回结构判定成败、崩溃恢复 SOP、表格双模式、回写双向验证）；
-- 新增 `references/real-data-workflow.md`：真实数据重跑契约（质量审计先于建模、结论缺口标 `AUTHOR_INPUT_NEEDED` 禁虚构、标准化框架边界、全局降维防标签漂移、多数类基线解读、图表纪律、回写双向验证）；
-- `references/dependencies.md` 新增 Verified integration pitfalls 表（local editor 参数/图片/会话/表格、Zotero 本地 API 只读）；
-- 非 MPA → MPA 转化路由补两步：数据一致性审计前置、用户提供原始数据时先跑数据路线再成文；routing 登记两个新 reference 的加载条件；
-- SKILL.md 验收补数字回写双向验证（新值命中、旧值清零）；
-- 公开契约测试同步扩展文件清单与断言。
+- 新增真实数据工作流与条件式本地 Office 编辑规则：数据与数值先于写作接受；Office 交付在中断后重新获取文档身份、分类写入状态，并在 `STATE_UNKNOWN` 时停止；
+- 新增 8 个可靠性场景、10 篇真实论文试点清单、逐案例机器可读结果与公开基准报告。
+
+### Changed
+
+- 转化、数据型论文与交付路线改为「能力预检 → 来源/数据/数值审计 → 分析或证据缺口 → 内容 → 交付 → 验收」；替换验收同时要求新值存在与旧值不存在；
+- README 中英文版同步加入数据先于写作、可恢复 Office 交付、开放论文审计示例、三个起步提示及证据边界。
+
+### Validation
+
+- 冻结候选在合成场景中为 8/8；无 Skill 与 v2.3.0 均为 7/8，差值均为 +1/8（+12.5 个百分点）；
+- 真实论文验证为 7 篇开发集加 3 篇留出集。v2.3.0 与 v2.4.0 均完成 10/10 路由、找出 30/30 个预登记风险，记录输出中的不受支持声明为 0；观察到的改进限于陈旧产物拒绝和可恢复交付，不代表论文诊断更优；
+- 限制：每个条件仅一次响应；4/10 个 PDF 结构预检为 `UNAVAILABLE`；10 篇试点不是总体估计；只有 1 条中国情境记录；来源链接可能漂移。
 
 ## [2.3.0] - 2026-08-24
 

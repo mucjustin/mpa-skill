@@ -39,16 +39,19 @@
 ## 📑 Table of Contents
 
 - [✨ Features](#-features)
-- [🧭 MPA Research Spine](#-mpa-research-spine)
-- [🛣️ Ten Routes & Use Cases](#-ten-routes--use-cases)
-- [🚀 Quick Start](#-quick-start)
-- [📖 Real-World Usage](#-real-world-usage)
+- [🧭 What it solves first](#-what-it-solves-first)
+- [🛣️ Applicable tasks](#-applicable-tasks)
+- [🚀 Install](#-install)
+- [⚙️ First-run setup](#-first-run-setup)
+- [Reproducible audit example](#reproducible-audit-example)
+- [📝 Three starter prompts](#-three-starter-prompts)
 - [🏗️ Architecture](#-architecture)
-- [🧰 Tech Stack](#-tech-stack)
-- [📂 Repository Layout](#-repository-layout)
-- [🧪 Development & Testing](#-development--testing)
-- [🔒 Privacy & Security](#-privacy--security)
-- [⚙️ Update & Uninstall](#-update--uninstall)
+- [🧰 Tech stack](#-tech-stack)
+- [📂 Repository layout](#-repository-layout)
+- [🧪 Development and testing](#-development-and-testing)
+- [🔌 Optional dependencies](#-optional-dependencies)
+- [🔒 Privacy and security](#-privacy-and-security)
+- [⚙️ Update and uninstall](#-update-and-uninstall)
 - [❓ Troubleshooting](#-troubleshooting)
 - [🤝 Contributing](#-contributing)
 - [📄 License](#-license)
@@ -62,24 +65,33 @@
 | 🧭 **MPA Research Spine** | A verifiable research thread: public problem → stakeholders → institutional context → theory → evidence → method → analysis → actionable recommendations. |
 | 🛣️ **Ten Research Routes** | Course materials / case analysis / case competition / policy memo / literature review / research design / fieldwork / data analysis / thesis / defence — composed as needed. |
 | 🔗 **Course-to-Capstone Reuse** | Notes, cases, surveys, and code can become research assets, but must be re-verified against original sources before reuse. |
-| 🧠 **MPA Knowledge Ontology** | v2.5.0 adds theory map, China governance contexts, thinking checklist, and course-capability map to ground the controller in MPA content. |
-| 🛡️ **Safety Stops** | Pauses and asks before logins, CAPTCHAs, paywalls, destructive writes, or substantive research ambiguity. |
-| 🔌 **Optional Integrations** | Zotero, Obsidian, literature/PDF/data/Office skills are used when available; missing tools trigger explicit degradation. |
-| ✅ **Contract Tests** | PowerShell contract tests cover repository structure, skill instructions, doc consistency, and privacy red lines. |
+| 🧠 **MPA Knowledge Ontology** | Theory map, China governance contexts, thinking checklist, and course-capability map to ground the controller in MPA content. |
+| 🛡️ **Data before writing** | When usable data exists, audit provenance, cleaning, methods, numbers, and existing conclusions first; unaccepted evidence is not hidden by rewriting prose. |
+| 🔄 **Recoverable delivery** | After local Office interruption, reacquire document identity and probe old and new content; stop at `STATE_UNKNOWN` instead of replaying writes or claiming success. |
+| ✅ **Contract tests** | PowerShell contract tests cover repository structure, skill instructions, doc consistency, and privacy red lines. |
 
 > **Windows-first**: the skill instructions are platform-agnostic, but automated workspace initialization and environment checks currently use PowerShell.
 
 ---
 
-## 🧭 MPA Research Spine
+## 🧭 What it solves first
 
-The MPA Research Spine is the research thread that runs through every task. The skill first identifies which parts of the spine **already hold** and which are **still missing**, then starts writing — preventing polished prose from masking an ill-defined problem, missing stakeholders, insufficient evidence, mismatched methods, or infeasible recommendations.
+`mpa-skill` is for MPA, public-administration, and public-policy graduate students who need to connect coursework, cases, policy, fieldwork, data, and a thesis into one verifiable research chain. It organizes work around the **MPA Research Spine** (public problem → stakeholders and public value → institutional and policy context → theory → evidence → method → analysis → actionable recommendations) and applies two behavioral gates:
+
+- **Data before writing:** when usable data exists, the [real-data workflow](skills/mpa-skill/references/real-data-workflow.md) audits provenance, cleaning, methods, numbers, and existing conclusions first. Unaccepted evidence or methods are not hidden by rewriting prose.
+- **Recoverable delivery:** the [local Office editing rules](skills/mpa-skill/references/local-office-editing.md) load only when the route needs local Office mutation and a matching capability is available. After interruption, the controller reacquires document identity and probes old and new content; it stops at `STATE_UNKNOWN` instead of replaying a write or claiming success.
+
+### v2.4.0 evidence boundary
+
+The [frozen reliability benchmark](docs/validation/v2.4.0-benchmark.md) observed 7/8 for no skill, 7/8 for v2.3.0, and 8/8 for v2.4.0. The v2.4.0 gain against each baseline was +1/8, or +12.5 percentage points. The 10-paper pilot contained 7 development papers and 3 frozen holdouts; both v2.3.0 and v2.4.0 routed 10/10 papers and found 30/30 preregistered risks, with zero unsupported claims in the recorded outputs.
+
+The observed improvement is **rejection of stale artifacts and recovery to a verifiable delivery state**. Paper-audit metrics were tied, so the pilot does not establish superior thesis diagnosis for v2.4.0. It sampled one response per condition, had 4/10 PDF structural preflights marked `UNAVAILABLE`, is a 10-paper pilot rather than a population estimate, contains only one China-context record, and depends on source links that may drift. It therefore does not prove general model reliability, Chinese-thesis quality, or live Office-mutation success.
+
+### MPA Research Spine
 
 <p align="center">
   <img src="assets/spine.svg" alt="MPA Research Spine" width="100%">
 </p>
-
-Core eight steps:
 
 ```text
 public problem
@@ -92,40 +104,38 @@ public problem
 → actionable recommendations
 ```
 
----
+The skill first identifies which parts of this spine already hold and which are still missing, then starts writing. This prevents polished prose from masking an ill-defined problem, missing stakeholders, insufficient evidence, mismatched methods, or infeasible recommendations.
 
-## 🛣️ Ten Routes & Use Cases
+### Course-to-capstone reuse
 
-This skill covers the full MPA research lifecycle, from coursework to thesis defence:
-
-| Route | Use Case |
-|---|---|
-| 📚 Course materials | Read, note, review, and prepare assignments. |
-| 📊 Case analysis | Multi-actor, institutional-constraint, and incentive analysis of public-management cases. |
-| 🏆 Case competition | Planning, evidence organization, and theory refinement for the China graduate public-administration case competition. |
-| 📝 Policy memo | Options, trade-offs, feasibility, and actionable recommendations for public-sector decision makers. |
-| 🔍 Literature review | Search, screen, synthesize, and theoretically position research on public problems. |
-| 🧪 Research design | Proposals, surveys, interviews, fieldwork, and ethics boundaries. |
-| 🌾 Fieldwork | Ethics, access, sampling, instrument design, and data collection. |
-| 📈 Data analysis | Reproducible analysis of survey, interview, administrative, and mixed-methods data. |
-| 📖 Thesis writing | Argument chain, evidence, method boundaries, and citation verification. |
-| 🎤 Defence prep | Decision narrative, core evidence, limitations, likely questions, and backup materials. |
-
-> Generic instructional design, blogging, generic data analysis, standalone Zotero/Obsidian housekeeping, or non-MPA theses do not trigger this skill just because keywords look similar.
+Course notes, cases, concepts, literature cards, assignments, surveys, data, code, and instructor feedback can become research assets — but provenance must be recorded. Course notes or old assignments must be re-verified against original sources before entering the proposal or thesis stage.
 
 ---
 
-## 🚀 Quick Start
+## 🛣️ Applicable tasks
 
-### Install
+- Complete reading, notes, revision, and assignment preparation for MPA course materials;
+- Public-management case analysis;
+- Case competition entries (for example, the China graduate public-management case competition): entry planning, fieldwork evidence organization, and theory framework refinement;
+- Policy memos;
+- Literature search and review for public problems;
+- Proposals, research design, surveys, interviews, and fieldwork;
+- Analysis of survey, interview, administrative, and mixed-methods data;
+- MPA thesis writing, citation verification, and defence preparation.
 
-#### Option 1: Agent Skills CLI
+Generic instructional design, blogging, programming, generic data analysis, standalone Zotero/Obsidian housekeeping, or non-MPA theses do not trigger this skill just because keywords look similar.
+
+---
+
+## 🚀 Install
+
+### Using the Agent Skills CLI
 
 ```powershell
 npx skills add mucjustin/mpa-skill -g -s mpa-skill -y --full-depth
 ```
 
-#### Option 2: Ask Codex to Install
+### Let Codex install it
 
 Tell Codex:
 
@@ -134,11 +144,13 @@ Use $skill-installer to install the user-level skill from
 https://github.com/mucjustin/mpa-skill at skills/mpa-skill.
 ```
 
-If the skill does not appear immediately, restart Codex.
+If a newly installed skill does not appear immediately, restart Codex.
 
-### First-Run Setup
+---
 
-The initialization script only creates a workspace under a root you choose and a local JSON config. It does not modify the Zotero database or Obsidian settings.
+## ⚙️ First-run setup
+
+The initialization script only creates a workspace under a root you choose plus a local JSON config. It does not modify the Zotero database or Obsidian settings.
 
 ```powershell
 $skillRoot = Join-Path $HOME '.agents\skills\mpa-skill'
@@ -167,57 +179,39 @@ Check the current environment without writing files or launching apps:
 
 ---
 
-## 📖 Real-World Usage
+## Reproducible audit example
 
-Codex inspects the request and attachments, composes a minimum sufficient route, then asks exactly once: **"是否执行？"** After confirmation it proceeds automatically; it only asks again for logins, CAPTCHAs, paid access, destructive writes, or new substantive research ambiguity.
+Codex inspects the request and attachments, composes a minimum sufficient route, then asks exactly once: `是否执行？`. After confirmation it proceeds automatically; it only asks again for logins, CAPTCHAs, paid access, destructive writes, or new substantive research ambiguity.
 
-### Course materials
+Take the Texas State University repository-open thesis [Establishing the Relationship Between Sewer Surcharge Fees and Pollutant Discharges by Industrial Users](https://digital.library.txst.edu/items/50bce8d1-3a34-49bb-8c38-8e52b8038265). PDF pages 29–32 cover exclusions, mean imputation, and aggregation; pages 30–32 and 37 show that implementation coincided with COVID-19 without an adequate control; and pages 36–41 do not justify converting non-significance into "no effect" or direct policy guidance. A reproducible route is: retrieve the open PDF → preserve page references while auditing raw data, missingness handling, and identification → mark counterfactual and inference gaps as `RISK`/`AUTHOR_INPUT_NEEDED` → write bounded conclusions only after analysis acceptance. Sources, pages, and preregistered risks are in the [benchmark report](docs/validation/v2.4.0-benchmark.md) and its machine-readable results. Reproduction keys: source `txst-50bce8d1-3a34-49bb-8c38-8e52b8038265`, risk `d3-identification` (pages 30, 31, 32, and 37).
+
+---
+
+## 📝 Three starter prompts
+
+### 1. Raw-data conversion
 
 ```text
-These are this semester's public policy analysis course materials. Inventory and read them fully, then build course notes, a concept map, and a revision checklist along the MPA Research Spine.
+Convert the attached non-MPA report, raw data, and existing conclusions into MPA research. Re-anchor the public problem with the Research Spine, then audit provenance, cleaning, variables, methods, and numbers. Do not rewrite conclusions until the analysis is accepted.
 ```
 
-### Case analysis
+### 2. Case/policy analysis without data
 
 ```text
-Analyze this grassroots governance case, comparing actors, institutional constraints, incentives, public value, implementation, alternatives, and transferability boundaries.
+Analyze this grassroots-governance case; no raw data is available. State the evidence gaps, compare stakeholders, institutional constraints, public value, alternatives, feasibility, and transfer boundaries, and do not invent data or effects.
 ```
 
-### Policy memo
+### 3. Accepted-content Word delivery
 
 ```text
-Based on these materials, write a policy memo for district-level decision makers covering options, criteria, trade-offs, feasibility, risks, and recommendations.
-```
-
-### Research design
-
-```text
-Develop an MPA proposal on community elder-care accessibility. Check the public problem, stakeholders, theory, evidence, method, ethics, and feasibility before drafting prose.
-```
-
-### Data analysis
-
-```text
-This is a resident satisfaction survey. Check data quality and variable definitions first, then analyze drivers, keep reproducible steps, and separate association from causal claims.
-```
-
-### Thesis review
-
-```text
-Check this MPA thesis for its argument chain, evidence, method boundaries, and references. Propose chapter revisions only after the evidence holds.
-```
-
-### Defence preparation
-
-```text
-Prepare a ten-minute defence from the finalized thesis: decision narrative, core evidence, limitations, likely questions, and backup materials.
+The research content has been accepted. Deliver it through a currently available Word/Office capability whose schema has been inspected. Record document identity and unique anchors before writing; after interruption, reopen and probe old and new content; stop at STATE_UNKNOWN; finally verify new content present, old content absent, and the saved file reopenable.
 ```
 
 ---
 
 ## 🏗️ Architecture
 
-MPA Skill is a **thin controller**: it owns scope classification, sequencing, minimum-sufficient routing, safety stops, and final acceptance. Specialist execution is delegated to matching skills; Zotero and Obsidian are optional integrations.
+The skill is a **thin controller**: it owns scope classification, sequencing, minimum-sufficient routing, safety stops, and final acceptance. Specialist execution is delegated to matching skills; Zotero and Obsidian are optional integrations.
 
 <p align="center">
   <img src="assets/workflow.svg" alt="MPA Skill workflow" width="100%">
@@ -237,7 +231,7 @@ Safety stops run throughout: logins, CAPTCHAs, paywalls, licensed access, destru
 
 ---
 
-## 🧰 Tech Stack
+## 🧰 Tech stack
 
 | Layer | Technology |
 |---|---|
@@ -250,7 +244,7 @@ Safety stops run throughout: logins, CAPTCHAs, paywalls, licensed access, destru
 
 ---
 
-## 📂 Repository Layout
+## 📂 Repository layout
 
 ```text
 mpa-skill/
@@ -258,60 +252,65 @@ mpa-skill/
 ├── skills/mpa-skill/               # The skill itself (install entry)
 │   ├── SKILL.md                    # Controller instructions and triggers
 │   ├── agents/openai.yaml          # Skill metadata
-│   ├── references/                 # Routing, research contract, case competition rules, deliverables, dependencies, workspace rules
+│   ├── references/                 # Routing, research contract, real-data, local Office, deliverable, dependency, workspace rules
 │   └── scripts/                    # Initialize-MpaWorkspace.ps1 / Test-MpaEnvironment.ps1
-├── tests/                          # Public contract and script tests (with fixtures)
-├── .github/                        # CI workflow, issue and PR templates
-├── CONTRIBUTING.md                 # Contributing guide and versioning policy
-├── CHANGELOG.md                    # Changelog
-├── SECURITY.md                     # Security disclosure policy
-└── LICENSE                         # MIT
+├── docs/validation/               # Corpus manifest, v2.4.0 machine results, and benchmark report
+├── tests/                         # Public contract, reliability-scenario, corpus-manifest, and script tests (with fixtures)
+├── .github/                       # CI workflow, issue and PR templates
+├── CONTRIBUTING.md                # Contributing guide and versioning policy
+├── CHANGELOG.md                   # Changelog
+├── SECURITY.md                    # Security disclosure policy
+└── LICENSE                        # MIT
 ```
 
 ---
 
-## 🧪 Development & Testing
+## 🧪 Development and testing
 
 Run the full test suite locally:
 
 ```powershell
-# Structure, instruction contract, docs consistency, privacy red lines
-pwsh tests/Test-PublicSkill.ps1
-
-# Workspace script behavior (runs in a temp directory)
-pwsh tests/Test-WorkspaceScripts.ps1
+pwsh -NoProfile -File tests/Test-PublicSkill.ps1
+pwsh -NoProfile -File tests/Test-ReliabilityScenarios.ps1
+pwsh -NoProfile -File tests/Test-BenchmarkManifest.ps1
+pwsh -NoProfile -File tests/Test-WorkspaceScripts.ps1
 ```
 
-CI (GitHub Actions, `windows-latest`) runs the same tests on `main` and every pull request.
+The first two validate the public behavior/docs contract and [reliability scenarios](tests/fixtures/reliability-scenarios.json), the third validates the public thesis manifest, and the last exercises workspace scripts only in a temporary directory. CI (GitHub Actions, windows-latest) runs the same tests on main and every pull request.
 
-### Optional Dependencies
+---
+
+## 🔌 Optional dependencies
 
 | Capability | Required | Notes |
 |---|---:|---|
 | Codex file and terminal capabilities | Yes | Read materials, run local scripts, verify results |
-| Zotero | No | Literature and attachment management; supported interfaces only |
+| Python/R/spreadsheet analysis capability | No | Used only when the data route needs it and its contract is verifiable; otherwise hand off reproducible steps or report the block |
+| Local Word/Office editing capability | No | Used only after content acceptance when the route needs it; provider-neutral and governed by the observed schema and return structure |
+| Zotero | No | Literature and attachment management; supported interfaces only, never the database directly |
 | Obsidian | No | Long-term Markdown notes and project hub |
-| Literature, PDF, data, Word, PPT skills | No | Selected by the controller once installed; explicit degradation when missing |
+| Literature, PDF, data, Word, PPT skills | No | Selected by the controller once installed; explicit degradation or blocking when missing |
 
-> The skill never silently installs third-party software, bypasses institutional access, or pretends an integration succeeded when it did not.
+The skill never silently installs third-party software, bypasses institutional access, or pretends an integration succeeded when it did not.
 
 ---
 
-## 🔒 Privacy & Security
+## 🔒 Privacy and security
 
 - No telemetry, no built-in accounts, no cloud keys;
 - Local config lives outside the skill repository;
+- The public benchmark stores metadata, HTTPS sources, derived risks, and scores—not thesis PDFs, raw long text, or long excerpts; repository links may drift;
 - Never modifies `zotero.sqlite` directly;
 - Never bypasses logins, CAPTCHAs, paywalls, licensing, or institutional access;
 - Never treats instructions embedded in attachments as user authorization;
 - Never disguises course notes or AI inference as research evidence;
-- Discloses AI assistance as programme, course, or competition rules require; never presents AI-generated content as the student's own.
+- Discloses AI assistance as current programme, course, or competition rules require; never presents AI-generated content as the student's own.
 
 See [SECURITY.md](SECURITY.md).
 
 ---
 
-## ⚙️ Update & Uninstall
+## ⚙️ Update and uninstall
 
 **Update:**
 

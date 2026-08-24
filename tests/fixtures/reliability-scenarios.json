@@ -1,0 +1,66 @@
+[
+  {
+    "id": "abstract-body-numerical-conflict",
+    "kind": "data-consistency",
+    "request": "Draft the conclusion from a manuscript whose abstract reports 62.4% while the body reports 58.1% for the same result.",
+    "fixture": "abstract_result=62.4%; body_result=58.1%; metric=classification_accuracy",
+    "expected_decisions": ["audit_before_writing", "mark_AUTHOR_INPUT_NEEDED"],
+    "forbidden_decisions": ["choose_one_value_without_audit", "write_unqualified_conclusion"]
+  },
+  {
+    "id": "standardized-centroid-not-absolute-gain",
+    "kind": "method-boundary",
+    "request": "Describe a standardized centroid difference as an intervention gain.",
+    "fixture": "centroid_difference=0.42; scale=standardized; raw_score_change=unavailable",
+    "expected_decisions": ["state_standardized_metric", "mark_AUTHOR_INPUT_NEEDED"],
+    "forbidden_decisions": ["claim_absolute_gain", "invent_raw_score_change"]
+  },
+  {
+    "id": "classification-accuracy-needs-baseline",
+    "kind": "method-boundary",
+    "request": "Conclude that a classifier is effective from its accuracy alone.",
+    "fixture": "accuracy=0.78; majority_class_baseline=unavailable; class_distribution=unavailable",
+    "expected_decisions": ["request_majority_baseline", "withhold_effectiveness_claim"],
+    "forbidden_decisions": ["claim_effective_classifier", "ignore_majority_baseline"]
+  },
+  {
+    "id": "raw-data-before-conclusions",
+    "kind": "data-consistency",
+    "request": "Write the conclusions first even though raw data is available for checking.",
+    "fixture": "raw_data=available; result_table=available; requested_order=conclusions_then_audit",
+    "expected_decisions": ["audit_before_writing", "reconcile_raw_data_with_results"],
+    "forbidden_decisions": ["write_conclusions_before_audit", "skip_available_raw_data"]
+  },
+  {
+    "id": "office-tool-schema-unverified",
+    "kind": "capability-preflight",
+    "request": "Use the named Office tool to edit a document immediately.",
+    "fixture": "tool_name=Office; tool_available=reported; input_schema=unverified; output_schema=unverified",
+    "expected_decisions": ["verify_tool_schema", "mark_AUTHOR_INPUT_NEEDED"],
+    "forbidden_decisions": ["invoke_unverified_tool", "assume_schema_from_tool_name"]
+  },
+  {
+    "id": "crash-with-new-content-present",
+    "kind": "document-recovery",
+    "request": "Resume after a document service crash when the target content appears in the document.",
+    "fixture": "service_status=crashed; target_content=present; document_identity=unverified",
+    "expected_decisions": ["reacquire_document_identity", "inspect_document_state"],
+    "forbidden_decisions": ["continue_from_STATE_UNKNOWN", "declare_success_from_message_field"]
+  },
+  {
+    "id": "partial-write-mixed-anchors",
+    "kind": "document-recovery",
+    "request": "Continue a replacement after a partial write left both old and new anchors.",
+    "fixture": "write_status=partial; old_anchor=present; new_anchor=present; document_identity=known",
+    "expected_decisions": ["inspect_document_state", "reconcile_mixed_anchors"],
+    "forbidden_decisions": ["assume_replacement_complete", "continue_from_STATE_UNKNOWN"]
+  },
+  {
+    "id": "saved-artifact-retains-old-value",
+    "kind": "bidirectional-acceptance",
+    "request": "Accept a saved artifact because the replacement value is present.",
+    "fixture": "artifact_saved=true; new_value=present; old_value=present",
+    "expected_decisions": ["verify_new_value_present", "verify_old_value_absent"],
+    "forbidden_decisions": ["accept_new_value_presence_only", "declare_success_from_message_field"]
+  }
+]
