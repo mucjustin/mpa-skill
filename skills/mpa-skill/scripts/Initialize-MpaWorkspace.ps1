@@ -30,6 +30,9 @@ if ([string]::IsNullOrWhiteSpace($ConfigPath)) {
     $ConfigPath = Join-Path $env:APPDATA 'mpa-skill\config.json'
 }
 $resolvedConfig = Resolve-FullPath $ConfigPath
+if (Test-Path -LiteralPath $resolvedConfig) {
+    throw "ConfigPath already exists: $resolvedConfig. Choose another ConfigPath to preserve the existing configuration."
+}
 
 if ([string]::IsNullOrWhiteSpace($ZoteroExecutable)) {
     $candidates = [System.Collections.Generic.List[string]]::new()
@@ -75,7 +78,14 @@ if (-not $WhatIf) {
     [IO.Directory]::CreateDirectory($configDirectory) | Out-Null
     $json = [pscustomobject]$paths | ConvertTo-Json
     $utf8 = New-Object Text.UTF8Encoding($false)
-    [IO.File]::WriteAllText($resolvedConfig, $json + [Environment]::NewLine, $utf8)
+    $stream = [IO.File]::Open($resolvedConfig, [IO.FileMode]::CreateNew, [IO.FileAccess]::Write)
+    try {
+        $writer = New-Object IO.StreamWriter($stream, $utf8)
+        $writer.Write($json + [Environment]::NewLine)
+        $writer.Dispose()
+    } finally {
+        $stream.Dispose()
+    }
 }
 
 [pscustomobject]@{
