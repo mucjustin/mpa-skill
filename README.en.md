@@ -56,7 +56,7 @@ Two behavioral gates run throughout:
 | | Feature | One-liner |
 |---|---|---|
 | 🧭 | MPA Research Spine | Eight-step verifiable research thread |
-| 🛣️ | Ten research routes | Course/case/policy/lit/design/fieldwork/data/thesis/defence |
+| 🛣️ | Twelve task routes | Course, case, policy, literature, design, fieldwork, data, thesis, defence, and related tasks |
 | 🔗 | Course-to-capstone reuse | Notes, cases, code become assets; re-verify before reuse |
 | 🧠 | MPA knowledge ontology | Theory map + China governance contexts + thinking checklist |
 | 🛡️ | Data before writing | Audit first, write second, never mask gaps |
@@ -83,6 +83,7 @@ $skillRoot = Join-Path $HOME '.agents\skills\mpa-skill'
 ```
 
 Default config goes to `%APPDATA%\mpa-skill\config.json`. Does not modify Zotero database or Obsidian settings. Add `-WhatIf` to preview; run `Test-MpaEnvironment.ps1` to check your setup.
+If the config file already exists, initialization stops and preserves it. Pass a new `-ConfigPath` to create another configuration.
 
 ### Update and uninstall
 

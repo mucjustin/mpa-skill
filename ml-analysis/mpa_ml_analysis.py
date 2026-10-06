@@ -5,6 +5,7 @@ Clean, publication-grade figures with reduced text and no overlap.
 """
 
 import json, re, os, warnings
+from pathlib import Path
 warnings.filterwarnings("ignore")
 
 import numpy as np
@@ -25,7 +26,7 @@ from scipy.spatial import ConvexHull
 from scipy.stats import chi2
 
 # ── paths ──
-REPO = r"E:\CodexProjects\mpa-skill-public"
+REPO = Path(__file__).resolve().parents[1]
 OUT = os.path.join(REPO, "ml-analysis", "output")
 os.makedirs(OUT, exist_ok=True)
 

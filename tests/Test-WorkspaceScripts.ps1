@@ -50,6 +50,26 @@ try {
     Assert-True ($config.zotero_executable -ceq $zoteroPath) 'explicit Zotero executable was not preserved'
     Assert-True ($result.ConfigPath -ceq [IO.Path]::GetFullPath($configPath)) 'initializer summary config path differs'
 
+    $originalConfig = [IO.File]::ReadAllBytes($configPath)
+    $secondWorkspace = Join-Path $testRoot 'SecondWorkspace'
+    $existingConfigRejected = $false
+    try {
+        $null = & $initializeScript -WorkspaceRoot $secondWorkspace -ConfigPath $configPath
+    } catch {
+        $existingConfigRejected = $true
+    }
+    Assert-True $existingConfigRejected 'existing config was silently replaced'
+    Assert-True (-not (Test-Path -LiteralPath $secondWorkspace)) 'existing config rejection created a workspace'
+    Assert-True ([Convert]::ToBase64String([IO.File]::ReadAllBytes($configPath)) -ceq [Convert]::ToBase64String($originalConfig)) 'existing config changed'
+
+    $whatIfRejected = $false
+    try {
+        $null = & $initializeScript -WorkspaceRoot $secondWorkspace -ConfigPath $configPath -WhatIf
+    } catch {
+        $whatIfRejected = $true
+    }
+    Assert-True $whatIfRejected 'WhatIf did not report existing config conflict'
+
     $whatIfRoot = Join-Path $testRoot 'WhatIfWorkspace'
     $whatIfConfig = Join-Path $isolatedAppData 'what-if.json'
     $null = & $initializeScript -WorkspaceRoot $whatIfRoot -ConfigPath $whatIfConfig -WhatIf
