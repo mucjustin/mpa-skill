@@ -1,7 +1,7 @@
 interface:
-  display_name: "MPA Research Workflow"
-  short_description: "MPA study, applied research, thesis, and defence controller"
-  default_prompt: "Use $mpa-skill to inspect these MPA materials, compose the minimum useful workflow, and ask once before execution."
+  display_name: "MPA Research Agent"
+  short_description: "Evidence-grounded MPA case, policy and thesis workflows"
+  default_prompt: "Use $mpa-skill to inspect MPA research materials, plan evidence-grounded analysis, and confirm authorization before local persistence."
 
 policy:
   allow_implicit_invocation: true

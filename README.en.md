@@ -1,12 +1,12 @@
 <p align="center">
-  <img src="assets/logo.svg" alt="MPA Skill logo" width="160">
+  <img src="assets/logo.svg" alt="MPA Research Agent logo" width="160">
 </p>
 
-<h1 align="center">MPA Skill 🎓</h1>
+<h1 align="center">MPA Research Agent</h1>
 
 <p align="center">
-  <strong>From fragments to verifiable research</strong><br>
-  A Codex Agent Skill for <strong>MPA graduate students</strong> — not a generic thesis template 🙅
+  <strong>Evidence-grounded MPA and public policy research</strong><br>
+  One portable Agent Skill for Codex and a WorkBuddy-compatible ZIP
 </p>
 
 <p align="center">
@@ -31,14 +31,14 @@
 </p>
 
 <p align="center">
-  <img src="assets/banner.svg" alt="MPA Skill Banner" width="100%">
+  <img src="assets/banner.svg" alt="MPA Research Agent banner" width="100%">
 </p>
 
 ---
 
 ## 🎯 What is this
 
-A Codex Agent Skill that helps MPA graduate students connect coursework, cases, policy, fieldwork, data, and a thesis into **one verifiable research chain**.
+**MPA Research Agent** is an evidence-grounded public-management research Skill. AI organizes questions, lenses and uncertainty; the bundled offline Python/SQLite tool performs deterministic source-snapshot and quotation-location checks.
 
 At its core is the **MPA Research Spine**: public problem → stakeholders → institutional context → theory → evidence → method → analysis → actionable recommendations. Find the gaps first, then write ✏️
 
@@ -47,7 +47,7 @@ Two behavioral gates run throughout:
 - 🛡️ **Data before writing**: when usable data exists, audit provenance, cleaning, methods, and numbers first. See the [execution handbook](skills/mpa-skill/references/execution.md).
 - 🔄 **Recoverable delivery**: after Office interruption, reacquire document identity; stop at `STATE_UNKNOWN` when unsure.
 
-> **Windows-first** · Instructions are platform-agnostic; automation scripts use PowerShell
+> **Windows-first** workspace helpers use PowerShell; the bundled Python evidence engine runs in Python 3.10+ environments with local execution permission.
 
 ---
 
@@ -60,6 +60,7 @@ Two behavioral gates run throughout:
 | 🔗 | Course-to-capstone reuse | Notes, cases, code become assets; re-verify before reuse |
 | 🧠 | MPA knowledge ontology | Theory map + China governance contexts + thinking checklist |
 | 🛡️ | Data before writing | Audit first, write second, never mask gaps |
+| 🔎 | Bundled evidence workbench | Offline hashes, exact quotations, SQLite records, explicit human review |
 | 🔄 | Recoverable delivery | Interruptible; stops at `STATE_UNKNOWN` |
 | 🧾 | AI-use disclosure | Generated only from actual tool use; see [disclosure workflow](skills/mpa-skill/references/aigc-disclosure.md) |
 | ✅ | Contract tests | PowerShell tests cover structure, instructions, docs, and privacy |
@@ -73,6 +74,16 @@ Two behavioral gates run throughout:
 ```powershell
 npx skills add mucjustin/mpa-skill -g -s mpa-skill -y --full-depth
 ```
+
+### WorkBuddy import (single Skill ZIP)
+
+The Skill follows WorkBuddy's documented `SKILL.md`, `references/`, and `scripts/` layout with bilingual metadata and a ZIP packaging check.
+
+```powershell
+python tools/package_skill.py --output dist/mpa-skill.zip
+```
+
+Import `dist/mpa-skill.zip` through WorkBuddy's Skills → Add Skill → Upload Skill, or obtain it from a successful branch [GitHub Actions artifact](https://github.com/mucjustin/mpa-skill/actions). **ZIP compatibility is tested; in-app WorkBuddy import is not yet verified.** See [installation and compatibility](docs/install-and-compatibility.md).
 
 ### Initialize workspace
 
@@ -122,16 +133,25 @@ For substantive public-management case studies and case competitions, an optiona
 
 Read [case-research.md](skills/mpa-skill/references/case-research.md), [evidence-protocol.md](skills/mpa-skill/references/evidence-protocol.md), the [hypothetical example](docs/examples/case-research-starter.md), and the [evaluation protocol](docs/validation/case-research-evaluation.md). CI tests structural contracts; they **do not** demonstrate improved semantic research performance.
 
+## 🔎 Offline Evidence Workbench (experimental)
+
+Unlike the instruction protocols, the optional **Python + SQLite CLI** actually snapshots local UTF-8 TXT/Markdown, CSV, DOCX, and extractable-text PDF files (SHA-256), indexes source locators, links exact quotations to claims, records explicit human reviews, audits integrity, and exports Markdown/JSON. No uploads, model calls, or automatic verification claims. The CLI is now **bundled inside the installed Skill** as `scripts/mpa_evidence.py`, runnable with Python 3.10+ without a package installation for TXT/MD/CSV/DOCX. Run `python <skill-root>/scripts/mpa_evidence.py doctor` to check capabilities; `pypdf` is optional and requires separate user approval for PDF. See [the evidence workbench guide](docs/evidence-workbench.md). Local copied originals and extracted text are **not encrypted**. Automated CLI tests do not establish improved research outcome quality.
+
 ## 🏗️ Architecture
 
-The skill is a **thin controller**: scope classification, routing, safety stops, and final acceptance. Specialist execution is delegated.
+**The Skill organizes research, deterministic code checks evidence, and a human researcher controls verification.** All new evidence starts `unverified`, never self-approved by the agent.
+
+<p align="center"><img src="assets/spine.svg" alt="MPA Research Spine model" width="100%"></p>
+<p align="center"><img src="assets/evidence-flow.svg" alt="Offline evidence workbench" width="100%"></p>
+
+The Skill remains a **thin controller** for scope, routing, authorization and acceptance, with the evidence utility performing deterministic local operations.
 
 <p align="center">
-  <img src="assets/workflow.svg" alt="MPA Skill workflow" width="100%">
+  <img src="assets/workflow.svg" alt="MPA Research Agent workflow" width="100%">
 </p>
 
 ```
-Input → Scope → Orchestrate → Route → Confirm(once) → Execute → Accept
+Research question → Evidence plan → Confirm once → Authorized execution → Source audit → Human review → Bounded delivery
 ```
 
 Safety stops: logins, CAPTCHAs, paywalls, licensed access, destructive writes, or substantive ambiguity → pause and ask.
@@ -142,27 +162,20 @@ Safety stops: logins, CAPTCHAs, paywalls, licensed access, destructive writes, o
 
 ```text
 mpa-skill/
-├── assets/                         # Logo, banner, diagrams
-├── skills/mpa-skill/               # The skill itself
-│   ├── SKILL.md                    # Controller instructions
-│   ├── agents/openai.yaml          # Metadata
-│   ├── references/                 # 8 reference files
-│   │   ├── routing.md              # Route table and decision tree
-│   │   ├── mpa-knowledge.md        # Unified knowledge base
-│   │   ├── execution.md            # Execution handbook
-│   │   ├── templates.md            # Practical templates
-│   │   ├── mpa-research-contract.md
-│   │   ├── mpa-deliverables.md
-│   │   ├── mpa-case-competition.md
-│   │   └── aigc-disclosure.md
-│   └── scripts/                    # Workspace and env scripts
-├── docs/validation/               # Benchmark report and corpus
-├── tests/                         # Contract tests
-├── .github/                        # CI and templates
-├── CONTRIBUTING.md
-├── CHANGELOG.md
-├── SECURITY.md
-└── LICENSE                         # MIT
+├── README.md / README.en.md
+├── assets/                        # Logo, Research Spine, evidence flow (SVG)
+├── skills/mpa-skill/
+│   ├── SKILL.md                   # Cross-client controller and metadata
+│   ├── agents/openai.yaml
+│   ├── references/                # Research and source-integrity protocols
+│   └── scripts/
+│       ├── mpa_evidence.py        # Bundled CLI
+│       ├── evidence_workbench/    # Python / SQLite core
+│       └── *.ps1                  # Windows workspace utilities
+├── tools/package_skill.py         # ZIP packaging
+├── tests/                         # Behavioral, package, asset, regression tests
+├── docs/                          # Installation, examples, historical benchmarks
+└── ml-analysis/                   # Legacy experiment source (plots regenerated)
 ```
 
 ---
@@ -208,6 +221,9 @@ See [SECURITY.md](SECURITY.md).
 ## 🧪 Development and testing
 
 ```powershell
+python -m unittest discover -s tests -p "test_skill_package.py" -v
+python -m unittest discover -s tests -p "test_docs_assets.py" -v
+python tools/package_skill.py --output dist/mpa-skill.zip
 pwsh -NoProfile -File tests/Test-PublicSkill.ps1
 pwsh -NoProfile -File tests/Test-ReliabilityScenarios.ps1
 pwsh -NoProfile -File tests/Test-BenchmarkManifest.ps1
@@ -222,7 +238,7 @@ CI (GitHub Actions, windows-latest) runs the same tests on main and every PR.
 
 | Capability | Required | Notes |
 |---|---:|---|
-| Codex file and terminal | ✅ | Read materials, run scripts, verify results |
+| Host file and terminal access | ✅ (for executable tools) | Without local execution rights, only the planning route is available |
 | Python/R/spreadsheet | ❌ | Used when data route needs it; reports block if missing |
 | Word/Office editing | ❌ | After content acceptance; governed by observed schema |
 | Zotero | ❌ | Literature management; supported interfaces only |

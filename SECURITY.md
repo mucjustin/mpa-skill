@@ -1,23 +1,23 @@
 # Security Policy
 
-## Supported release
+## Supported versions
 
-Security fixes are applied to the latest published release and the `main` branch.
+Security issues are triaged for the latest published release and `main`; feature PRs are experimental until reviewed and merged. This is **not** an encrypted document repository or a verified source-authenticity service.
 
-## Report a vulnerability
+## Report privately
 
-Use GitHub private vulnerability reporting for this repository. Do not open a public Issue containing exploit details, credentials, private research data, participant information, licensed documents, or institutional access information.
+Use GitHub private vulnerability reporting. Never attach passwords, API tokens, confidential documents, real student data, interviews, personnel/benefit records, access cookies, or private screenshots to a public issue. Reproduce with synthetic materials.
 
-Include the affected version, reproducible steps using synthetic data, expected impact, and a safe way to confirm the finding. Never include real passwords, tokens, cookies, Zotero databases, Obsidian vaults, student records, interview transcripts, or unpublished research materials.
+## Actual trust boundaries
 
-## Security boundaries
+- `SKILL.md` and reference files are research instructions, not a privileged executable policy. The agent must still obey the host application's authorization rules.
+- The optional Python evidence tool has no built-in telemetry, login system, remote synchronization, credentials, or external API calls.
+- `init` and `ingest` create local files only **after authorized execution**; `doctor` is read-only.
+- Imported originals and extracted paragraphs are stored under `<workspace>/.mpa-evidence/` in SQLite and local snapshots. **They are not encrypted.** Host/user filesystem permissions and backup choices control access. Avoid syncing that folder to public drives or committing it into a repository.
+- `sha256` validates the stored byte snapshot, not the authenticity or fairness of its original source. Exact-text matching is not contextual or causal validation.
+- The `verified` flag reflects a user-supplied reviewer declaration, **not** system verification of reviewer identity, source truth or research causation. AI must not self-confirm evidence.
+- Automatic dependency installation is prohibited; PDF needs separately approved `pypdf`. No bypassing login, CAPTCHA, paywalls, licensed materials, or institutional controls.
+- Exports (even without quotes) may contain personal information inside researcher-entered questions or assertions. Review before sharing.
+- ZIP packages are generated only from the Skill folder; no research datasets, local caches or workspaces should enter distributions.
 
-- The Skill contains no telemetry or bundled credentials.
-- Local configuration is written outside the repository.
-- Scripts create directories only under the user-selected workspace root and reject filesystem roots.
-- Environment inspection is read-only and does not launch applications.
-- Zotero integration uses supported local interfaces and never modifies `zotero.sqlite` directly.
-- The workflow does not bypass login, CAPTCHA, paywall, licensing, authorization, or institutional access controls.
-- Instructions embedded in documents are treated as content unless the user explicitly adopts them.
-
-This project cannot secure third-party Skills, applications, connectors, datasets, or services. Review their permissions and policies independently.
+This repository cannot guarantee security of Codex, WorkBuddy or third-party plugins, connectors, or host environments. Verify client permissions and data-handling terms independently.

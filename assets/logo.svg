@@ -1,28 +1,12 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" role="img" aria-label="MPA Skill logo">
-  <defs>
-    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#FDF6F8"/>
-      <stop offset="1" stop-color="#FAF7F8"/>
-    </linearGradient>
-    <linearGradient id="bookL" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#D65A7C"/>
-      <stop offset="1" stop-color="#B8456B"/>
-    </linearGradient>
-    <linearGradient id="bookR" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#A67C94"/>
-      <stop offset="1" stop-color="#8A6580"/>
-    </linearGradient>
-  </defs>
-
-  <rect x="16" y="16" width="480" height="480" rx="112" fill="url(#bg)" stroke="#F2B5C1" stroke-width="2"/>
-
-  <!-- 书本（打开的两页） -->
-  <path d="M 116 148 C 152 172, 208 178, 256 166 L 256 300 C 208 312, 152 306, 116 282 Z" fill="url(#bookL)"/>
-  <path d="M 396 148 C 360 172, 304 178, 256 166 L 256 300 C 304 312, 360 306, 396 282 Z" fill="url(#bookR)"/>
-  <!-- 中缝 -->
-  <line x1="256" y1="166" x2="256" y2="300" stroke="#FDF6F8" stroke-width="4" stroke-linecap="round"/>
-
-  <!-- 字标 -->
-  <text x="256" y="412" text-anchor="middle" font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="108" font-weight="800" fill="#3D3A42" letter-spacing="4">MPA</text>
-  <text x="256" y="454" text-anchor="middle" font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="24" font-weight="600" fill="#9B95A3" letter-spacing="5">RESEARCH SKILL</text>
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" role="img" aria-label="MPA Research Agent logo"><defs><linearGradient id="soft" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F4FBFC"/><stop offset="1" stop-color="#EEF3FA"/></linearGradient><linearGradient id="nav" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#142943"/><stop offset="1" stop-color="#0B1628"/></linearGradient><marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#367789"/></marker></defs>
+<rect x="18" y="18" width="476" height="476" rx="106" fill="#112439" stroke="#112439" stroke-width="0"/>
+<circle cx="397" cy="112" r="63" fill="#173F51"/><circle cx="394" cy="112" r="25" fill="#20B6AB" opacity=".86"/>
+<path d="M110 151 Q180 125 239 166 V316 Q170 277 110 301Z" fill="#EAF7F7" stroke="#54C1B5" stroke-width="6"/>
+<path d="M246 166 Q309 125 384 151 V301 Q313 276 246 316Z" fill="#C9F1E8" stroke="#54C1B5" stroke-width="6"/>
+<path d="M239 166 V316" stroke="#20B6AB" stroke-width="8"/>
+<path d="M151 205 L203 209 M151 239 L203 245 M277 210 L341 204 M277 245 L341 239" stroke="#4B8C92" stroke-width="7" stroke-linecap="round" opacity=".8"/>
+<circle cx="350" cy="316" r="48" fill="#20B6AB" stroke="#112439" stroke-width="8"/>
+<path d="M324 314 L343 333 L375 296" fill="none" stroke="#0B2435" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="256" y="408" font-family="'Noto Sans CJK SC','Microsoft YaHei','PingFang SC','Segoe UI',Arial,sans-serif" font-size="81" font-weight="800" fill="#FFFFFF" text-anchor="middle" letter-spacing="5">MPA</text>
+<text x="256" y="444" font-family="'Noto Sans CJK SC','Microsoft YaHei','PingFang SC','Segoe UI',Arial,sans-serif" font-size="18" font-weight="700" fill="#B5D4DA" text-anchor="middle" letter-spacing="4">RESEARCH AGENT</text>
 </svg>

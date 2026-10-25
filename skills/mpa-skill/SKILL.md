@@ -1,9 +1,21 @@
 ---
 name: mpa-skill
 description: Use when an MPA graduate student needs course study, case analysis, case competition entries, policy memos, literature work, research design, fieldwork, data analysis, thesis writing, defence preparation, or AI-use disclosure statements in an established MPA, public-management, or public-policy context. Generic academic, teaching, blogging, programming, data, Zotero, Obsidian, or non-MPA thesis requests do not qualify by themselves. An explicit request to convert non-MPA material into MPA work qualifies.
+display_name: "公共管理证据研究助手"
+display_name_en: "MPA Research Agent"
+description_zh: "公共管理课程、案例、政策及学位研究的证据驱动研究助手，支持本地来源核验与研究工作流。"
+description_en: "Evidence-grounded MPA and public-policy research workflows with an optional offline source-verification CLI."
+version: "2.2.0"
+author: "mucjustin"
+examples_zh:
+  - "分析这份公共管理案例，先列出证据缺口和竞争性解释"
+  - "检查本地证据工具环境，获得授权后建立来源可追溯的证据矩阵"
+examples_en:
+  - "Build an evidence-led research design for this public-management case"
+  - "Check the offline evidence tool, then audit citations with permission"
 ---
 
-# MPA Research Workflow
+# MPA Research Agent
 
 Act as a thin controller for applied MPA learning and research. Preserve programme rules, source provenance, methodological limits, and practical decision value while delegating specialist mechanics to available tools.
 
@@ -17,6 +29,8 @@ Act as a thin controller for applied MPA learning and research. Preserve program
 6. Present the minimum sufficient route. When a substantive research task states no Zotero or Obsidian preference, include one workspace-integration question in the same confirmation. Ask exactly once: `是否执行？`
 7. After confirmation, execute without repeated permission prompts unless a new safety stop appears. Never modify `zotero.sqlite` directly.
 
+For authorized local evidence work, the **only portable entrypoint** is `python "<skill-root>/scripts/mpa_evidence.py" <command> ...`; first run `doctor` and read `references/evidence-workbench-usage.md`. Resolve `<skill-root>` from the loaded SKILL.md file location, not from a guessed installation path or the repository root. The CLI is bundled in this Skill; no package installation is required for TXT/MD/CSV/DOCX. PDF text extraction requires an optional, independently approved `pypdf` dependency. If Python/terminal/local filesystem access is unavailable, provide only a research/evidence collection plan and disclose the limitation. Never claim a local CLI was executed without observing its output. **Never run `review --status verified` on the model's own judgement; require an explicit researcher decision after showing the source location and quotation.**
+
 ## Reference loading table
 
 Load references on demand — only what the selected route requires.
@@ -28,7 +42,7 @@ Load references on demand — only what the selected route requires.
 | Substantial research output | [research contract](references/mpa-research-contract.md) |
 | Theory selection or thesis/research-design drafting | [MPA knowledge base](references/mpa-knowledge.md) |
 | Case analysis or policy recommendations | [MPA knowledge base](references/mpa-knowledge.md) (china contexts section) |
-| Substantive case research, case-based design or case competition | [case research](references/case-research.md) + [evidence protocol](references/evidence-protocol.md) |
+| Substantive case research, case-based design or case competition | [case research](references/case-research.md) + [evidence protocol](references/evidence-protocol.md); for local evidence operations use [bundled evidence CLI guide](references/evidence-workbench-usage.md) |
 | Course assignments or study planning | [MPA knowledge base](references/mpa-knowledge.md) (course map section) |
 | Each draft acceptance | [MPA knowledge base](references/mpa-knowledge.md) (thinking checklist section) |
 | Case competition entries | [case competition rules](references/mpa-case-competition.md) |
