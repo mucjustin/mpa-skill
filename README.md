@@ -67,6 +67,8 @@
 
 ---
 
+**当前版本：v2.2.0。** [正式发行说明与安装包](https://github.com/mucjustin/mpa-skill/releases/latest) · [更新日志](CHANGELOG.md)。合并代码并不会自动生成发行版，因此采用单独的 CI 发布门禁。
+
 ## 🚀 快速开始
 
 ### 安装
@@ -83,7 +85,7 @@ WorkBuddy 官方格式接受含 `SKILL.md` 的目录及可选 `references/`、`s
 python tools/package_skill.py --output dist/mpa-skill.zip
 ```
 
-在 WorkBuddy「技能 → 添加技能 → 上传技能」导入 `dist/mpa-skill.zip`。也可在此功能分支的 [GitHub Actions 运行产物](https://github.com/mucjustin/mpa-skill/actions) 中下载自动打包文件。**ZIP 结构已验证，WorkBuddy 客户端实际导入尚未验证。** 详见 [Codex / WorkBuddy 安装说明](docs/install-and-compatibility.md)。
+在 WorkBuddy「技能 → 添加技能 → 上传技能」导入 `dist/mpa-skill.zip`；正式版也可在 [GitHub Releases](https://github.com/mucjustin/mpa-skill/releases/latest) 下载同名附件。**ZIP 结构已验证，WorkBuddy 客户端实际导入尚未验证。** 详见 [Codex / WorkBuddy 安装说明](docs/install-and-compatibility.md)。
 
 ### 初始化工作区
 
@@ -127,7 +129,7 @@ npx skills remove mpa-skill -g -y    # 卸载（不删除已创建的工作区�
 
 ---
 
-## 🧩 案例研究引擎（研发中的 v2.2 能力）
+## 🧩 案例研究引擎（v2.2.0）
 
 面向深入案例研究与案例大赛，新增一条**问题驱动、证据约束**的流程：
 

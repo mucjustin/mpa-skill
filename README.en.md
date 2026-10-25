@@ -67,6 +67,8 @@ Two behavioral gates run throughout:
 
 ---
 
+**Current version: v2.2.0.** [GitHub Release and ZIP](https://github.com/mucjustin/mpa-skill/releases/latest) · [Changelog](CHANGELOG.md). Merging code alone does not create a GitHub Release.
+
 ## 🚀 Quick start
 
 ### Install
@@ -83,7 +85,7 @@ The Skill follows WorkBuddy's documented `SKILL.md`, `references/`, and `scripts
 python tools/package_skill.py --output dist/mpa-skill.zip
 ```
 
-Import `dist/mpa-skill.zip` through WorkBuddy's Skills → Add Skill → Upload Skill, or obtain it from a successful branch [GitHub Actions artifact](https://github.com/mucjustin/mpa-skill/actions). **ZIP compatibility is tested; in-app WorkBuddy import is not yet verified.** See [installation and compatibility](docs/install-and-compatibility.md).
+Import `dist/mpa-skill.zip` through WorkBuddy's Skills → Add Skill → Upload Skill, or download the named ZIP attachment from the [latest GitHub Release](https://github.com/mucjustin/mpa-skill/releases/latest). **ZIP compatibility is tested; in-app WorkBuddy import is not yet verified.** See [installation and compatibility](docs/install-and-compatibility.md).
 
 ### Initialize workspace
 
@@ -127,7 +129,7 @@ The research content has been accepted. Deliver it through a currently available
 
 ---
 
-## 🧩 Evidence-led Case Research Engine (v2.2 candidate)
+## 🧩 Evidence-led Case Research Engine (v2.2.0)
 
 For substantive public-management case studies and case competitions, an optional question-first workflow adds: choosing a lens based on evidence access and method fit; mapping actors' reported interests versus observed actions; planning verifiable materials; tracing events and rival mechanisms; and making uncertainty visible. The four lenses are examples, not a mandatory checklist. Short classroom questions remain short.
 

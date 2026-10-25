@@ -49,6 +49,14 @@ jobs:
         shell: pwsh
         run: python -m unittest discover -s tests -p 'test_docs_assets.py' -v
 
+      - name: Verify release metadata and version tests
+        shell: pwsh
+        run: |
+          python -m unittest discover -s tests -p 'test_release_metadata.py' -v
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          python tools/check_release.py
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+
       - name: Run public skill contract tests
         shell: pwsh
         run: ./tests/Test-PublicSkill.ps1
@@ -68,3 +76,58 @@ jobs:
       - name: Run workspace script tests
         shell: pwsh
         run: ./tests/Test-WorkspaceScripts.ps1
+
+  publish-release:
+    name: Publish versioned release after green CI
+    needs: test
+    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    concurrency:
+      group: mpa-skill-release-main
+      cancel-in-progress: false
+    steps:
+      - name: Check out tested main commit including tags
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Validate metadata, package Skill and generate checksum
+        shell: bash
+        run: |
+          set -euo pipefail
+          python tools/check_release.py
+          python tools/package_skill.py --output dist/mpa-skill.zip
+          (cd dist && sha256sum mpa-skill.zip > SHA256SUMS)
+
+      - name: Publish tag and release only for new version
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          VERSION="$(python tools/check_release.py --print-version)"
+          TAG="v$VERSION"
+          NOTES="docs/releases/v$VERSION.md"
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            echo "Release $TAG already exists; do not overwrite published artifacts."
+            exit 0
+          fi
+          if git show-ref --verify --quiet "refs/tags/$TAG"; then
+            TAG_COMMIT="$(git rev-list -n 1 "$TAG")"
+            if [ "$TAG_COMMIT" != "$GITHUB_SHA" ]; then
+              echo "Tag $TAG already exists at $TAG_COMMIT, not $GITHUB_SHA." >&2
+              exit 1
+            fi
+          fi
+          gh release create "$TAG" dist/mpa-skill.zip dist/SHA256SUMS \
+            --target "$GITHUB_SHA" \
+            --title "v$VERSION — MPA Research Agent / 公共管理证据研究助手" \
+            --notes-file "$NOTES" \
+            --latest
