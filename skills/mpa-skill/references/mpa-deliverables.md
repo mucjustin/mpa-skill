@@ -5,7 +5,7 @@ Use the smallest artifact that answers the student's actual task. Every substant
 | Deliverable | Required decision fields | Acceptance checks |
 |---|---|---|
 | course notes | source identity, page/section coverage, concepts, cases, instructor emphasis, questions, reusable assets | source-complete for the agreed corpus; notes link back to sources; no unverified note becomes thesis evidence |
-| case analysis | focal public problem, actors, institutions, incentives, public value, implementation process, outcomes, alternatives | explains mechanisms rather than retelling events; compares plausible alternatives; identifies transfer limits |
+| case analysis | focal public problem and chosen lens, actors and observed actions, institutions, evidence/gaps, implementation events, rival explanations, outcomes and alternatives (proportionate to scope) | explains mechanisms rather than retelling events; traces material claims to sources; distinguishes stated interests from actions and process chronology from causal inference; identifies transfer limits |
 | policy memo | decision maker, deadline, problem, options, criteria, trade-offs, feasibility, recommendation | recommendation follows from explicit criteria and evidence; implementation and risk are visible |
 | literature map | applied question, concepts, theories, methods, findings, disagreements, evidence gaps | each claim traces to a verified source; gaps lead to a research need rather than decorative citations |
 | proposal | applied problem, research question, scope, framework, evidence, method, ethics, feasibility, contribution, risks | question is answerable; method fits the question; access and time constraints are credible |

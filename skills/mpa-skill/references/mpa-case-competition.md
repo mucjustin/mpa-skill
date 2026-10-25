@@ -16,6 +16,10 @@ One document, three parts: 案例正文 (≤15000 characters), 案例分析报�
 - 调研报告: first-hand evidence base, event timeline, policy background, implementation challenges, actionable recommendations.
 - No part reveals the team, supervisor, or institution.
 
+## Evidence-led case research
+
+Before outlining the story, use case-research.md to set the focal question and evidence-protocol.md to plan multi-actor evidence, verify event sequence, and record rival explanations. Reuse evidence IDs across 案例正文、案例分析报告、调研报告 without exposing participant identity. The research planning protocol does not relax the current-year contest rules, originality restrictions or the team's responsibility for its own core arguments.
+
 ## Fieldwork
 
 Plan multi-stakeholder interview outlines — decision-makers, street-level executors, organizations, residents — with dates. Add questionnaires, documents, photos where they exist. Cross-check claims across stakeholders before stating facts.

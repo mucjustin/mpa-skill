@@ -116,6 +116,12 @@ The research content has been accepted. Deliver it through a currently available
 
 ---
 
+## 🧩 Evidence-led Case Research Engine (v2.2 candidate)
+
+For substantive public-management case studies and case competitions, an optional question-first workflow adds: choosing a lens based on evidence access and method fit; mapping actors' reported interests versus observed actions; planning verifiable materials; tracing events and rival mechanisms; and making uncertainty visible. The four lenses are examples, not a mandatory checklist. Short classroom questions remain short.
+
+Read [case-research.md](skills/mpa-skill/references/case-research.md), [evidence-protocol.md](skills/mpa-skill/references/evidence-protocol.md), the [hypothetical example](docs/examples/case-research-starter.md), and the [evaluation protocol](docs/validation/case-research-evaluation.md). CI tests structural contracts; they **do not** demonstrate improved semantic research performance.
+
 ## 🏗️ Architecture
 
 The skill is a **thin controller**: scope classification, routing, safety stops, and final acceptance. Specialist execution is delegated.

@@ -18,6 +18,18 @@
 
 ---
 
+## [Unreleased] — Evidence-led case research
+
+### Added
+- Case Research Engine protocol: research question/lens selection, dynamic stakeholder actions, source-backed timeline, mechanism and rival-explanation checks.
+- Evidence Protocol: question-to-observation collection design, stable evidence IDs, verified/unverified/disputed/missing/inaccessible statuses, and sensitive-data protections.
+- Hypothetical case walkthrough, six semantic evaluation scenarios, independent structural CI contract test, and an explicit future evaluation protocol.
+
+### Changed
+- Case analysis and competition routes conditionally load research/evidence protocols without adding a discoverable Skill or forcing a dossier for short answers.
+- Case templates support optional evidence matrices and timeline assets; method decision tree now distinguishes causal identification preconditions, case process tracing and interview analysis.
+- Existing reliability benchmarks remain historical; new structural tests do not claim semantic outcome gains.
+
 ## [2.1.0] - 2026-08-25
 
 ### Added（模板弹性与覆盖检查）

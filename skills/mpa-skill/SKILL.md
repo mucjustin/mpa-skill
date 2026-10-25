@@ -28,6 +28,7 @@ Load references on demand — only what the selected route requires.
 | Substantial research output | [research contract](references/mpa-research-contract.md) |
 | Theory selection or thesis/research-design drafting | [MPA knowledge base](references/mpa-knowledge.md) |
 | Case analysis or policy recommendations | [MPA knowledge base](references/mpa-knowledge.md) (china contexts section) |
+| Substantive case research, case-based design or case competition | [case research](references/case-research.md) + [evidence protocol](references/evidence-protocol.md) |
 | Course assignments or study planning | [MPA knowledge base](references/mpa-knowledge.md) (course map section) |
 | Each draft acceptance | [MPA knowledge base](references/mpa-knowledge.md) (thinking checklist section) |
 | Case competition entries | [case competition rules](references/mpa-case-competition.md) |
