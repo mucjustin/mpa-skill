@@ -44,7 +44,7 @@ pwsh -NoProfile -File tests/Test-WorkspaceScripts.ps1
 
 ## 版本与维护
 
-使用 Conventional Commits：`feat:`、`fix:`、`docs:`、`test:`、`refactor:`、`chore:`。发布前同步 `SKILL.md` 的 `version`、`CHANGELOG.md` 和用户文档。历史评测数据保留原始口径，不能为宣传改写既有实验结论。
+使用 Conventional Commits：`feat:`、`fix:`、`docs:`、`test:`、`refactor:`、`chore:`。发布前同步 `SKILL.md` 的 `version`、`CHANGELOG.md`、`docs/releases/vX.Y.Z.md` 和用户文档；运行 `python tools/check_release.py`。主分支 CI 全部成功后才会创建对应 Git 标签与 GitHub Release，并附 ZIP 和 SHA256SUMS；不递增版本则不会再次发布。历史评测数据保留原始口径，不能为宣传改写既有实验结论。
 
 ## 安全报告
 

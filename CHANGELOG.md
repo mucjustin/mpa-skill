@@ -18,49 +18,29 @@
 
 ---
 
-## [Unreleased] — Research Agent naming and cross-client package
+## [Unreleased]
 
-### Added
-- Codex/WorkBuddy-compatible Skill metadata: bilingual display names, descriptions, examples, version and author while preserving the installed `mpa-skill` ID.
-- Deterministic one-folder ZIP packaging for WorkBuddy/manual imports, with isolated package validation and GitHub Actions artifact publishing.
-- Reworked vector identity, research spine and workflow/evidence pipeline diagrams, plus explicit multilingual installation and security guidance.
+暂无。下一次发布前请记录新改动，并递增 `skills/mpa-skill/SKILL.md` 的版本号。
 
-### Changed
-- Public branding is now **MPA Research Agent / 公共管理证据研究助手** without renaming `mucjustin/mpa-skill`.
-- Removed unused legacy illustration PNGs and generated historical plot binaries while keeping original research code, records and Git history.
-- Clarified unsupported client claims: automated ZIP tests do not equal successful installation inside the proprietary WorkBuddy app.
+## [2.2.0] - 2026-10-26
 
-## [Unreleased] — Portable Skill-bundled evidence workbench
+### Added — 研究与工具
+- **Case Research Engine**：研究视角诊断、动态利益主体、事件链、机制与替代解释核对、证据缺口管理，短任务保持轻量。
+- **Evidence Protocol**：区分来源原文、观察事实、解释推断和建议，保留缺失、矛盾和待核验信息。
+- **离线证据工作台（实验性）**：随 Skill 分发 Python/SQLite 命令行工具；支持 TXT、Markdown、CSV、DOCX 和可提取文字的 PDF（需可选 pypdf）；具备 SHA-256 快照、来源定位、主张—证据链接、人工复核、审计与 Markdown/JSON 导出。
+- **Codex/WorkBuddy 双客户端分发**：单 Skill ZIP、双语展示信息、只读 doctor 预检、脱离完整 Git 仓库的可移植性测试。
+- **设计与品牌**：MPA Research Agent（公共管理证据研究助手），新版 Logo、Banner、Research Spine、工作流程和证据架构 SVG。
 
-### Changed
-- Moved the canonical Python evidence registry into the installable Skill folder `skills/mpa-skill/scripts/evidence_workbench/` with direct entrypoint `scripts/mpa_evidence.py`. No repo-root imports or pip installation required for text workflows.
-- Added read-only `doctor` capability preflight for Python, optional PDF dependency and workspace status.
-- Kept root editable-package installation functional using `pyproject.toml` package discovery pointed at the Skill source tree; removed duplicate root implementation.
-- Added installed-Skill-only subprocess test and documentation. The controller must not automatically confirm researcher verification.
+### Changed — 结构、文档与分发
+- 保留 `mucjustin/mpa-skill` 仓库和 `mpa-skill` Skill ID，保障原安装命令兼容。
+- 证据 Python 核心仅保留在 `skills/mpa-skill/scripts/evidence_workbench/`；工作区 PowerShell 辅助工具继续保留。
+- 更新 README 中英文、安全政策、贡献指南、安装兼容性说明；删除不再使用的旧插画和可重建的历史图表产物，保留研究历史与分析源码。
+- 增加版本与发布说明同步检查；由通过测试的主分支发布带 Skill ZIP 和 SHA-256 文件的 GitHub Release。
 
-## [Unreleased] — Offline evidence workbench implementation
-
-### Added
-- Optional, runnable Python CLI and local SQLite registry for source snapshots, exact text locators, claims, citations, manual source reviews and audit/export.
-- UTF-8/CSV/DOCX ingestion without runtime dependencies, opt-in pypdf ingestion of text PDFs. Explicitly reject scanned/encrypted PDF rather than claiming extraction.
-- Automated end-to-end tests and opt-in Windows CI Python setup; local generated evidence stores ignored by Git.
-- User guide with privacy boundaries, unsupported formats, and reproducible verification procedure.
-
-### Boundaries
-- The new CLI proves only source snapshot integrity and quote location, not interview truth, research design validity, triangulation, or causal identification.
-- It is installed separately from Codex Skills and has no cloud sync, encrypted storage, OCR, or independent identity verification.
-
-## [Unreleased] — Evidence-led case research
-
-### Added
-- Case Research Engine protocol: research question/lens selection, dynamic stakeholder actions, source-backed timeline, mechanism and rival-explanation checks.
-- Evidence Protocol: question-to-observation collection design, stable evidence IDs, verified/unverified/disputed/missing/inaccessible statuses, and sensitive-data protections.
-- Hypothetical case walkthrough, six semantic evaluation scenarios, independent structural CI contract test, and an explicit future evaluation protocol.
-
-### Changed
-- Case analysis and competition routes conditionally load research/evidence protocols without adding a discoverable Skill or forcing a dossier for short answers.
-- Case templates support optional evidence matrices and timeline assets; method decision tree now distinguishes causal identification preconditions, case process tracing and interview analysis.
-- Existing reliability benchmarks remain historical; new structural tests do not claim semantic outcome gains.
+### Validation & limitations
+- CI 的程序、ZIP、隔离安装、SVG、链接、PowerShell 检查证明的是**软件行为**，不是研究结论的实证准确性。
+- 哈希与逐字引用不证明来源真实性、样本代表性或因果结论；已验证状态需要研究者明确人工确认。
+- 本地证据库未加密；WorkBuddy GUI 安装以及真实研究质量 A/B 评估尚未完成。
 
 ## [2.1.0] - 2026-08-25
 
