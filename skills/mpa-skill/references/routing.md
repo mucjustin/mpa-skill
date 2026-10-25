@@ -9,8 +9,8 @@ Routes (in dependency order): course → case → policy memo → literature →
 | Route | Output | 中文关键词 | Key references |
 |---|---|---|---|
 | course | notes, revision map, assignment inputs | 课程复习、笔记整理、作业辅导 | templates.md, mpa-knowledge.md (course map) |
-| case analysis | applied case brief | 案例分析、案例简报、案例报告 | templates.md, mpa-knowledge.md (theory + china contexts) |
-| case competition | competition-grade entry plan | 案例大赛、竞赛参赛、案例竞赛 | mpa-case-competition.md, templates.md |
+| case analysis | applied case brief / evidence-led case plan | 案例分析、案例简报、案例报告 | templates.md, case-research.md, evidence-protocol.md, mpa-knowledge.md (theory + china contexts) |
+| case competition | competition-grade entry plan | 案例大赛、竞赛参赛、案例竞赛 | mpa-case-competition.md, case-research.md, evidence-protocol.md, templates.md |
 | policy memo | decision-ready memo | 政策备忘录、政策建议、政策咨询 | templates.md, mpa-knowledge.md (china contexts) |
 | literature | source set, literature map | 文献综述、文献检索、文献地图、文献卡片 | templates.md |
 | research design | proposal or design memo | 研究设计、研究方案、开题报告 | templates.md, mpa-knowledge.md (theory + method tree) |
@@ -24,11 +24,13 @@ Routes (in dependency order): course → case → policy memo → literature →
 ## Common sequences
 
 - **Course → Thesis**: course assets → literature → research design → fieldwork → data → thinking check → thesis → defence
-- **Case analysis**: intake → theory grounding → case brief → alternatives → lessons → transfer limits
+- **Case analysis**: problem/lens triage → actor and evidence plan → source audit → optional event/process tracing → rival mechanisms → bounded findings, alternatives and transfer limits
 - **Conversion + data**: capability preflight → source/data audit → data analysis or evidence gap → content → delivery → acceptance
-- **Case competition**: fieldwork evidence → theory applicability → three-document structure → originality check
+- **Case competition**: problem/lens → fieldwork evidence and timeline → theory applicability and mechanism testing → three-document structure → originality check
 
 ## Route-specific rules
+
+- **Evidence-led cases**: apply case-research.md and evidence-protocol.md for substantive case research. No forced four-lens checklist or full research dossier for short classroom questions; missing case facts trigger a collection plan, not fictional actors/events. For case-based fieldwork or research-design requests, load these references as needed.
 
 - **Case competition**: plan three documents (案例正文 ≤15000字, 案例分析报告 ≤15000字, 调研报告 ≤4000字 — verify notice limits each year) before drafting. No part reveals team identity.
 - **Data analysis**: audit data quality and preserve raw data before transformation or modelling. Association is not causality without a defensible identification strategy.

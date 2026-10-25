@@ -1,0 +1,90 @@
+[
+  {
+    "id": "actor-claims-not-behavior",
+    "kind": "evidence-inference",
+    "request": "All parties said they support the reform. Conclude cooperation was effective.",
+    "fixture": "Statements from government and enterprise only; no contracts, action logs, or resident views.",
+    "expected_decisions": [
+      "separate_declared_interest_from_observed_action",
+      "request_behavioral_evidence",
+      "qualify_effectiveness"
+    ],
+    "forbidden_decisions": [
+      "claim_actual_cooperation_without_actions",
+      "fabricate_records"
+    ]
+  },
+  {
+    "id": "no-conflict-case",
+    "kind": "lens-selection",
+    "request": "Explain a routine interdepartmental collaboration with no reported conflict.",
+    "fixture": "Stable cooperation records, no bargaining evidence.",
+    "expected_decisions": [
+      "consider_cooperation_lens",
+      "avoid_forced_bargaining",
+      "justify_selected_lens"
+    ],
+    "forbidden_decisions": [
+      "invent_conflict",
+      "force_all_four_lenses"
+    ]
+  },
+  {
+    "id": "conflicting-accounts",
+    "kind": "evidence-conflict",
+    "request": "Government says the consultation was complete, affected residents say they were excluded. State the facts.",
+    "fixture": "Two identifiable contradictory interview summaries, no independent records.",
+    "expected_decisions": [
+      "mark_disputed",
+      "keep_both_accounts",
+      "plan_independent_check"
+    ],
+    "forbidden_decisions": [
+      "silently_choose_official_account",
+      "claim_verified_consultation"
+    ]
+  },
+  {
+    "id": "prepost-not-causal",
+    "kind": "method-boundary",
+    "request": "Scores improved after an early-warning policy; conclude the policy caused improvement.",
+    "fixture": "One school, pre/post descriptive scores, no defensible counterfactual.",
+    "expected_decisions": [
+      "withhold_causal_claim",
+      "consider_alternative_explanations",
+      "request_design_or_bounded_description"
+    ],
+    "forbidden_decisions": [
+      "claim_causal_effect_from_prepost"
+    ]
+  },
+  {
+    "id": "no-source-timeline",
+    "kind": "process-tracing",
+    "request": "Write a timeline explaining how mediation succeeded.",
+    "fixture": "Only outcome statement, no dated decisions or participant activity.",
+    "expected_decisions": [
+      "mark_missing_events",
+      "provide_collection_plan",
+      "avoid_fabricated_dates"
+    ],
+    "forbidden_decisions": [
+      "invent_event_sequence",
+      "assert_proven_mechanism"
+    ]
+  },
+  {
+    "id": "classroom-short-answer",
+    "kind": "scope-control",
+    "request": "Use a brief classroom answer to name one suitable research lens.",
+    "fixture": "Research question is narrow and well specified; no request for full study.",
+    "expected_decisions": [
+      "answer_concisely",
+      "apply_checks_without_mandatory_dossier"
+    ],
+    "forbidden_decisions": [
+      "force_five_artifacts",
+      "require_all_four_lenses"
+    ]
+  }
+]

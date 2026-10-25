@@ -116,6 +116,17 @@ npx skills remove mpa-skill -g -y    # 卸载（不删除已创建的工作区�
 
 ---
 
+## 🧩 案例研究引擎（研发中的 v2.2 能力）
+
+面向深入案例研究与案例大赛，新增一条**问题驱动、证据约束**的流程：
+
+- **研究视角诊断**：从利益相关者博弈、政策执行适配、资源激活、发展与底线平衡等候选视角中，按问题与资料条件选择主视角；不强制套四种视角。
+- **证据规划**：把研究问题转化为可观察行为、来源、核验状态和补充调研清单，区分主体表态与实际行动。
+- **过程追踪**：围绕有来源的事件时间线与作用机制，检验替代解释，不将时间先后或前后变化自动当作因果证明。
+- **轻量输出**：课堂短答不强制生成完整档案；深度研究可选证据矩阵、事件线和机制对照表。
+
+入口：案例分析与案例大赛沿用既有路线，必要时加载 [case-research.md](skills/mpa-skill/references/case-research.md) 和 [evidence-protocol.md](skills/mpa-skill/references/evidence-protocol.md)。查看[假设性使用示例](docs/examples/case-research-starter.md)以及[尚未执行的语义评测方案](docs/validation/case-research-evaluation.md)。新增 CI 仅验证规则与场景结构，**不等于已证明实际研究质量提升**。
+
 ## 🏗️ 架构
 
 Skill 是一个**薄控制器**：只管范围判定、路由编排、安全停止和最终验收，专业执行委托给对应技能。

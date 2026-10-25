@@ -23,3 +23,7 @@ Identify stakeholders, distributional effects, administrative capacity, costs, l
 ## Precedence and ethics
 
 Current programme, university, supervisor, ethics, formatting, and submission rules override generic guidance. For case competition entries, apply [case competition rules](mpa-case-competition.md); the current-year official notice overrides both. Pause when current requirements conflict or cannot be verified. Protect participants, confidential administrative data, and licensed sources.
+
+## Case research and dynamic evidence
+
+For substantive case research, use case-research.md and evidence-protocol.md. Select a question/lens before a theory. Separate declared interests from observed conduct, actors' self-reports from corroborated records, and chronological sequence from causal process evidence. Keep rival explanations and missing or disputed sources visible. A case with cooperation, quiet adaptation or no overt conflict should not be rewritten as a bargaining conflict.

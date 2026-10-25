@@ -19,6 +19,10 @@ jobs:
         shell: pwsh
         run: ./tests/Test-PublicSkill.ps1
 
+      - name: Validate evidence-led case research contracts
+        shell: pwsh
+        run: ./tests/Test-CaseResearch.ps1
+
       - name: Validate reliability scenarios
         shell: pwsh
         run: ./tests/Test-ReliabilityScenarios.ps1
