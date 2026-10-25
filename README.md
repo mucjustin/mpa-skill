@@ -67,7 +67,7 @@
 
 ---
 
-**当前版本：v2.2.0。** [正式发行说明与安装包](https://github.com/mucjustin/mpa-skill/releases/latest) · [更新日志](CHANGELOG.md)。合并代码并不会自动生成发行版，因此采用单独的 CI 发布门禁。
+**当前版本：v2.2.1。** [正式发行说明与安装包](https://github.com/mucjustin/mpa-skill/releases/latest) · [更新日志](CHANGELOG.md)。合并代码并不会自动生成发行版，因此采用单独的 CI 发布门禁。
 
 ## 🚀 快速开始
 
@@ -147,6 +147,8 @@ npx skills remove mpa-skill -g -y    # 卸载（不删除已创建的工作区�
 **核心工具现在随单个 Skill 一并分发**：使用实际安装目录内的 `scripts/mpa_evidence.py`，无需安装 Python 包即可处理 TXT、Markdown、CSV 和 DOCX；PDF 需单独授权安装可选 `pypdf` 依赖。启动前运行 `python <skill-root>/scripts/mpa_evidence.py doctor`，使用方法见 [本地证据工作台指南](docs/evidence-workbench.md) 和内置 [操作指南](skills/mpa-skill/references/evidence-workbench-usage.md)。本地工作区以 .mpa-evidence/ 存储原文件副本与提取内容，**不加密**，涉及个人隐私或单位内部资料时请遵守访问与审批要求。
 
 功能实现通过单元及 CLI 测试，**尚无真实用户研究证明其能改善研究结论或提高效率**。
+
+设计理念与单色标识参见 [Visual Identity](docs/brand-identity.md)。
 
 ## 🏗️ 架构
 
