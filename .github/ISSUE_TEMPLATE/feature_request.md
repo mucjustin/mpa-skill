@@ -1,6 +1,6 @@
 ---
 name: 功能建议
-about: 为 MPA Research Workflow 提出新能力
+about: 为 MPA Research Agent 提出新能力
 labels: ["enhancement"]
 title: "[feat] "
 ---

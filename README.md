@@ -1,12 +1,12 @@
 <p align="center">
-  <img src="assets/logo.svg" alt="MPA Skill logo" width="160">
+  <img src="assets/logo.svg" alt="MPA Research Agent logo" width="160">
 </p>
 
-<h1 align="center">MPA Skill 🎓</h1>
+<h1 align="center">MPA Research Agent</h1>
 
 <p align="center">
-  <strong>让公共管理研究从碎片走向可核验</strong><br>
-  给 MPA 研究生的 Codex Agent Skill  🙅
+  <strong>公共管理证据研究助手 · Evidence-Grounded Research</strong><br>
+  一个可在 Codex 使用、可打包供 WorkBuddy 导入的 Agent Skill
 </p>
 
 <p align="center">
@@ -31,14 +31,14 @@
 </p>
 
 <p align="center">
-  <img src="assets/banner.svg" alt="MPA Skill Banner" width="100%">
+  <img src="assets/banner.svg" alt="MPA Research Agent banner" width="100%">
 </p>
 
 ---
 
 ## 🎯 这是什么
 
-帮 MPA 研究生把课程、案例、政策、田间、数据和论文串成**一条可核验研究链**的 Codex Agent Skill。
+**MPA Research Agent（公共管理证据研究助手）** 是面向公共管理课程、政策与案例研究的开源 Agent Skill。它把研究问题、利益主体、机制假说和证据定位连接起来，由 AI 组织研究任务，内置 Python/SQLite 工具负责确定性来源检查。
 
 核心是 **MPA Research Spine**：公共问题 → 利益相关者 → 制度情境 → 理论 → 证据 → 方法 → 分析 → 可执行建议。先找缺口，再动笔 ✏️
 
@@ -47,7 +47,7 @@
 - 🛡️ **数据先于写作**：有数据时先审计来源、清洗、方法和数值；分析未被接受前不改写结论。详见[执行手册](skills/mpa-skill/references/execution.md)。
 - 🔄 **可恢复交付**：Office 编辑中断后重新核验文档身份；不确定时停在 `STATE_UNKNOWN`，不盲目重放。
 
-> **Windows-first** · 指令可跨平台阅读，自动化脚本使用 PowerShell
+> **Windows-first** 的工作区辅助脚本使用 PowerShell；内置 Python 证据工具可在具备 Python 3.10+ 的本地环境中运行。
 
 ---
 
@@ -60,6 +60,7 @@
 | 🔗 | 课程→毕业复用 | 笔记、案例、代码可沉淀为研究资产，复用前回原始来源核验 |
 | 🧠 | MPA 知识本体 | 理论地图 + 中国治理情境 + 思维清单 + 课程映射 |
 | 🛡️ | 数据先于写作 | 先审计再写作，不靠改写掩盖缺口 |
+| 🔎 | 内置证据工作台 | 本地文件哈希、精确引文定位、SQLite 证据审计及人工复核 |
 | 🔄 | 可恢复交付 | 中断可恢复，`STATE_UNKNOWN` 时停止 |
 | 🧾 | AI 使用声明 | 只依据实际工具使用生成，不编造。详见[声明工作流](skills/mpa-skill/references/aigc-disclosure.md) |
 | ✅ | 契约测试 | PowerShell 测试覆盖结构、指令、文档与隐私红线 |
@@ -73,6 +74,16 @@
 ```powershell
 npx skills add mucjustin/mpa-skill -g -s mpa-skill -y --full-depth
 ```
+
+### WorkBuddy 导入（单 Skill ZIP）
+
+WorkBuddy 官方格式接受含 `SKILL.md` 的目录及可选 `references/`、`scripts/`。现已补齐双语名称、描述、版本、作者和示例字段，并加入 ZIP 打包和隔离运行测试。
+
+```powershell
+python tools/package_skill.py --output dist/mpa-skill.zip
+```
+
+在 WorkBuddy「技能 → 添加技能 → 上传技能」导入 `dist/mpa-skill.zip`。也可在此功能分支的 [GitHub Actions 运行产物](https://github.com/mucjustin/mpa-skill/actions) 中下载自动打包文件。**ZIP 结构已验证，WorkBuddy 客户端实际导入尚未验证。** 详见 [Codex / WorkBuddy 安装说明](docs/install-and-compatibility.md)。
 
 ### 初始化工作区
 
@@ -127,16 +138,29 @@ npx skills remove mpa-skill -g -y    # 卸载（不删除已创建的工作区�
 
 入口：案例分析与案例大赛沿用既有路线，必要时加载 [case-research.md](skills/mpa-skill/references/case-research.md) 和 [evidence-protocol.md](skills/mpa-skill/references/evidence-protocol.md)。查看[假设性使用示例](docs/examples/case-research-starter.md)以及[尚未执行的语义评测方案](docs/validation/case-research-evaluation.md)。新增 CI 仅验证规则与场景结构，**不等于已证明实际研究质量提升**。
 
+## 🔎 可运行的本地证据工作台（实验性）
+
+与研究方法协议不同，本次新增的是**实际可执行的 Python + SQLite 工具**：为本地 TXT/Markdown、CSV、DOCX 和可提取文本的 PDF 建立原始文件 SHA-256 快照、页码/段落/行号定位、主张—证据链接、显式人工复核、完整性审计与 Markdown/JSON 导出。默认不上传材料、不调用模型、不自动给证据标记已核验。
+
+**核心工具现在随单个 Skill 一并分发**：使用实际安装目录内的 `scripts/mpa_evidence.py`，无需安装 Python 包即可处理 TXT、Markdown、CSV 和 DOCX；PDF 需单独授权安装可选 `pypdf` 依赖。启动前运行 `python <skill-root>/scripts/mpa_evidence.py doctor`，使用方法见 [本地证据工作台指南](docs/evidence-workbench.md) 和内置 [操作指南](skills/mpa-skill/references/evidence-workbench-usage.md)。本地工作区以 .mpa-evidence/ 存储原文件副本与提取内容，**不加密**，涉及个人隐私或单位内部资料时请遵守访问与审批要求。
+
+功能实现通过单元及 CLI 测试，**尚无真实用户研究证明其能改善研究结论或提高效率**。
+
 ## 🏗️ 架构
 
-Skill 是一个**薄控制器**：只管范围判定、路由编排、安全停止和最终验收，专业执行委托给对应技能。
+**AI 组织研究，确定性工具检查证据，研究者作最终核实。** 新关联证据默认为 `unverified`，模型不得自行标记人工 `verified`。
+
+<p align="center"><img src="assets/spine.svg" alt="MPA Research Spine eight stages" width="100%"></p>
+<p align="center"><img src="assets/evidence-flow.svg" alt="Offline evidence workbench" width="100%"></p>
+
+Skill 仍是一个**薄控制器**：负责范围、路由、安全停止和交付验收；资料处理可调用内置的确定性 Python 程序，不自动宣称研究结论成立。
 
 <p align="center">
-  <img src="assets/workflow.svg" alt="MPA Skill workflow" width="100%">
+  <img src="assets/workflow.svg" alt="MPA Research Agent workflow" width="100%">
 </p>
 
 ```
-输入 → 判定 → 编排 → 路由 → 确认(一次) → 执行 → 验收
+研究问题 → 路由和证据计划 → 确认(一次) → 授权后执行 → 来源核验 → 人工复核 → 有界交付
 ```
 
 安全停止：登录、验证码、付费墙、授权访问、破坏性写入或实质研究歧义 → 暂停并询问。
@@ -147,27 +171,20 @@ Skill 是一个**薄控制器**：只管范围判定、路由编排、安全停�
 
 ```text
 mpa-skill/
-├── assets/                         # Logo、Banner、架构图
-├── skills/mpa-skill/               # Skill 本体
-│   ├── SKILL.md                    # 控制器指令
-│   ├── agents/openai.yaml          # 元数据
-│   ├── references/                 # 8 个引用文件
-│   │   ├── routing.md              # 路由表与决策树
-│   │   ├── mpa-knowledge.md        # 统一知识库
-│   │   ├── execution.md            # 执行手册
-│   │   ├── templates.md            # 实用模板库
-│   │   ├── mpa-research-contract.md
-│   │   ├── mpa-deliverables.md
-│   │   ├── mpa-case-competition.md
-│   │   └── aigc-disclosure.md
-│   └── scripts/                    # 工作区与环境脚本
-├── docs/validation/               # 基准报告与语料
-├── tests/                         # 契约测试
-├── .github/                        # CI 与模板
-├── CONTRIBUTING.md
-├── CHANGELOG.md
-├── SECURITY.md
-└── LICENSE                         # MIT
+├── README.md / README.en.md       # 中英文文档
+├── assets/                        # Logo / Research Spine / 证据架构 SVG
+├── skills/mpa-skill/
+│   ├── SKILL.md                   # 公共管理研究总控 + 双客户端元数据
+│   ├── agents/openai.yaml
+│   ├── references/                # 案例、证据、方法、学术与操作规范
+│   └── scripts/
+│       ├── mpa_evidence.py        # 本地证据工具入口
+│       ├── evidence_workbench/    # Python / SQLite 核心
+│       └── *.ps1                  # Windows 工作区管理
+├── tools/package_skill.py         # ZIP 分发
+├── tests/                         # 程序、Skill、ZIP、文档和历史契约测试
+├── docs/                          # 安装指南、示例、历史基准
+└── ml-analysis/                   # 旧版研究实验源码（图表按需重新生成）
 ```
 
 ---
@@ -213,6 +230,9 @@ Codex 先检查指令和附件，组合最小必要路线，然后只问一次 `
 ## 🧪 开发与测试
 
 ```powershell
+python -m unittest discover -s tests -p "test_skill_package.py" -v
+python -m unittest discover -s tests -p "test_docs_assets.py" -v
+python tools/package_skill.py --output dist/mpa-skill.zip
 pwsh -NoProfile -File tests/Test-PublicSkill.ps1
 pwsh -NoProfile -File tests/Test-ReliabilityScenarios.ps1
 pwsh -NoProfile -File tests/Test-BenchmarkManifest.ps1
@@ -227,7 +247,7 @@ CI（GitHub Actions，windows-latest）在 main 分支和每个 PR 上运行相�
 
 | 能力 | 必需 | 说明 |
 |---|---:|---|
-| Codex 文件与终端 | ✅ | 读取材料、执行脚本、验证结果 |
+| 宿主客户端的文件与终端权限 | ✅（运行时） | Codex 或 WorkBuddy 无执行能力时降级为研究规划 |
 | Python/R/表格分析 | ❌ | 数据路线需要时使用，缺失时报告阻塞 |
 | Word/Office 编辑 | ❌ | 内容验收后使用，以实际 schema 为准 |
 | Zotero | ❌ | 文献管理，只走受支持接口 |
@@ -274,5 +294,5 @@ CI（GitHub Actions，windows-latest）在 main 分支和每个 PR 上运行相�
 </p>
 
 <p align="center">
-  <sub>Built with kyro🧠 for MPA researchers · 从碎片到可核验</sub>
+  <sub>MPA Research Agent · Evidence-grounded public management research</sub>
 </p>

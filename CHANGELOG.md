@@ -8,7 +8,7 @@
     <img src="https://img.shields.io/badge/Keep%20a%20Changelog-1.1.0-4A90E2.svg" alt="Keep a Changelog">
   </a>
   <a href="https://semver.org/lang/zh-CN/">
-    <img src="https://img.shields.io/badge/SemVer-2.0.0-6f42c1.svg" alt="Semantic Versioning">
+    <img src="https://img.shields.io/badge/SemVer-specification-6f42c1.svg" alt="Semantic Versioning">
   </a>
 </p>
 
@@ -17,6 +17,38 @@
 格式基于 [Keep a Changelog](https://keepachangelog.com/zh-CN/1.1.0/)，版本号遵循[语义化版本](https://semver.org/lang/zh-CN/)。
 
 ---
+
+## [Unreleased] — Research Agent naming and cross-client package
+
+### Added
+- Codex/WorkBuddy-compatible Skill metadata: bilingual display names, descriptions, examples, version and author while preserving the installed `mpa-skill` ID.
+- Deterministic one-folder ZIP packaging for WorkBuddy/manual imports, with isolated package validation and GitHub Actions artifact publishing.
+- Reworked vector identity, research spine and workflow/evidence pipeline diagrams, plus explicit multilingual installation and security guidance.
+
+### Changed
+- Public branding is now **MPA Research Agent / 公共管理证据研究助手** without renaming `mucjustin/mpa-skill`.
+- Removed unused legacy illustration PNGs and generated historical plot binaries while keeping original research code, records and Git history.
+- Clarified unsupported client claims: automated ZIP tests do not equal successful installation inside the proprietary WorkBuddy app.
+
+## [Unreleased] — Portable Skill-bundled evidence workbench
+
+### Changed
+- Moved the canonical Python evidence registry into the installable Skill folder `skills/mpa-skill/scripts/evidence_workbench/` with direct entrypoint `scripts/mpa_evidence.py`. No repo-root imports or pip installation required for text workflows.
+- Added read-only `doctor` capability preflight for Python, optional PDF dependency and workspace status.
+- Kept root editable-package installation functional using `pyproject.toml` package discovery pointed at the Skill source tree; removed duplicate root implementation.
+- Added installed-Skill-only subprocess test and documentation. The controller must not automatically confirm researcher verification.
+
+## [Unreleased] — Offline evidence workbench implementation
+
+### Added
+- Optional, runnable Python CLI and local SQLite registry for source snapshots, exact text locators, claims, citations, manual source reviews and audit/export.
+- UTF-8/CSV/DOCX ingestion without runtime dependencies, opt-in pypdf ingestion of text PDFs. Explicitly reject scanned/encrypted PDF rather than claiming extraction.
+- Automated end-to-end tests and opt-in Windows CI Python setup; local generated evidence stores ignored by Git.
+- User guide with privacy boundaries, unsupported formats, and reproducible verification procedure.
+
+### Boundaries
+- The new CLI proves only source snapshot integrity and quote location, not interview truth, research design validity, triangulation, or causal identification.
+- It is installed separately from Codex Skills and has no cloud sync, encrypted storage, OCR, or independent identity verification.
 
 ## [Unreleased] — Evidence-led case research
 

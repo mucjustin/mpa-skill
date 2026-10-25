@@ -4,3 +4,14 @@ docs/superpowers/
 # Local generated configuration and test output
 *.local.json
 .tmp/
+
+# Private local evidence workspaces and caches
+.mpa-evidence/
+__pycache__/
+*.py[cod]
+*.egg-info/
+
+dist/
+ml-analysis/output/
+
+

@@ -1,66 +1,23 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 380" width="1280" height="380" role="img" aria-label="MPA Skill thin-controller workflow">
-  <defs>
-    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#FDF6F8"/>
-      <stop offset="1" stop-color="#FAF7F8"/>
-    </linearGradient>
-    <marker id="ar" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
-      <path d="M0,0 L0,6 L9,3 z" fill="#D65A7C"/>
-    </marker>
-    <marker id="ag" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
-      <path d="M0,0 L0,6 L9,3 z" fill="#E87A6A"/>
-    </marker>
-  </defs>
-
-  <rect width="1280" height="380" fill="url(#bg)"/>
-
-  <!-- 标题 -->
-  <text x="640" y="40" text-anchor="middle" font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="24" font-weight="700" fill="#3D3A42" letter-spacing="2">薄控制器工作流 · Thin-Controller Workflow</text>
-
-  <!-- 排 1：左 → 右 -->
-  <rect x="70"   y="72" width="220" height="60" rx="14" fill="#FFFFFF" stroke="#F2B5C1" stroke-width="1.5"/>
-  <text x="180"  y="108" text-anchor="middle" font-family="'Microsoft YaHei', 'PingFang SC', 'Segoe UI', sans-serif" font-size="18" font-weight="700" fill="#3D3A42">用户请求</text>
-
-  <rect x="370"  y="72" width="220" height="60" rx="14" fill="#D65A7C"/>
-  <text x="480"  y="108" text-anchor="middle" font-family="'Microsoft YaHei', 'PingFang SC', 'Segoe UI', sans-serif" font-size="18" font-weight="700" fill="#FFFFFF">范围判定</text>
-
-  <rect x="670"  y="72" width="220" height="60" rx="14" fill="#FFFFFF" stroke="#F2B5C1" stroke-width="1.5"/>
-  <text x="780"  y="108" text-anchor="middle" font-family="'Microsoft YaHei', 'PingFang SC', 'Segoe UI', sans-serif" font-size="18" font-weight="700" fill="#3D3A42">任务排序</text>
-
-  <rect x="970"  y="72" width="220" height="60" rx="14" fill="#FFFFFF" stroke="#F2B5C1" stroke-width="1.5"/>
-  <text x="1080" y="108" text-anchor="middle" font-family="'Microsoft YaHei', 'PingFang SC', 'Segoe UI', sans-serif" font-size="18" font-weight="700" fill="#3D3A42">路线组合</text>
-
-  <!-- 排 1 箭头 -->
-  <line x1="290" y1="102" x2="364" y2="102" stroke="#D65A7C" stroke-width="3" marker-end="url(#ar)"/>
-  <line x1="590" y1="102" x2="664" y2="102" stroke="#D65A7C" stroke-width="3" marker-end="url(#ar)"/>
-  <line x1="890" y1="102" x2="964" y2="102" stroke="#D65A7C" stroke-width="3" marker-end="url(#ar)"/>
-
-  <!-- 非 MPA 分支 -->
-  <line x1="480" y1="132" x2="480" y2="186" stroke="#D65A7C" stroke-width="2.5" stroke-dasharray="5 5" marker-end="url(#ar)"/>
-  <rect x="390" y="192" width="180" height="42" rx="12" fill="#FFFFFF" stroke="#F2B5C1" stroke-width="1.5"/>
-  <text x="480" y="219" text-anchor="middle" font-family="'Microsoft YaHei', 'PingFang SC', 'Segoe UI', sans-serif" font-size="15" fill="#9B95A3">转交其他 Skill</text>
-
-  <!-- 排 1 → 排 2 连接（右侧下行） -->
-  <line x1="1080" y1="132" x2="1080" y2="246" stroke="#E87A6A" stroke-width="3" marker-end="url(#ag)"/>
-
-  <!-- 排 2：右 → 左 -->
-  <rect x="970"  y="252" width="220" height="60" rx="14" fill="#FFFFFF" stroke="#F5C896" stroke-width="2"/>
-  <text x="1080" y="288" text-anchor="middle" font-family="'Microsoft YaHei', 'PingFang SC', 'Segoe UI', sans-serif" font-size="18" font-weight="700" fill="#3D3A42">一次性确认</text>
-
-  <rect x="670"  y="252" width="220" height="60" rx="14" fill="#FFFFFF" stroke="#F2B5C1" stroke-width="1.5"/>
-  <text x="780"  y="288" text-anchor="middle" font-family="'Microsoft YaHei', 'PingFang SC', 'Segoe UI', sans-serif" font-size="18" font-weight="700" fill="#3D3A42">执行路由</text>
-
-  <rect x="370"  y="252" width="220" height="60" rx="14" fill="#FFFFFF" stroke="#F2B5C1" stroke-width="1.5"/>
-  <text x="480"  y="288" text-anchor="middle" font-family="'Microsoft YaHei', 'PingFang SC', 'Segoe UI', sans-serif" font-size="18" font-weight="700" fill="#3D3A42">质量门</text>
-
-  <rect x="70"   y="252" width="220" height="60" rx="14" fill="#FFFFFF" stroke="#F2B5C1" stroke-width="1.5"/>
-  <text x="180"  y="288" text-anchor="middle" font-family="'Microsoft YaHei', 'PingFang SC', 'Segoe UI', sans-serif" font-size="18" font-weight="700" fill="#3D3A42">交付</text>
-
-  <!-- 排 2 箭头（向左） -->
-  <line x1="970" y1="282" x2="896" y2="282" stroke="#D65A7C" stroke-width="3" marker-end="url(#ar)"/>
-  <line x1="670" y1="282" x2="596" y2="282" stroke="#D65A7C" stroke-width="3" marker-end="url(#ar)"/>
-  <line x1="370" y1="282" x2="296" y2="282" stroke="#D65A7C" stroke-width="3" marker-end="url(#ar)"/>
-
-  <!-- 底部 -->
-  <text x="640" y="350" text-anchor="middle" font-family="'Microsoft YaHei', 'PingFang SC', 'Segoe UI', sans-serif" font-size="14" fill="#9B95A3">安全停止：遇到登录、验证码、付费墙或歧义时暂停</text>
+<svg xmlns="http://www.w3.org/2000/svg" width="1320" height="555" viewBox="0 0 1320 555" role="img" aria-label="MPA Agent Skill orchestration: route, authorize, execute, audit, human review"><defs><linearGradient id="soft" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F4FBFC"/><stop offset="1" stop-color="#EEF3FA"/></linearGradient><linearGradient id="nav" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#142943"/><stop offset="1" stop-color="#0B1628"/></linearGradient><marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#367789"/></marker></defs>
+<rect x="0" y="0" width="1320" height="555" rx="0" fill="url(#soft)" stroke="none" stroke-width="0"/>
+<text x="55" y="62" font-family="'Noto Sans CJK SC','Microsoft YaHei','PingFang SC','Segoe UI',Arial,sans-serif" font-size="30" font-weight="800" fill="#152C40" text-anchor="start" >AGENT + TOOL WORKFLOW</text>
+<text x="55" y="92" font-family="'Noto Sans CJK SC','Microsoft YaHei','PingFang SC','Segoe UI',Arial,sans-serif" font-size="17" font-weight="500" fill="#607684" text-anchor="start" >研究方法由 Skill 协调 · 精确处理交给程序 · 证据结论由研究者确认</text>
+<rect x="56" y="140" width="238" height="91" rx="15" fill="#FFFFFF" stroke="#BED5DF" stroke-width="1.8"/><text x="74" y="169" font-family="'Noto Sans CJK SC','Microsoft YaHei','PingFang SC','Segoe UI',Arial,sans-serif" font-size="13" font-weight="700" fill="#247981" text-anchor="start" >01 / ROUTE</text><text x="74" y="199" font-family="'Noto Sans CJK SC','Microsoft YaHei','PingFang SC','Segoe UI',Arial,sans-serif" font-size="21" font-weight="700" fill="#152C40" text-anchor="start" >需求与研究问题</text><text x="74" y="219" font-family="'Noto Sans CJK SC','Microsoft YaHei','PingFang SC','Segoe UI',Arial,sans-serif" font-size="12" font-weight="400" fill="#66818C" text-anchor="start" >轻量任务不启用本地库</text>
+<rect x="375" y="140" width="238" height="91" rx="15" fill="#FFFFFF" stroke="#BED5DF" stroke-width="1.8"/><text x="393" y="169" font-family="'Noto Sans CJK SC','Microsoft YaHei','PingFang SC','Segoe UI',Arial,sans-serif" font-size="13" font-weight="700" fill="#247981" text-anchor="start" >02 / PLAN</text><text x="393" y="199" font-family="'Noto Sans CJK SC','Microsoft YaHei','PingFang SC','Segoe UI',Arial,sans-serif" font-size="21" font-weight="700" fill="#152C40" text-anchor="start" >研究视角与证据计划</text><text x="393" y="219" font-family="'Noto Sans CJK SC','Microsoft YaHei','PingFang SC','Segoe UI',Arial,sans-serif" font-size="12" font-weight="400" fill="#66818C" text-anchor="start" >识别主体、来源和缺口</text>
+<rect x="694" y="140" width="238" height="91" rx="15" fill="#FFFFFF" stroke="#BED5DF" stroke-width="1.8"/><text x="712" y="169" font-family="'Noto Sans CJK SC','Microsoft YaHei','PingFang SC','Segoe UI',Arial,sans-serif" font-size="13" font-weight="700" fill="#247981" text-anchor="start" >03 / CONSENT</text><text x="712" y="199" font-family="'Noto Sans CJK SC','Microsoft YaHei','PingFang SC','Segoe UI',Arial,sans-serif" font-size="21" font-weight="700" fill="#152C40" text-anchor="start" >资料权限与工作区</text><text x="712" y="219" font-family="'Noto Sans CJK SC','Microsoft YaHei','PingFang SC','Segoe UI',Arial,sans-serif" font-size="12" font-weight="400" fill="#66818C" text-anchor="start" >持久化前需要授权</text>
+<rect x="1013" y="140" width="238" height="91" rx="15" fill="#143B4D" stroke="#143B4D" stroke-width="1.8"/><text x="1031" y="169" font-family="'Noto Sans CJK SC','Microsoft YaHei','PingFang SC','Segoe UI',Arial,sans-serif" font-size="13" font-weight="700" fill="#84E1D2" text-anchor="start" >04 / EXECUTE</text><text x="1031" y="199" font-family="'Noto Sans CJK SC','Microsoft YaHei','PingFang SC','Segoe UI',Arial,sans-serif" font-size="21" font-weight="700" fill="#FFFFFF" text-anchor="start" >内置 Python 工具</text><text x="1031" y="219" font-family="'Noto Sans CJK SC','Microsoft YaHei','PingFang SC','Segoe UI',Arial,sans-serif" font-size="12" font-weight="400" fill="#B8D7DB" text-anchor="start" >导入、定位、关联引文</text>
+<line x1="294" y1="184" x2="366" y2="184" stroke="#367789" stroke-width="3" marker-end="url(#arrow)"/>
+<line x1="613" y1="184" x2="686" y2="184" stroke="#367789" stroke-width="3" marker-end="url(#arrow)"/>
+<line x1="932" y1="184" x2="1004" y2="184" stroke="#367789" stroke-width="3" marker-end="url(#arrow)"/>
+<rect x="1013" y="311" width="238" height="91" rx="15" fill="#143B4D" stroke="#143B4D" stroke-width="1.8"/><text x="1031" y="340" font-family="'Noto Sans CJK SC','Microsoft YaHei','PingFang SC','Segoe UI',Arial,sans-serif" font-size="13" font-weight="700" fill="#84E1D2" text-anchor="start" >05 / SOURCE</text><text x="1031" y="370" font-family="'Noto Sans CJK SC','Microsoft YaHei','PingFang SC','Segoe UI',Arial,sans-serif" font-size="21" font-weight="700" fill="#FFFFFF" text-anchor="start" >源文件完整性检查</text><text x="1031" y="390" font-family="'Noto Sans CJK SC','Microsoft YaHei','PingFang SC','Segoe UI',Arial,sans-serif" font-size="12" font-weight="400" fill="#B8D7DB" text-anchor="start" >哈希与引文逐字匹配</text>
+<rect x="694" y="311" width="238" height="91" rx="15" fill="#FFFFFF" stroke="#BED5DF" stroke-width="1.8"/><text x="712" y="340" font-family="'Noto Sans CJK SC','Microsoft YaHei','PingFang SC','Segoe UI',Arial,sans-serif" font-size="13" font-weight="700" fill="#247981" text-anchor="start" >06 / HUMAN</text><text x="712" y="370" font-family="'Noto Sans CJK SC','Microsoft YaHei','PingFang SC','Segoe UI',Arial,sans-serif" font-size="21" font-weight="700" fill="#152C40" text-anchor="start" >研究者人工复核</text><text x="712" y="390" font-family="'Noto Sans CJK SC','Microsoft YaHei','PingFang SC','Segoe UI',Arial,sans-serif" font-size="12" font-weight="400" fill="#66818C" text-anchor="start" >模型不能自行置 verified</text>
+<rect x="375" y="311" width="238" height="91" rx="15" fill="#FFFFFF" stroke="#BED5DF" stroke-width="1.8"/><text x="393" y="340" font-family="'Noto Sans CJK SC','Microsoft YaHei','PingFang SC','Segoe UI',Arial,sans-serif" font-size="13" font-weight="700" fill="#247981" text-anchor="start" >07 / AUDIT</text><text x="393" y="370" font-family="'Noto Sans CJK SC','Microsoft YaHei','PingFang SC','Segoe UI',Arial,sans-serif" font-size="21" font-weight="700" fill="#152C40" text-anchor="start" >缺口、争议与因果边界</text><text x="393" y="390" font-family="'Noto Sans CJK SC','Microsoft YaHei','PingFang SC','Segoe UI',Arial,sans-serif" font-size="12" font-weight="400" fill="#66818C" text-anchor="start" >错误与未验证信息保留</text>
+<rect x="56" y="311" width="238" height="91" rx="15" fill="#FFFFFF" stroke="#BED5DF" stroke-width="1.8"/><text x="74" y="340" font-family="'Noto Sans CJK SC','Microsoft YaHei','PingFang SC','Segoe UI',Arial,sans-serif" font-size="13" font-weight="700" fill="#247981" text-anchor="start" >08 / DELIVER</text><text x="74" y="370" font-family="'Noto Sans CJK SC','Microsoft YaHei','PingFang SC','Segoe UI',Arial,sans-serif" font-size="21" font-weight="700" fill="#152C40" text-anchor="start" >可追溯的研究成果</text><text x="74" y="390" font-family="'Noto Sans CJK SC','Microsoft YaHei','PingFang SC','Segoe UI',Arial,sans-serif" font-size="12" font-weight="400" fill="#66818C" text-anchor="start" >Markdown / JSON / 研究计划</text>
+<line x1="1132" y1="231" x2="1132" y2="301" stroke="#367789" stroke-width="3" marker-end="url(#arrow)"/>
+<line x1="1013" y1="355" x2="940" y2="355" stroke="#367789" stroke-width="3" marker-end="url(#arrow)"/>
+<line x1="694" y1="355" x2="621" y2="355" stroke="#367789" stroke-width="3" marker-end="url(#arrow)"/>
+<line x1="375" y1="355" x2="302" y2="355" stroke="#367789" stroke-width="3" marker-end="url(#arrow)"/>
+<rect x="55" y="456" width="1210" height="57" rx="14" fill="#E4F6F4" stroke="#BEDFD9" stroke-width="1.5"/>
+<text x="79" y="491" font-family="'Noto Sans CJK SC','Microsoft YaHei','PingFang SC','Segoe UI',Arial,sans-serif" font-size="17" font-weight="750" fill="#1C6468" text-anchor="start" >FALLBACK</text>
+<text x="217" y="491" font-family="'Noto Sans CJK SC','Microsoft YaHei','PingFang SC','Segoe UI',Arial,sans-serif" font-size="18" font-weight="550" fill="#234C57" text-anchor="start" >无本地终端 / 无授权 / 无解析能力 → 仅产出研究设计与证据收集计划，不伪称已执行</text>
 </svg>

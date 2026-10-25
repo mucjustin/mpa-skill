@@ -1,55 +1,21 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 420" width="1280" height="420" role="img" aria-label="MPA Skill banner">
-  <defs>
-    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#FDF6F8"/>
-      <stop offset="0.55" stop-color="#FAF7F8"/>
-      <stop offset="1" stop-color="#F5EFF1"/>
-    </linearGradient>
-    <radialGradient id="halo1" cx="0.85" cy="0.25" r="0.55">
-      <stop offset="0" stop-color="#D65A7C" stop-opacity="0.12"/>
-      <stop offset="1" stop-color="#D65A7C" stop-opacity="0"/>
-    </radialGradient>
-    <radialGradient id="halo2" cx="0.2" cy="0.9" r="0.6">
-      <stop offset="0" stop-color="#A67C94" stop-opacity="0.10"/>
-      <stop offset="1" stop-color="#A67C94" stop-opacity="0"/>
-    </radialGradient>
-    <linearGradient id="bL" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#D65A7C"/>
-      <stop offset="1" stop-color="#B8456B"/>
-    </linearGradient>
-    <linearGradient id="bR" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#A67C94"/>
-      <stop offset="1" stop-color="#8A6580"/>
-    </linearGradient>
-    <linearGradient id="line" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0" stop-color="#D65A7C"/>
-      <stop offset="0.5" stop-color="#E87A6A"/>
-      <stop offset="1" stop-color="#F5C896"/>
-    </linearGradient>
-  </defs>
-
-  <rect width="1280" height="420" fill="url(#bg)"/>
-  <rect width="1280" height="420" fill="url(#halo1)"/>
-  <rect width="1280" height="420" fill="url(#halo2)"/>
-
-  <!-- 底部光带 -->
-  <rect x="0" y="406" width="1280" height="6" fill="url(#line)" opacity="0.9"/>
-  <rect x="0" y="416" width="1280" height="4" fill="#F2B5C1" opacity="0.5"/>
-
-  <!-- 左侧文案 -->
-  <text x="72" y="168" font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="76" font-weight="800" fill="#3D3A42" letter-spacing="2">MPA Skill</text>
-  <text x="72" y="226" font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="28" font-weight="500" fill="#9B95A3" letter-spacing="1">可核验、可复用、能落地的公共管理研究工作流</text>
-
-  <!-- 标签徽章 -->
-  <rect x="72" y="258" width="170" height="40" rx="20" fill="#FFFFFF" stroke="#F2B5C1"/>
-  <text x="92" y="285" font-family="'Segoe UI', Arial, sans-serif" font-size="20" font-weight="600" fill="#3D3A42">Agent Skill</text>
-  <rect x="258" y="258" width="152" height="40" rx="20" fill="#FFFFFF" stroke="#F2B5C1"/>
-  <text x="278" y="285" font-family="'Segoe UI', Arial, sans-serif" font-size="20" font-weight="600" fill="#3D3A42">Windows-first</text>
-  <rect x="426" y="258" width="140" height="40" rx="20" fill="#FFFFFF" stroke="#F2B5C1"/>
-  <text x="446" y="285" font-family="'Segoe UI', Arial, sans-serif" font-size="20" font-weight="600" fill="#3D3A42">MIT License</text>
-
-  <!-- 右侧书本 -->
-  <path d="M 862 132 C 908 162, 976 168, 1032 154 L 1032 306 C 976 320, 908 314, 862 284 Z" fill="url(#bL)" opacity="0.95"/>
-  <path d="M 1198 132 C 1152 162, 1084 168, 1028 154 L 1028 306 C 1084 320, 1152 314, 1198 284 Z" fill="url(#bR)" opacity="0.95"/>
-  <line x1="1030" y1="154" x2="1030" y2="306" stroke="#FDF6F8" stroke-width="5" stroke-linecap="round"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="405" viewBox="0 0 1280 405" role="img" aria-label="MPA Research Agent: evidence-grounded public management research"><defs><linearGradient id="soft" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F4FBFC"/><stop offset="1" stop-color="#EEF3FA"/></linearGradient><linearGradient id="nav" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#142943"/><stop offset="1" stop-color="#0B1628"/></linearGradient><marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#367789"/></marker></defs>
+<rect x="0" y="0" width="1280" height="405" rx="0" fill="url(#nav)" stroke="none" stroke-width="0"/>
+<circle cx="1118" cy="66" r="220" fill="#1B4353" opacity=".6"/>
+<circle cx="1012" cy="310" r="195" fill="#183958" opacity=".74"/>
+<path d="M0 388 H1280" stroke="#22B9AC" stroke-width="9"/>
+<text x="67" y="89" font-family="'Noto Sans CJK SC','Microsoft YaHei','PingFang SC','Segoe UI',Arial,sans-serif" font-size="18" font-weight="700" fill="#80D4CD" text-anchor="start" letter-spacing="4">MPA / OPEN RESEARCH</text>
+<text x="67" y="176" font-family="'Noto Sans CJK SC','Microsoft YaHei','PingFang SC','Segoe UI',Arial,sans-serif" font-size="66" font-weight="750" fill="#FFFFFF" text-anchor="start" >MPA Research Agent</text>
+<text x="67" y="230" font-family="'Noto Sans CJK SC','Microsoft YaHei','PingFang SC','Segoe UI',Arial,sans-serif" font-size="32" font-weight="650" fill="#E2F2F4" text-anchor="start" >公共管理证据研究助手</text>
+<text x="67" y="283" font-family="'Noto Sans CJK SC','Microsoft YaHei','PingFang SC','Segoe UI',Arial,sans-serif" font-size="20" font-weight="450" fill="#ACC4D1" text-anchor="start" >Research questions → verifiable evidence → bounded findings</text>
+<rect x="67" y="319" width="170" height="40" rx="20" fill="#204D57" stroke="#417F87" stroke-width="1.5"/>
+<text x="152" y="346" font-family="'Noto Sans CJK SC','Microsoft YaHei','PingFang SC','Segoe UI',Arial,sans-serif" font-size="16" font-weight="700" fill="#D9FDF6" text-anchor="middle" >CODEX + SKILL</text>
+<rect x="248" y="319" width="185" height="40" rx="20" fill="#204D57" stroke="#417F87" stroke-width="1.5"/>
+<text x="341" y="346" font-family="'Noto Sans CJK SC','Microsoft YaHei','PingFang SC','Segoe UI',Arial,sans-serif" font-size="15" font-weight="700" fill="#D9FDF6" text-anchor="middle" >WORKBUDDY ZIP</text>
+<rect x="448" y="319" width="163" height="40" rx="20" fill="#204D57" stroke="#417F87" stroke-width="1.5"/>
+<text x="530" y="346" font-family="'Noto Sans CJK SC','Microsoft YaHei','PingFang SC','Segoe UI',Arial,sans-serif" font-size="15" font-weight="700" fill="#D9FDF6" text-anchor="middle" >OFFLINE FIRST</text>
+<path d="M856 130 Q917 108 974 142 V295 Q915 269 856 286Z" fill="#E9F8F6" stroke="#26C2B4" stroke-width="6"/>
+<path d="M982 142 Q1046 104 1124 135 V286 Q1055 262 982 295Z" fill="#C0EDE8" stroke="#26C2B4" stroke-width="6"/>
+<line x1="978" y1="143" x2="978" y2="295" stroke="#26C2B4" stroke-width="7"/>
+<circle cx="1117" cy="277" r="54" fill="#21C6B3" stroke="#112439" stroke-width="8"/>
+<path d="M1088 277 L1109 299 L1143 255" fill="none" stroke="#112439" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>

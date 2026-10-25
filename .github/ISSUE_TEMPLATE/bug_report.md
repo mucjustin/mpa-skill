@@ -20,11 +20,13 @@ title: "[bug] "
 
 ## 环境
 
-- Windows 版本：
-- PowerShell 版本（`$PSVersionTable.PSVersion`）：
-- Codex / 客户端版本：
-- Skill 安装方式（`npx skills add` / 手动 / 其他）：
+- 操作系统及版本：
+- Python 版本（若使用证据工具）：
+- PowerShell 版本（若使用 Windows 工作区脚本）：
+- Codex / WorkBuddy / 其他客户端及版本：
+- Skill 安装来源（main / PR 分支 / WorkBuddy ZIP）：
+- 已执行的命令和诊断结果（去除个人资料）：
 
 ## 补充信息
 
-<!-- 相关日志、截图或最小复现材料 -->
+<!-- 只使用合成或公开示例；严禁提交学生资料、真实访谈、原始行政数据、访问令牌和私有项目路径 -->
