@@ -148,6 +148,8 @@ npx skills remove mpa-skill -g -y    # 卸载（不删除已创建的工作区�
 
 功能实现通过单元及 CLI 测试，**尚无真实用户研究证明其能改善研究结论或提高效率**。
 
+设计理念与单色标识参见 [Visual Identity](docs/brand-identity.md)。
+
 ## 🏗️ 架构
 
 **AI 组织研究，确定性工具检查证据，研究者作最终核实。** 新关联证据默认为 `unverified`，模型不得自行标记人工 `verified`。

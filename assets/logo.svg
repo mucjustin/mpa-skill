@@ -1,12 +1,30 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" role="img" aria-label="MPA Research Agent logo"><defs><linearGradient id="soft" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F4FBFC"/><stop offset="1" stop-color="#EEF3FA"/></linearGradient><linearGradient id="nav" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#142943"/><stop offset="1" stop-color="#0B1628"/></linearGradient><marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#367789"/></marker></defs>
-<rect x="18" y="18" width="476" height="476" rx="106" fill="#112439" stroke="#112439" stroke-width="0"/>
-<circle cx="397" cy="112" r="63" fill="#173F51"/><circle cx="394" cy="112" r="25" fill="#20B6AB" opacity=".86"/>
-<path d="M110 151 Q180 125 239 166 V316 Q170 277 110 301Z" fill="#EAF7F7" stroke="#54C1B5" stroke-width="6"/>
-<path d="M246 166 Q309 125 384 151 V301 Q313 276 246 316Z" fill="#C9F1E8" stroke="#54C1B5" stroke-width="6"/>
-<path d="M239 166 V316" stroke="#20B6AB" stroke-width="8"/>
-<path d="M151 205 L203 209 M151 239 L203 245 M277 210 L341 204 M277 245 L341 239" stroke="#4B8C92" stroke-width="7" stroke-linecap="round" opacity=".8"/>
-<circle cx="350" cy="316" r="48" fill="#20B6AB" stroke="#112439" stroke-width="8"/>
-<path d="M324 314 L343 333 L375 296" fill="none" stroke="#0B2435" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
-<text x="256" y="408" font-family="'Noto Sans CJK SC','Microsoft YaHei','PingFang SC','Segoe UI',Arial,sans-serif" font-size="81" font-weight="800" fill="#FFFFFF" text-anchor="middle" letter-spacing="5">MPA</text>
-<text x="256" y="444" font-family="'Noto Sans CJK SC','Microsoft YaHei','PingFang SC','Segoe UI',Arial,sans-serif" font-size="18" font-weight="700" fill="#B5D4DA" text-anchor="middle" letter-spacing="4">RESEARCH AGENT</text>
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" role="img" aria-label="MPA Research Agent emblem: a river of evidence links public governance to an open knowledge source">
+  <title>MPA Research Agent — Evidence River</title>
+  <desc>The source-book becomes a winding turquoise evidence route toward a civic skyline, with multiple stakeholder nodes.</desc>
+  <defs>
+    <linearGradient id="night" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#183C56"/><stop offset=".52" stop-color="#102C47"/><stop offset="1" stop-color="#071B31"/></linearGradient>
+    <linearGradient id="ribbon" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#9CE4DF"/><stop offset=".58" stop-color="#35AEA8"/><stop offset="1" stop-color="#0D668A"/></linearGradient>
+    <linearGradient id="paper" x1="0" y1="0" x2=".8" y2="1"><stop offset="0" stop-color="#FFF9E9"/><stop offset="1" stop-color="#CBEAE8"/></linearGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F8D59B"/><stop offset="1" stop-color="#D99C52"/></linearGradient>
+  </defs>
+  <rect x="8" y="8" width="496" height="496" rx="111" fill="url(#night)"/>
+  <path d="M66 371 A202 202 0 0 1 439 233" stroke="#71C5BA" stroke-width="2.5" opacity=".24" fill="none"/>
+  <circle cx="256" cy="170" r="106" fill="#2D5F68" opacity=".28"/>
+  <circle cx="257" cy="159" r="82" fill="#F4D6A1" opacity=".93"/>
+  <path d="M157 204 Q193 144 248 167 Q291 131 360 193 L379 217 H141Z" fill="#163C59" opacity=".72"/>
+  <path d="M175 211 V169 L196 157 V211 M202 211 V143 L222 132 V211 M228 211 V182 L245 182 V211 M267 211 V155 L291 146 V211 M298 211 V173 L320 173 V211 M325 211 V192 L343 192 V211" fill="#154362" stroke="#0D3A57" stroke-width="3"/>
+  <path d="M165 217 H352" stroke="#A0DAD4" stroke-width="5" stroke-linecap="round" opacity=".9"/>
+  <path d="M259 204 C313 214 326 243 281 264 C232 288 180 304 248 338 C268 348 282 356 257 377" stroke="#10344B" stroke-width="59" stroke-linecap="round" fill="none"/>
+  <path d="M259 204 C313 214 326 243 281 264 C232 288 180 304 248 338 C268 348 282 356 257 377" stroke="url(#ribbon)" stroke-width="47" stroke-linecap="round" fill="none"/>
+  <path d="M254 204 C294 215 304 239 274 251 C221 280 202 303 260 330" stroke="#F6F1D9" stroke-width="8" stroke-linecap="round" fill="none" opacity=".8"/>
+  <path d="M75 321 Q171 294 252 358 Q341 294 436 321 L436 390 Q336 374 256 432 Q165 374 75 390Z" fill="#0A253C"/>
+  <path d="M83 315 Q172 287 255 350 Q339 287 428 315 V370 Q344 352 255 405 Q173 352 83 370Z" fill="url(#paper)"/>
+  <path d="M255 350 V405" stroke="#1D7D8A" stroke-width="8" stroke-linecap="round"/>
+  <path d="M113 329 Q170 325 221 360 M113 352 Q160 347 197 367" stroke="#63B4AD" stroke-width="5" opacity=".6" fill="none" stroke-linecap="round"/>
+  <path d="M399 329 Q338 325 286 360 M397 352 Q353 348 318 367" stroke="#63B4AD" stroke-width="5" opacity=".6" fill="none" stroke-linecap="round"/>
+  <circle cx="157" cy="255" r="10" fill="url(#gold)"/>
+  <circle cx="356" cy="246" r="9" fill="#86DED5"/>
+  <circle cx="254" cy="116" r="8" fill="#FFF3D2"/>
+  <path d="M157 255 C183 257 191 271 206 280 M356 246 C334 246 328 246 320 252" stroke="#B7DFD7" stroke-width="3" stroke-dasharray="3 8" opacity=".78" fill="none"/>
+  <circle cx="256" cy="414" r="8" fill="url(#gold)"/>
 </svg>

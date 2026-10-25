@@ -139,6 +139,8 @@ Read [case-research.md](skills/mpa-skill/references/case-research.md), [evidence
 
 Unlike the instruction protocols, the optional **Python + SQLite CLI** actually snapshots local UTF-8 TXT/Markdown, CSV, DOCX, and extractable-text PDF files (SHA-256), indexes source locators, links exact quotations to claims, records explicit human reviews, audits integrity, and exports Markdown/JSON. No uploads, model calls, or automatic verification claims. The CLI is now **bundled inside the installed Skill** as `scripts/mpa_evidence.py`, runnable with Python 3.10+ without a package installation for TXT/MD/CSV/DOCX. Run `python <skill-root>/scripts/mpa_evidence.py doctor` to check capabilities; `pypdf` is optional and requires separate user approval for PDF. See [the evidence workbench guide](docs/evidence-workbench.md). Local copied originals and extracted text are **not encrypted**. Automated CLI tests do not establish improved research outcome quality.
 
+For the symbol rationale and monochrome variant, see [Visual Identity](docs/brand-identity.md).
+
 ## 🏗️ Architecture
 
 **The Skill organizes research, deterministic code checks evidence, and a human researcher controls verification.** All new evidence starts `unverified`, never self-approved by the agent.
