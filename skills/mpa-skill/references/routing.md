@@ -26,7 +26,7 @@ Routes (in dependency order): course → case → policy memo → literature →
 - **Course → Thesis**: course assets → literature → research design → fieldwork → data → thinking check → thesis → defence
 - **Case analysis**: problem/lens triage → actor and evidence plan → source audit → optional event/process tracing → rival mechanisms → bounded findings, alternatives and transfer limits
 - **Conversion + data**: capability preflight → source/data audit → data analysis or evidence gap → content → delivery → acceptance
-- **Case competition**: problem/lens → multi-actor evidence plan → verified fieldwork and timeline → theory/mechanism test → three-document structure → originality check
+- **Case competition**: problem/lens → fieldwork evidence and timeline → theory applicability and mechanism testing → three-document structure → originality check
 
 ## Route-specific rules
 
