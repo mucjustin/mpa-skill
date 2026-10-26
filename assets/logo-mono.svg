@@ -1,8 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256" role="img" aria-label="Monochrome MPA Research Agent evidence river symbol">
-<title>MPA Research Agent — single-color emblem</title>
-<path d="M124 28 Q184 37 166 73 Q157 87 122 102 Q82 121 118 150 Q149 172 125 193" fill="none" stroke="currentColor" stroke-width="25" stroke-linecap="round"/>
-<path d="M18 164 Q71 148 127 192 Q185 146 238 164 V206 Q174 197 127 233 Q76 198 18 206Z" fill="none" stroke="currentColor" stroke-width="11" stroke-linejoin="round"/>
-<path d="M127 193 V233" stroke="currentColor" stroke-width="10" stroke-linecap="round"/>
-<path d="M61 70 V49 L79 39 V70 M90 70 V25 L108 20 V70 M143 70 V43 L161 34 V70 M171 70 V51 L188 51 V70" fill="none" stroke="currentColor" stroke-width="9" stroke-linecap="round"/>
-<path d="M52 75 H197" stroke="currentColor" stroke-width="9" stroke-linecap="round"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" role="img" aria-label="One-color MPA Research Agent lettermark">
+<title>MPA Research Agent — monochrome MPA lettermark</title>
+<g transform="translate(-4 22) scale(.76)"><path id="letter-m" d="M 32 442 L 32 179 Q 32 162 49 162 L 66 162 L 147 247 L 228 162 L 257 162 L 257 442 L 207 442 L 207 265 L 147 326 L 85 265 L 85 442 Z" fill="currentColor"/><path id="data-bars" d="M 106 442 V 394 L 123 380 V 442 Z M 133 442 V 361 L 150 348 V 442 Z M 161 442 V 332 L 179 316 V 442 Z" fill="currentColor"/><path id="letter-p" d="M 278 162 L 377 162 Q 458 162 458 246 Q 458 329 377 329 L 332 329 L 332 442 L 278 442 Z M 332 212 L 332 279 L 374 279 Q 401 279 401 246 Q 401 212 374 212 Z" fill="currentColor" fill-rule="evenodd"/><path id="letter-a" d="M 451 442 L 524 180 Q 531 157 552 157 Q 566 157 572 181 L 652 442 L 591 442 L 575 390 L 508 390 L 495 442 Z M 526 340 L 560 340 L 542 283 Z" fill="currentColor" fill-rule="evenodd"/><path id="research-arc" d="M 472 439 C 515 392 554 368 602 373 C 583 378 553 392 533 412 L 509 439 Z" fill="currentColor"/></g>
 </svg>
