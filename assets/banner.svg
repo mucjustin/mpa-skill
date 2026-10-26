@@ -1,34 +1,13 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="405" viewBox="0 0 1280 405" role="img" aria-label="MPA Research Agent project banner: research journeys connect evidence, insight and public value">
-  <title>MPA Research Agent · Evidence-Grounded Public Management</title>
-  <defs>
-    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#173B55"/><stop offset="1" stop-color="#07182C"/></linearGradient>
-    <linearGradient id="river" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#8FE1D4"/><stop offset="1" stop-color="#138493"/></linearGradient>
-    <linearGradient id="paper" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFF9EB"/><stop offset="1" stop-color="#BFE5E3"/></linearGradient>
-    <linearGradient id="sun" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFE3AA"/><stop offset="1" stop-color="#DDA55D"/></linearGradient>
-  </defs>
-  <rect width="1280" height="405" fill="url(#bg)"/>
-  <path d="M0 0 H1280 V405 H0Z" fill="none" stroke="#48BDB4" stroke-width="2" opacity=".2"/>
-  <circle cx="1102" cy="190" r="219" fill="#28556D" opacity=".22"/>
-  <circle cx="992" cy="194" r="160" fill="#244C63" opacity=".37"/>
-  <circle cx="1016" cy="153" r="96" fill="url(#sun)" opacity=".96"/>
-  <path d="M869 235 Q945 154 1012 204 Q1062 154 1139 209 L1180 242 H852Z" fill="#15405B" opacity=".85"/>
-  <path d="M891 246 V203 L916 189 V246 M928 246 V175 L953 164 V246 M968 246 V211 L991 211 V246 M1014 246 V194 L1042 185 V246 M1056 246 V215 L1085 215 V246 M1096 246 V227 L1118 227 V246" fill="#153C5A" stroke="#133950" stroke-width="3"/>
-  <path d="M879 250 H1131" stroke="#A2DAD2" stroke-width="6" stroke-linecap="round"/>
-  <path d="M1005 243 C1073 259 1083 282 1014 301 C934 323 917 339 989 353" stroke="#13364B" stroke-width="48" fill="none" stroke-linecap="round"/>
-  <path d="M1005 243 C1073 259 1083 282 1014 301 C934 323 917 339 989 353" stroke="url(#river)" stroke-width="39" fill="none" stroke-linecap="round"/>
-  <path d="M1003 245 C1051 258 1047 278 1013 289 C970 302 953 322 1003 341" stroke="#F4EEDA" stroke-width="7" fill="none" stroke-linecap="round" opacity=".9"/>
-  <path d="M803 330 Q912 296 1000 359 Q1101 295 1196 330 V376 Q1082 363 1000 394 Q919 361 803 376Z" fill="#0A2A3D"/>
-  <path d="M812 321 Q912 298 1000 352 Q1094 299 1186 322 V362 Q1078 351 1000 386 Q921 350 812 362Z" fill="url(#paper)"/>
-  <path d="M1000 354 V388" stroke="#348B8C" stroke-width="7"/>
-  <circle cx="869" cy="273" r="11" fill="#F0C581"/>
-  <circle cx="1152" cy="273" r="10" fill="#76D5C5"/>
-  <path d="M869 273 Q892 268 920 294 M1152 273 Q1127 268 1101 294" stroke="#8FD2C8" stroke-width="3" stroke-dasharray="3 8" fill="none" opacity=".65"/>
-  <rect x="73" y="61" width="9" height="26" rx="4.5" fill="#45C6B2"/>
-  <text x="101" y="81" font-family="Arial, sans-serif" font-size="19" font-weight="700" letter-spacing="4" fill="#94DAD2">EVIDENCE-LED RESEARCH</text>
-  <text x="75" y="167" font-family="Arial, 'Segoe UI', sans-serif" font-size="65" font-weight="750" fill="#F9FBF8">MPA Research Agent</text>
-  <text x="75" y="222" font-family="'Noto Sans CJK SC','Microsoft YaHei','PingFang SC',Arial,sans-serif" font-size="32" font-weight="600" fill="#D9ECEA">公共管理证据研究助手</text>
-  <path d="M77 250 H664" stroke="#70C8BE" stroke-width="2" opacity=".45"/>
-  <text x="76" y="295" font-family="Arial,'Segoe UI',sans-serif" font-size="19" font-weight="450" fill="#B5CED6">From public questions to verifiable evidence</text>
-  <text x="76" y="334" font-family="Arial,'Segoe UI',sans-serif" font-size="15" font-weight="650" letter-spacing="3" fill="#69C8BA">QUESTION   /   EVIDENCE   /   INSIGHT   /   IMPACT</text>
-  <path d="M0 399 H1280" stroke="#3CC0B1" stroke-width="6"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="405" viewBox="0 0 1280 405" role="img" aria-label="MPA Research Agent banner: bold MPA lettermark, rising teal evidence bars, research arc, and bilingual project name">
+<title>MPA Research Agent | 公共管理证据研究助手</title>
+<rect width="1280" height="405" fill="#F9FBFC"/>
+<rect x="0" y="398" width="1280" height="7" fill="#0EA99C"/>
+<path d="M682 0 H1280 V398 H760 Q705 290 682 0" fill="#E8F6F5"/>
+<rect x="58" y="65" width="6" height="29" rx="3" fill="#0EA99C"/>
+<text x="81" y="88" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="700" letter-spacing="3" fill="#008B82">PUBLIC MANAGEMENT × EVIDENCE</text>
+<text x="61" y="186" font-family="Arial,Helvetica,sans-serif" font-size="60" font-weight="800" letter-spacing="-1.3" fill="#0D2F52">MPA Research Agent</text>
+<text x="62" y="243" font-family="'Noto Sans CJK SC','Microsoft YaHei','PingFang SC',sans-serif" font-size="30" font-weight="600" fill="#0D2F52">公共管理证据研究助手</text>
+<path d="M61 272 H643" stroke="#B2CBCC" stroke-width="2"/>
+<text x="62" y="316" font-family="Arial,Helvetica,sans-serif" font-size="19" fill="#516A80">Evidence-grounded · Research-led · Human-verified</text>
+<g transform="translate(740 36) scale(.68)"><path id="letter-m" d="M 32 442 L 32 179 Q 32 162 49 162 L 66 162 L 147 247 L 228 162 L 257 162 L 257 442 L 207 442 L 207 265 L 147 326 L 85 265 L 85 442 Z" fill="#0D2F52"/><path id="data-bars" d="M 106 442 V 394 L 123 380 V 442 Z M 133 442 V 361 L 150 348 V 442 Z M 161 442 V 332 L 179 316 V 442 Z" fill="#0EA99C"/><path id="letter-p" d="M 278 162 L 377 162 Q 458 162 458 246 Q 458 329 377 329 L 332 329 L 332 442 L 278 442 Z M 332 212 L 332 279 L 374 279 Q 401 279 401 246 Q 401 212 374 212 Z" fill="#0D2F52" fill-rule="evenodd"/><path id="letter-a" d="M 451 442 L 524 180 Q 531 157 552 157 Q 566 157 572 181 L 652 442 L 591 442 L 575 390 L 508 390 L 495 442 Z M 526 340 L 560 340 L 542 283 Z" fill="#0D2F52" fill-rule="evenodd"/><path id="research-arc" d="M 472 439 C 515 392 554 368 602 373 C 583 378 553 392 533 412 L 509 439 Z" fill="#1FBDC0"/></g>
 </svg>

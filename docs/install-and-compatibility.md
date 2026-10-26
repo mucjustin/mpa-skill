@@ -1,6 +1,6 @@
 # 安装与兼容性 / Codex & WorkBuddy
 
-**展示名称：MPA Research Agent（公共管理证据研究助手）**。技术 Skill ID、安装目录和 GitHub 仓库地址仍保留 `mpa-skill`、`mucjustin/mpa-skill`，不破坏已有命令。Skill 元数据 `version: "2.2.1"`、CHANGELOG 与对应 GitHub Release 必须保持一致。正式附件请从 [Releases](https://github.com/mucjustin/mpa-skill/releases/latest) 下载。
+**展示名称：MPA Research Agent（公共管理证据研究助手）**。技术 Skill ID、安装目录和 GitHub 仓库地址仍保留 `mpa-skill`、`mucjustin/mpa-skill`，不破坏已有命令。Skill 元数据 `version: "2.2.2"`、CHANGELOG 与对应 GitHub Release 必须保持一致。正式附件请从 [Releases](https://github.com/mucjustin/mpa-skill/releases/latest) 下载。
 
 ## 宿主支持与验证边界
 
@@ -9,7 +9,7 @@
 | 发现包含 `SKILL.md` 的 Skill | 官方支持 | 官方支持 |
 | 加载 references 和执行脚本 | 具备对应文件/终端权限时支持 | 官方描述支持，实际客户端权限需核查 |
 | 单目录自包含 Python 工具 | GitHub CI 隔离测试通过 | GitHub CI ZIP 解压隔离测试通过 |
-| 安装 v2.2.1 | `main` / 正式 GitHub Release | ZIP 隔离执行已验证；**尚未实测 WorkBuddy GUI 导入** |
+| 安装 v2.2.2 | `main` / 正式 GitHub Release | ZIP 隔离执行已验证；**尚未实测 WorkBuddy GUI 导入** |
 | PDF 文本处理 | 可选 `pypdf` | 需另行授权安装 `pypdf`，且宿主允许调用 |
 
 来源：

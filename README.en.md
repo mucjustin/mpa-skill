@@ -67,7 +67,7 @@ Two behavioral gates run throughout:
 
 ---
 
-**Current version: v2.2.1.** [GitHub Release and ZIP](https://github.com/mucjustin/mpa-skill/releases/latest) · [Changelog](CHANGELOG.md). Merging code alone does not create a GitHub Release.
+**Current version: v2.2.2.** [GitHub Release and ZIP](https://github.com/mucjustin/mpa-skill/releases/latest) · [Changelog](CHANGELOG.md). Merging code alone does not create a GitHub Release.
 
 ## 🚀 Quick start
 

@@ -22,6 +22,13 @@
 
 暂无。下一次发布前请记录新改动，并递增 `skills/mpa-skill/SKILL.md` 的版本号。
 
+## [2.2.2] - 2026-10-26
+
+### Changed — MPA 字母品牌标志
+- 根据新的品牌反馈，将「证据之河」替换为清晰的 **MPA** 几何字母标志（M 内青绿色数据柱、A 内研究上升弧线），移除不直观的复杂具象元素。
+- 更新 `assets/logo.svg`、`assets/banner.svg`、`assets/logo-mono.svg` 及中英文品牌说明；核心字母采用 SVG 路径，在 32/64 像素下仍可辨认。
+- 保持 Codex/WorkBuddy 安装标识、Python/SQLite 证据工具与协议不变；通过自动发布流程更新 v2.2.2 安装 ZIP 和完整性校验文件。
+
 ## [2.2.1] - 2026-10-26
 
 ### Changed — 视觉标识优化

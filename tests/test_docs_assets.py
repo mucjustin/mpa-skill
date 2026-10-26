@@ -17,6 +17,14 @@ class TestDocsAssets(unittest.TestCase):
                 self.assertIn("viewBox", root.attrib)
                 self.assertTrue(root.attrib.get("aria-label"))
 
+    def test_logo_letters_are_real_paths(self):
+        for name in ("logo.svg", "logo-mono.svg", "banner.svg"):
+            with self.subTest(name=name):
+                root = ET.parse(ROOT / "assets" / name).getroot()
+                ids = {element.attrib.get("id") for element in root.iter()}
+                self.assertTrue({"letter-m", "letter-p", "letter-a", "data-bars", "research-arc"}.issubset(ids))
+                self.assertIn("MPA", root.attrib["aria-label"])
+
     def test_bilingual_documents_have_real_local_targets(self):
         for name in ("README.md", "README.en.md", "docs/install-and-compatibility.md"):
             text = (ROOT / name).read_text(encoding="utf-8")
