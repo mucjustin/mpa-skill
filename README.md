@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="assets/logo.svg" alt="MPA Research Agent logo" width="160">
+  <img src="assets/brand-lockup.svg" alt="MPA Research Agent 正式标志：连写 MP、青绿色 A、金色圆点及中英文名称" width="570">
 </p>
 
 <h1 align="center">MPA Research Agent</h1>
@@ -67,7 +67,7 @@
 
 ---
 
-**当前版本：v2.2.2。** [正式发行说明与安装包](https://github.com/mucjustin/mpa-skill/releases/latest) · [更新日志](CHANGELOG.md)。合并代码并不会自动生成发行版，因此采用单独的 CI 发布门禁。
+**当前版本：v2.2.3。** [正式发行说明与安装包](https://github.com/mucjustin/mpa-skill/releases/latest) · [更新日志](CHANGELOG.md)。合并代码并不会自动生成发行版，因此采用单独的 CI 发布门禁。
 
 ## 🚀 快速开始
 

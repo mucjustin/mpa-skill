@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="assets/logo.svg" alt="MPA Research Agent logo" width="160">
+  <img src="assets/brand-lockup.svg" alt="Approved MPA Research Agent emblem with joined MP, teal A, gold dot and bilingual name" width="570">
 </p>
 
 <h1 align="center">MPA Research Agent</h1>
@@ -67,7 +67,7 @@ Two behavioral gates run throughout:
 
 ---
 
-**Current version: v2.2.2.** [GitHub Release and ZIP](https://github.com/mucjustin/mpa-skill/releases/latest) · [Changelog](CHANGELOG.md). Merging code alone does not create a GitHub Release.
+**Current version: v2.2.3.** [GitHub Release and ZIP](https://github.com/mucjustin/mpa-skill/releases/latest) · [Changelog](CHANGELOG.md). Merging code alone does not create a GitHub Release.
 
 ## 🚀 Quick start
 
