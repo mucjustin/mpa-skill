@@ -5,7 +5,7 @@ display_name: "公共管理证据研究助手"
 display_name_en: "MPA Research Agent"
 description_zh: "公共管理课程、案例、政策及学位研究的证据驱动研究助手，支持本地来源核验与研究工作流。"
 description_en: "Evidence-grounded MPA and public-policy research workflows with an optional offline source-verification CLI."
-version: "2.2.2"
+version: "2.2.3"
 author: "mucjustin"
 examples_zh:
   - "分析这份公共管理案例，先列出证据缺口和竞争性解释"

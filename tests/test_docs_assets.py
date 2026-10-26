@@ -5,7 +5,7 @@ from pathlib import Path
 from xml.etree import ElementTree as ET
 
 ROOT = Path(__file__).resolve().parents[1]
-SVG = ["logo.svg", "logo-mono.svg", "banner.svg", "spine.svg", "workflow.svg", "evidence-flow.svg"]
+SVG = ["logo.svg", "logo-mono.svg", "brand-lockup.svg", "banner.svg", "spine.svg", "workflow.svg", "evidence-flow.svg"]
 
 
 class TestDocsAssets(unittest.TestCase):
@@ -18,11 +18,11 @@ class TestDocsAssets(unittest.TestCase):
                 self.assertTrue(root.attrib.get("aria-label"))
 
     def test_logo_letters_are_real_paths(self):
-        for name in ("logo.svg", "logo-mono.svg", "banner.svg"):
+        for name in ("logo.svg", "logo-mono.svg", "brand-lockup.svg", "banner.svg"):
             with self.subTest(name=name):
                 root = ET.parse(ROOT / "assets" / name).getroot()
                 ids = {element.attrib.get("id") for element in root.iter()}
-                self.assertTrue({"letter-m", "letter-p", "letter-a", "data-bars", "research-arc"}.issubset(ids))
+                self.assertTrue({"mpa-reference-mark", "joined-mp", "a-upper", "a-lower", "evidence-curve", "gold-point"}.issubset(ids))
                 self.assertIn("MPA", root.attrib["aria-label"])
 
     def test_bilingual_documents_have_real_local_targets(self):

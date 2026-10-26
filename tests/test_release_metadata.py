@@ -13,8 +13,8 @@ spec.loader.exec_module(module)
 
 class ReleaseContractTests(unittest.TestCase):
     def test_version_matches_release_docs(self):
-        self.assertEqual(module.skill_version(), "2.2.2")
-        self.assertEqual(module.validate(), "2.2.2")
+        self.assertEqual(module.skill_version(), "2.2.3")
+        self.assertEqual(module.validate(), "2.2.3")
 
     def test_different_changelog_version_is_rejected(self):
         with tempfile.TemporaryDirectory() as tmp:
@@ -48,8 +48,8 @@ class ReleaseContractTests(unittest.TestCase):
                 self.assertIn(required, source)
 
     def test_release_notes_are_complete(self):
-        notes = (ROOT / "docs/releases/v2.2.2.md").read_text(encoding="utf-8")
-        for term in ("v2.2.2", "mpa-skill.zip", "SHA256SUMS", "SQLite", "WorkBuddy"):
+        notes = (ROOT / "docs/releases/v2.2.3.md").read_text(encoding="utf-8")
+        for term in ("v2.2.3", "mpa-skill.zip", "SHA256SUMS", "SQLite", "WorkBuddy"):
             with self.subTest(term=term):
                 self.assertIn(term, notes)
 
