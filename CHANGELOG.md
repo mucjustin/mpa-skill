@@ -31,6 +31,7 @@
 - 证据工作台新增 `check-draft`、`progress`、`redact`、`export --redact`/`--redact-terms`、`workspace-init`、`env-check` 命令。
 - 引文支持跨行/跨页范围定位（`L3-L5`）、显式 `--normalized` 匹配（保存原文逐字片段并标记 `match_mode`）、DOCX 脚注 `fn.N` 与尾注 `en.N`。
 - `claim --rival-of` 登记竞争性解释；审计新增 `no_rival_explanation`、`rival_untested`、`normalized_match_check_context`。
+- 新增说明图 `assets/in-service.svg`（在职研究路径与教练模式循环）；更新 `workflow.svg`、`evidence-flow.svg` 的功能文字。正式 Logo 保持不变。
 
 ### Changed
 - `SKILL.md` 的 `description` 加入中文触发关键词，并说明在职研究与教练模式入口。

@@ -144,6 +144,8 @@ The research content has been accepted. Deliver it through a currently available
 
 Most MPA students study while working, research their own organisation, and have fragmented time. v2.3.0 adds:
 
+<p align="center"><img src="assets/in-service.svg" alt="In-service research path: workplace problem, topic comparison, insider check, de-identified evidence, thesis and policy report, plus the coaching loop" width="100%"></p>
+
 - **Workplace problem → topic**: decompose a workplace frustration into phenomenon, public problem, research question and theory dialogue; compare 2–3 candidate topics on evidence access, feasibility, insider risk and confidentiality. See the [in-service research guide](skills/mpa-skill/references/in-service-research.md).
 - **Insider-research checks**: role conflict, power relations in interviews, consent, material classification (classified material never enters the research), silent groups.
 - **Local de-identification**: `redact` and `export --redact-terms` replace names, units and places from the student's own term list, with automatic fallbacks for ID numbers, phones, emails and official document numbers; fully offline.

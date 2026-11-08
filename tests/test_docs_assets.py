@@ -5,7 +5,7 @@ from pathlib import Path
 from xml.etree import ElementTree as ET
 
 ROOT = Path(__file__).resolve().parents[1]
-SVG = ["logo.svg", "logo-mono.svg", "brand-lockup.svg", "banner.svg", "spine.svg", "workflow.svg", "evidence-flow.svg"]
+SVG = ["logo.svg", "logo-mono.svg", "brand-lockup.svg", "banner.svg", "spine.svg", "workflow.svg", "evidence-flow.svg", "in-service.svg"]
 
 
 class TestDocsAssets(unittest.TestCase):
