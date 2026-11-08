@@ -12,7 +12,9 @@ from pathlib import Path
 from .core import MAX_BYTES, EvidenceError, connect, extract
 
 CLAIM_TAG = re.compile(r"[\[【](C\d{4,})[\]】]")
-SENTENCE = re.compile(r"[^。！？!?；;\n]+[。！？!?；;]?")
+# Sentence ends: CJK/ASCII terminators, or an English period followed by whitespace
+# or end of text (so decimals such as 3.5 and claim tags like [C0001]. stay intact).
+SENTENCE_END = re.compile(r"(?<=[。！？!?；;])|(?<=\.)(?=\s|$)|\n")
 # Wording that asserts causation; flagged when not backed by a tagged causal claim.
 CAUSAL = re.compile(
     r"导致|造成|引起|促使|使得|归因于|决定了|带来了|推动了|促进了|提升了|提高了|降低了|减少了|增加了|"
@@ -28,8 +30,8 @@ def _draft_sentences(path: Path):
         raise EvidenceError("Draft exceeds the 30 MiB limit.")
     _, segments = extract(path)
     for locator, content in segments:
-        for match in SENTENCE.finditer(content):
-            sentence = match.group(0).strip()
+        for piece in SENTENCE_END.split(content):
+            sentence = piece.strip()
             if sentence and not sentence.startswith("#"):
                 yield locator, sentence
 

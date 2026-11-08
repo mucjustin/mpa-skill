@@ -247,6 +247,21 @@ class TestDraftCheck(Base):
         self.assertTrue(report["ok"])
         self.assertIn("causal_wording_on_noncausal_claim", [i["code"] for i in report["issues"]])
 
+    def test_english_sentences_are_split_so_tags_do_not_mask_neighbours(self):
+        doc = self.source("en.txt", "Complaints fell after the pilot.\n")
+        claim = core.add_claim(self.ws, "why", "The pilot caused complaints to fall", "causal")
+        rival = core.add_claim(self.ws, "why", "Inspections caused it", "causal", rival_of=claim)
+        for c in (claim, rival):
+            eid = core.add_evidence(self.ws, c, doc, "L1", "Complaints fell")
+            core.review_evidence(self.ws, eid, "verified", "R1")
+        draft = self.root / "en.md"
+        draft.write_text(f"The pilot caused complaints to fall [{claim}]. Another policy caused "
+                         "unemployment. Spending rose 3.5 percent in 2023.\n", encoding="utf-8")
+        report = check_draft(self.ws, draft)
+        self.assertEqual(report["sentences"], 3)
+        untagged = [i["sentence"] for i in report["issues"] if i["code"] == "untagged_causal_statement"]
+        self.assertEqual(untagged, ["Another policy caused unemployment."])
+
 
 if __name__ == "__main__":
     unittest.main()
