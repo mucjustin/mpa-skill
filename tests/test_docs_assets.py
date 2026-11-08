@@ -5,7 +5,7 @@ from pathlib import Path
 from xml.etree import ElementTree as ET
 
 ROOT = Path(__file__).resolve().parents[1]
-SVG = ["logo.svg", "logo-mono.svg", "brand-lockup.svg", "banner.svg", "spine.svg", "workflow.svg", "evidence-flow.svg"]
+SVG = ["logo.svg", "logo-mono.svg", "brand-lockup.svg", "banner.svg", "spine.svg", "workflow.svg", "evidence-flow.svg", "in-service.svg"]
 
 
 class TestDocsAssets(unittest.TestCase):
@@ -39,10 +39,9 @@ class TestDocsAssets(unittest.TestCase):
             for path in re.findall(r'<img[^>]*src="(assets/[^"]+)"', text):
                 self.assertTrue((ROOT / path).is_file(), path)
 
-    def test_generated_old_images_removed_but_historical_sources_retained(self):
+    def test_legacy_material_removed_but_benchmark_retained(self):
         self.assertFalse((ROOT / "assets" / "xiaohei-illustrations").exists())
-        self.assertFalse((ROOT / "ml-analysis" / "output").exists())
-        self.assertTrue((ROOT / "ml-analysis" / "mpa_ml_analysis.py").is_file())
+        self.assertFalse((ROOT / "ml-analysis").exists(), "legacy ML experiment was removed in v2.3.0")
         self.assertTrue((ROOT / "docs" / "validation" / "v1.0.0-benchmark.md").is_file())
 
 

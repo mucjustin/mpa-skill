@@ -20,10 +20,10 @@
     <img src="https://img.shields.io/github/v/release/mucjustin/mpa-skill?color=brightgreen" alt="Release">
   </a>
   <a href="#">
-    <img src="https://img.shields.io/badge/platform-Windows--first-0078D4.svg" alt="Platform">
+    <img src="https://img.shields.io/badge/platform-macOS%20%7C%20Windows%20%7C%20Linux-0078D4.svg" alt="Platform">
   </a>
   <a href="#">
-    <img src="https://img.shields.io/badge/PowerShell-5.1%2B-5391FE.svg?logo=powershell" alt="PowerShell">
+    <img src="https://img.shields.io/badge/Python-3.10%2B-3776AB.svg?logo=python&logoColor=white" alt="Python 3.10+">
   </a>
   <a href="#">
     <img src="https://img.shields.io/badge/Codex-Agent%20Skill-8A2BE2.svg" alt="Codex Agent Skill">
@@ -47,7 +47,7 @@ Two behavioral gates run throughout:
 - 🛡️ **Data before writing**: when usable data exists, audit provenance, cleaning, methods, and numbers first. See the [execution handbook](skills/mpa-skill/references/execution.md).
 - 🔄 **Recoverable delivery**: after Office interruption, reacquire document identity; stop at `STATE_UNKNOWN` when unsure.
 
-> **Windows-first** workspace helpers use PowerShell; the bundled Python evidence engine runs in Python 3.10+ environments with local execution permission.
+> **Cross-platform**: since v2.3.0 the evidence tool and workspace setup are pure Python 3.10+ standard library and run on macOS, Windows and Linux. PowerShell is no longer required.
 
 ---
 
@@ -56,24 +56,26 @@ Two behavioral gates run throughout:
 | | Feature | One-liner |
 |---|---|---|
 | 🧭 | MPA Research Spine | Eight-step verifiable research thread |
-| 🛣️ | Twelve task routes | Course, case, policy, literature, design, fieldwork, data, thesis, defence, and related tasks |
+| 🛣️ | Fourteen task routes | Course, case, policy, literature, design, fieldwork, data, thesis, defence, workplace topics, coaching, and related tasks |
+| 🏢 | In-service research | Workplace problem → topic, insider-ethics checks, local de-identification, thesis and policy report from one evidence base |
+| 🎓 | Coaching mode | Asks and diagnoses instead of drafting; draft self-check, method diagnosis, defence rehearsal, supervisor briefs |
 | 🔗 | Course-to-capstone reuse | Notes, cases, code become assets; re-verify before reuse |
 | 🧠 | MPA knowledge ontology | Theory map + China governance contexts + thinking checklist |
 | 🛡️ | Data before writing | Audit first, write second, never mask gaps |
-| 🔎 | Bundled evidence workbench | Offline hashes, exact quotations, SQLite records, explicit human review |
+| 🔎 | Bundled evidence workbench | Offline hashes, exact quotations (incl. multi-line ranges and opt-in PDF-normalized matching), rival explanations, SQLite records, explicit human review |
 | 🔄 | Recoverable delivery | Interruptible; stops at `STATE_UNKNOWN` |
 | 🧾 | AI-use disclosure | Generated only from actual tool use; see [disclosure workflow](skills/mpa-skill/references/aigc-disclosure.md) |
-| ✅ | Contract tests | PowerShell tests cover structure, instructions, docs, and privacy |
+| ✅ | Cross-platform tests | Python tests on macOS / Windows / Linux CI cover tools, safety red lines, docs and privacy |
 
 ---
 
-**Current version: v2.2.3.** [GitHub Release and ZIP](https://github.com/mucjustin/mpa-skill/releases/latest) · [Changelog](CHANGELOG.md). Merging code alone does not create a GitHub Release.
+**Current version: v2.3.0.** [GitHub Release and ZIP](https://github.com/mucjustin/mpa-skill/releases/latest) · [Changelog](CHANGELOG.md). Merging code alone does not create a GitHub Release.
 
 ## 🚀 Quick start
 
 ### Install
 
-```powershell
+```bash
 npx skills add mucjustin/mpa-skill -g -s mpa-skill -y --full-depth
 ```
 
@@ -81,26 +83,35 @@ npx skills add mucjustin/mpa-skill -g -s mpa-skill -y --full-depth
 
 The Skill follows WorkBuddy's documented `SKILL.md`, `references/`, and `scripts/` layout with bilingual metadata and a ZIP packaging check.
 
-```powershell
-python tools/package_skill.py --output dist/mpa-skill.zip
+```bash
+python3 tools/package_skill.py --output dist/mpa-skill.zip
 ```
 
 Import `dist/mpa-skill.zip` through WorkBuddy's Skills → Add Skill → Upload Skill, or download the named ZIP attachment from the [latest GitHub Release](https://github.com/mucjustin/mpa-skill/releases/latest). **ZIP compatibility is tested; in-app WorkBuddy import is not yet verified.** See [installation and compatibility](docs/install-and-compatibility.md).
 
-### Initialize workspace
+### Initialize workspace (optional)
+
+macOS / Linux:
+
+```bash
+SKILL_ROOT="$HOME/.agents/skills/mpa-skill"   # use your actual install location
+python3 "$SKILL_ROOT/scripts/mpa_evidence.py" workspace-init "$HOME/Documents/MPA-Workspace" --dry-run
+python3 "$SKILL_ROOT/scripts/mpa_evidence.py" workspace-init "$HOME/Documents/MPA-Workspace"
+python3 "$SKILL_ROOT/scripts/mpa_evidence.py" env-check
+```
+
+Windows:
 
 ```powershell
 $skillRoot = Join-Path $HOME '.agents\skills\mpa-skill'
-& (Join-Path $skillRoot 'scripts\Initialize-MpaWorkspace.ps1') `
-  -WorkspaceRoot (Join-Path $HOME 'Documents\MPA-Workspace')
+python (Join-Path $skillRoot 'scripts\mpa_evidence.py') workspace-init (Join-Path $HOME 'Documents\MPA-Workspace')
 ```
 
-Default config goes to `%APPDATA%\mpa-skill\config.json`. Does not modify Zotero database or Obsidian settings. Add `-WhatIf` to preview; run `Test-MpaEnvironment.ps1` to check your setup.
-If the config file already exists, initialization stops and preserves it. Pass a new `-ConfigPath` to create another configuration.
+The config goes to `~/Library/Application Support/mpa-skill/config.json` (macOS), `%APPDATA%\mpa-skill\config.json` (Windows) or `~/.config/mpa-skill/config.json` (Linux), or wherever `--config` / `MPA_WORKSPACE_CONFIG` points. It never modifies the Zotero database or Obsidian settings, and stops rather than overwrite an existing config.
 
 ### Update and uninstall
 
-```powershell
+```bash
 npx skills update mpa-skill -g -y    # Update
 npx skills remove mpa-skill -g -y    # Uninstall (keeps your workspace and config)
 ```
@@ -128,6 +139,21 @@ The research content has been accepted. Deliver it through a currently available
 ```
 
 ---
+
+## 🏢 Built for in-service MPA students (v2.3.0)
+
+Most MPA students study while working, research their own organisation, and have fragmented time. v2.3.0 adds:
+
+<p align="center"><img src="assets/in-service.svg" alt="In-service research path: workplace problem, topic comparison, insider check, de-identified evidence, thesis and policy report, plus the coaching loop" width="100%"></p>
+
+- **Workplace problem → topic**: decompose a workplace frustration into phenomenon, public problem, research question and theory dialogue; compare 2–3 candidate topics on evidence access, feasibility, insider risk and confidentiality. See the [in-service research guide](skills/mpa-skill/references/in-service-research.md).
+- **Insider-research checks**: role conflict, power relations in interviews, consent, material classification (classified material never enters the research), silent groups.
+- **Local de-identification**: `redact` and `export --redact-terms` replace names, units and places from the student's own term list, with automatic fallbacks for ID numbers, phones, emails and official document numbers; fully offline.
+- **Coaching mode**: when asked "coach me, don't write it", the Skill asks and diagnoses only, backed by `check-draft` (claim–evidence coverage, causal wording, overclaiming), method diagnosis, defence rehearsal and supervisor briefs. See [coaching mode](skills/mpa-skill/references/coaching-mode.md).
+- **Resumable progress**: `progress` stores the status of the eight Research Spine links and the next task, so a 30-minute session can pick up where the last one stopped.
+- **One study, two outputs**: thesis and policy report share one evidence base; every recommendation links back to evidence IDs.
+
+These features pass synthetic unit and CLI tests; **they have not yet been evaluated with real students**.
 
 ## 🧩 Evidence-led Case Research Engine (v2.2.0)
 
@@ -174,12 +200,10 @@ mpa-skill/
 │   ├── references/                # Research and source-integrity protocols
 │   └── scripts/
 │       ├── mpa_evidence.py        # Bundled CLI
-│       ├── evidence_workbench/    # Python / SQLite core
-│       └── *.ps1                  # Windows workspace utilities
+│       └── evidence_workbench/    # Python / SQLite core, redaction, draft check, workspace config
 ├── tools/package_skill.py         # ZIP packaging
-├── tests/                         # Behavioral, package, asset, regression tests
-├── docs/                          # Installation, examples, historical benchmarks
-└── ml-analysis/                   # Legacy experiment source (plots regenerated)
+├── tests/                         # Tool, Skill contract, package, docs and workspace tests (all Python)
+└── docs/                          # Installation, examples, historical benchmarks
 ```
 
 ---
@@ -224,17 +248,13 @@ See [SECURITY.md](SECURITY.md).
 
 ## 🧪 Development and testing
 
-```powershell
-python -m unittest discover -s tests -p "test_skill_package.py" -v
-python -m unittest discover -s tests -p "test_docs_assets.py" -v
-python tools/package_skill.py --output dist/mpa-skill.zip
-pwsh -NoProfile -File tests/Test-PublicSkill.ps1
-pwsh -NoProfile -File tests/Test-ReliabilityScenarios.ps1
-pwsh -NoProfile -File tests/Test-BenchmarkManifest.ps1
-pwsh -NoProfile -File tests/Test-WorkspaceScripts.ps1
+```bash
+python3 -m unittest discover -s tests -v
+python3 tools/check_release.py
+python3 tools/package_skill.py --output dist/mpa-skill.zip
 ```
 
-CI (GitHub Actions, windows-latest) runs the same tests on main and every PR.
+CI (GitHub Actions) runs the same suite on macOS, Windows and Linux with Python 3.10 and 3.13.
 
 ---
 
@@ -242,7 +262,7 @@ CI (GitHub Actions, windows-latest) runs the same tests on main and every PR.
 
 | Capability | Required | Notes |
 |---|---:|---|
-| Host file and terminal access | ✅ (for executable tools) | Without local execution rights, only the planning route is available |
+| Python 3.10+ with host file and terminal access | ✅ (for executable tools) | Without local execution rights, only the planning route is available |
 | Python/R/spreadsheet | ❌ | Used when data route needs it; reports block if missing |
 | Word/Office editing | ❌ | After content acceptance; governed by observed schema |
 | Zotero | ❌ | Literature management; supported interfaces only |
@@ -258,8 +278,8 @@ Never silently installs third-party software or pretends an integration succeede
 | Problem | Fix |
 |---|---|
 | Skill not found | Restart Codex; run `npx skills list -g` |
-| Config not found | Run `Initialize-MpaWorkspace.ps1` or set `MPA_WORKSPACE_CONFIG` |
-| Zotero won't start | Run `Test-MpaEnvironment.ps1`; check executable path |
+| Config not found | Run `mpa_evidence.py workspace-init` or set `MPA_WORKSPACE_CONFIG` |
+| Zotero won't start | Run `mpa_evidence.py env-check`; check path and connector |
 | Missing capability | Install matching skill, or let controller degrade and state scope |
 
 ---

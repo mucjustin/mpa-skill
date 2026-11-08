@@ -1,6 +1,6 @@
 # 安装与兼容性 / Codex & WorkBuddy
 
-**展示名称：MPA Research Agent（公共管理证据研究助手）**。技术 Skill ID、安装目录和 GitHub 仓库地址仍保留 `mpa-skill`、`mucjustin/mpa-skill`，不破坏已有命令。Skill 元数据 `version: "2.2.3"`、CHANGELOG 与对应 GitHub Release 必须保持一致。正式附件请从 [Releases](https://github.com/mucjustin/mpa-skill/releases/latest) 下载。
+**展示名称：MPA Research Agent（公共管理证据研究助手）**。技术 Skill ID、安装目录和 GitHub 仓库地址仍保留 `mpa-skill`、`mucjustin/mpa-skill`，不破坏已有命令。Skill 元数据 `version: "2.3.0"`、CHANGELOG 与对应 GitHub Release 必须保持一致。正式附件请从 [Releases](https://github.com/mucjustin/mpa-skill/releases/latest) 下载。
 
 ## 宿主支持与验证边界
 
@@ -9,8 +9,9 @@
 | 发现包含 `SKILL.md` 的 Skill | 官方支持 | 官方支持 |
 | 加载 references 和执行脚本 | 具备对应文件/终端权限时支持 | 官方描述支持，实际客户端权限需核查 |
 | 单目录自包含 Python 工具 | GitHub CI 隔离测试通过 | GitHub CI ZIP 解压隔离测试通过 |
-| 安装 v2.2.3 | `main` / 正式 GitHub Release | ZIP 隔离执行已验证；**尚未实测 WorkBuddy GUI 导入** |
+| 安装 v2.3.0 | `main` / 正式 GitHub Release | ZIP 隔离执行已验证；**尚未实测 WorkBuddy GUI 导入** |
 | PDF 文本处理 | 可选 `pypdf` | 需另行授权安装 `pypdf`，且宿主允许调用 |
+| 操作系统 | macOS / Windows / Linux（CI 三平台测试） | 取决于宿主环境；只需 Python 3.10+，无需 PowerShell |
 
 来源：
 - [OpenAI Agent Skills 结构与运行要求](https://developers.openai.com/api/docs/guides/tools-skills)
@@ -21,18 +22,26 @@
 
 正式安装命令（默认取得 main 的现有版本）：
 
-~~~powershell
+~~~bash
 npx skills add mucjustin/mpa-skill -g -s mpa-skill -y --full-depth
 ~~~
 
 PR #2 与 PR #3 均已合并到 `main`。默认安装命令将获取包含研究引擎和内置证据工具的新版；若需要固定复现某一次发行，请使用 [GitHub Releases](https://github.com/mucjustin/mpa-skill/releases/latest) 中对应的 ZIP 或标签源码。
 
-参考本地工具预检（实际路径以你安装的位置为准）：
+参考本地工具预检（实际路径以你安装的位置为准）。macOS / Linux：
+
+~~~bash
+python3 "$HOME/.agents/skills/mpa-skill/scripts/mpa_evidence.py" doctor
+~~~
+
+Windows：
 
 ~~~powershell
 $skillRoot = Join-Path $HOME '.agents\skills\mpa-skill'
 python (Join-Path $skillRoot 'scripts\mpa_evidence.py') doctor
 ~~~
+
+macOS 自带的 `python3` 若低于 3.10，可通过 [python.org](https://www.python.org/downloads/macos/) 安装包或 Homebrew（`brew install python`）安装新版本。
 
 `doctor` 只读，不初始化数据库，不自动联网、不自动安装依赖。若 Python 版本不支持或没有终端权限，Skill 应只提供研究方案或证据收集计划。
 
@@ -40,8 +49,8 @@ python (Join-Path $skillRoot 'scripts\mpa_evidence.py') doctor
 
 从完整仓库根目录运行：
 
-~~~powershell
-python tools/package_skill.py --output dist/mpa-skill.zip
+~~~bash
+python3 tools/package_skill.py --output dist/mpa-skill.zip
 ~~~
 
 正式版从 [GitHub Releases](https://github.com/mucjustin/mpa-skill/releases/latest) 下载 **`mpa-skill.zip`**，并核对附带的 `SHA256SUMS`。GitHub Actions 构建产物 `mpa-research-agent-skill` 是用于 CI 验证的临时双层 ZIP，不能与正式版附件混淆。

@@ -22,7 +22,6 @@ title: "[bug] "
 
 - 操作系统及版本：
 - Python 版本（若使用证据工具）：
-- PowerShell 版本（若使用 Windows 工作区脚本）：
 - Codex / WorkBuddy / 其他客户端及版本：
 - Skill 安装来源（main / PR 分支 / WorkBuddy ZIP）：
 - 已执行的命令和诊断结果（去除个人资料）：

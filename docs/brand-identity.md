@@ -22,11 +22,21 @@
 | [assets/banner.svg](../assets/banner.svg) | 同一图形与中英文字样的横幅版，适合项目主页 |
 | [assets/logo-mono.svg](../assets/logo-mono.svg) | 相同轮廓的单色应用版本，使用 `currentColor` |
 
+说明图（与 Logo 分开管理，可随功能更新）：
+
+| 路径 | 用途 |
+|---|---|
+| [assets/spine.svg](../assets/spine.svg) | MPA Research Spine 八个环节 |
+| [assets/workflow.svg](../assets/workflow.svg) | Skill 与内置工具的执行流程 |
+| [assets/evidence-flow.svg](../assets/evidence-flow.svg) | 证据工作台架构与人工复核边界 |
+| [assets/in-service.svg](../assets/in-service.svg) | 在职研究路径与教练模式循环（v2.3.0） |
+
 建议主色为深蓝 `#07345D`、青绿 `#10908D`、金色 `#E4AD38`、白色 `#FFFFFF`。Logo 背景不叠加其它装饰。单色版为印刷用变体，不替代正式三色版。
 
 ## 版本与使用
 
 - v2.2.2：原先开发的另一套 MPA 几何字母方案，**不是用户最终选定的图形**。
 - v2.2.3：按用户提供的原图恢复 M/P 连写 + A 白色路径 + 金色圆点。该改动只涉及视觉及文档，不影响 Skill 功能与数据。
+- v2.3.0：Logo 不变；更新 `workflow.svg`、`evidence-flow.svg` 的功能说明，新增 `in-service.svg`。
 
 项目仓库里的 SVG 不会自动修改 GitHub 账号头像或 Social Preview。若要分享封面也使用此版本，需在 GitHub 仓库设置中上传基于此 Logo 的图片。

@@ -10,8 +10,9 @@ Applies to substantive case research and case-based fieldwork. Complements the e
 4. Plan coverage across affected actor groups and event stages. Document important groups inaccessible to the researcher and missing negative cases.
 5. Record obtained materials without inventing access, pages, timestamps or participant identities. Assign stable E001-style IDs only to actual evidence items; planned sources remain collection tasks, not evidence.
 6. Validate source identity, provenance, timestamp, precision of locator, authorization and relevant context. Where possible corroborate independently; repeat claims from the same underlying record do not count as independent sources.
-7. Link evidence IDs to claims and timeline events. Mark contradictions and unresolved alternative explanations; never silently pick one of conflicting accounts.
-8. Before conclusions, audit every material claim for evidence status and inference strength; only use the supported degree of language.
+7. Register genuinely plausible rival explanations as their own claims (in the bundled workbench: `claim --rival-of C0001`) and link evidence to each, so an untested rival remains visible.
+8. Link evidence IDs to claims and timeline events. Mark contradictions and unresolved alternative explanations; never silently pick one of conflicting accounts.
+9. Before conclusions, audit every material claim for evidence status and inference strength; only use the supported degree of language.
 
 ## Evidence register (minimum)
 
@@ -55,7 +56,7 @@ The JSON block is a schema illustration, not an actual research record. IDs are 
 
 ## Privacy and research ethics
 
-Do not commit interviews, raw transcripts, identifiable student or citizen records, consent forms, confidential administrative datasets or private contact details into a public repository. Keep sensitive originals outside public projects, with restricted access and pseudonymized study IDs. Do not re-identify or merge data beyond permission; check local ethics review and institutional rules before collecting. Zotero/Obsidian integration uses only existing, verified and authorized interfaces. Public output may include aggregate/de-identified findings only when disclosure risk is acceptably managed.
+In-service students researching their own organisation also apply the insider-research and de-identification rules in [in-service research](in-service-research.md). Do not commit interviews, raw transcripts, identifiable student or citizen records, consent forms, confidential administrative datasets or private contact details into a public repository. Keep sensitive originals outside public projects, with restricted access and pseudonymized study IDs. Do not re-identify or merge data beyond permission; check local ethics review and institutional rules before collecting. Zotero/Obsidian integration uses only existing, verified and authorized interfaces. Public output may include aggregate/de-identified findings only when disclosure risk is acceptably managed.
 
 ## Acceptance
 

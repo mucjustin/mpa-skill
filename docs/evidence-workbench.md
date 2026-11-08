@@ -4,11 +4,12 @@
 
 ## 能力与限制
 
-- Python 3.10+。TXT/Markdown、UTF-8 CSV、DOCX（正文段落）通过标准库解析；PDF 使用可选 pypdf 提取文本。
-- 导入时复制原始文件到本地 .mpa-evidence/sources/，记录 SHA-256 和文件版本 ID。文本定位 L1，CSV 为 row.1，DOCX 为 para.1，PDF 为 p.1。
+- Python 3.10+，macOS / Windows / Linux 均可。TXT/Markdown、UTF-8 CSV、DOCX（正文段落、脚注、尾注）通过标准库解析；PDF 使用可选 pypdf 提取文本。
+- 导入时复制原始文件到本地 .mpa-evidence/sources/，记录 SHA-256 和文件版本 ID。文本定位 L1，CSV 为 row.1，DOCX 正文为 para.1、脚注为 fn.1、尾注为 en.1，PDF 为 p.1。跨行或跨页引文可用范围定位，如 L3-L5、p.2-p.3（同一类型，最多 20 段）。
 - 重复导入同内容不会生成新记录，修订后重新导入则生成新文档 ID，旧证据不会被静默重写。
-- 引用必须逐字存在于定位段落；默认 unverified。研究者运行 review 才能标为 verified、disputed、rejected。人工复核不是证明学术结论正确。
-- audit 识别源文件损坏、引文不符、缺少证据、未复核或争议证据，并提示因果结论需要额外方法审查。
+- 引用必须逐字存在于定位段落；默认 unverified。PDF 抽取常在中文句子中插入空格或换行，可显式加 `--normalized`：忽略空白与全半角差异后匹配，但数据库保存的仍是**原文逐字片段**，并标记 `match_mode: normalized` 供人工核对语境。研究者运行 review 才能标为 verified、disputed、rejected。人工复核不是证明学术结论正确。
+- audit 识别源文件损坏、引文不符、缺少证据、未复核或争议证据，并提示因果结论需要额外方法审查；因果论断没有登记竞争性解释（`claim --rival-of`）或竞争性解释没有证据时也会提示。
+- `check-draft` 读取初稿中的 `[C0001]` 标注，报告论断—证据覆盖、未标注的因果措辞和过度断言；`progress` 保存研究主线状态与待办；`redact` 与 `export --redact-terms` 在本地脱敏。
 - **暂不支持** OCR、加密 PDF、DOCX 真实页码、Excel 工作簿、音视频、来源真实性鉴定、自动因果推断、用户权限验证、云同步和文件加密。
 - PDF 定位指物理页序号，可能不同于印刷页码；复杂表格、图片、布局会影响提取。DOCX 仅定位正文段落，文档修订后应使用新的版本 ID。
 
@@ -18,9 +19,9 @@
 
 **本功能已打包进 `skills/mpa-skill/scripts/`**：用户安装单个 `mpa-skill` 后，在具备 Python 3.10+ 与文件/终端权限的环境下，无需额外安装项目即可运行 TXT/MD/CSV/DOCX 证据工作流。请优先阅读安装后 Skill 内置的 `references/evidence-workbench-usage.md`，并从 Skill 实际所在路径运行：
 
-~~~powershell
-$skillRoot = Join-Path $HOME '.agents\skills\mpa-skill'
-python (Join-Path $skillRoot 'scripts\mpa_evidence.py') doctor
+~~~bash
+SKILL_ROOT="$HOME/.agents/skills/mpa-skill"   # macOS / Linux
+python3 "$SKILL_ROOT/scripts/mpa_evidence.py" doctor
 ~~~
 
 安装路径仅为示例，应以当前环境中实际安装的 Skill 目录为准。PDF 文本提取是**可选依赖** `pypdf`，仅在用户授权时安装，例如 `python -m pip install 'pypdf>=5,<8'`；无依赖时可处理上述四类文本文件。也可在完整源码仓库执行 `python -m pip install -e '.[pdf]'` 使用兼容的 `python -m evidence_workbench` 命令。Skill 不会自动联网安装依赖。
