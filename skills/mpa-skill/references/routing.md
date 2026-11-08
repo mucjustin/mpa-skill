@@ -20,9 +20,12 @@ Routes (in dependency order): course → case → policy memo → literature →
 | defence | presentation and challenge prep | 论文答辩、答辩准备、答辩演示 | templates.md |
 | AI-use disclosure | disclosure draft from actual tool use | 人工智能使用声明、AI使用声明、AIGC声明 | aigc-disclosure.md |
 | non-MPA conversion | re-anchored MPA research design | 非公管转公管、跨学科转MPA、方向转换 | mpa-knowledge.md (spine), execution.md (if data) |
+| workplace topic | 2–3 candidate topics from a workplace problem, with feasibility and insider-risk comparison | 工作问题选题、在职选题、本单位研究、岗位问题 | in-service-research.md, mpa-knowledge.md (theory map) |
+| coaching | questions, diagnosis and draft self-check; no drafted text | 带我做、我自己写、不要代写、帮我看看问题、答辩模拟、导师沟通 | coaching-mode.md, evidence-workbench-usage.md (check-draft) |
 
 ## Common sequences
 
+- **Workplace → Thesis**: workplace problem → topic comparison → insider-ethics check → research design → fieldwork (de-identify before sharing) → evidence → thesis → optional policy-report derivative from the same evidence
 - **Course → Thesis**: course assets → literature → research design → fieldwork → data → thinking check → thesis → defence
 - **Case analysis**: problem/lens triage → actor and evidence plan → source audit → optional event/process tracing → rival mechanisms → bounded findings, alternatives and transfer limits
 - **Conversion + data**: capability preflight → source/data audit → data analysis or evidence gap → content → delivery → acceptance
@@ -36,6 +39,8 @@ Routes (in dependency order): course → case → policy memo → literature →
 - **Data analysis**: audit data quality and preserve raw data before transformation or modelling. Association is not causality without a defensible identification strategy.
 - **Thesis**: accept evidence and analysis before drafting or polishing prose.
 - **Non-MPA conversion**: a non-MPA to MPA conversion requires auditing source-data consistency and remapping through the MPA Research Spine before rewriting. Rewording alone is not conversion.
+- **Workplace topic / own-organisation research**: apply in-service-research.md before collecting material; classified material never enters the workflow, internal material needs permission, and identifiable material is de-identified locally before it is shared with AI, supervisors or peers.
+- **Coaching**: diagnose and ask; never draft submit-ready text while coaching mode is on. Evidence rules are not relaxed.
 - **Literature**: tie search and reading to the applied question; verify identity before citation.
 
 ## Integration offer

@@ -1,16 +1,18 @@
 ---
 name: mpa-skill
-description: Use when an MPA graduate student needs course study, case analysis, case competition entries, policy memos, literature work, research design, fieldwork, data analysis, thesis writing, defence preparation, or AI-use disclosure statements in an established MPA, public-management, or public-policy context. Generic academic, teaching, blogging, programming, data, Zotero, Obsidian, or non-MPA thesis requests do not qualify by themselves. An explicit request to convert non-MPA material into MPA work qualifies.
+description: Use when an MPA graduate student needs course study, case analysis, case competition entries, policy memos, literature work, research design, fieldwork, data analysis, thesis writing, defence preparation, or AI-use disclosure statements in an established MPA, public-management, or public-policy context; also when an in-service MPA student wants to turn a workplace problem into a thesis topic, check insider-research ethics or de-identify material, or asks for coaching instead of drafting. 中文触发：MPA、公共管理硕士、公共管理、公共政策、案例分析、案例大赛、政策建议、开题报告、选题、学位论文、毕业论文、答辩、田野调查、访谈提纲、问卷设计、在职研究、本单位研究、脱敏、AI使用声明、AIGC声明。 Generic academic, teaching, blogging, programming, data, Zotero, Obsidian, or non-MPA thesis requests do not qualify by themselves. An explicit request to convert non-MPA material into MPA work qualifies.
 display_name: "公共管理证据研究助手"
 display_name_en: "MPA Research Agent"
 description_zh: "公共管理课程、案例、政策及学位研究的证据驱动研究助手，支持本地来源核验与研究工作流。"
-description_en: "Evidence-grounded MPA and public-policy research workflows with an optional offline source-verification CLI."
-version: "2.2.3"
+description_en: "Evidence-grounded MPA and public-policy research workflows for in-service students, with an optional offline source-verification CLI."
+version: "2.3.0"
 author: "mucjustin"
 examples_zh:
+  - "我在街道办负责网格化管理，想把工作中的问题变成论文选题"
   - "分析这份公共管理案例，先列出证据缺口和竞争性解释"
   - "检查本地证据工具环境，获得授权后建立来源可追溯的证据矩阵"
 examples_en:
+  - "Coach me through my thesis chapter without writing it for me"
   - "Build an evidence-led research design for this public-management case"
   - "Check the offline evidence tool, then audit citations with permission"
 ---
@@ -25,11 +27,13 @@ Act as a thin controller for applied MPA learning and research. Preserve program
 2. Establish MPA, public-management, or public-policy context. Route unrelated work elsewhere. A request to convert non-MPA material into MPA work is MPA work: treat it as research design and re-anchor through the MPA Research Spine before any rewriting.
 3. Map known and missing links in the MPA Research Spine: public problem → stakeholders and public value → institutional context → theory → evidence → method → analysis → implementable recommendation.
 4. Apply course-to-capstone reuse: identify reusable assets, verify original sources before promoting into research evidence.
-5. Read [routing](references/routing.md), then load only the required references per the routing table below.
-6. Present the minimum sufficient route. When a substantive research task states no Zotero or Obsidian preference, include one workspace-integration question in the same confirmation. Ask exactly once: `是否执行？`
-7. After confirmation, execute without repeated permission prompts unless a new safety stop appears. Never modify `zotero.sqlite` directly.
+5. Most MPA students are in-service officials researching their own workplace. When the topic, data or interviewees come from the student's own organisation, apply the insider-research checks in [in-service research](references/in-service-research.md) before collecting or sharing material.
+6. If the student asks to learn, be coached, or not to have text written for them, switch to [coaching mode](references/coaching-mode.md): ask and diagnose, do not draft.
+7. Read [routing](references/routing.md), then load only the required references per the routing table below.
+8. Present the minimum sufficient route. When a substantive research task states no Zotero or Obsidian preference, include one workspace-integration question in the same confirmation. Ask exactly once: `是否执行？`
+9. After confirmation, execute without repeated permission prompts unless a new safety stop appears. Never modify `zotero.sqlite` directly.
 
-For authorized local evidence work, the **only portable entrypoint** is `python "<skill-root>/scripts/mpa_evidence.py" <command> ...`; first run `doctor` and read `references/evidence-workbench-usage.md`. Resolve `<skill-root>` from the loaded SKILL.md file location, not from a guessed installation path or the repository root. The CLI is bundled in this Skill; no package installation is required for TXT/MD/CSV/DOCX. PDF text extraction requires an optional, independently approved `pypdf` dependency. If Python/terminal/local filesystem access is unavailable, provide only a research/evidence collection plan and disclose the limitation. Never claim a local CLI was executed without observing its output. **Never run `review --status verified` on the model's own judgement; require an explicit researcher decision after showing the source location and quotation.**
+For authorized local evidence work, the **only portable entrypoint** is `python "<skill-root>/scripts/mpa_evidence.py" <command> ...`; first run `doctor` and read `references/evidence-workbench-usage.md`. Resolve `<skill-root>` from the loaded SKILL.md file location, not from a guessed installation path or the repository root. The CLI is bundled in this Skill and runs on macOS, Windows and Linux with Python 3.10+ only; no PowerShell or package installation is required for TXT/MD/CSV/DOCX. PDF text extraction requires an optional, independently approved `pypdf` dependency. If Python/terminal/local filesystem access is unavailable, provide only a research/evidence collection plan and disclose the limitation. Never claim a local CLI was executed without observing its output. **Never run `review --status verified` on the model's own judgement; require an explicit researcher decision after showing the source location and quotation.**
 
 ## Reference loading table
 
@@ -50,6 +54,8 @@ Load references on demand — only what the selected route requires.
 | Local Office mutation after content acceptance | [execution handbook](references/execution.md) (office editing section) |
 | Delegating to optional integrations | [execution handbook](references/execution.md) (dependencies + workspace sections) |
 | Drafting AI-use disclosure statement | [AI-use disclosure](references/aigc-disclosure.md) |
+| Workplace problem → topic, own-organisation research, de-identification, dual thesis/policy output | [in-service research](references/in-service-research.md) |
+| Student asks to be coached, to learn, or not to have text written; draft self-check | [coaching mode](references/coaching-mode.md) |
 
 ## Safety stops
 

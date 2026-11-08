@@ -22,6 +22,30 @@
 
 暂无。下一次发布前请记录新改动，并递增 `skills/mpa-skill/SKILL.md` 的版本号。
 
+## [2.3.0] - 2026-11-08
+
+### Added — 面向在职 MPA 学生
+- 新增 `references/in-service-research.md`：工作问题 → 选题（四层拆解、候选题六维比较）、局内人研究检查（角色冲突、权力关系、知情同意、材料分级、沉默群体）、本地脱敏流程、论文与政策建议报告同源产出、碎片时间续接。
+- 新增 `references/coaching-mode.md`：只追问与诊断、不代写；按研究主线追问、问卷/访谈/结论措辞诊断、`check-draft` 结果解读、答辩模拟、导师沟通包。
+- 路由新增「工作问题选题」与「教练模式」两条路线及「工作 → 论文」组合序列。
+- 证据工作台新增 `check-draft`、`progress`、`redact`、`export --redact`/`--redact-terms`、`workspace-init`、`env-check` 命令。
+- 引文支持跨行/跨页范围定位（`L3-L5`）、显式 `--normalized` 匹配（保存原文逐字片段并标记 `match_mode`）、DOCX 脚注 `fn.N` 与尾注 `en.N`。
+- `claim --rival-of` 登记竞争性解释；审计新增 `no_rival_explanation`、`rival_untested`、`normalized_match_check_context`。
+
+### Changed
+- `SKILL.md` 的 `description` 加入中文触发关键词，并说明在职研究与教练模式入口。
+- 证据库结构升级为版本 2，打开旧工作区时自动迁移，已有证据与复核状态不变。
+- 工作区配置改为跨平台：macOS `~/Library/Application Support/mpa-skill/config.json`、Windows `%APPDATA%\mpa-skill\config.json`、Linux `~/.config/mpa-skill/config.json`。
+- CI 改为 macOS / Windows / Linux × Python 3.10 / 3.13 矩阵，全部测试使用 Python。
+- Skill 契约测试改写为 `tests/test_skill_contract.py`：只锁定安全红线、引用关系、场景结构与隐私扫描，不再用约 200 条正则冻结普通措辞。
+
+### Removed
+- PowerShell 工作区脚本与 PowerShell 测试（由 Python 实现替代）。
+- 与 Skill 无关的 `ml-analysis/` 旧实验代码。
+
+### Validation
+- 新功能均以合成数据通过单元与 CLI 测试；尚未进行真实学生使用评估。v1.0.0 基准报告保持历史口径，不代表本版本。
+
 ## [2.2.3] - 2026-10-26
 
 ### Fixed — 恢复用户已选定的品牌图形

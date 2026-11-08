@@ -12,6 +12,5 @@ __pycache__/
 *.egg-info/
 
 dist/
-ml-analysis/output/
 
 

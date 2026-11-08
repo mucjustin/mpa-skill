@@ -20,10 +20,10 @@
     <img src="https://img.shields.io/github/v/release/mucjustin/mpa-skill?color=brightgreen" alt="Release">
   </a>
   <a href="#">
-    <img src="https://img.shields.io/badge/platform-Windows--first-0078D4.svg" alt="Platform">
+    <img src="https://img.shields.io/badge/platform-macOS%20%7C%20Windows%20%7C%20Linux-0078D4.svg" alt="Platform">
   </a>
   <a href="#">
-    <img src="https://img.shields.io/badge/PowerShell-5.1%2B-5391FE.svg?logo=powershell" alt="PowerShell">
+    <img src="https://img.shields.io/badge/Python-3.10%2B-3776AB.svg?logo=python&logoColor=white" alt="Python 3.10+">
   </a>
   <a href="#">
     <img src="https://img.shields.io/badge/Codex-Agent%20Skill-8A2BE2.svg" alt="Codex Agent Skill">
@@ -47,7 +47,7 @@
 - 🛡️ **数据先于写作**：有数据时先审计来源、清洗、方法和数值；分析未被接受前不改写结论。详见[执行手册](skills/mpa-skill/references/execution.md)。
 - 🔄 **可恢复交付**：Office 编辑中断后重新核验文档身份；不确定时停在 `STATE_UNKNOWN`，不盲目重放。
 
-> **Windows-first** 的工作区辅助脚本使用 PowerShell；内置 Python 证据工具可在具备 Python 3.10+ 的本地环境中运行。
+> **跨平台**：自 v2.3.0 起，证据工具与工作区配置全部使用 Python 3.10+ 标准库实现，在 macOS、Windows、Linux 上运行，不再需要 PowerShell。
 
 ---
 
@@ -56,24 +56,26 @@
 | | 特性 | 一句话 |
 |---|---|---|
 | 🧭 | MPA Research Spine | 八步可核验研究主线，先识别缺口再动笔 |
-| 🛣️ | 十二条任务路由 | 课程、案例、政策、文献、设计、田野、数据、论文、答辩等，按需组合 |
+| 🛣️ | 十四条任务路由 | 课程、案例、政策、文献、设计、田野、数据、论文、答辩、工作问题选题、教练模式等，按需组合 |
+| 🏢 | 在职研究支持 | 工作问题→选题、局内人伦理检查、本地脱敏、论文与政策建议报告同源产出 |
+| 🎓 | 教练模式 | 只追问和诊断、不代写；初稿自检、方法诊断、答辩模拟、导师沟通包 |
 | 🔗 | 课程→毕业复用 | 笔记、案例、代码可沉淀为研究资产，复用前回原始来源核验 |
 | 🧠 | MPA 知识本体 | 理论地图 + 中国治理情境 + 思维清单 + 课程映射 |
 | 🛡️ | 数据先于写作 | 先审计再写作，不靠改写掩盖缺口 |
-| 🔎 | 内置证据工作台 | 本地文件哈希、精确引文定位、SQLite 证据审计及人工复核 |
+| 🔎 | 内置证据工作台 | 本地文件哈希、精确引文定位（含跨行范围与 PDF 规范化匹配）、竞争性解释、SQLite 审计及人工复核 |
 | 🔄 | 可恢复交付 | 中断可恢复，`STATE_UNKNOWN` 时停止 |
 | 🧾 | AI 使用声明 | 只依据实际工具使用生成，不编造。详见[声明工作流](skills/mpa-skill/references/aigc-disclosure.md) |
-| ✅ | 契约测试 | PowerShell 测试覆盖结构、指令、文档与隐私红线 |
+| ✅ | 跨平台测试 | Python 测试在 macOS / Windows / Linux CI 上覆盖程序、安全红线、文档与隐私 |
 
 ---
 
-**当前版本：v2.2.3。** [正式发行说明与安装包](https://github.com/mucjustin/mpa-skill/releases/latest) · [更新日志](CHANGELOG.md)。合并代码并不会自动生成发行版，因此采用单独的 CI 发布门禁。
+**当前版本：v2.3.0。** [正式发行说明与安装包](https://github.com/mucjustin/mpa-skill/releases/latest) · [更新日志](CHANGELOG.md)。合并代码并不会自动生成发行版，因此采用单独的 CI 发布门禁。
 
 ## 🚀 快速开始
 
 ### 安装
 
-```powershell
+```bash
 npx skills add mucjustin/mpa-skill -g -s mpa-skill -y --full-depth
 ```
 
@@ -81,26 +83,35 @@ npx skills add mucjustin/mpa-skill -g -s mpa-skill -y --full-depth
 
 WorkBuddy 官方格式接受含 `SKILL.md` 的目录及可选 `references/`、`scripts/`。现已补齐双语名称、描述、版本、作者和示例字段，并加入 ZIP 打包和隔离运行测试。
 
-```powershell
-python tools/package_skill.py --output dist/mpa-skill.zip
+```bash
+python3 tools/package_skill.py --output dist/mpa-skill.zip
 ```
 
 在 WorkBuddy「技能 → 添加技能 → 上传技能」导入 `dist/mpa-skill.zip`；正式版也可在 [GitHub Releases](https://github.com/mucjustin/mpa-skill/releases/latest) 下载同名附件。**ZIP 结构已验证，WorkBuddy 客户端实际导入尚未验证。** 详见 [Codex / WorkBuddy 安装说明](docs/install-and-compatibility.md)。
 
-### 初始化工作区
+### 初始化工作区（可选）
+
+macOS / Linux：
+
+```bash
+SKILL_ROOT="$HOME/.agents/skills/mpa-skill"   # 以实际安装位置为准
+python3 "$SKILL_ROOT/scripts/mpa_evidence.py" workspace-init "$HOME/Documents/MPA-Workspace" --dry-run
+python3 "$SKILL_ROOT/scripts/mpa_evidence.py" workspace-init "$HOME/Documents/MPA-Workspace"
+python3 "$SKILL_ROOT/scripts/mpa_evidence.py" env-check
+```
+
+Windows：
 
 ```powershell
 $skillRoot = Join-Path $HOME '.agents\skills\mpa-skill'
-& (Join-Path $skillRoot 'scripts\Initialize-MpaWorkspace.ps1') `
-  -WorkspaceRoot (Join-Path $HOME 'Documents\MPA-Workspace')
+python (Join-Path $skillRoot 'scripts\mpa_evidence.py') workspace-init (Join-Path $HOME 'Documents\MPA-Workspace')
 ```
 
-默认配置写入 `%APPDATA%\mpa-skill\config.json`，不修改 Zotero 数据库或 Obsidian 设置。预览操作加 `-WhatIf`；检查环境用 `Test-MpaEnvironment.ps1`。
-若配置文件已存在，初始化会停止并保留原文件；要创建另一套配置，请指定新的 `-ConfigPath`。
+配置默认写入 macOS `~/Library/Application Support/mpa-skill/config.json`、Windows `%APPDATA%\mpa-skill\config.json` 或 Linux `~/.config/mpa-skill/config.json`，也可用 `--config` 或环境变量 `MPA_WORKSPACE_CONFIG` 指定。不修改 Zotero 数据库或 Obsidian 设置；若配置文件已存在，初始化会停止并保留原文件。
 
 ### 更新与卸载 (Update & Uninstall)
 
-```powershell
+```bash
 npx skills update mpa-skill -g -y    # 更新
 npx skills remove mpa-skill -g -y    # 卸载（不删除已创建的工作区和配置）
 ```
@@ -128,6 +139,19 @@ npx skills remove mpa-skill -g -y    # 卸载（不删除已创建的工作区�
 ```
 
 ---
+
+## 🏢 为在职 MPA 学生设计（v2.3.0）
+
+大多数 MPA 学生在职读书、研究自己单位的问题、时间零碎。v2.3.0 围绕这些处境新增：
+
+- **工作问题 → 选题**：把“网格员任务太重”这类工作困扰拆成现象、公共问题、研究问题和理论对话，给出 2–3 个候选题并比较证据可得性、可毕业性、身份风险和保密约束。见 [在职研究指南](skills/mpa-skill/references/in-service-research.md)。
+- **局内人研究检查**：角色冲突、上下级访谈的权力关系、知情同意、材料分级（涉密材料不进入研究）、沉默群体。
+- **本地脱敏**：`redact` 命令和 `export --redact-terms` 按学生的术语表替换人名、单位、地名，并自动兜底身份证号、手机号、邮箱和公文文号；全程离线。
+- **教练模式**：学生要求“带我做、不要代写”时，只追问和诊断。配合 `check-draft` 初稿自检（论断—证据覆盖、因果措辞、过度断言）、方法诊断、答辩模拟和导师沟通包。见 [教练模式](skills/mpa-skill/references/coaching-mode.md)。
+- **进度续接**：`progress` 记录研究主线八个环节的状态和下一步任务，每次半小时的会话也能接着上次继续。
+- **一份研究，两种产出**：论文与政策建议报告使用同一证据库，报告中的每条建议都能回链证据编号，不加码、不删除不利证据。
+
+这些功能已通过合成数据的单元与 CLI 测试，**尚未经过真实学生的使用评估**。
 
 ## 🧩 案例研究引擎（v2.2.0）
 
@@ -183,12 +207,10 @@ mpa-skill/
 │   ├── references/                # 案例、证据、方法、学术与操作规范
 │   └── scripts/
 │       ├── mpa_evidence.py        # 本地证据工具入口
-│       ├── evidence_workbench/    # Python / SQLite 核心
-│       └── *.ps1                  # Windows 工作区管理
+│       └── evidence_workbench/    # Python / SQLite 核心、脱敏、初稿自检、工作区配置
 ├── tools/package_skill.py         # ZIP 分发
-├── tests/                         # 程序、Skill、ZIP、文档和历史契约测试
-├── docs/                          # 安装指南、示例、历史基准
-└── ml-analysis/                   # 旧版研究实验源码（图表按需重新生成）
+├── tests/                         # 程序、Skill 契约、ZIP、文档和工作区测试（全部 Python）
+└── docs/                          # 安装指南、示例、历史基准
 ```
 
 ---
@@ -233,17 +255,13 @@ Codex 先检查指令和附件，组合最小必要路线，然后只问一次 `
 
 ## 🧪 开发与测试
 
-```powershell
-python -m unittest discover -s tests -p "test_skill_package.py" -v
-python -m unittest discover -s tests -p "test_docs_assets.py" -v
-python tools/package_skill.py --output dist/mpa-skill.zip
-pwsh -NoProfile -File tests/Test-PublicSkill.ps1
-pwsh -NoProfile -File tests/Test-ReliabilityScenarios.ps1
-pwsh -NoProfile -File tests/Test-BenchmarkManifest.ps1
-pwsh -NoProfile -File tests/Test-WorkspaceScripts.ps1
+```bash
+python3 -m unittest discover -s tests -v
+python3 tools/check_release.py
+python3 tools/package_skill.py --output dist/mpa-skill.zip
 ```
 
-CI（GitHub Actions，windows-latest）在 main 分支和每个 PR 上运行相同测试。
+CI（GitHub Actions）在 macOS、Windows、Linux 以及 Python 3.10 / 3.13 上运行同一套测试。
 
 ---
 
@@ -251,7 +269,7 @@ CI（GitHub Actions，windows-latest）在 main 分支和每个 PR 上运行相�
 
 | 能力 | 必需 | 说明 |
 |---|---:|---|
-| 宿主客户端的文件与终端权限 | ✅（运行时） | Codex 或 WorkBuddy 无执行能力时降级为研究规划 |
+| Python 3.10+ 与宿主客户端的文件/终端权限 | ✅（运行时） | Codex 或 WorkBuddy 无执行能力时降级为研究规划 |
 | Python/R/表格分析 | ❌ | 数据路线需要时使用，缺失时报告阻塞 |
 | Word/Office 编辑 | ❌ | 内容验收后使用，以实际 schema 为准 |
 | Zotero | ❌ | 文献管理，只走受支持接口 |
@@ -267,8 +285,8 @@ CI（GitHub Actions，windows-latest）在 main 分支和每个 PR 上运行相�
 | 问题 | 解决 |
 |---|---|
 | 找不到 Skill | 重启 Codex，运行 `npx skills list -g` |
-| 找不到配置 | 运行 `Initialize-MpaWorkspace.ps1` 或设 `MPA_WORKSPACE_CONFIG` |
-| Zotero 启动失败 | 运行 `Test-MpaEnvironment.ps1` 确认可执行文件 |
+| 找不到配置 | 运行 `mpa_evidence.py workspace-init` 或设 `MPA_WORKSPACE_CONFIG` |
+| Zotero 启动失败 | 运行 `mpa_evidence.py env-check` 确认路径和连接器 |
 | 缺少专业能力 | 安装对应 Skill，或让控制器降级并说明范围 |
 
 ---

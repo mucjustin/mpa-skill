@@ -14,7 +14,7 @@
 
 - Python 3.10+（标准库支持文本、CSV、DOCX 核心流程）。
 - PDF 文字提取可选：`python -m pip install 'pypdf>=5,<8'`。
-- PowerShell 7+ 用于 Windows 下的现有兼容性/工作区测试。无 PowerShell 的平台可运行 Python 测试，但不代表原有 PowerShell 脚本均能运行。
+- 不需要 PowerShell：自 v2.3.0 起全部工具与测试均为 Python，CI 在 macOS、Windows、Linux 上运行。
 - Git + 可执行 Python 的本地 shell；不在 CI 或 Skill 中静默下载其他软件。
 
 ## PR 流程
@@ -27,18 +27,14 @@
 
 ## 验证命令
 
-~~~powershell
-python -m pip install -e '.[pdf]'
-python -m unittest discover -s tests -p 'test_evidence_*.py' -v
-python -m unittest discover -s tests -p 'test_skill_portability.py' -v
-python -m unittest discover -s tests -p 'test_skill_package.py' -v
-python tools/package_skill.py --output dist/mpa-skill.zip
-pwsh -NoProfile -File tests/Test-PublicSkill.ps1
-pwsh -NoProfile -File tests/Test-CaseResearch.ps1
-pwsh -NoProfile -File tests/Test-ReliabilityScenarios.ps1
-pwsh -NoProfile -File tests/Test-BenchmarkManifest.ps1
-pwsh -NoProfile -File tests/Test-WorkspaceScripts.ps1
+~~~bash
+python3 -m pip install -e '.[pdf]'   # 可选：PDF 测试
+python3 -m unittest discover -s tests -v
+python3 tools/check_release.py
+python3 tools/package_skill.py --output dist/mpa-skill.zip
 ~~~
+
+`tests/test_skill_contract.py` 只锁定安全红线（不自行复核、不编造、不越权写入等）和引用关系，不锁定普通措辞；改写 references 时如删除了红线，应先说明理由再调整测试。
 
 机器测试验证确定性行为，不是独立的学术质量 A/B 基准。评测报告要区分开发集、留出集、人工评价与尚未实际完成的实验。
 

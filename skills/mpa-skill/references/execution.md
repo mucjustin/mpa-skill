@@ -111,8 +111,8 @@
 ### 解析顺序
 
 1. 设置了 `MPA_WORKSPACE_CONFIG` 环境变量时读取其命名的 JSON 文件。
-2. 否则 Windows 上读取 `%APPDATA%\mpa-skill\config.json`。
-3. 无有效配置时，运行 `scripts/Initialize-MpaWorkspace.ps1` 或请用户选择工作区根目录。
+2. 否则读取平台默认位置：macOS `~/Library/Application Support/mpa-skill/config.json`；Windows `%APPDATA%\mpa-skill\config.json`；Linux `$XDG_CONFIG_HOME/mpa-skill/config.json`（默认 `~/.config`）。
+3. 无有效配置时，经用户确认后运行 `python "<skill-root>/scripts/mpa_evidence.py" workspace-init "<workspace-root>"`（可先加 `--dry-run` 预览），或请用户选择工作区根目录。`env-check` 只读检查配置与 Zotero 连接器。不需要 PowerShell。
 
 必需 JSON 属性：`workspace_root`、`obsidian_vault`、`zotero_executable`、`zotero_attachments`、`research_data`、`research_projects`。配置是本地机器状态，不提交到 Skill 仓库。
 
