@@ -6,7 +6,7 @@ metadata:
   display_name_en: "MPA Research Agent"
   description_zh: "公共管理课程、案例、政策及学位研究的证据驱动研究助手，支持本地来源核验与研究工作流。"
   description_en: "Evidence-grounded MPA and public-policy research workflows for in-service students, with an optional offline source-verification CLI."
-  version: "2.3.0"
+  version: "2.3.1"
   author: "mucjustin"
   examples_zh: |
     我在街道办负责网格化管理，想把工作中的问题变成论文选题

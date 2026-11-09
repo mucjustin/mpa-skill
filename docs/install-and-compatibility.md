@@ -1,6 +1,6 @@
 # 安装与兼容性 / Codex & WorkBuddy
 
-**展示名称：MPA Research Agent（公共管理证据研究助手）**。技术 Skill ID、安装目录和 GitHub 仓库地址仍保留 `mpa-skill`、`mucjustin/mpa-skill`，不破坏已有命令。Skill 的 `metadata.version`（当前为 `"2.3.0"`）、CHANGELOG 与对应 GitHub Release 必须保持一致。正式附件请从 [Releases](https://github.com/mucjustin/mpa-skill/releases/latest) 下载。
+**展示名称：MPA Research Agent（公共管理证据研究助手）**。技术 Skill ID、安装目录和 GitHub 仓库地址仍保留 `mpa-skill`、`mucjustin/mpa-skill`，不破坏已有命令。Skill 的 `metadata.version`（当前为 `"2.3.1"`）、CHANGELOG 与对应 GitHub Release 必须保持一致。正式附件请从 [Releases](https://github.com/mucjustin/mpa-skill/releases/latest) 下载。
 
 `SKILL.md` 顶层使用标准 `name`、`description` 和 `metadata` 字段。版本、作者和双语展示信息均为 `metadata` 下的字符串；双语示例使用多行字符串保存。Codex 界面配置仍由 `agents/openai.yaml` 提供。项目发行工具读取 `metadata.version`，不再读取旧的顶层 `version`。安装包通过通用格式校验不代表已验证 WorkBuddy GUI 导入。
 
@@ -11,7 +11,7 @@
 | 发现包含 `SKILL.md` 的 Skill | 官方支持 | 官方支持 |
 | 加载 references 和执行脚本 | 具备对应文件/终端权限时支持 | 官方描述支持，实际客户端权限需核查 |
 | 单目录自包含 Python 工具 | GitHub CI 隔离测试通过 | GitHub CI ZIP 解压隔离测试通过 |
-| 安装 v2.3.0 | `main` / 正式 GitHub Release | ZIP 隔离执行已验证；**尚未实测 WorkBuddy GUI 导入** |
+| 安装 v2.3.1 | `main` / 正式 GitHub Release | ZIP 隔离执行已验证；**尚未实测 WorkBuddy GUI 导入** |
 | PDF 文本处理 | 可选 `pypdf` | 需另行授权安装 `pypdf`，且宿主允许调用 |
 | 操作系统 | macOS / Windows / Linux（CI 三平台测试） | 取决于宿主环境；只需 Python 3.10+，无需 PowerShell |
 
