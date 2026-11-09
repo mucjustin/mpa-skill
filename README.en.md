@@ -40,7 +40,7 @@
 
 **MPA Research Agent** is an evidence-grounded public-management research Skill. AI organizes questions, lenses and uncertainty; the bundled offline Python/SQLite tool performs deterministic source-snapshot and quotation-location checks.
 
-At its core is the **MPA Research Spine**: public problem → stakeholders → institutional context → theory → evidence → method → analysis → actionable recommendations. Find the gaps first, then write ✏️
+Match claims to evidence for the actual question. The **MPA Research Spine** (public problem, stakeholders and public value, institutional context, theory, evidence, method, analysis, recommendations) is a diagnostic checklist: use the relevant links and revise the question or method as evidence changes.
 
 Two behavioral gates run throughout:
 
@@ -55,7 +55,7 @@ Two behavioral gates run throughout:
 
 | | Feature | One-liner |
 |---|---|---|
-| 🧭 | MPA Research Spine | Eight-step verifiable research thread |
+| 🧭 | MPA Research Spine | Diagnostic research checklist selected for the task |
 | 🛣️ | Fourteen task routes | Course, case, policy, literature, design, fieldwork, data, thesis, defence, workplace topics, coaching, and related tasks |
 | 🏢 | In-service research | Workplace problem → topic, insider-ethics checks, local de-identification, thesis and policy report from one evidence base |
 | 🎓 | Coaching mode | Asks and diagnoses instead of drafting; draft self-check, method diagnosis, defence rehearsal, supervisor briefs |
@@ -69,7 +69,7 @@ Two behavioral gates run throughout:
 
 ---
 
-**Current version: v2.3.0.** [GitHub Release and ZIP](https://github.com/mucjustin/mpa-skill/releases/latest) · [Changelog](CHANGELOG.md). Merging code alone does not create a GitHub Release.
+**Current version: v2.3.1.** [GitHub Release and ZIP](https://github.com/mucjustin/mpa-skill/releases/latest) · [Changelog](CHANGELOG.md). Merging code alone does not create a GitHub Release.
 
 ## 🚀 Quick start
 
@@ -181,7 +181,7 @@ The Skill remains a **thin controller** for scope, routing, authorization and ac
 </p>
 
 ```
-Research question → Evidence plan → Confirm once → Authorized execution → Source audit → Human review → Bounded delivery
+Research question → Evidence plan → Execute within authorization → Source audit → Human review of persisted evidence → Bounded delivery
 ```
 
 Safety stops: logins, CAPTCHAs, paywalls, licensed access, destructive writes, or substantive ambiguity → pause and ask.
@@ -210,7 +210,7 @@ mpa-skill/
 
 ## Reproducible audit example
 
-Codex inspects the request and attachments, composes a minimum sufficient route, then asks once: `是否执行？`.
+Codex proceeds with read-only analysis within the request, asking only for missing authorization before external writes or source persistence. Existing authorization remains valid within its scope. For local libraries, use the [evidence-readiness checks](skills/mpa-skill/references/evidence-readiness.md) to reconcile catalog labels, source passages, reading scope and project data.
 
 Take the Texas State University repository-open thesis [Establishing the Relationship Between Sewer Surcharge Fees and Pollutant Discharges by Industrial Users](https://digital.library.txst.edu/items/50bce8d1-3a34-49bb-8c38-8e52b8038265). PDF pages 29–32 cover exclusions, mean imputation, and aggregation; pages 30–32 and 37 show that implementation coincided with COVID-19 without an adequate control; and pages 36–41 do not justify converting non-significance into "no effect" or direct policy guidance.
 

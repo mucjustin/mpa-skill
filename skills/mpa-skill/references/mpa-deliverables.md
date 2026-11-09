@@ -1,6 +1,6 @@
 # MPA Deliverables
 
-Use the smallest artifact that answers the student's actual task. Every substantive artifact identifies which MPA Research Spine links are established, missing, or outside scope. Label evidence, inference, and recommendation separately. Use [templates](templates.md) as starting structures.
+Use the smallest artifact that answers the student's actual task. Check the Research Spine links relevant to the artifact and expose material evidence gaps. Label evidence, inference, and recommendation separately. Use [templates](templates.md) as starting structures.
 
 | Deliverable | Required decision fields | Acceptance checks |
 |---|---|---|

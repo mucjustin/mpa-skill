@@ -14,10 +14,17 @@ def skill_version(root: Path = ROOT) -> str:
     blocks = content.split("---", 2)
     if len(blocks) < 3 or blocks[0].strip():
         raise ValueError("SKILL.md YAML frontmatter is missing")
-    versions = re.findall(r'(?m)^version:\s*"([0-9]+\.[0-9]+\.[0-9]+)"\s*$', blocks[1])
-    if len(versions) != 1:
-        raise ValueError("SKILL.md frontmatter requires one quoted semantic version")
-    return versions[0]
+    # Read the canonical metadata mapping without adding a runtime YAML dependency.
+    metadata = re.findall(r'(?ms)^metadata:[ \t]*\n(.*?)(?=^\S|\Z)', blocks[1])
+    if len(metadata) != 1:
+        raise ValueError("SKILL.md requires one metadata mapping")
+    versions = re.findall(r'(?m)^  version:[^\n]*$', metadata[0])
+    match = None
+    if len(versions) == 1:
+        match = re.fullmatch(r'  version:[ \t]*"([0-9]+\.[0-9]+\.[0-9]+)"[ \t]*', versions[0])
+    if match is None:
+        raise ValueError("SKILL.md metadata.version requires one quoted semantic version")
+    return match.group(1)
 
 
 def validate(root: Path = ROOT) -> str:
