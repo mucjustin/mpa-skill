@@ -21,7 +21,7 @@ class ReleaseContractTests(unittest.TestCase):
             root = Path(tmp)
             (root / "skills/mpa-skill").mkdir(parents=True)
             (root / "skills/mpa-skill/SKILL.md").write_text(
-                '---\nname: mpa-skill\nversion: "2.3.0"\n---\n',
+                '---\nname: mpa-skill\nmetadata:\n  version: "2.3.0"\n---\n',
                 encoding="utf-8",
             )
             (root / "CHANGELOG.md").write_text(
@@ -30,6 +30,28 @@ class ReleaseContractTests(unittest.TestCase):
             )
             with self.assertRaisesRegex(ValueError, "CHANGELOG"):
                 module.validate(root)
+
+    def test_version_comes_only_from_metadata(self):
+        fixtures = [
+            ('metadata:\n  version: "2.3.0"\n', "2.3.0"),
+            ('version: "2.3.0"\n', None),
+            ('metadata:\n  author: "test"\nother:\n  version: "2.3.0"\n', None),
+            ('metadata:\n  version: "2.3.0"\n  version: "2.4.0"\n', None),
+            ('metadata:\n  version: "next"\n', None),
+        ]
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            skill = root / "skills/mpa-skill/SKILL.md"
+            skill.parent.mkdir(parents=True)
+            for fields, expected in fixtures:
+                with self.subTest(fields=fields):
+                    skill.write_text('---\nname: mpa-skill\n' + fields + '---\n',
+                                     encoding="utf-8")
+                    if expected:
+                        self.assertEqual(module.skill_version(root), expected)
+                    else:
+                        with self.assertRaises(ValueError):
+                            module.skill_version(root)
 
     def test_ci_gates_release_after_all_tests(self):
         source = (ROOT / ".github/workflows/ci.yml").read_text(encoding="utf-8")

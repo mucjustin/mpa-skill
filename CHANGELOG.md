@@ -24,11 +24,12 @@
 
 - 已授权的只读任务直接执行；Zotero/Obsidian 仅按请求或既有授权使用，外部写入和来源持久化继续遵守授权范围与人工复核规则。
 - 将 Research Spine 用作按需诊断清单；新增本地文献库证据就绪规则，显式检查方法标签与原文角色冲突、阅读范围和项目数据可行性。
+- 修复通用 Skill frontmatter 兼容性：版本、作者、双语名称、描述和示例移入标准 `metadata` 的字符串字段；发行工具和安装包测试同步读取 `metadata.version`。
 - 本次为开发候选，版本号保持 2.3.0；后续发版须递增版本并更新发行说明。
 
 ### Validation
 
-- Mac 本地 Python 3.12 下 54 个项目测试通过；两例合成材料独立模型回归试跑 2/2 通过，见 `docs/validation/v230-evidence-flow-results.md`。通用 Skill 校验器对上游和本候选均因既有自定义 frontmatter 字段失败，该兼容性问题仍待处理。
+- Mac 本地 Python 3.12 下 55 个项目测试通过；两例合成材料独立模型回归试跑 2/2 通过，见 `docs/validation/v230-evidence-flow-results.md`。修复元数据后，源码与解包后的安装包均通过通用 Skill 校验，发行元数据检查通过。
 
 ## [2.3.0] - 2026-11-08
 

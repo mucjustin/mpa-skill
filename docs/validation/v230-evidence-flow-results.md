@@ -19,3 +19,9 @@ Candidate `4a1b296` is based on public `main` at `9bb5869`. The [protocol](v230-
 - The system Skill Creator `quick_validate.py` rejects the existing custom frontmatter keys (`version`, `author`, translated display/description/example fields). Running the validator against both upstream `9bb5869` and this candidate produces the same failure. This pre-existing format compatibility issue remains unresolved; the project test suite is not a substitute for the generic validator.
 
 These runs do not validate real CAJ/OCR extraction, research truth, causal inference, sensitive data handling, or actual Zotero/Obsidian mutations. The CLI and its database format were not modified.
+
+## Frontmatter repair follow-up
+
+The compatibility issue above was reproduced and repaired after the frozen model runs. Custom fields now live under the standard `metadata` mapping as strings, including multiline example strings. The release checker reads `metadata.version` and rejects a missing, duplicate or malformed version, including versions found in an unrelated mapping. Package tests require the standard top-level fields and the preserved nested metadata.
+
+The unchanged Skill body preserves the evaluated research behavior. The repaired source and extracted ZIP both pass the system Skill Creator validator; 55 project tests and the release metadata checker pass on local Python 3.12. This supersedes the earlier candidate's unresolved-format status; it does not assert WorkBuddy GUI import was tested.

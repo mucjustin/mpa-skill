@@ -1,20 +1,21 @@
 ---
 name: mpa-skill
 description: Use when an MPA graduate student needs course study, case analysis, case competition entries, policy memos, literature work, research design, fieldwork, data analysis, thesis writing, defence preparation, or AI-use disclosure statements in an established MPA, public-management, or public-policy context; also when an in-service MPA student wants to turn a workplace problem into a thesis topic, check insider-research ethics or de-identify material, or asks for coaching instead of drafting. 中文触发：MPA、公共管理硕士、公共管理、公共政策、案例分析、案例大赛、政策建议、开题报告、选题、学位论文、毕业论文、答辩、田野调查、访谈提纲、问卷设计、在职研究、本单位研究、脱敏、AI使用声明、AIGC声明。 Generic academic, teaching, blogging, programming, data, Zotero, Obsidian, or non-MPA thesis requests do not qualify by themselves. An explicit request to convert non-MPA material into MPA work qualifies.
-display_name: "公共管理证据研究助手"
-display_name_en: "MPA Research Agent"
-description_zh: "公共管理课程、案例、政策及学位研究的证据驱动研究助手，支持本地来源核验与研究工作流。"
-description_en: "Evidence-grounded MPA and public-policy research workflows for in-service students, with an optional offline source-verification CLI."
-version: "2.3.0"
-author: "mucjustin"
-examples_zh:
-  - "我在街道办负责网格化管理，想把工作中的问题变成论文选题"
-  - "分析这份公共管理案例，先列出证据缺口和竞争性解释"
-  - "检查本地证据工具环境，获得授权后建立来源可追溯的证据矩阵"
-examples_en:
-  - "Coach me through my thesis chapter without writing it for me"
-  - "Build an evidence-led research design for this public-management case"
-  - "Check the offline evidence tool, then audit citations with permission"
+metadata:
+  display_name: "公共管理证据研究助手"
+  display_name_en: "MPA Research Agent"
+  description_zh: "公共管理课程、案例、政策及学位研究的证据驱动研究助手，支持本地来源核验与研究工作流。"
+  description_en: "Evidence-grounded MPA and public-policy research workflows for in-service students, with an optional offline source-verification CLI."
+  version: "2.3.0"
+  author: "mucjustin"
+  examples_zh: |
+    我在街道办负责网格化管理，想把工作中的问题变成论文选题
+    分析这份公共管理案例，先列出证据缺口和竞争性解释
+    检查本地证据工具环境，获得授权后建立来源可追溯的证据矩阵
+  examples_en: |
+    Coach me through my thesis chapter without writing it for me
+    Build an evidence-led research design for this public-management case
+    Check the offline evidence tool, then audit citations with permission
 ---
 
 # MPA Research Agent

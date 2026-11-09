@@ -2,6 +2,7 @@
 import importlib.util
 import json
 import os
+import re
 import subprocess
 import sys
 import tempfile
@@ -36,10 +37,12 @@ class TestSkillPackage(unittest.TestCase):
         text = manifest.read_text(encoding="utf-8")
         self.assertTrue(text.startswith("---\nname: mpa-skill\ndescription:"))
         front = text.split("---", 2)[1]
-        for key in ("name", "description", "display_name", "display_name_en",
+        top_keys = set(re.findall(r"(?m)^([a-z_-]+):", front))
+        self.assertEqual(top_keys, {"name", "description", "metadata"})
+        for key in ("display_name", "display_name_en",
                     "description_zh", "description_en", "version", "author",
                     "examples_zh", "examples_en"):
-            self.assertRegex(front, rf"(?m)^{key}:")
+            self.assertRegex(front, rf"(?m)^  {key}:")
         self.assertIn("scripts/mpa_evidence.py", text)
         self.assertIn("mpa-skill/SKILL.md", self.names)
         self.assertIn("mpa-skill/scripts/mpa_evidence.py", self.names)

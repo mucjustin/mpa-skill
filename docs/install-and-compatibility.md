@@ -1,6 +1,8 @@
 # 安装与兼容性 / Codex & WorkBuddy
 
-**展示名称：MPA Research Agent（公共管理证据研究助手）**。技术 Skill ID、安装目录和 GitHub 仓库地址仍保留 `mpa-skill`、`mucjustin/mpa-skill`，不破坏已有命令。Skill 元数据 `version: "2.3.0"`、CHANGELOG 与对应 GitHub Release 必须保持一致。正式附件请从 [Releases](https://github.com/mucjustin/mpa-skill/releases/latest) 下载。
+**展示名称：MPA Research Agent（公共管理证据研究助手）**。技术 Skill ID、安装目录和 GitHub 仓库地址仍保留 `mpa-skill`、`mucjustin/mpa-skill`，不破坏已有命令。Skill 的 `metadata.version`（当前为 `"2.3.0"`）、CHANGELOG 与对应 GitHub Release 必须保持一致。正式附件请从 [Releases](https://github.com/mucjustin/mpa-skill/releases/latest) 下载。
+
+`SKILL.md` 顶层使用标准 `name`、`description` 和 `metadata` 字段。版本、作者和双语展示信息均为 `metadata` 下的字符串；双语示例使用多行字符串保存。Codex 界面配置仍由 `agents/openai.yaml` 提供。项目发行工具读取 `metadata.version`，不再读取旧的顶层 `version`。安装包通过通用格式校验不代表已验证 WorkBuddy GUI 导入。
 
 ## 宿主支持与验证边界
 
