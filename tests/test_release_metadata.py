@@ -37,6 +37,8 @@ class ReleaseContractTests(unittest.TestCase):
             ('version: "2.3.0"\n', None),
             ('metadata:\n  author: "test"\nother:\n  version: "2.3.0"\n', None),
             ('metadata:\n  version: "2.3.0"\n  version: "2.4.0"\n', None),
+            ('metadata:\n  version: "2.3.0"\n  version: "next"\n', None),
+            ('metadata:\n  version: "2.3.0"\nmetadata:\n  author: "test"\n', None),
             ('metadata:\n  version: "next"\n', None),
         ]
         with tempfile.TemporaryDirectory() as tmp:

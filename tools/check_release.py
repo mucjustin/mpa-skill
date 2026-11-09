@@ -18,10 +18,13 @@ def skill_version(root: Path = ROOT) -> str:
     metadata = re.findall(r'(?ms)^metadata:[ \t]*\n(.*?)(?=^\S|\Z)', blocks[1])
     if len(metadata) != 1:
         raise ValueError("SKILL.md requires one metadata mapping")
-    versions = re.findall(r'(?m)^  version:[ \t]*"([0-9]+\.[0-9]+\.[0-9]+)"[ \t]*$', metadata[0])
-    if len(versions) != 1:
+    versions = re.findall(r'(?m)^  version:[^\n]*$', metadata[0])
+    match = None
+    if len(versions) == 1:
+        match = re.fullmatch(r'  version:[ \t]*"([0-9]+\.[0-9]+\.[0-9]+)"[ \t]*', versions[0])
+    if match is None:
         raise ValueError("SKILL.md metadata.version requires one quoted semantic version")
-    return versions[0]
+    return match.group(1)
 
 
 def validate(root: Path = ROOT) -> str:
