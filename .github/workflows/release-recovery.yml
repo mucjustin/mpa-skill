@@ -1,0 +1,65 @@
+name: Recover v2.3.1 publication
+
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/release-recovery.yml']
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  actions: read
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    concurrency:
+      group: mpa-skill-release-main
+      cancel-in-progress: false
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Require the exact source already approved by six-platform CI
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          set -euo pipefail
+          test "$GITHUB_REF" = refs/heads/main
+          test "$(gh api repos/$GH_REPO/actions/runs/42670493252 --jq .conclusion)" = success
+          test "$(gh api repos/$GH_REPO/actions/runs/42670493252 --jq .head_sha)" = 84ad50b0e515e97ac8bf865488d3b915290d5195
+          git diff --exit-code 84ad50b0e515e97ac8bf865488d3b915290d5195 "$GITHUB_SHA" -- . ':!.github/workflows/release-recovery.yml'
+          test "$(python tools/check_release.py --print-version)" = 2.3.1
+      - name: Test and build the release again
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m pip install 'pypdf>=5,<8'
+          python -m unittest discover -s tests -v
+          python tools/check_release.py
+          python tools/package_skill.py --output dist/mpa-skill.zip
+          (cd dist && sha256sum mpa-skill.zip > SHA256SUMS)
+      - name: Publish the verified package
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          if gh release view v2.3.1 >/dev/null 2>&1; then
+            echo 'v2.3.1 already exists; preserve published assets.'
+            exit 0
+          fi
+          if git show-ref --verify --quiet refs/tags/v2.3.1; then
+            test "$(git rev-list -n 1 v2.3.1)" = "$GITHUB_SHA"
+          fi
+          gh release create v2.3.1 dist/mpa-skill.zip dist/SHA256SUMS \
+            --target "$GITHUB_SHA" \
+            --title 'v2.3.1 — MPA Research Agent / 公共管理证据研究助手' \
+            --notes-file docs/releases/v2.3.1.md \
+            --latest
