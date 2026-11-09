@@ -39,7 +39,7 @@ class TestControllerContract(unittest.TestCase):
     def test_core_red_lines(self):
         rules = {
             "research spine": r"(?i)public problem.*stakeholders.*public value.*institutional.*theory.*evidence.*method.*analysis.*recommendation",
-            "single confirmation": "是否执行？",
+            "authorized read-only work": r"(?i)proceed with read-only analysis authorized by the request",
             "no repeated prompts": r"(?i)without repeated.*permission",
             "zotero db": r"(?i)never.*zotero\.sqlite",
             "access stop": r"(?i)login.*CAPTCHA.*paywall",
@@ -93,8 +93,8 @@ class TestReferenceContracts(unittest.TestCase):
             "route coverage": r"(?i)course.*case.*policy memo.*literature.*research design.*fieldwork.*data.*thesis.*defence",
             "data before writing": r"(?i)audit.*data.*content.*acceptance|capabilit.*audit.*data.*content.*deliver",
             "conversion": r"(?is)non-MPA to MPA conversion.*Research Spine before rewriting",
-            "integration offer once": r"(?i)Offer Zotero or Obsidian integration once",
-            "no unconfirmed writes": r"(?i)write nothing to either before the user confirms",
+            "requested integrations": r"(?i)Use Zotero or Obsidian only when requested or already authorized",
+            "no unconfirmed writes": r"(?i)write nothing to either without authorization",
             "workplace route": r"in-service-research\.md",
             "coaching route": r"coaching-mode\.md",
             "competition limits": r"(?s)15000.*4000",

@@ -4,7 +4,7 @@ Choose the minimum sufficient route from capabilities actually available. Order 
 
 ## Route table
 
-Routes (in dependency order): course → case → policy memo → literature → research design → fieldwork → data → thesis → defence. Compose the minimum sufficient subset.
+Available routes: course, case, policy memo, literature, research design, fieldwork, data, thesis, and defence. Compose the minimum sufficient subset in the order required by the actual task and evidence.
 
 | Route | Output | 中文关键词 | Key references |
 |---|---|---|---|
@@ -43,6 +43,8 @@ Routes (in dependency order): course → case → policy memo → literature →
 - **Coaching**: diagnose and ask; never draft submit-ready text while coaching mode is on. Evidence rules are not relaxed.
 - **Literature**: tie search and reading to the applied question; verify identity before citation.
 
-## Integration offer
+## Existing libraries and optional integrations
 
-Offer Zotero or Obsidian integration once in the route confirmation when a substantive research task states no preference. Write nothing to either before the user confirms.
+For an existing library or supplied corpus, apply [evidence readiness](evidence-readiness.md) before citing or deciding a method is feasible. A read-only assessment does not require importing material into the evidence workbench.
+
+Use Zotero or Obsidian only when requested or already authorized. Write nothing to either without authorization for that integration; do not repeat an authorization question already resolved within the current scope.
