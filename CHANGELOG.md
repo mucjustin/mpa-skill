@@ -20,7 +20,9 @@
 
 ## [Unreleased]
 
-暂无。
+### Added
+
+- 新增[发布前检查清单](docs/release-checklist.md)：六处版本轴的对齐要求、本地三道预检、打包内容自检、`publish-release` 的三条分支、发布后核验命令、发错版本的处理方式，以及 `check_release.py` 全部报错的对照表。
 
 ## [2.3.2] - 2026-11-20
 

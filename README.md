@@ -69,7 +69,7 @@
 
 ---
 
-**当前版本：v2.3.2。** [正式发行说明与安装包](https://github.com/mucjustin/mpa-skill/releases/latest) · [更新日志](CHANGELOG.md)。合并代码并不会自动生成发行版，因此采用单独的 CI 发布门禁。
+**当前版本：v2.3.2。** [正式发行说明与安装包](https://github.com/mucjustin/mpa-skill/releases/latest) · [更新日志](CHANGELOG.md) · [发布前检查清单](docs/release-checklist.md)。合并代码并不会自动生成发行版，因此采用单独的 CI 发布门禁。
 
 ## 🚀 快速开始
 
