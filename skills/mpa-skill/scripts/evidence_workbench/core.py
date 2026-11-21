@@ -6,6 +6,7 @@ original sources and extracted text contain potentially sensitive information.
 from __future__ import annotations
 
 import csv
+import difflib
 import hashlib
 import json
 import os
@@ -344,7 +345,7 @@ def list_segments(workspace, doc_id, search=None, locator=None, limit=25):
             rows = conn.execute("SELECT locator,content FROM segments WHERE doc_id=? ORDER BY rowid",
                                 (doc_id,)).fetchall()
         if not conn.execute("SELECT 1 FROM documents WHERE doc_id=?", (doc_id,)).fetchone():
-            raise EvidenceError("Unknown document ID.")
+            raise unknown_document_error(conn, doc_id)
         result = [{"locator": r["locator"], "content": r["content"]} for r in rows]
         if search:
             result = [r for r in result if search in r["content"]]
@@ -375,6 +376,25 @@ def parse_identifier(identifier, prefix):
     if not identifier.startswith(prefix) or not identifier[len(prefix):].isdigit():
         raise EvidenceError(f"Invalid ID: {identifier}")
     return int(identifier[len(prefix):])
+
+
+def available_documents(conn, limit=5):
+    """Human-readable inventory used only inside error messages."""
+    rows = conn.execute("SELECT doc_id, name FROM documents ORDER BY rowid LIMIT ?",
+                        (limit,)).fetchall()
+    total = conn.execute("SELECT COUNT(*) c FROM documents").fetchone()["c"]
+    if not rows:
+        return "No document is registered yet; run `ingest WORKSPACE FILE` first."
+    listing = ", ".join(f"{r['doc_id']} ({r['name']})" for r in rows)
+    more = f" and {total - len(rows)} more via `ingest` output" if total > len(rows) else ""
+    return f"Registered documents: {listing}{more}."
+
+
+def unknown_document_error(conn, doc_id):
+    """Document IDs are content-derived, so a wrong ID cannot be corrected by guessing."""
+    return EvidenceError(
+        f"Unknown document ID {doc_id!r}. IDs are derived from the file content, "
+        "so re-importing does not rename them. " + available_documents(conn))
 
 
 # ── locators and quote matching ─────────────────────────────────────────────
@@ -454,6 +474,43 @@ def find_source_span(text, quote):
     return text[index[pos]:index[pos + len(norm_quote) - 1] + 1]
 
 
+MIN_HINT_SPAN = 8
+
+
+def quote_mismatch_hint(conn, doc_id, locator, text, quote, workspace=None):
+    """Explain a failed verbatim match without ever relaxing it.
+
+    Two common mistakes are reported concretely: the quote lives at a different
+    locator, or the quote is nearly right (a stray space, punctuation or a
+    mistyped character). Matching stays exact; only the message improves.
+    """
+    elsewhere = [r["locator"] for r in conn.execute(
+        "SELECT locator, content FROM segments WHERE doc_id=? ORDER BY rowid", (doc_id,))
+        if quote in r["content"]]
+    if elsewhere:
+        shown = ", ".join(elsewhere[:3]) + (" ..." if len(elsewhere) > 3 else "")
+        return (f"The quoted text is verbatim at {shown}, not at {locator}. "
+                "Re-run with that locator.")
+    shown_ws = "WORKSPACE" if workspace is None else f'"{Path(workspace).expanduser().resolve()}"'
+    inspect = f"segments {shown_ws} {doc_id} --locator {locator}"
+    matcher = difflib.SequenceMatcher(None, text, quote, autojunk=False)
+    block = matcher.find_longest_match(0, len(text), 0, len(quote))
+    if block.size < MIN_HINT_SPAN:
+        return ("No usable verbatim span was found there; inspect the exact segment "
+                f"first: {inspect}")
+    parts = []
+    if block.b:
+        parts.append(f"{block.b} extra character(s) before it: {quote[:block.b]!r}")
+    tail = quote[block.b + block.size:]
+    if tail:
+        parts.append(f"{len(tail)} extra character(s) after it: {tail!r}")
+    detail = "; ".join(parts) or "the surrounding text differs"
+    return (f"Longest verbatim span is {block.size} characters "
+            f"({text[block.a:block.a + block.size]!r}); {detail}. "
+            "Match stays exact: delete or correct the extra text, or use --normalized "
+            f"only for whitespace/full-width differences. Inspect with: {inspect}")
+
+
 def add_evidence(workspace, claim_id, doc_id, locator, quote, relation="supports",
                  normalized=False):
     if relation not in RELATIONS or not quote.strip():
@@ -463,7 +520,7 @@ def add_evidence(workspace, claim_id, doc_id, locator, quote, relation="supports
     with connect(workspace) as conn:
         row = conn.execute("SELECT * FROM documents WHERE doc_id=?", (doc_id,)).fetchone()
         if row is None:
-            raise EvidenceError("Unknown document ID.")
+            raise unknown_document_error(conn, doc_id)
         if not document_integrity(workspace, row):
             raise EvidenceError("Source snapshot integrity check failed.")
         text = segment_text(conn, doc_id, start, end)
@@ -471,7 +528,9 @@ def add_evidence(workspace, claim_id, doc_id, locator, quote, relation="supports
         if quote not in text:
             span = find_source_span(text, quote)
             if span is None:
-                raise EvidenceError("Quote not found verbatim at locator; no approximate matching.")
+                raise EvidenceError(
+                    "Quote not found verbatim at locator. "
+                    + quote_mismatch_hint(conn, doc_id, locator, text, quote, workspace))
             if not normalized:
                 raise EvidenceError(
                     "Quote not found verbatim at locator. It matches only after ignoring "
@@ -521,7 +580,14 @@ def review_evidence(workspace, evidence_id, status, reviewer, note=""):
 
 # ── audit and export ────────────────────────────────────────────────────────
 
-def audit(workspace):
+def audit(workspace, strict=False):
+    """Check integrity and unresolved research gaps.
+
+    ``ok`` means "the gate passed". By default only integrity errors block;
+    with ``strict`` any unresolved warning (pending review, missing rival,
+    claim without evidence) also blocks, so scripts and agents can demand a
+    clean register without parsing the issue list themselves.
+    """
     issues = []
     with connect(workspace) as conn:
         docs = conn.execute("SELECT * FROM documents ORDER BY doc_id").fetchall()
@@ -563,8 +629,12 @@ def audit(workspace):
                 if not claim["rival_of"] and not rivals.get(cid):
                     issues.append({"severity": "warning", "code": "no_rival_explanation",
                                    "item": label})
+    counts = {"error": 0, "warning": 0, "info": 0}
+    for issue in issues:
+        counts[issue["severity"]] = counts.get(issue["severity"], 0) + 1
+    ok = counts["error"] == 0 and (counts["warning"] == 0 or not strict)
     return {"documents": len(docs), "claims": len(claims), "evidence": len(evidence),
-            "ok": not any(i["severity"] == "error" for i in issues), "issues": issues}
+            "strict": bool(strict), "counts": counts, "ok": ok, "issues": issues}
 
 
 def export_registry(workspace, fmt="md", include_quotes=False, redactor=None):

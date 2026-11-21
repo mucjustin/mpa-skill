@@ -69,7 +69,7 @@ Two behavioral gates run throughout:
 
 ---
 
-**Current version: v2.3.1.** [GitHub Release and ZIP](https://github.com/mucjustin/mpa-skill/releases/latest) · [Changelog](CHANGELOG.md). Merging code alone does not create a GitHub Release.
+**Current version: v2.3.2.** [GitHub Release and ZIP](https://github.com/mucjustin/mpa-skill/releases/latest) · [Changelog](CHANGELOG.md). Merging code alone does not create a GitHub Release.
 
 ## 🚀 Quick start
 
@@ -78,6 +78,8 @@ Two behavioral gates run throughout:
 ```bash
 npx skills add mucjustin/mpa-skill -g -s mpa-skill -y --full-depth
 ```
+
+For the first real document, follow the [ten-minute quick start](docs/quickstart.md): ingest → locate → cite → human review → strict audit → export.
 
 ### WorkBuddy import (single Skill ZIP)
 

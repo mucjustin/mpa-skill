@@ -14,6 +14,8 @@ Do not use a guessed globally installed `mpa-evidence` command. The TXT/MD/CSV/D
 
 If doctor reports unsupported Python, required format dependency missing, inaccessible local files, or no terminal, STOP the local operation and deliver a bounded evidence collection plan instead. Never claim a file was processed, a document verified, or an output saved without reading the CLI response.
 
+Read three doctor fields together: `python_usable` (false = stop), `python_supported` with `python_minimum` (the tested floor), and `warnings`. An interpreter below the floor but above the runnable one is reported as `python_usable: true` with `python_supported: false` and an explicit warning: commands run there, but the result is untested, so tell the user and prefer Python 3.10+ before relying on it.
+
 ## Authorized source-to-evidence workflow
 
 1. Explain that import saves a **second copy** of the supplied document and parsed full-text segments in the chosen local research workspace under `.mpa-evidence/`. Neither is encrypted. Do not import confidential, identifiable or restricted personal records without approval/appropriate safeguards. Confirm intended workspace and persistence permission before first `init`/`ingest`. Do not write inside the installed Skill directory or any public repository.
@@ -24,8 +26,10 @@ If doctor reports unsupported Python, required format dependency missing, inacce
 6. `python "<skill-root>/scripts/mpa_evidence.py" cite "<workspace>" --claim C0001 --document "<D-ID>" --locator "L2" --quote "<exact text>" --relation supports`. Use `--relation challenges` for conflicting accounts; preserve them as contradictions. Newly linked records are **always unverified**.
    - A quote spanning lines/pages uses a range such as `--locator "L2-L4"` (same locator type, at most 20 segments; segments are joined by newlines).
    - PDF extraction often inserts spaces or line breaks inside Chinese sentences. If cite reports that the quote matches only after ignoring whitespace/full-width differences, show the user the stored segment and, with their agreement, rerun with `--normalized`. The registry then stores the **verbatim source span**, records `match_mode: normalized`, and audit asks for a context check. Never use `--normalized` to paraphrase.
+   - When cite fails, read the diagnostic instead of guessing: it names the locator where the quote actually is, or the longest verbatim span plus the extra characters. A quote may be corrected or the locator changed; matching is never relaxed except through `--normalized`. An unknown document ID is listed with the registered ones — never invent or pattern-guess a D-ID.
 7. **Human-only verification gate**: show the user the original source identity, locator and quotation. Only after the researcher explicitly reports completing the check and instructs a specific review action may the agent run `review "<workspace>" E0001 --status verified --reviewer "<user-provided-label>"` (or `disputed`/`rejected` with a reason). The agent must not self-approve any evidence, infer user verification, invent reviewer names, or auto-run review in a batch.
 8. `python "<skill-root>/scripts/mpa_evidence.py" audit "<workspace>" --json` then `export "<workspace>" --format md --output "<destination>"`. Default exports omit original quotations; `--include-quotes` may disclose confidential data and needs explicit authorization. Existing outputs are not overwritten without `--overwrite`.
+   - `audit` `ok` means integrity only. Add `--strict` when a clean register is required (no pending review, no claim without evidence, no causal claim without a rival): unresolved warnings then make `ok` false with exit 2. Read `counts` (error/warning/info) and `issues`; never report a passing audit as proof that the research conclusions hold.
 
 ## Research support commands
 

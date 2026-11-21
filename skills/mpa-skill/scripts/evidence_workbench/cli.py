@@ -15,6 +15,33 @@ from .redact import Redactor
 from .workspace import initialize_workspace, inspect_environment
 
 
+SUPPORTED_PYTHON = (3, 10)  # tested and supported minimum
+RUNNABLE_PYTHON = (3, 8)  # runnable floor: the bundle uses no 3.10-only syntax
+
+
+def python_status():
+    """Describe the interpreter honestly: supported, merely runnable, or too old."""
+    current = sys.version_info
+    version = f"{current.major}.{current.minor}.{current.micro}"
+    supported = current >= SUPPORTED_PYTHON
+    usable = current >= RUNNABLE_PYTHON
+    floor = ".".join(map(str, RUNNABLE_PYTHON))
+    ceiling = ".".join(map(str, SUPPORTED_PYTHON))
+    if supported:
+        reason, warnings = "Matches the tested and supported minimum.", []
+    elif usable:
+        reason = (f"Runs every bundled command (no 3.10-only syntax) but Python {version} "
+                  "is below the tested minimum.")
+        warnings = [f"Python {version} is below the declared minimum {ceiling}. "
+                    "Commands work here, but this interpreter is untested: install "
+                    "Python 3.10+ before relying on the result."]
+    else:
+        reason, warnings = f"Below the runnable floor {floor}.", [
+            f"Python {version} is below the runnable floor {floor}; install Python 3.10+."]
+    return {"python": version, "python_supported": supported, "python_minimum": ceiling,
+            "python_usable": usable, "python_status": reason, "warnings": warnings}
+
+
 def parser():
     p = argparse.ArgumentParser(prog="mpa-evidence",
         description="Offline evidence registry. Source match is not a causal validity check.")
@@ -70,6 +97,9 @@ def parser():
     s = sub.add_parser("audit", help="Check source integrity and unresolved gaps")
     s.add_argument("workspace")
     s.add_argument("--json", action="store_true")
+    s.add_argument("--strict", action="store_true",
+                   help="Also fail (exit 2) when unresolved warnings remain, "
+                        "e.g. evidence pending review or a claim without evidence")
 
     s = sub.add_parser("export", help="Export a privacy-conscious evidence register")
     s.add_argument("workspace")
@@ -158,8 +188,7 @@ def main(argv=None):
                     ".mpa-evidence" / "registry.sqlite3"
                 )
             result = {
-                "python": f"{sys.version_info.major}.{sys.version_info.minor}.{sys.version_info.micro}",
-                "python_supported": sys.version_info >= (3, 10),
+                **python_status(),
                 "sqlite_available": True,
                 "bundled_scripts": str(root),
                 "text_formats": [".txt", ".md", ".csv", ".docx"],
@@ -191,7 +220,7 @@ def main(argv=None):
             result = {"evidence_id": review_evidence(args.workspace, args.evidence, args.status,
                                                      args.reviewer, args.note), "status": args.status}
         elif args.command == "audit":
-            result = audit(args.workspace)
+            result = audit(args.workspace, strict=args.strict)
         elif args.command == "export":
             redactor = build_redactor(args)
             payload = export_registry(args.workspace, args.format, args.include_quotes, redactor)

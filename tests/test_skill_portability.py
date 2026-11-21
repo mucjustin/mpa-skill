@@ -47,7 +47,12 @@ class TestPortableSkill(unittest.TestCase):
         self.assertTrue(self.entry.is_file())
         self.assertFalse((self.installed / "evidence_workbench").exists())
         doctor = self.run_cli("doctor", "--workspace", self.workspace)
-        self.assertTrue(doctor["python_supported"])
+        # The flag must describe this interpreter, not flatter the runner: the
+        # suite also runs on Python 3.9, where doctor reports supported=false
+        # while every bundled command still executes.
+        self.assertEqual(doctor["python_supported"], sys.version_info >= (3, 10))
+        self.assertTrue(doctor["python_usable"])
+        self.assertEqual(bool(doctor["warnings"]), not doctor["python_supported"])
         self.assertTrue(doctor["sqlite_available"])
         self.assertFalse(doctor["workspace_initialized"])
         self.assertTrue(doctor["read_only"])

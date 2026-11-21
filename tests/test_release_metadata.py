@@ -1,5 +1,6 @@
 """Guard against stale GitHub release versions and unsafe publishing workflows."""
 import importlib.util
+import shutil
 import tempfile
 import unittest
 from pathlib import Path
@@ -13,8 +14,8 @@ spec.loader.exec_module(module)
 
 class ReleaseContractTests(unittest.TestCase):
     def test_version_matches_release_docs(self):
-        self.assertEqual(module.skill_version(), "2.3.1")
-        self.assertEqual(module.validate(), "2.3.1")
+        self.assertEqual(module.skill_version(), "2.3.2")
+        self.assertEqual(module.validate(), "2.3.2")
 
     def test_different_changelog_version_is_rejected(self):
         with tempfile.TemporaryDirectory() as tmp:
@@ -55,6 +56,24 @@ class ReleaseContractTests(unittest.TestCase):
                         with self.assertRaises(ValueError):
                             module.skill_version(root)
 
+    def test_packaging_version_matches_skill_version(self):
+        self.assertEqual(module.project_version(), "2.3.2")
+        self.assertEqual(module.project_version(), module.skill_version())
+
+    def test_packaging_drift_is_rejected(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            shutil.copytree(ROOT / "skills", root / "skills")
+            for name in ("CHANGELOG.md", "README.md", "README.en.md",
+                         "docs/install-and-compatibility.md", "docs/releases/v2.3.2.md"):
+                target = root / name
+                target.parent.mkdir(parents=True, exist_ok=True)
+                target.write_text((ROOT / name).read_text(encoding="utf-8"), encoding="utf-8")
+            (root / "pyproject.toml").write_text('[project]\nversion = "0.1.0"\n',
+                                                 encoding="utf-8")
+            with self.assertRaisesRegex(ValueError, r"pyproject\.toml version 0\.1\.0"):
+                module.validate(root)
+
     def test_ci_gates_release_after_all_tests(self):
         source = (ROOT / ".github/workflows/ci.yml").read_text(encoding="utf-8")
         for required in (
@@ -72,8 +91,8 @@ class ReleaseContractTests(unittest.TestCase):
                 self.assertIn(required, source)
 
     def test_release_notes_are_complete(self):
-        notes = (ROOT / "docs/releases/v2.3.1.md").read_text(encoding="utf-8")
-        for term in ("v2.3.1", "mpa-skill.zip", "SHA256SUMS", "SQLite", "WorkBuddy"):
+        notes = (ROOT / "docs/releases/v2.3.2.md").read_text(encoding="utf-8")
+        for term in ("v2.3.2", "mpa-skill.zip", "SHA256SUMS", "SQLite", "WorkBuddy"):
             with self.subTest(term=term):
                 self.assertIn(term, notes)
 

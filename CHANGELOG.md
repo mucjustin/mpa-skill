@@ -22,6 +22,32 @@
 
 暂无。
 
+## [2.3.2] - 2026-11-20
+
+### Added
+
+- `audit --strict`：未决警告（待复核、论断无证据、因果论断无竞争解释）同样令 `ok` 为假并返回退出码 2，便于脚本与 agent 做门禁；`audit` 输出新增 `counts`（error/warning/info）与 `strict` 字段，默认严格度不变。
+- `doctor` 新增 `python_minimum`、`python_usable`、`python_status`、`warnings`：把「受测下限」与「本机能否实际运行」分开报告，不再用一个布尔值同时表达两件事。
+- 新增[十分钟快速开始](docs/quickstart.md)：一份材料从预检、导入、定位、引证、人工复核、门禁审计到导出的完整路径，附失败信息对照表。
+
+### Changed
+
+- `cite` 的失败信息改为可执行：引文错位时指出它实际所在的定位；引文近似时给出最长逐字片段与多余字符；无法匹配时给出可直接复制的 `segments` 检查命令。匹配规则不变，仍是逐字匹配、仍拒绝近似替换。
+- 「未知文档 ID」错误改为列出已登记文档并提示 `ingest`；文档 ID 由内容哈希派生，无法靠格式猜测。
+- `pyproject.toml` 版本与 Skill 版本统一为 2.3.2，`tools/check_release.py` 交叉校验打包版本，避免两条版本轴静默漂移。
+
+### Fixed
+
+- `tests/test_skill_portability.py` 不再假定解释器一定受支持：`python_supported` 的期望值由 `sys.version_info` 推导，并断言 `python_usable` 与 `warnings` 一致（此前在 Python 3.9 上必然失败）。
+
+### Removed
+
+- 删除 `.github/workflows/release-recovery.yml`：它是 v2.3.1 发布补救用的一次性工作流，版本写死在该发行上，保留只会在手动触发时失败。正常发行仍由 `ci.yml` 的 `publish-release` 承担。
+
+### Validation
+
+- 本地 Python 3.9.6 下 69 个测试全部通过（新增 `tests/test_diagnostics.py` 12 例、发行元数据 2 例）；`tools/check_release.py` 与 `tools/package_skill.py` 均通过。测试通过不等于研究质量已被证明。
+
 ## [2.3.1] - 2026-11-09
 
 ### Changed

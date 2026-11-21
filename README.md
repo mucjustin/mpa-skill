@@ -69,7 +69,7 @@
 
 ---
 
-**当前版本：v2.3.1。** [正式发行说明与安装包](https://github.com/mucjustin/mpa-skill/releases/latest) · [更新日志](CHANGELOG.md)。合并代码并不会自动生成发行版，因此采用单独的 CI 发布门禁。
+**当前版本：v2.3.2。** [正式发行说明与安装包](https://github.com/mucjustin/mpa-skill/releases/latest) · [更新日志](CHANGELOG.md)。合并代码并不会自动生成发行版，因此采用单独的 CI 发布门禁。
 
 ## 🚀 快速开始
 
@@ -78,6 +78,8 @@
 ```bash
 npx skills add mucjustin/mpa-skill -g -s mpa-skill -y --full-depth
 ```
+
+第一份材料怎么走完「导入 → 定位 → 引证 → 人工复核 → 门禁审计 → 导出」，见[十分钟快速开始](docs/quickstart.md)。
 
 ### WorkBuddy 导入（单 Skill ZIP）
 

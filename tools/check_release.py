@@ -27,6 +27,25 @@ def skill_version(root: Path = ROOT) -> str:
     return match.group(1)
 
 
+def project_version(root: Path = ROOT):
+    """Read [project].version when a packaging manifest exists, else None.
+
+    The wheel metadata is a second version axis: it ships the same tool layer, so
+    letting it drift is how a release ends up describing two different bundles.
+    """
+    path = root / "pyproject.toml"
+    if not path.is_file():
+        return None
+    section = re.search(r"(?ms)^\[project\][ \t]*\n(.*?)(?=^\[|\Z)",
+                        path.read_text(encoding="utf-8"))
+    if section is None:
+        return None
+    found = re.findall(r'(?m)^version[ \t]*=[ \t]*"([^"]+)"', section.group(1))
+    if len(found) > 1:
+        raise ValueError("pyproject.toml [project] requires exactly one version")
+    return found[0] if found else None
+
+
 def validate(root: Path = ROOT) -> str:
     version = skill_version(root)
     changelog = (root / "CHANGELOG.md").read_text(encoding="utf-8")
@@ -47,6 +66,10 @@ def validate(root: Path = ROOT) -> str:
         doc = (root / path).read_text(encoding="utf-8")
         if f"v{version}" not in doc:
             raise ValueError(f"Version drift in {path}")
+    packaged = project_version(root)
+    if packaged is not None and packaged != version:
+        raise ValueError(
+            f"pyproject.toml version {packaged} does not match Skill version {version}")
     return version
 
 
